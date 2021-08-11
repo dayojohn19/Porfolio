@@ -25,8 +25,7 @@ SECRET_KEY = 'django-insecure-rmxq3lkq@nhlwgg)deu@q5e_nfmz8((qqe)v9s0vt*o5&i(ez%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['herokudjangoapp.herokuapp.com']
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -40,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'herokuapp',
 ]
 
 MIDDLEWARE = [
@@ -134,21 +132,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'blogs/')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-##from heroku 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.11/howto/static-files/
-PROJECT_ROOT   =   os.path.join(os.path.abspath(__file__))
-STATIC_ROOT  =   os.path.join(PROJECT_ROOT, 'staticfiles')
-STATIC_URL = '/static/'
-
-# Extra lookup directories for collectstatic to find static files
-STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, 'static'),
-)
-
-#  Add configuration for static files storage using whitenoise
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-
-import dj_database_url 
-prod_db  =  dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(prod_db)
