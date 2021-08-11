@@ -1,0 +1,30 @@
+{% extends "a_index/layout.html" %}
+
+{% load static %}
+    {% block body %}
+
+<h1>This is Blog</h1>
+<div class="b-container-main">
+    <div class="b-container-sub-1">
+        <form>
+            <textarea class="b-textarea" maxlength="400" placeholder="What is your Content ??"></textarea>
+            <input type="submit" value="Post">
+        </form>
+    </div>
+
+    <div>
+        <form action="{% url 'blog:new_blog' %}" method="post" enctype="multipart/form-data" >
+            {%csrf_token%}
+ 
+            <div>{{post.as_p}}</div>
+            <button type="submit">Upload</button>
+            </form>
+    </div>
+    {{message}}message
+    {% for e in entries %}
+    {{e}}
+    {{e.textarea}}
+    {%endfor%}
+</div>
+
+    {% endblock %}

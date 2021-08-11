@@ -1,0 +1,51 @@
+{% extends "a_index/layout.html" %}
+
+{% block body %}
+{% load static %}
+<div class="container-main-main">
+    <div>
+        <div class="r-container-form">
+            {{pass}}
+            <form method="post" action="{% url 'street_race:create' %}">
+                {% csrf_token %}
+                {{form}}<br>
+                <input type="submit" value="Create Room">
+            </form>
+        </div>
+        <div class="r-container-form">
+            <form>
+                <input required placeholder="Enter Race Number">
+                <br>
+                <button>Join Race</button>
+            </form>
+        </div>
+        <div class="r-container-form">
+            <a href="{% url 'street_race:race' %}">Race</a>
+        </div>
+
+        <div>
+            <h1>List of Races</h1>
+            {{message}}
+            <ul>
+                {% for r in room %}
+                <div class="r-list">
+                    
+                    <li>
+                        <form method="post" action="{% url 'street_race:join' %}">
+                            {% csrf_token %}
+                        Host:<input name="host" value="{{r.player1}}">
+                        <br>{{r.room_code}}
+                        <input name="name" placeholder="Your Nick Name">
+                        <input name="code" placeholder="code" required>
+                        <input type="submit" value="Join">
+                        </form>
+                    </li>
+                    <br>
+                </div>
+                {% endfor %}
+
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

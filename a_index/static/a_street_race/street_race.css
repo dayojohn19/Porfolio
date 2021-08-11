@@ -1,0 +1,71 @@
+.r-list {
+    background-color: bisque;
+    margin: 1%;
+    padding: 1%;
+}
+.r-list>li{
+    background-color: blueviolet;
+    text-decoration: none;
+    list-style-type: none;
+}
+.r-container-form {
+    margin: auto;
+    margin-bottom: 2%;
+    margin-top: 2%;
+    background-color: cadetblue;
+    padding: 2%;
+    border-radius: 10px;
+    text-align: center;
+    width: fit-content;
+}
+
+.r-container-player{
+    background-color: rgb(255, 238, 80);
+    margin: 2%;
+    border-radius: 10px;
+    width: 100%;
+    text-align: center;
+}
+.r-container-player-sub {
+    background-color: rgb(100, 237, 141);
+    margin: 1%;
+    padding:2%;
+    width: 50%;
+
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+.r-clock{
+    width: fit-content;
+    background-color: crimson;
+    margin: 0 auto;
+    text-align: center;
+}
+.r-clock> input {
+    height: 100px;
+}
+.r-clock>form {
+    background-color: cyan;
+    vertical-align: baseline;
+
+    margin-top: 50%;
+}
+.r-clock>form > input {
+    height: 30px;
+}
+.r-chatbox {
+    border: 2px solid black;
+    color: black;
+    background-color: violet;
+    margin: 1%;
+    text-align: center;
+}
+.r-chatbox>form>input{
+    height: 30px;
+}
+.r-chatbox > ul > li {
+    text-align: left;
+    list-style-type: none;
+}

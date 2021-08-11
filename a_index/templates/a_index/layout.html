@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My WebPage</title>
+
+    <link href="{% static 'a_index/styles.css' %}" rel="stylesheet">
+    <link href="{% static 'a_index/moving.css' %}" rel="stylesheet">
+    <link href="{% static 'a_index/colregs.css' %}" rel="stylesheet">
+    <link href="{% static 'a_blog/blog.css' %}" rel="stylesheet">
+    <link href="{% static 'a_street_race/street_race.css' %}" rel="stylesheet">
+
+
+    <div class="container-main">
+        <div class="container-main-1">
+            <h1>John Foreign</h1>
+        </div>
+
+        <div class="container-main-2">
+        </div>
+
+        <div class="container-sub-2-1">
+            <span><a href="{% url 'index:index' %}">Home</a></span>
+            <span><a href="{% url 'index:blog' %}">Blogs</a></span>
+            <span><a href="{% url 'index:social' %}">Socials</a></span>
+            <span><a href="{% url 'index:colreg' %}">Col Regs</a></span>
+            <span><a href="{% url 'street_race:index' %}">Street Race</a></span>
+            <button><a href="#">Contact</a></button>
+        </div>
+</head>
+<body>
+    <div class="container-main-main" style="height: 1000px; height: fit-content;">
+        {% block body %}
+
+
+
+        {% endblock %}
+    </div>
+</body>
+<div class="container-main-6">
+    <div class="container-sub-6">+639 5685 43802</div>
+    <div class="container-sub-6">dayo_john16@yahoo.com</div>
+    <div class="container-sub-6">dayojohn16@gmail.com</div>
+
+</div>
+<div class="test">Bottom</div>
+</div>
+
+</html>

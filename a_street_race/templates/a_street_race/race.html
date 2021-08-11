@@ -1,0 +1,113 @@
+{% extends "a_index/layout.html" %}
+
+{% block body %}
+{% load static %}
+<h1 class="code">{{code}}</h1>
+{{message}}
+<h1 class="user">{{user}}</h1>
+<h1 class="chat_id">{{rid}}</h1>
+<div class="r-container-player row">
+    <div class="r-container-player-sub">
+        <h1 class="player1">{{host}}</h1>
+        <div>
+            <p>Status</p>
+        </div>
+        <button>Ready</button>
+    </div>
+    <div class="r-clock">
+        <form>
+            <input required placeholder="Type your Code">
+            <br>
+            <input type="submit" value="Clock">
+        </form>
+    </div>
+</div>
+<div class="r-container-player row">
+    <div class="r-container-player-sub">
+        <h1 class="player2">{{player2}}</h1>
+        <div>
+            <p>Status</p>
+        </div>
+        <button>Ready</button>
+    </div>
+    <div class="r-clock">
+        <form>
+            <input required placeholder="Type your Code">
+            <br>
+            <input type="submit" value="Clock">
+        </form>
+    </div>
+</div>
+<div class="r-chatbox">
+    <p>Chat Box</p>
+
+<form>
+    {% csrf_token %}
+    <input id="message">
+    <br>
+    <input type="submit" value="Send">
+
+</form>
+    <ul>
+        <li class="r-chat">1st chat</li>
+    </ul>
+</div>
+<div style="height: 1000px;"></div>
+<button onclick="get()">get it</button>
+
+<script>
+    x = document.querySelector(".player1").innerHTML;
+    y = document.querySelector(".player2").innerHTML;
+    yy = document.querySelector(".player2");
+    xx = document.querySelector(".player2").innerHTML;
+    code = document.querySelector(".code").innerHTML;
+setInterval(() => {
+    if (xx == ''){
+        fetch('fetch',{
+            method: 'POST',
+            body: JSON.stringify({
+                code : code,
+            })
+        })
+        .then(response => response.json())
+        .then(result => {
+            yy.innerHTML = result;
+            console.log(result);
+        })
+    }else {
+        console.log(xx);
+        fetch('fetch',{
+            method: 'PUT',
+            body: JSON.stringify({
+                code : code,
+            })
+        })
+        .then(response => response.json())
+        .then(result => {
+            yy.innerHTML = result;
+            console.log(result);
+        })
+    }
+}, 1500);
+
+function message(){
+    message_u = document.querySelector("#message").value;
+    player = document.querySelector(".user").innerHTML;
+    chat_id = document.querySelector(".chat_id").innerHTML;
+    fetch('send',{
+            method: 'POST',
+            body: JSON.stringify({
+                message_u : textarea,
+                player : user,
+                chat_id : chat_id,
+            })
+        })
+        .then(response => response.json())
+        .then(result => {
+            yy.innerHTML = result;
+            console.log(result);
+        })
+}
+
+</script>
+{% endblock %} 
