@@ -2,33 +2,61 @@
 
 {% block body %}
 {% load static %}
+It is {% now "jS F Y H:i" %}<br>
 <h1 class="code">{{code}}</h1>
 {{message}}
 <h1 class="user">{{user}}</h1>
 <h1 class="chat_id">{{rid}}</h1>
-<div class="r-container-player row">
-    <div class="r-container-player-sub">
-        <h1 class="player1">{{host}}</h1>
-        <div>
-            <p>Status</p>
+
+
+<!--First Player
+ready -->
+    <div class="r-container-player row">
+        <div class="r-container-player-sub">
+            <h1 class="player1">{{host}}</h1>
+            <div>
+                <p>Status</p>
+            </div>
+            {% if host == user %}
+            <form method="GET" action="{% url 'street_race:sticker' %}">
+            {% csrf_token %}
+                <input name="player" value="player1">
+                <input name="room" value="{{rid}}">
+                <input name="user" value="{{user}}">
+                <input name="sticker" placeholder="your Sticker">
+                <input type="submit" value="Ready">
+            </form>
+            {% endif %}
         </div>
-        <button>Ready</button>
+        <div class="r-clock">
+            <form>
+                <input required placeholder="Type your Code">
+                <br>
+                <input type="submit" value="Clock">
+            </form>
+        </div>
     </div>
-    <div class="r-clock">
-        <form>
-            <input required placeholder="Type your Code">
-            <br>
-            <input type="submit" value="Clock">
-        </form>
-    </div>
-</div>
+<!--First END Player Ready-->
+
+
+
+<!--Second Player-->
 <div class="r-container-player row">
     <div class="r-container-player-sub">
         <h1 class="player2">{{player2}}</h1>
         <div>
             <p>Status</p>
         </div>
-        <button>Ready</button>
+        {% if player2 == user %}
+        <form method="GET" action="{% url 'street_race:sticker' %}">
+            {% csrf_token %}
+            <input name="player" value="player2">
+            <input name="room" value="{{rid}}">
+            <input name="user" value="{{user}}">
+            <input name="sticker" placeholder="your Sticker">
+            <input type="submit" value="Ready">
+        </form>
+        {% endif %}
     </div>
     <div class="r-clock">
         <form>
@@ -38,30 +66,36 @@
         </form>
     </div>
 </div>
+
+
+
+
+
+<!--Chat box-->
 <div class="r-chatbox">
     <p>Chat Box</p>
-
-<form>
-    {% csrf_token %}
     <input id="message">
-    <br>
-    <input type="submit" value="Send">
-
-</form>
+    <button onclick="message()"></button>
     <ul>
         <li class="r-chat">1st chat</li>
+        <li id="messages"></li>
     </ul>
 </div>
 <div style="height: 1000px;"></div>
-<button onclick="get()">get it</button>
 
 <script>
+    window.onbeforeunload = function() {
+        return "Dude, are you sure you want to leave? Think of the kittens!";
+    }
+
+
+setInterval(() => {
     x = document.querySelector(".player1").innerHTML;
     y = document.querySelector(".player2").innerHTML;
     yy = document.querySelector(".player2");
     xx = document.querySelector(".player2").innerHTML;
     code = document.querySelector(".code").innerHTML;
-setInterval(() => {
+    //getting the joiner
     if (xx == ''){
         fetch('fetch',{
             method: 'POST',
@@ -73,8 +107,12 @@ setInterval(() => {
         .then(result => {
             yy.innerHTML = result;
             console.log(result);
+            console.log('no player2');
         })
-    }else {
+    }else 
+    //getting the message
+    {
+        console.log('player2 join');
         console.log(xx);
         fetch('fetch',{
             method: 'PUT',
@@ -83,12 +121,30 @@ setInterval(() => {
             })
         })
         .then(response => response.json())
-        .then(result => {
-            yy.innerHTML = result;
-            console.log(result);
-        })
+        .then(messages => {
+            console.log(messages);
+            messages.forEach((element) => {
+                const e = element;
+                d = `${e.id}`;
+                if ((d-1) > 0 )
+                {return}
+                else
+               {
+               const div = document.createElement('div');
+                    content = `<div class='message_container'>
+                        <p>${e.sender}</p>
+                        <p>${e.message}</p>
+                        <p>${e.time}</p>
+                            </div>`;
+                    div.innerHTML = content;
+                    document.querySelector("#messages").append(div);
+                }
+            });
+        });
+        //put append #messages
     }
 }, 1500);
+
 
 function message(){
     message_u = document.querySelector("#message").value;
@@ -97,16 +153,12 @@ function message(){
     fetch('send',{
             method: 'POST',
             body: JSON.stringify({
-                message_u : textarea,
-                player : user,
+                message_u : message_u,
+                player : player,
                 chat_id : chat_id,
             })
         })
-        .then(response => response.json())
-        .then(result => {
-            yy.innerHTML = result;
-            console.log(result);
-        })
+
 }
 
 </script>

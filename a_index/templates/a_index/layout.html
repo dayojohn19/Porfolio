@@ -7,46 +7,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My WebPage</title>
 
-    <link href="{% static 'a_index/styles.css' %}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link href="{% static 'a_index/moving.css' %}" rel="stylesheet">
-    <link href="{% static 'a_index/colregs.css' %}" rel="stylesheet">
-    <link href="{% static 'a_blog/blog.css' %}" rel="stylesheet">
+    <link href="{% static 'colregs/colregs.css' %}" rel="stylesheet">
+    <link href="{% static 'blog/blog.css' %}" rel="stylesheet">
     <link href="{% static 'a_street_race/street_race.css' %}" rel="stylesheet">
+<!---<<<-->
+<!--disable right_Click-->
+<!-- <script src="{% static 'a_index/dis.js' %}"></script> -->
 
+    <link rel="stylesheet" href="{% static 'a_index/1000.css' %}">
+    <link rel="stylesheet" href="{% static 'a_index/500.css' %}">
+    <link href="{% static 'a_index/styles.css' %}" rel="stylesheet">
 
     <div class="container-main">
-        <div class="container-main-1">
-            <h1>John Foreign</h1>
+        <div class="container-main-1 bgimg ops">
+            <h1 class="o-green">John Foreign</h1>
+            <a class="red a-left">!! This Web requires high computing power !!</a>
         </div>
 
-        <div class="container-main-2">
-        </div>
-
-        <div class="container-sub-2-1">
-            <span><a href="{% url 'index:index' %}">Home</a></span>
-            <span><a href="{% url 'index:blog' %}">Blogs</a></span>
-            <span><a href="{% url 'index:social' %}">Socials</a></span>
-            <span><a href="{% url 'index:colreg' %}">Col Regs</a></span>
-            <span><a href="{% url 'street_race:index' %}">Street Race</a></span>
-            <button><a href="#">Contact</a></button>
+        <div class="container-sub-2-1 a-right">
+            <span><a class=""  href="{% url 'index:index' %}"><img class="h-icon th hg" src="{% static 'a_index/images/home.png' %}" alt=""></a></span>
+            <span><a class=""  href="{% url 'index:social' %}"><img class="h-icon th hg" src="{% static 'a_index/images/socials.png' %}" alt=""></a></span>
+            <span><a class=""  href="{% url 'index:blog' %}"><img class="h-icon th hg" src="{% static 'a_index/images/blog.png' %}" alt=""></a></span>
+            <span><a class=""  href="{% url 'index:map' %}"><img class="h-icon th hg" src="{% static 'a_index/images/map.png' %}" alt=""></a></span>
+            <span><a class=""  href="{% url 'index:games' %}"><img class="h-icon th hg" src="{% static 'a_index/images/games2.png' %}" alt=""></a></span>
         </div>
 </head>
+<!---end-->
 <body>
     <div class="container-main-main" style="height: 1000px; height: fit-content;">
         {% block body %}
 
 
 
+
+
+
+
+
         {% endblock %}
     </div>
 </body>
-<div class="container-main-6">
-    <div class="container-sub-6">+639 5685 43802</div>
-    <div class="container-sub-6">dayo_john16@yahoo.com</div>
-    <div class="container-sub-6">dayojohn16@gmail.com</div>
 
-</div>
-<div class="test">Bottom</div>
+
+<div class="container-main-6 footer ">
+    
+    <div class="container-sub-6 red">+639 5685 43802</div>
+    <div class="container-sub-6 ">dayo_john16@yahoo.com</div>
+    <div class="container-sub-6 ">dayojohn16@gmail.com</div>
 </div>
 
 </html>

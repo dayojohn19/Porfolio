@@ -1,0 +1,26 @@
+{% extends "a_index/layout.html" %}
+
+{% load static %}
+    {% block body %}
+    <link rel="stylesheet" href="{% static 'map/map.css' %}">
+
+
+
+<div class="container-main-maps">
+    <div class="">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d7949426.37729477!2d119.57401255460233!3d13.377870856738133!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sph!4v1628821992885!5m2!1sen!2sph" ></iframe>
+        <div class="map-form-container">
+            <div class="mb-3">
+                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Your Email">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Say Something</label>
+                <input type="textarea" class="form-control ta" id="exampleFormControlTextarea1" rows="3" value="Hi John, I like your Website, ">
+            </div>
+            <input type="submit"  value="Send"class="btn btn-primary">
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

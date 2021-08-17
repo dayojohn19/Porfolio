@@ -1,0 +1,7 @@
+{
+    "[html]": {
+    
+        "editor.suggest.insertMode": "replace"
+    },
+    "liveServer.settings.port": 5501
+}

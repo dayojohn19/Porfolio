@@ -5,10 +5,15 @@ def index(request):
     return render(request, 'a_index/index.html', {})
 
 def social(request):
-    return render(request, 'a_index/social.html')
+    return render(request, 'social/social.html')
 
 def colreg(request):
-    return render(request, 'a_index/colregs.html')
+    return render(request, 'colregs/colregs.html')
 
 def blog(request):
-    return render(request, 'a_index/blog.html')
+    return render(request, 'blog/blog.html')
+
+def map(request):
+    return render(request, 'map/map.html')
+def games(request):
+    return render(request, 'games/games.html')

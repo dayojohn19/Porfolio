@@ -1,0 +1,18 @@
+{% extends "a_index/layout.html" %}
+
+{% load static %}
+    {% block body %}
+    <link rel="stylesheet" href="{% static 'games/games.css' %}">
+
+<div class="games_container">
+    <div class="game">
+        <img src="{% static 'games/images/logo3.png' %}">
+        <a href="{% url 'street_race:index' %}">Street Race</a>
+    </div>
+
+    <div class="game">
+        <img src="{% static 'games/images/math.png' %}">
+        <a href="{% url 'games:addition' %}">Math Games</a>
+    </div>
+</div>
+{% endblock %}

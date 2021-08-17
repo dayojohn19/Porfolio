@@ -1,3 +1,27 @@
+.r-chatbox-b {
+    align-items: center;
+    width: 50%;
+    border-radius: 10px;
+    padding: 1%;
+    display: inline;
+}
+#r-host {
+    background-color: greenyellow;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.r-chatbox-b>input {
+    margin: 1%;
+}
+.r-chatbox-b>input+button {
+    display: inline;
+    border-radius: 10px;
+}
+.r-button{
+    border-radius: 10px;
+}
+
 .r-list {
     background-color: bisque;
     margin: 1%;
@@ -9,9 +33,9 @@
     list-style-type: none;
 }
 .r-container-form {
-    margin: auto;
-    margin-bottom: 2%;
-    margin-top: 2%;
+    margin: 0 auto;
+    margin-bottom: 5%;
+    margin-top: 5%;
     background-color: cadetblue;
     padding: 2%;
     border-radius: 10px;
@@ -59,13 +83,30 @@
     border: 2px solid black;
     color: black;
     background-color: violet;
-    margin: 1%;
+    margin: 0 auto;
+    padding: 1%;
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px rgb(209, 209, 209);
     text-align: center;
 }
-.r-chatbox>form>input{
-    height: 30px;
-}
+
 .r-chatbox > ul > li {
     text-align: left;
     list-style-type: none;
+}
+.list_messages {
+    overflow-y:auto;
+
+}
+.lists {
+    background-color: burlywood;
+    overflow:scroll;
+    height: 100px;
+    text-align: left;
+}
+.all_message {
+    background-color: chartreuse;
+    margin: 1%;
+    font-size: larger;
 }

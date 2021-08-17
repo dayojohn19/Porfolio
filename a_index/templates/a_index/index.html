@@ -2,50 +2,203 @@
 
 {% block body %}
 {% load static %}
-<script src="{% static 'a_index/index.js' %}"></script>
+<script src="{% static 'a_index/images/index.js' %}"></script>
 
 
 <div class="container-main-main">
 
-    <div class="container-main-3">
-        <div class="container-sub-3 sub-3-img m-fadeIn">
-            <img src="{% static 'images/img.png' %}">
+    <div class="container-main-main">
+        <div class="container-main-3">
+            <div class="container-sub-3 sub-3-img m-fadeIn ">
+                <div class="sp  ins th hg"></div>
+            </div>
+            <div class="th container-sub-3 sub-3-p">
+                <p class="m-types p-green">"Good Day to you <strong><a id="u_name"></a></strong>, I am a self taught Programmer, with Grit, Time and Dedication "</p>
+            </div>
         </div>
-        <div class="container-sub-3 sub-3-p">
-            <p class="m-types">"Good Day to you <strong><a id="u_name"></a></strong>, I am a self taught Programmer, with Grit, Time and Dedication "</p>
+    </div>
+    
+     
+     <hr>
+     <div class="container-main-main">
+         <div class="container-sub-4 th mar-ad">
+             <h1 class="robo app p-green">My Stacks</h1>
+         </div>
+     </div> 
+
+
+
+     <div class="test flex-container btm-icon-container">
+        <div class="a-docker btm-icon-cont m-icon ">
+            <img class=" img-fluid expd" src="{% static 'a_index/images/bottom/icons/logo-post.png' %}">
+         </div>
+         <div class="i-docker i-name i-o"><h1>PostGresSQL</h1><p>used for storing data</p></div>
+     
+        <div class="a-expressjs btm-icon-cont m-icon ">
+            <img class=" img-fluid expd" src="{% static 'a_index/images/bottom/icons/logo-json2.png' %}">
+         </div>
+         <div class="i-expressjs i-name i-o"><h1>JavaScript Object Notation</h1><p>used for transmission of data thru JavaScript</p></div>
+     
+
+        <div class="a-sass btm-icon-cont m-icon ">
+            <img class=" img-fluid expd" src="{% static 'a_index/images/bottom/icons/logo-selenium.png' %}">
+         </div>
+         <div class="i-sass i-name i-o"><h1>Selenium</h1><p>framework for web applications testing and controlling</p></div>
+     
+        <div class="a-sass btm-icon-cont m-icon ">
+           <img class=" img-fluid expd" src="{% static 'a_index/images/bottom/icons/logo-sass.png' %}">
         </div>
+        <div class="i-sass i-name i-o"><h1>Sass</h1><p>used in advance html designing</p></div>
+    
+        <div class="a-postgress btm-icon-cont m-icon">
+            <img class="img-fluid expd" src="{% static 'a_index/images/bottom/icons/logo-postman.png' %}">
+        </div>
+        <div class="i-postgress i-name"><h1>Postman</h1><p>Under Construction, used as communication to database</p></div>
+    
+        <div class="a-photoshop btm-icon-cont m-icon">
+            <img class="img-fluid expd" src="{% static 'a_index/images/bottom/icons/logo-ps.png' %}">
+        </div>
+        <div class="i-photoshop i-name"><h1>Photoshop</h1><p>for advance image editing/graphic arts</p></div>
+    
+        <div class="a-vsc btm-icon-cont m-icon">
+            <img class="img-fluid expd" src="{% static 'a_index/images/bottom/icons/logo-vsc.png' %}">
+        </div>
+        <div class="i-vsc i-name"><h1>Visual Studio Code</h1><p>for advance code editor filled with useful extensions and packages</p></div>
+        
+        <div class="a-github btm-icon-cont m-icon node">
+            <img class="img-fluid expd" src="{% static 'a_index/images/bottom/icons/logo-github1.png' %}">
+        </div>
+        <div class="i-github i-name"><h1>Github</h1><p>repository hosting services, provide convenient way to collaborate,</p></div>
+    
+        <div class="a-django btm-icon-cont m-icon">
+            <img class="img-fluid expd" src="{% static 'a_index/images/bottom/icons/logo-django2.png' %}">
+        </div>
+        <div class="i-django i-name"><h1>Django</h1><p>a Framework mainly used for Python Language, developed by developers for developers per se, provides html anti hack/spam security </p></div>
+    
+        <div class="a-docker btm-icon-cont m-icon">
+            <img class="img-fluid expd" src="{% static 'a_index/images/bottom/icons/logo-docker.png' %}">
+        </div>
+        <div class="i-docker i-name"><h1>Docker</h1><p>an open source container, works like a lightweight virtual computer</p></div>
+    
+        <div class="a-python btm-icon-cont m-icon">
+            <img class="img-fluid " src="{% static 'a_index/images/bottom/icons/logo-python.png' %}">
+        </div>
+        <div class="i-python i-name"><h1>Python</h1><p>Language mainly used for machine learning, data science</p></div>
+    
+        <div class="a-javascript btm-icon-cont m-icon">
+            <img class="img-fluid " src="{% static 'a_index/images/bottom/icons/logo-javascript.png' %}">
+        </div>
+        <div class="i-javascript i-name"><h1>JavaScript</h1><p>Language used in broad field from designing to hacking</p></div>
+    
+        <div class="a-bootstrap btm-icon-cont m-icon">
+            <img class="img-fluid " src="{% static 'a_index/images/bottom/icons/logo-bootstrap.png' %}">
+        </div>
+        <div class="i-bootstrap i-name"><h1>Bootstrap</h1><p>an online aid for web designing, ease the disect coding </p></div>
+    
+        <div class="a-css3 btm-icon-cont m-icon">
+            <img class="img-fluid " src="{% static 'a_index/images/bottom/icons/logo-css3.png' %}">
+        </div>
+        <div class="i-css3 i-name"><h1>Cascading Style Sheet Level3</h1><p>html extension used for designing web pages</p></div>
+    
+        <div class="a-expressjs btm-icon-cont m-icon node">
+            <img class="img-fluid " src="{% static 'a_index/images/bottom/icons/logo-expressjs.png' %}">
+        </div>
+        <div class="i-expressjs i-name"><h1>Express JS</h1><p>Under Construction, Framework for Node JS </p></div>
+    
+        <div class="a-git btm-icon-cont m-icon">
+            <img class="img-fluid " src="{% static 'a_index/images/bottom/icons/logo-git.png' %}">
+        </div>
+        <div class="i-git i-name"><h1>Global Information Tracker</h1><p>mainly used for collaborating large projects</p></div>
+    
+        <div class="a-gitlab btm-icon-cont m-icon">
+            <img class="img-fluid " src="{% static 'a_index/images/bottom/icons/logo-gitlab-ci' %}-cd.png">
+        </div>
+        <div class="i-gitlab i-name"><h1>GitLab</h1><p>lightweight hosting of repositories, collaborations</p></div>
+    
+        <div class="a-heroku btm-icon-cont m-icon">
+            <img class="img-fluid " src="{% static 'a_index/images/bottom/icons/logo-heroku.png' %}">
+        </div>
+        <div class="i-heroku i-name"><h1>Heroku</h1><p>a cloud container used mainly used to deploy applications which requires a running server </p></div>
+    
+        <div class="a-html5 btm-icon-cont m-icon">
+            <img class="img-fluid " src="{% static 'a_index/images/bottom/icons/logo-html5.png' %}">
+        </div>
+        <div class="i-html5 i-name"><h1>Hyper Text Markup Language 5</h1><p>a modern version used in surfing contents from world wide web</p></div>
+    
+        <div class="a-mongodb btm-icon-cont m-icon">
+            <img class="img-fluid " src="{% static 'a_index/images/bottom/icons/logo-mongodb.png' %}">
+        </div>
+        <div class="i-mongodb i-name"><h1>Mongo DB</h1><p>Under constraction, an open source database management</p></div>
+    
+        <div class="a-nodejs btm-icon-cont m-icon node">
+            <img class="img-fluid " src="{% static 'a_index/images/bottom/icons/logo-nodejs.png' %}">
+        </div>
+        <div class="i-nodejs i-name"><h1>Node JS</h1><p>Under Construction, extension for JavaScript</p></div>
+    
+        <div class="a-react btm-icon-cont m-icon">
+            <img class="img-fluid " src="{% static 'a_index/images/bottom/icons/logo-react.png' %}">
+        </div>
+        <div class="i-react i-name"><h1>React</h1><p> user interface lightweight and realtime data rendering</p></div>
+    
+        <div class="a-rest btm-icon-cont m-icon">
+            <img class="img-fluid " src="{% static 'a_index/images/bottom/icons/logo-rest.png' %}">
+        </div>
+        <div class="i-rest i-name"><h1>Rest</h1><p>Under Construction</p></div>
+    
+        <div class="a-sublime btm-icon-cont m-icon">
+            <img class="img-fluid " src="{% static 'a_index/images/bottom/icons/logo-sublime-text' %}-3.png">
+        </div>
+        <div class="i-sublime i-name"><h1>Sublime</h1><p>lightweight text editor</p></div>
     </div>
 
-    <div class="container-main-4">
-        <div class="container-sub-4">
-            Some of my Works
+    <hr>
+    <div class="container-main-main">
+
+        <div class="container-main-4">
+            <div class="container-sub-4 th">
+                <h1 class="robo p-green">Some of my Projects</h1>
+            </div>
+            <div class="container-sub-4">
+            </div>
         </div>
-        <div class="container-sub-4">
-        </div>
-    </div>
-    <div class="container-main-5 m-types-2">
-        <div class="container-sub-5">
-            <img class="sub-5-img"  src="{% static 'images/item.png' %}">
-        </div>
-        <div class="container-sub-5">
-            <img class="sub-5-img"  src="{% static 'images/item.png' %}">
-        </div>
-        <div class="container-sub-5">
-            <img class="sub-5-img"  src="{% static 'images/item.png' %}">
-        </div>
-        <div class="container-sub-5">
-            <img class="sub-5-img"  src="{% static 'images/item.png' %}">
-        </div>
-        <div class="container-sub-5">
-            <img class="sub-5-img"  src="{% static 'images/item.png' %}">
-        </div>
-        <div class="container-sub-5">
-            <img class="sub-5-img"  src="{% static 'images/item.png' %}">
-        </div>
-        <div class="container-sub-5">
-            <img class="sub-5-img"  src="{% static 'images/item.png' %}">
-        </div>
-    </div>
+
+
+
+            <div class="container-main-5 ">
+ 
+                <div class="container-sub-5">
+                    <img class="sub-5-img zz"  src="{% static 'a_index/images/work.png' %}">
+                </div>
+                <div class="container-sub-5">
+                    <img class="sub-5-img zz"  src="{% static 'a_index/images/work2.png' %}">
+                </div>
+                <div class="container-sub-5">
+                    <img class="sub-5-img zz"  src="{% static 'a_index/images/work3.png' %}">
+                </div>
+                <div class="container-sub-5">
+                    <img class="sub-5-img zz"  src="{% static 'a_index/images/work4.png' %}"><script src="index/dis.js"></script>
+                </div>
+                <div class="container-sub-5">
+                    <img class="sub-5-img zz"  src="{% static 'a_index/images/work5.png' %}">
+                </div>
+                <div class="container-sub-5">
+                    <img class="sub-5-img zz"  src="{% static 'a_index/images/work6.png' %}">
+                </div>
+                <div class="container-sub-5">
+                    <img class="sub-5-img zz"  src="{% static 'a_index/images/work7.png' %}">
+                </div>
+                <div class="container-sub-5">
+                    <img class="sub-5-img zz"  src="{% static 'a_index/images/work8.png' %}">
+                </div>
+                <div class="container-sub-5">
+                    <img class="sub-5-img zz"  src="{% static 'a_index/images/work9.png' %}">
+                </div>
+
+            </div>
+<!--Some Projects-->
+
+
+
 </div>
 
 

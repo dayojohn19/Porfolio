@@ -7,4 +7,6 @@ urlpatterns = [
     path("social/", views.social, name="social"),
     path("colreg/", views.colreg, name="colreg"),
     path("blog/", views.blog, name="blog"),
+    path("map/", views.map, name="map"),
+    path("games/", views.games, name="games")
 ]

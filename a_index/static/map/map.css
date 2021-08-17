@@ -1,0 +1,41 @@
+.container-main-maps {
+    height: fit-content;
+    height: 1000px;
+}
+iframe {
+    float: right;
+    width:50%;
+    height:500px;
+    border-radius: 15px;
+    margin: 1%;
+}
+.map-form-container {
+    width: 50%;
+    padding: 5%;
+    margin: 2%;
+}
+.ta {
+    height: 120px;
+    white-space: pre-wrap;
+}
+@media only screen and (max-width: 600px){
+
+.map-form-container {
+    width: 90%;
+    top: 20%;
+    height: 20%;
+
+    padding: 5%;
+    margin: 2%;
+}
+iframe {
+    position: inherit;
+    display: block;
+    width: 100%;
+    margin: 0px;
+    margin-bottom: 5%;
+    
+}
+
+}
+

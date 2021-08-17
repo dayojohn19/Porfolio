@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'a_street_race',
     'a_index',
     'a_blog',
+    'games',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,7 +43,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -50,7 +50,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
 ROOT_URLCONF = 'webpage.urls'
@@ -73,21 +72,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'webpage.wsgi.application'
 
-
+import os
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd4vp7ukh3b4mie',
-        'HOST': 'ec2-54-173-31-84.compute-1.amazonaws.com',
-        'PORT': 5432,
-        'USER':'exilmnzuffgqor',
-        'PASSWORD': '4ab209d64937c938c37a16a2cb527ff3bbf80bca783a97ee4b8f796849edadd4'
-
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
 
 
 # Password validation
@@ -114,13 +109,13 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
-
+TIME_ZONE = 'Asia/Manila'
+TIME_INPUT_FORMATS = ('%I:%M %p',)
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)

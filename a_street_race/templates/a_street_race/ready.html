@@ -1,0 +1,84 @@
+{% extends "a_index/layout.html" %}
+
+{% block body %}
+{% load static %}
+It is {% now "jS F Y H:i" %}<br>
+<h1 class="code">{{code}}</h1>
+{{message}}
+<h1 class="user">{{user}}</h1>
+<h1 class="chat_id">{{rid}}</h1>
+
+
+
+
+{% if 1_sticker %}
+<!--Player 1-->
+<div class="player">player2</div> 
+<!-- changed-->
+    {% if pp %}
+        {% for p in pp %} 
+            {{p.player2}}
+            <br>
+            <div class="sticker">sticker2:</div>
+            <div class="2_sticker">{{p.sticker2}}</div>
+            <br>
+        {% endfor %}
+    {% else %}
+    <h1>Not Ready</h1>
+    {% endif %}
+<br>
+<!-- end changed-->
+    player1 : {{player1}}
+   
+    <script>
+
+        setInterval(() => {
+        code = document.querySelector(".chat_id").innerHTML;
+        player = document.querySelector(".player").innerHTML;
+        sticker = document.querySelector(".sticker").innerHTML;
+           // if (sticker2 == ''){
+                fetch('get_sticker',{
+            method: 'POST',
+            body: JSON.stringify({
+                code : code,
+                player:player,
+            })
+        })
+        .then(response => response.json())
+        .then(result => {
+            // sticker2.innerHTML = result;
+            console.log(result);
+        })
+            //}
+        }, 1500);
+    </script>
+
+{% else %}
+<!--Player 2-->
+    <!-- changed-->
+        {% if pp %}
+            {% for p in pp %}
+              <div class"player">player1</div> {{p.player1}}
+                <br>
+                p2_sticker: <div class="1_sticker">{{p.sticker1}}</div>
+                <br>
+            {% endfor %}
+        {% else %}
+        <h1>Not Ready</h1>
+        {% endif %}
+    <br>
+    <!-- end changed-->
+
+    Player2: {{player2}}
+
+
+{% endif %}
+
+
+
+
+
+
+
+
+{% endblock %} 

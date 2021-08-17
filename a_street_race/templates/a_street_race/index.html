@@ -2,30 +2,53 @@
 
 {% block body %}
 {% load static %}
+<script src="{% static 'a_street_race/street_race.js' %}"></script>
+
+ {% now " F j g:m  a " %}<br>
+<script>
+    function refresh() {
+        location.reload();
+    }
+    window.onbeforeunload = function() {
+        return "Dude, are you sure you want to leave? Think of the kittens!";
+    }
+</script>
+
+
+<div class="r-chatbox">
+    <section class="lists">
+        <p class="list_messages"></p>
+    </section>
+    <div class="r-chatbox-b">
+        <input class="message_general" maxlength="18">
+        <button onclick="message_general()" onclick="document.querySelector('.message_general').value = ''">Send</button>    
+    </div>
+</div>
+{% if message %}
+<script>
+    alert('Wrong Code');
+</script>
+{% endif %}
+
+
 <div class="container-main-main">
     <div>
         <div class="r-container-form">
             {{pass}}
             <form method="post" action="{% url 'street_race:create' %}">
                 {% csrf_token %}
-                {{form}}<br>
+                {{form.name}}<br>
+                {{form.code}}<br>
+                <hr>
                 <input type="submit" value="Create Room">
             </form>
         </div>
-        <div class="r-container-form">
-            <form>
-                <input required placeholder="Enter Race Number">
-                <br>
-                <button>Join Race</button>
-            </form>
-        </div>
-        <div class="r-container-form">
-            <a href="{% url 'street_race:race' %}">Race</a>
-        </div>
+   
 
         <div>
-            <h1>List of Races</h1>
-            {{message}}
+            <h1>Races <button class="r-button" onclick="refresh()">Refresh</button></h1>
+            {{message}}<br>
+            
             <ul>
                 {% for r in room %}
                 <div class="r-list">
@@ -33,14 +56,13 @@
                     <li>
                         <form method="post" action="{% url 'street_race:join' %}">
                             {% csrf_token %}
-                        Host:<input name="host" value="{{r.player1}}">
-                        <br>{{r.room_code}}
+                            <input class="r-button" type="submit" value="Join">
+                        Host: <input id="r-host" disabled name="host" value="{{r.player1}}">
                         <input name="name" placeholder="Your Nick Name">
-                        <input name="code" placeholder="code" required>
-                        <input type="submit" value="Join">
+                        <input type="number" name="code" placeholder="code" required>
+                        {{r.room_code}}
                         </form>
                     </li>
-                    <br>
                 </div>
                 {% endfor %}
 
@@ -48,4 +70,6 @@
         </div>
     </div>
 </div>
+
+
 {% endblock %}
