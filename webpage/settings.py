@@ -30,6 +30,7 @@ ALLOWED_HOSTS = ['https://lit-river-78167.herokuapp.com','127.0.0.1','lit-river-
 # Application definition
 
 INSTALLED_APPS = [
+    'app_mail',
     'a_street_race',
     'a_index',
     'a_blog',
@@ -133,3 +134,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'blogs/')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+###### authenticate user from
+AUTH_USER_MODEL = 'app_mail.User'

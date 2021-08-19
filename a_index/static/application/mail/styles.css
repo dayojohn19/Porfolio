@@ -1,0 +1,85 @@
+textarea {
+    min-height: 400px;
+}
+.b1 {
+    background-color: rgb(186, 247, 162);
+}
+.email_list {
+    border-style: dotted;
+    border-width: 3px;
+    border-color: rgb(87, 87, 87);
+    background-color: rgb(173, 173, 173);
+    width: 50%;
+
+
+}
+.email_listun {
+    border-style: inset;
+    border-width: 3px;
+    border-color: rgb(255, 238, 232);
+    background-color: rgb(255, 255, 255);
+    width: 50%;
+
+
+}
+.email_body {
+    border-width: 4px;
+    border-color: rgb(59, 255, 255);
+    margin-left: 20px;
+    width: 45%;
+    height: fit-content;
+    top: 30%;
+    left: 50%;
+    border-radius: 10%;
+    border-style: solid;
+        background-color: rgb(195, 255, 255);
+      position: fixed;
+      text-align: center;
+}
+
+@keyframes 
+            remove {    0% {left: 0%;
+                                opacity: 1;
+                                height: 100%;
+                                line-height: 100%;
+                                padding: 20px;
+                                margin-bottom: 10px;
+                            }
+                        30% {left:-10%;
+                                opacity: 0.7;
+                            }
+                        100%{left: 100%;
+                                opacity:0;
+                                height: 0px;
+                                line-height: 0px;
+                                padding: 0px;
+                                margin-bottom: 0px;
+                                margin: 0px;
+                                margin-top: 0%;
+                                }
+                    }
+            .post2 { background-color: #d3ffa7;
+                    border: 3px solid #acff59;
+                    text-align: center;
+                    padding-top: 20px;
+                    margin-top: 10px;
+                    border-radius: 10%;
+                    }
+
+
+body { 
+    background-color: rgb(255, 239, 221);
+}
+
+.post2:hover {
+    background-color: rgb(255, 152, 111);
+}
+#side:hover{
+    background-color: aqua;
+}
+.email_listun:hover {
+    background-color: rgb(255, 255, 185);
+}
+.email_list:hover{
+    background-color: rgb(202, 202, 202);
+}

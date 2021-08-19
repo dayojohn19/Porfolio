@@ -22,5 +22,6 @@ urlpatterns = [
     path('blog/', include('a_blog.urls')),
     path('street_race/', include('a_street_race.urls')),
     path('games/', include('games.urls')),
+    path('app_mail/', include('app_mail.urls'))
 
 ]

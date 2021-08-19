@@ -35,12 +35,13 @@ def create(request):
                 'player2':room.player2,
                 'rid':room.id,
                 'message':'done',
-                'user':np.host
+                'user':np.host,
             })
             except:
-                np.save()
                 rm.save()
                 room = Room.objects.filter(full=False).get(room_code=np.code)
+                np.save()
+                
                 return render(request, 'a_street_race/race.html',{
                     'rid':room.id,
                     'host':rm.player1,
@@ -49,6 +50,10 @@ def create(request):
                     'player2':rm.player2,
                     'user':np.host
                 })
+        else:
+            return render(request, 'a_street_race/index.html', {
+                'form':NewRace()
+            })
         
 from django.views.decorators.csrf import csrf_exempt
 import json
@@ -58,14 +63,14 @@ def fetch(request):
     if request.method == 'POST':
         data = json.loads(request.body)
         code = data.get('code')
-        room = Room.objects.get(room_code=code)
+        room = Room.objects.get(id=code)
         re = room.player2
         return JsonResponse(re, safe=False)
     elif request.method == 'PUT':
         data = json.loads(request.body)
         code = data.get('code')
-        room = Room.objects.get(room_code=code)
-        messages = Chat.objects.filter(chat_id=room.id).order_by('id').reverse()
+        # room = Room.objects.get(room_code=code)
+        messages = Chat.objects.filter(chat_id=code).order_by('id')
         return JsonResponse([message.serialize() for message in messages], safe=False)
     else:
         messages = Chat.objects.filter(chat_id=1).order_by('id')
@@ -74,9 +79,12 @@ def fetch(request):
 def get_sticker(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-        code = data.get("code")
+        rid = data.get("rid")
         player_init = data.get("player")
-        player = Room.objects.filter(pk=code).get(player=player_init)
+        if player_init == 'player1':
+            player = Room.objects.get(pk=rid).sticker2
+        if player_init == 'player2':
+            player = Room.objects.get(pk=rid).sticker1
         return JsonResponse(player, safe=False)
 
 def join(request):
@@ -97,14 +105,15 @@ def join(request):
                 'code':code,
                 'user':name,
                 'rid':room.id,
-                
+                'form':NewRace()
             })
         except:
-            room = Room.objects.filter(full=False).get(room_code=code)
+            # room = Room.objects.filter(full=False).get(room_code=code)
             return render(request, 'a_street_race/index.html',{
                 'message':'wrong Code',
                 'room': Room.objects.order_by('id').reverse(),
-                'rid':room.id
+                # 'rid':room.id,
+                'form':NewRace()
             })
 @csrf_exempt  
 def send(request):

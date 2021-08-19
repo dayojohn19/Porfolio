@@ -11,7 +11,22 @@
             <input type="submit" value="Post">
         </form>
     </div>
+    
+<hr><hr>
+{% for e in entries %}
+{{e.title}}<br>
+{{e.page}}
+{% endfor %}
+<hr><hr>
 
+
+<script>
+    blogs = "{{entries}}";
+    console.log(blogs);
+    </script>
+<hr>
+<hr>
+<hr>
     <div>
         <form action="{% url 'blog:new_blog' %}" method="post" enctype="multipart/form-data" >
             {%csrf_token%}

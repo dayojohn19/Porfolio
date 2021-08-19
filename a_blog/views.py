@@ -18,10 +18,14 @@ markdowner = Markdown()
 class Post(forms.Form):
     title = forms.CharField(label= "Title")
     pan = forms.CharField(label= "pan")
-    img = forms.ImageField()
+    # img = forms.ImageField()
     textarea = forms.CharField(widget=forms.Textarea(), label='')
 class Search(forms.Form):
     item = forms.CharField(widget=forms.TextInput(attrs={'class' : 'myfieldclass', 'placeholder': 'Search'}))
+def get_blog(request):
+    blog = util.list_entries()
+    return blog
+    
 def save_blog(request):
     if request.method == 'POST':
         form = Post(request.POST)
@@ -29,8 +33,9 @@ def save_blog(request):
             title = form.cleaned_data["title"]
             t1 = form.cleaned_data["textarea"]
             pan = form.cleaned_data["pan"]
-            img = form.cleaned_data["img"]
-            textarea = t1 +  ' by -' + pan + img
+            # img = form.cleaned_data["img"]
+            # textarea = t1 +  ' by -' + pan + img
+            textarea = t1 +  ' by -' + pan 
             entries = util.list_entries()
             if title in entries:
                 return render(request, 'a_blog/index.html',{

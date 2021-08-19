@@ -2,6 +2,7 @@
 
 {% block body %}
 {% load static %}
+user{{request.user}}<br>
 <script src="{% static 'a_street_race/street_race.js' %}"></script>
 
  {% now " F j g:m  a " %}<br>
@@ -9,28 +10,11 @@
     function refresh() {
         location.reload();
     }
-    window.onbeforeunload = function() {
-        return "Dude, are you sure you want to leave? Think of the kittens!";
-    }
+    // window.onbeforeunload = function() {
+    //     return "Dude, are you sure you want to leave? Think of the kittens!";
+    // }
 </script>
-
-
-<div class="r-chatbox">
-    <section class="lists">
-        <p class="list_messages"></p>
-    </section>
-    <div class="r-chatbox-b">
-        <input class="message_general" maxlength="18">
-        <button onclick="message_general()" onclick="document.querySelector('.message_general').value = ''">Send</button>    
-    </div>
-</div>
-{% if message %}
-<script>
-    alert('Wrong Code');
-</script>
-{% endif %}
-
-
+<!-- create -->
 <div class="container-main-main">
     <div>
         <div class="r-container-form">
@@ -43,33 +27,111 @@
                 <input type="submit" value="Create Room">
             </form>
         </div>
-   
-
-        <div>
-            <h1>Races <button class="r-button" onclick="refresh()">Refresh</button></h1>
-            {{message}}<br>
-            
-            <ul>
-                {% for r in room %}
-                <div class="r-list">
-                    
-                    <li>
-                        <form method="post" action="{% url 'street_race:join' %}">
-                            {% csrf_token %}
-                            <input class="r-button" type="submit" value="Join">
-                        Host: <input id="r-host" disabled name="host" value="{{r.player1}}">
-                        <input name="name" placeholder="Your Nick Name">
-                        <input type="number" name="code" placeholder="code" required>
-                        {{r.room_code}}
-                        </form>
-                    </li>
-                </div>
-                {% endfor %}
-
-            </ul>
-        </div>
     </div>
 </div>
+<!-- end create -->
+<!-- ROom -->
+<div>
+    <h1>Room <button class="r-button" onclick="refresh()">Refresh</button></h1>
+    {{message}}<br>
+        {% for r in room %}
+        <div class="cent">
+            <div class="all_message">
+                <form method="post" action="{% url 'street_race:join' %}">
+                    {% csrf_token %}
+                <input readonly class="inp"  id="r-host" name="host" value="{{r.player1}}">
+                <br>
+                <input name="name" placeholder="Your Nick Name">
+                <br>
+                <input type="number" name="code" placeholder="password" required>
+                <br>
+                <input class="inp" class="r-button" type="submit" value="Join">
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+</div>
+<!-- end Room -->
 
+
+
+<!-- chat box -->
+<div class="r-chatbox-c">
+    <div class="r-chatbox-b">
+        <input class="message_general border" maxlength="18">
+        <button onclick="message_general()" onclick="document.querySelector('.message_general').value = ''">Send</button>    
+    </div>
+    <div class="r-chatbox">
+        <section class="lists">
+            <p class="list_messages"></p>
+        </section>
+    </div>
+</div>
+<!-- chatbox end -->
+
+{% if message %}
+<script>
+    alert('Wrong Code');
+</script>
+{% endif %}
+
+
+
+<script>
+    let y = 0;
+setInterval(() => {
+//getting the joiner
+    //getting the message
+
+        fetch('fetch')
+        .then(response => response.json())
+        .then(messages => {
+            x = messages.length;
+            if((y-x) == 0) {
+                console.log('nonew ' + x);
+            }else {
+                latest = messages.slice(Math.max(messages.length - 3, 0))
+                //.reverse()
+                console.log(latest);
+                y=x;
+                console.log(y);
+            
+            
+            latest.forEach((element) => {
+                const e = element;
+
+                console.log(e);
+                div = document.createElement('div');
+
+                    content = `<div class="all_message">
+                                ${e.message}
+                                &nbsp;
+                                <span class="time">${e.time}</span>   &nbsp;&nbsp;&nbsp;
+                            </div>`;
+                    xx = div.innerHTML = content;
+
+            });
+            all = div;
+            document.querySelector(".list_messages").prepend(all);
+        }
+        });
+
+    
+}, 1500);
+
+
+function message_general(){
+    message_u = document.querySelector(".message_general").value;
+    fetch('send',{
+            method: 'POST',
+            body: JSON.stringify({
+                message_u : message_u,
+                player:'noname',
+                chat_id : 1,
+            })
+        });
+        document.querySelector(".message_general").value = '';
+}
+</script>
 
 {% endblock %}

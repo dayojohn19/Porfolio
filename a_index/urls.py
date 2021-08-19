@@ -8,5 +8,7 @@ urlpatterns = [
     path("colreg/", views.colreg, name="colreg"),
     path("blog/", views.blog, name="blog"),
     path("map/", views.map, name="map"),
-    path("games/", views.games, name="games")
+    path("games/", views.games, name="games"),
+    path("application/", views.application, name="application"),
+
 ]
