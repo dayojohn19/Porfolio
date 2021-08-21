@@ -3,10 +3,15 @@
 {% load static %}
     {% block body %}
     <link rel="stylesheet" href="{% static 'application/application.css' %}">
+{{data}}
+{% for d in data %}
+{{d}}
+{% endfor %}
 
 <ul>
     <li>Tour Guide</li>
-    
+    <li><a href="{% url 'index:mail' %}">F Mail</a></li>
+    <li><a href="{% url 'index:earthquake' %}">Earthquake</a></li>
     <li>Festivals</li>
     get festivals 
 </ul>

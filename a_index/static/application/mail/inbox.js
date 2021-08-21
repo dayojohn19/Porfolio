@@ -60,7 +60,9 @@ function cc() {
 const body = document.querySelector('#compose-body').value;
 const subject = document.querySelector('#compose-subject').value;
 const recipients = document.querySelector('#compose-recipients').value;
-fetch('/emails', {
+
+alert('send');
+fetch('application/emails', {
   method: 'POST',
   body: JSON.stringify({
       recipients: recipients,
@@ -76,6 +78,7 @@ fetch('/emails', {
 });
 alert('message sent');
 load_mailbox('sent');
+console.log('sending');
 }
 //
 function compose_email() {
@@ -96,7 +99,7 @@ document.querySelector('#emails-view').innerHTML = `<strong><h3>${mailbox.charAt
 
 
 //fetch the emails 
-fetch(`/emails/${mailbox}`)
+fetch(`/app_mail/application/emails/${mailbox}`)
 .then(response => response.json())
 .then(emails => {
 console.log(emails);
@@ -127,7 +130,7 @@ if (mailbox == "inbox") {
 
   function xdate() {
     document.querySelector('#side').style.display = 'block';
-    fetch(`/emails/${mailbox}`)
+    fetch(`/app_mail/application/emails/${mailbox}`)
   .then(response => response.json())
   .then(emails => {
     x1 = emails;
@@ -174,7 +177,7 @@ if (mailbox == "inbox") {
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 function show_mail(id, mailbox) {
-fetch(`/emails/${id}`)
+fetch(`/app_mail/application/emails/${id}`)
 .then((response) => response.json())
 .then((email) => {
   e = email;
@@ -221,7 +224,7 @@ return;}
 }
 
 function toggle_archive(id, state) {
-fetch(`/emails/${id}`, {
+fetch(`/app_mail/application/emails/${id}`, {
 method: "PUT",
 body: JSON.stringify({
   archived: !state,
@@ -230,7 +233,7 @@ body: JSON.stringify({
 }
 
 function make_read(id) {
-fetch(`/emails/${id}`, {
+fetch(`/app_mail/application/emails/${id}`, {
 method: "PUT",
 body: JSON.stringify({read: true,}), 
 });

@@ -69,6 +69,20 @@ textarea {
 
 body { 
     background-color: rgb(255, 239, 221);
+    color: white;
+    margin:0;
+    padding: 0;
+    background-color: violet;
+    color: white;
+    font-family: 'Mukta', sans-serif;
+    letter-spacing: 0.7px;   
+    height: 1000px;
+}
+.email_listun {
+    color: black;
+}
+.email_body{
+    color: black;
 }
 
 .post2:hover {
@@ -83,3 +97,9 @@ body {
 .email_list:hover{
     background-color: rgb(202, 202, 202);
 }
+#side {
+    background-repeat: no-repeat;
+    background-position: right top;
+    margin-right: 200px;
+    background-attachment: fixed;
+  }
