@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- REMOVE UNDERLINE ON TEXT-->
+         <STYLE>A {text-decoration: none;} </STYLE>
+            <body class="body">
+            <div" style=" align-items: center;" >
+            <iframe  content="width=device-width" src="https://www.youtube.com/embed/cgfDzVmkhqs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+<!--get your location-->
+
+                    <br>
+                        <button onclick="getLocation()">Get Your Location</button>
+                                
+                    <p id="location"></p>
+
+                      <script>
+                    var x = document.getElementById("location");
+                    var y = document.getElementById("latitude");
+
+                      function getLocation() {
+                      if (navigator.geolocation) {
+                      navigator.geolocation.getCurrentPosition(showPosition);
+                        } else { 
+                                    x.innerHTML = "Geolocation is not supported by this browser.";
+                      }
+                      }
+
+                      function showPosition(position) {
+                      x.innerHTML = "Latitude: " + position.coords.latitude + 
+                      "<br>Longitude: " + position.coords.longitude;
+                      }
+
+                
+                             </script>
+                      <p id="latitude"></p>
+ <!--- QUESTION AND ANSWER-->
+ <div class="mydiv" style="background-color: rgba(22, 21, 21, 0.548);">
+        <a class="qa" href="paano.html" style="font-family: 'Google Sans',Roboto,Arial,sans-serif;"><br><b>PAANO KUMUHA NG PREMYO<br></a>
+        <a class="qa" href="paanosumali.html" style="font-family: 'Google Sans',Roboto,Arial,sans-serif;"><br><b>PAANO ULIT SUMALI ANG NATALO</b><br></a>
+        <a class="qa" href="paanomanalo.html" style="font-family: 'Google Sans',Roboto,Arial,sans-serif;"><br><b>PAANO MANALO</b><br></a>
+        <a class="qa" href="nextlap.html" style="font-family: 'Google Sans',Roboto,Arial,sans-serif;"><br><b>PAANO SUMALI SA KASUNOD NA LAP</b><br></a>
+        <a class="qa" href="point.html" ><br><b>PAANO ANG POINT SYSTEM</b><br></a>
+      </div>
+      <style>
+        .qa {
+          font-size: larger;
+          font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+          font-style:unset;
+          font-variant-numeric: unset;
+          background-color: navajowhite;
+        
+          text-emphasis-color: rgb(255, 255, 255);
+          font-display: rgb(0, 0, 0);
+          
+        }
+
+      </style>
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<!--button show and unshow-->
+    <p20 class="sulat" id="1"   > 
+        KUNG IKAW AY KASAMA SA NANALO SA na UNANG LAP <br><br>IPAKITA LAMANG ANG STICKER
+
+        <br><br>
+        IPA CHECK ANG IYONG LOFT SA LISTAHAN NG MANGA NANALO
+        <br><br>
+        HUMINGI NG PANIBAGONG STICKER WALA NA ITONG BAYAD
+        
+        <br><br>
+        PIRMAHAN ANG PAPEL KATUNAYAN NA IKAW AY NAKA KUHA NA NG STICKER
+        <br><br>
+
+     </p20>
+<!--button show and unshow-->
+     <button onclick="first()"> <h20>
+        PAANO SUMALI SA KASUNOD NA LAP PARA PANALO
+     </h20> </button>
+     <p id="1.1"></p>
+<!---second-->
+<!--button show and unshow-->
+<button onclick="second()"> <h20>
+    PAANO SUMALI SA KASUNOD NA LAP PARA SA TALO
+ </h20> </button>
+
+     <p20 class="sulat" id="2"   > 
+        KUNG IKAW AY KASAMA SA NATALO SA NA-UNANG LAP <br><br>IPAKITA LAMANG ANG STICKER
+    
+        <br><br>
+        IPA CHECK ANG IYONG LOFT SA LISTAHAN NG MANGA NATALO
+        <br><br>
+        IPALIT ANG NATALO NA  STIKER SA PANIBAGONG STICKER UPANG KALAHATI LAMANG ANG IYONG BAYARAN NA ENTRY SA SUSUNOD NA LAP
+        <br><br>
+        PIRMAHAN ANG PAPEL KATUNAYAN NA IKAW AY NAKA KUHA NA NG STICKER
+        <br><br>
+     </p20>
+    
+    
+     <p id="2.2"></p>
+     
+     
+     <script>
+        let x = document.getElementById("1").innerHTML
+        let y = document.getElementById("2").innerHTML   
+
+    function first() {
+                document.getElementById("1.1").innerHTML = x;
+        var y = document.getElementById("1.1");
+        if (y.style.display === "none") {
+              y.style.display = "block";
+                         } else {
+                          y.style.display = "none";
+                        }
+   }
+
+
+    function second() {
+      document.getElementById("2.2").innerHTML = x;
+      var y = document.getElementById("2.2");
+        if (y.style.display === "none") {
+              y.style.display = "block";
+                         } else {
+                          y.style.display = "none";
+                        }
+    }
+    
+
+    </script>
+
+
+</body>
+</html>

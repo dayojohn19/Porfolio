@@ -3,16 +3,23 @@
 {% load static %}
     {% block body %}
     <link rel="stylesheet" href="{% static 'application/application.css' %}">
-{{data}}
-{% for d in data %}
-{{d}}
-{% endfor %}
+<link rel="stylesheet" href="{% static 'games/games.css' %}">
 
-<ul>
-    <li>Tour Guide</li>
-    <li><a href="{% url 'index:mail' %}">F Mail</a></li>
-    <li><a href="{% url 'index:earthquake' %}">Earthquake</a></li>
-    <li>Festivals</li>
-    get festivals 
-</ul>
+<div class="games_container">
+    <div class="game">
+        <img src="{% static 'application/images/mail.png' %}">
+        <a href="{% url 'mail:index' %}">E-Mail</a>
+    </div>
+
+    <div class="game">
+        <img src="{% static 'application/images/earthquake.png' %}">
+        <a href="{% url 'index:earthquake' %}">World Earthquake Report</a>
+    </div>
+
+    <div class="game">
+        <img src="{% static 'application/images/calendar.png' %}">
+        <a href="{% url 'index:calendar' %}">Calendar</a>
+    </div>
+
+</div>
     {% endblock %}

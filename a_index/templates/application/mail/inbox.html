@@ -1,0 +1,52 @@
+{% extends "a_index/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="{% static 'application/mail/styles.css' %}">
+<script src="{% static 'application/mail/inbox.js' %}"></script>
+
+    <h2>{{ request.user.email }} is online for <a id="h4"></a></h2>
+    <button class="btn btn-sm btn-outline-primary" id="inbox">Inbox</button>
+    <button class="btn btn-sm btn-outline-primary" id="compose">Compose</button>
+    <button class="btn btn-sm btn-outline-primary" id="sent">Sent</button>
+    <button class="btn btn-sm btn-outline-primary" id="archived">Archived</button>
+    <a class="btn btn-sm btn-outline-primary" href="{% url 'mail:logout' %}">Log Out</a>
+    <hr>
+    
+    <div id="side"></div>
+
+    <div id="emails-view">
+        <!-- add codes here-->
+       
+    </div>
+     
+     <div id="compose-view">
+        
+        <h3>New Email</h3>
+        <div id="compose-form">
+            <div class="form-group">
+                From: <input disabled class="form-control" value="{{ request.user.email }}">
+            </div>
+            <div class="form-group">
+                
+                To: <strong><div id="rec" style="font-size: 30px;"></div></strong>
+                <input type="text" id="compose-recipients" placeholder="Recipient">
+ 
+
+
+            </div>
+            <div class="form-group">
+                <input class="form-control" id="compose-subject" placeholder="Subject">
+            </div>
+            <textarea class="form-control" id="compose-body" placeholder="Body"></textarea>
+            <input id="submit" type="submit" class="btn btn-primary"/>
+        </div>
+    </div>
+ 
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'application/mail/inbox.js' %}">s</script>
+{% endblock %}

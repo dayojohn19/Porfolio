@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 0px;
+  max-width: 10%;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+</style>
+</head>
+<body>
+
+<h2>Images Side by Side</h2>
+<p>How to create side-by-side images with the CSS float property:</p>
+
+<div class="row">
+  <div class="column">
+    <img src="yellow.png" alt="Snow" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="black.png" alt="Forest" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="orange.png" alt="Mountains" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="green.png" alt="Mountains" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="blue.png" alt="Mountains" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="violet.png" alt="Mountains" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="white2.png" alt="Mountains" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="red.png" alt="Mountains" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="red.png" alt="Mountains" style="width:100%">
+  </div>
+
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+
+   
+   
+     
+
+
+
+</head>
+<body>
+   
+        
+<div style="font-size: 300;" >
+    
+        <p20 style="font-size: 20;"  class="sulat" id="2">
+            "Kung ikaw ay nais na mag claim nang iyong napanalunan ngunit hindi pa tapos ang race babawasan ito ng KALAHAT ang premyo na iyong matatangap 
+            upang pandagdag sa premyo sa susunod na LAP" <br>
+            Halimbawa 200 ang iyong premyo 100 lamang ang makukuha mo <br>
+            <br>Bawal kumuha ng premyo sa even number na lap, gaya ng <br>lap 2,<br> lap 4,6,8,10...
+
+        </p20>
+        <button onclick="second()"> <h20>
+            <h20 style="font-family: 'Google Sans',Roboto,Arial,sans-serif;">
+                PAANO MAG CLAIM PAGKATAPOS NG LAP?
+            </h20>
+        </h20> </button>
+        <p id="2.2"></p>
+             
+            <p20 class="sulat" id="1"  > 
+               <br><br> Ipakita ang sticker at ipalit sa premyo
+                <br><br>Kung nasira naman ang sticker puwede na ipakita ang picture ng sticker
+                <br><br>Kung nasira din ang sticker puwede na ipakita ang sticker na sira pero may kaunting detalye na nakasulat kasama ang ibon at ang ring nito
+            </p20>
+       <!--button show and unshow-->
+            <button onclick="first()"> <h20>
+                PAANO MAG CLAIM PAGKATAPOS NG RACE?
+            </h20> </button>
+
+            <p id="1.1"></p>
+            
+            <script>
+                let x = document.getElementById("1").innerHTML
+                let y = document.getElementById("2").innerHTML   
+
+            function first() {
+                        document.getElementById("1.1").innerHTML = x;
+                var y = document.getElementById("1.1");
+                if (y.style.display === "none") {
+                      y.style.display = "block";
+                                 } else {
+                                  y.style.display = "none";
+                                }
+           }
+
+
+            function second() {
+              document.getElementById("2.2").innerHTML = x;
+              var y = document.getElementById("2.2");
+                if (y.style.display === "none") {
+                      y.style.display = "block";
+                                 } else {
+                                  y.style.display = "none";
+                                }
+            }
+            
+
+            </script>
+            
+
+</div>
+
+
+</body>
+</html>

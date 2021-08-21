@@ -1,0 +1,591 @@
+.box-img{
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 1px 1px 20px #000000;
+  margin: auto;
+  border-style: solid;
+  border-width: 8px;
+  border-color: rgb(34, 32, 32);
+  }
+ 
+  .sb
+  {
+    border-radius: 12px;
+    padding-right: 7px;
+    padding-left: 7px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    box-shadow:black;
+    box-shadow: 2px 2px 30px #000000;
+    background-color: khaki;
+  }
+  .body {
+  background-color: grey;
+  }
+  .frame {
+ 
+    width: 100%;
+    height: 100%;
+    border: 0;
+    transform: scale(1);
+    transform-origin: 0 0;
+    
+}
+  .view1{
+  
+    cursor: pointer;
+    box-shadow: 0 0 0 rgba(0,0,0,0.1), inset 3 0 0 rgba(0,0,0,0.1);
+    text-align: center;
+    text-emphasis-color: black;
+    border-style: solid;
+    border-width: 18px;
+   
+    box-shadow: 1px 1px 20px #000000;
+    margin: auto;
+   
+   
+    width: max-content;
+    height: 100px;
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+   
+   }
+
+   .button1{
+
+    font-size: 20px;
+    font-weight: bold;
+    display: inline-block;
+    margin: 0 auto;
+    color: #dcfbb4;
+    background-color: rgb(197, 80, 33);
+    border: 0.4em solid #d4f7da;
+    border-radius: 50%;
+    transition: all 0.3s;
+    box-sizing: border-box;
+    width: 4m;
+    height: 4em;
+    line-height: 3em;
+    cursor: pointer;
+    box-shadow: 0 0 0 rgba(0,0,0,0.1), inset 0 0 0 rgba(0,0,0,0.1);
+    text-align: center;
+  
+    border-style: solid;
+      border-width: 10px;
+      border-color: #ffffff;
+      box-shadow: 0px 0px 20px #000000;
+      margin: auto;
+     
+      overflow: hidden;
+      
+      position: relative;
+
+      text-align:center;
+      /*the same margin which is every button have, it is for small screen, and if you have many buttons.*/
+    
+   }
+   .button2{
+
+
+    font-size: 20px;
+    font-weight: bold;
+    display: inline-block;
+    margin: 0 auto;
+    color: #dcfbb4;
+    background-color: rgb(60, 170, 33);
+    border: 0.4em solid #d4f7da;
+    border-radius: 50%;
+    transition: all 0.3s;
+    box-sizing: border-box;
+    width: 4m;
+    height: 4em;
+    line-height: 3em;
+    cursor: pointer;
+    box-shadow: 0 0 0 rgba(0,0,0,0.1), inset 0 0 0 rgba(0,0,0,0.1);
+    text-align: center;
+  
+    border-style: solid;
+      border-width: 10px;
+      border-color: #ffffff;
+      box-shadow: 0px 0px 20px #000000;
+      margin: auto;
+     
+      overflow: hidden;
+      
+      position: relative;
+
+      text-align:center;
+      /*the same margin which is every button have, it is for small screen, and if you have many buttons.*/
+    
+   }
+   .row{
+    text-align:center;
+    /*the same margin which is every button have, it is for small screen, and if you have many buttons.*/
+    margin-left:-20px;
+    marin-right:-20px;
+  }
+
+  .frame1
+  {
+    width: auto;
+    height: auto;
+  }
+
+  .mydiv {
+
+    border: 5px outset rgb(70, 69, 69);
+    background-color: rgba(222, 230, 150, 0.596);
+    text-align: center;
+   
+    width: 200px;
+    height: auto;
+    border: 15px solid rgb(62, 63, 62);
+    padding:   5px;
+    margin: auto;
+    box-shadow: 1px 1px 20px #000000;
+    border-radius: 12px;
+  }
+  .mydiv2 {
+    
+    border: 5px outset rgb(94, 93, 93);
+    background-color: rgb(33, 34, 34);
+    text-align: center;
+   
+    width: 200px;
+    height: auto;
+    border: 15px solid rgb(74, 75, 74);
+    padding: 5px;
+    margin: auto;
+    background-color: rgb(26, 25, 25);
+    transition: background-color 7s;
+    box-shadow: 1px 1px 20px #000000;
+  }
+
+  body {
+    background-color: red;
+    transition: background-color 0.5s;
+  }
+  .divi
+{
+  width: auto;
+  margin-top:0;
+margin-right:auto;
+margin-bottom:0;
+margin-left:auto;
+
+}
+.click3
+{
+  font-size: 20px;
+  font-weight: bold;
+  display: inline-block;
+  margin: 0 auto;
+  color: #dcfbb4;
+  background-color: green;
+  border: 0.4em solid #d4f7da;
+  border-radius: 50%;
+  transition: all 0.3s;
+  box-sizing: border-box;
+  width: 12em;
+  height: 12em;
+  line-height: 8em;
+  cursor: pointer;
+  box-shadow: 0 0 0 rgba(83, 175, 90, 0.1), inset 0 0 0 rgba(0,0,0,0.1);
+  text-align: center;
+ text-size-adjust: 1000%;
+ -moz-text-size-adjust: 200px;
+  border-style: solid;
+    border-width: 30px;
+    border-color: #ffffff;
+    box-shadow: 0px 0px 20px #000000;
+    margin: auto;
+    margin: auto;
+    overflow: hidden;
+    float: left;
+    position: relative;
+    
+}
+.click2
+{
+  -webkit-text-fill-color: black;
+  font-size: 20px;
+  font-weight: bold;
+  display: inline-block;
+  margin: 0 auto;
+  color: #dcfbb4;
+  background-color: yellow;
+  border: 0.4em solid #d4f7da;
+  border-radius: 50%;
+  transition: all 0.3s;
+  box-sizing: border-box;
+  width: 12em;
+  height: 12em;
+  line-height: 8em;
+  cursor: pointer;
+  box-shadow: 0 0 0 rgba(83, 175, 90, 0.1), inset 0 0 0 rgba(0,0,0,0.1);
+  text-align: center;
+ text-size-adjust: 1000%;
+ -moz-text-size-adjust: 200px;
+  border-style: solid;
+    border-width: 30px;
+    border-color: #ffffff;
+    box-shadow: 0px 0px 20px #000000;
+    margin: auto;
+    margin: auto;
+    overflow: hidden;
+   float: right;
+    position: relative;
+}
+.click1
+{
+  -webkit-text-fill-color: black;
+  font-size: 20px;
+  font-weight: bold;
+  display: inline-block;
+  margin: 0 auto;
+  color: #dcfbb4;
+  background-color: red;
+  border: 0.4em solid #d4f7da;
+  border-radius: 50%;
+  transition: all 0.3s;
+  box-sizing: border-box;
+  width: 12em;
+  height: 12em;
+  line-height: 8em;
+  cursor: pointer;
+  box-shadow: 0 0 0 rgba(83, 175, 90, 0.1), inset 0 0 0 rgba(0,0,0,0.1);
+  text-align: center;
+ text-size-adjust: 1000%;
+ -moz-text-size-adjust: 200px;
+  border-style: solid;
+    border-width: 30px;
+    border-color: #ffffff;
+    box-shadow: 0px 0px 20px #000000;
+    margin: auto;
+    margin: auto;
+    overflow: hidden;
+   float: right;
+    position: relative;
+}
+/*this is for button group lower page*/
+.btn-grp .grp {
+  background-color: darkgrey;
+  border: 1px solid black;
+  color: white;
+  padding: 5px 80px;
+  padding-left: 5px;
+  padding-right:100px;
+ 
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  width: 1px;
+  display: block;
+ 
+ 
+}
+.btn-grp .grp:not(:last-child) {
+ border-bottom: none;
+}
+.btn-grp .grp:hover {
+  background-color: darkgrey;
+}
+.sulat {
+ font-size: larger;
+ font-family: 'Google Sans',Roboto,Arial,sans-serif;
+}
+.bg {
+  /* The image used */
+
+
+  /* Full height */
+  height: 100%; 
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+}
+
+/*8 images----------
+8 images----------
+8 images----------style*/
+.am {
+  max-width: 11.45%;      
+}
+
+
+.img1    {
+  text-align: center;
+  display: block;
+position: fixed;
+top: 70%;
+  align-items: center;
+  object-fit: fill;
+  max-width: 10;
+  padding-top: 1em;
+  padding-bottom: 0.1em;
+  padding-right: 0.2em;
+  padding-left: 0.2em;
+  border-radius: 14%;
+/*backround color*/
+ /* background-color: darkgray;*/
+  animation-name: img;
+  animation-duration :2s;
+  animation-iteration-count:  infinite;
+  /*background color style with  opacity
+  background-image: linear-gradient( rgb(80, 18, 161,0), rgb(185, 178, 178,0.4));  */
+/*this is for background color transition*/
+animation-name: backgroundColorPalette1;
+	animation-duration: 5s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+  animation-timing-function: linear; 
+  
+	/* linear is enabled default, it’s not necessary to add it make it work but it can make your code more expressive */
+
+}
+/*changing background colors*/
+@keyframes backgroundColorPalette1 {
+	12% {
+		background: rgb(241, 218, 5);
+    background: linear-gradient(to top, rgba(241, 218, 5, 0.704), rgb(185, 178, 178,0.0)); 
+	}
+	24% {
+    background: rgb(5, 5, 5);
+    background: linear-gradient(to top, rgba(241, 241, 241, 0.704), rgb(185, 178, 178,0.0)); 
+	}
+	36% {
+    background: rgb(228, 155, 86);
+    background: linear-gradient(to top, rgba(247, 119, 0, 0.784), rgb(185, 178, 178,0.0));
+	}
+	48% {
+    background: rgb(60, 177, 14);
+    background: linear-gradient(to top, rgba(60, 177, 14, 0.766), rgb(185, 178, 178,0.0));
+  }
+  60% {
+    background: rgb(62, 65, 238);
+    background: linear-gradient(to top, rgba(62, 65, 238, 0.766), rgb(185, 178, 178,0.0));   
+  }
+	72% {
+    background: rgb(132, 27, 202);
+    background: linear-gradient(to top, rgba(132, 27, 202, 0.766), rgb(185, 178, 178,0.0));   
+  }
+  84% {
+    background: rgb(250, 250, 250);
+    background: linear-gradient(to top, rgba(250, 250, 250, 0.766), rgb(185, 178, 178,0.0));   
+  }
+   
+  
+  100% {
+    background: rgb(209, 42, 42);
+    background: linear-gradient(to top, rgba(209, 42, 42, 0.766), rgb(185, 178, 178,0.0));  
+
+}
+}
+.bg {
+  /* The image used */
+
+
+  /* Full height */
+  height: 100%; 
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.tag {
+  margin: 0;
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.bggreen { 
+  background: url(green.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.bgblue { 
+  background: url(blue.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.bgviolet { 
+  background:  no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.teambot
+
+{
+ 
+  position: absolute;
+  top: 80%;
+
+  
+}
+
+.sb2
+
+  {
+  max-width: 50;
+
+  border-radius: 0%;
+
+/*backround color*/
+ /* background-color: darkgray;*/
+  animation-name: img;
+  animation-duration :2s;
+  animation-iteration-count:  infinite;
+  /*background color style with  opacity
+  background-image: linear-gradient( rgb(80, 18, 161,0), rgb(185, 178, 178,0.4));  */
+/*this is for background color transition*/
+animation-name: backgroundColorPalette1;
+	animation-duration: 5s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+  animation-timing-function: linear; 
+  
+  
+  box-shadow:black;
+  box-shadow: 2px 2px 30px #000000;
+  
+	/* linear is enabled default, it’s not necessary to add it make it work but it can make your code more expressive */
+
+}
+  
+  .sb1
+  {
+  max-width: 10;
+  padding-top: 1em;
+  padding-bottom: 0.1em;
+  padding-right: 0.2em;
+  padding-left: 0.2em;
+  border-radius: 0%;
+
+/*backround color*/
+ /* background-color: darkgray;*/
+  animation-name: img;
+  animation-duration :2s;
+  animation-iteration-count:  infinite;
+  /*background color style with  opacity
+  background-image: linear-gradient( rgb(80, 18, 161,0), rgb(185, 178, 178,0.4));  */
+/*this is for background color transition*/
+animation-name: backgroundColorPalette1;
+	animation-duration: 5s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+  animation-timing-function: linear; 
+  
+  padding-right: 7px;
+  padding-left: 7px;
+  padding-top: 7px;
+  padding-bottom: 1px;
+  box-shadow:black;
+  box-shadow: 2px 2px 30px #000000;
+  
+	/* linear is enabled default, it’s not necessary to add it make it work but it can make your code more expressive */
+
+}
+  
+
+  .tag1 {
+    margin: 0;
+    position: fixed;
+    top: 250%;
+   
+  }
+
+  .imik {
+    margin: 0;
+    position: absolute;
+    top: 88%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);}
+    .img2    {
+      text-align: center;
+      display: block;
+   
+    top: 50%;
+      align-items: center;
+      object-fit: fill;
+      max-width: 10;
+      padding-top: 1em;
+      padding-bottom: 0.1em;
+      padding-right: 0.2em;
+      padding-left: 0.2em;
+      border-radius: 14%;
+    /*backround color*/
+     /* background-color: darkgray;*/
+      animation-name: img;
+      animation-duration :2s;
+      animation-iteration-count:  infinite;
+      /*background color style with  opacity
+      background-image: linear-gradient( rgb(80, 18, 161,0), rgb(185, 178, 178,0.4));  */
+    /*this is for background color transition*/
+      animation-name: backgroundColorPalette1;
+      animation-duration: 5s;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+      animation-timing-function: linear; 
+      /* linear is enabled default, it’s not necessary to add it make it work but it can make your code more expressive */
+    }
+
+    h20 { 
+      display: block;
+      font-size: 1.2em;
+      margin-top: 0.83em;
+      margin-bottom: 0.83em;
+      margin-left: 0;
+      margin-right: 0;
+      font-weight: bold;
+      background-color: rgba(229, 236, 201, 0.849);
+    }
+    p20 {
+        text-align: justify;
+        display: none;
+    }
+    body{
+        background-color: rgb(230, 227, 227);
+    }
+    button{
+        background-color: rgb(51, 51, 51);
+    }
+    .sulat
+    {
+      background-color: ivory;
+    }
+
+    .sulat2
+    {
+      background-color:rgba(163, 9, 9, 0.274);
+    }
+
+

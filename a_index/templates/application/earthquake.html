@@ -1,0 +1,33 @@
+{% extends "a_index/layout.html" %}
+
+{% load static %}
+    {% block body %}
+    <link rel="stylesheet" href="{% static 'application/application.css' %}">
+{% if data %}    
+<div class="earthquake-heading">
+<h1>United States Geological Survey Report</h1>
+<h3>Using Python in Django</h3>
+<p>Taking Monthly data of Significant Earthquake in all world</p>
+</div>
+<div class="earthquake-container">
+    <div class="earthquake">
+        <div class="earthquake-heading">
+            <h1>There are {{count}}</h1><h2>Recorded earthquakes around the world since last Month</h2>
+        </div>
+        <ol>
+        {% for d in data %}
+        <li>{{d}}</li>
+        {% endfor %}
+    </ol>
+    </div>
+    <div class="earthquake e-just">
+        Console log:
+        <hr>
+        {{data2}}
+    </div>
+    
+</div>
+{% endif %}
+
+ 
+{% endblock %}

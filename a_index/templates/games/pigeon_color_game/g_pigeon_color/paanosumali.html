@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=
+    
+    , initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        h20 { 
+          display: block;
+          font-size: 1.2em;
+          margin-top: 0.83em;
+          margin-bottom: 0.83em;
+          margin-left: 0;
+          margin-right: 0;
+          font-weight: bold;
+          background-color: rgb(73, 72, 72);
+        }
+        p20 {
+            text-align: justify;
+            display: none;
+        }
+        body{
+            background-color: grey;
+        }
+        button{
+            background-color: rgb(51, 51, 51);
+        }
+       
+     </style>
+     
+
+
+
+</head>
+<body>
+    
+<div>
+    <!--button 1-->
+        <p20 id="2">
+            Natalo ka sa lap ngunit umuwi ang iyong ibon, <br>Sumali muli sa susunod na lap dahil kalahati lamang ng entry fee ang iyong babayaran. <br>
+            Halimbawa ang entry fee na sa susunod na lap ay 100 kung ikaw ay kasali sa natalo sa naunang lap kalahati lamang ang iyong babayaran ito ay magiging 50
+        </p20>
+        <button onclick="second()"> 
+            <h20 style="background-color: rgba(229, 236, 201, 0.849);">
+                SASALI KA SA KASUNOD NA LAP KUNG NATALO?
+            </h20>
+         </button>
+        <p id="2.2"></p>
+             <!--button2-->
+            <p20 id="1"  > 
+               <br><br> Ipakita ang nauna na sticker at ipalit sa bago
+                <br><br>Kung nasira naman ang sticker puwede na ipakita ang picture ng sticker
+                <br><br>Kung nasira din ang sticker puwede na ipakita ang sticker na sira pero may kaunting detalye na nakasulat kasama ang ibon at ang ring nito
+                <br><br>Kung ikaw naman ay kabilang sa manga nanalo at nag claim na nang Price Hindi na ito pwede sa iyo, buong entry Fee na ang babayaran mo
+            </p20>
+       <!--button2-->
+            <button onclick="first()"> <h20 style="background-color: rgba(229, 236, 201, 0.849);">
+                PAANO UPANG KALAHATI LANG NANG ENTRY FEE ANG babayaran
+                </h20> </button>
+                <p id="1.1"></p>
+                
+            
+            <script>
+                let x = document.getElementById("1").innerHTML
+                let y = document.getElementById("2").innerHTML   
+/*second button script
+*/
+            function first() {
+                        document.getElementById("1.1").innerHTML = x;
+                var y = document.getElementById("1.1");
+                if (y.style.display === "none") {
+                      y.style.display = "block";
+                                 } else {
+                                  y.style.display = "none";
+                                }
+           }
+/* first button script
+*/
+            function second() {
+              document.getElementById("2.2").innerHTML = y;
+              var x = document.getElementById("2.2");
+                if (x.style.display === "none") {
+                      x.style.display = "block";
+                                 } else {
+                                  x.style.display = "none";
+                                }
+            }
+            
+
+            </script>
+            
+
+</div>
+
+<!--music-->
+<!---sound effects-->
+<script>
+    window.onload = function() {
+      document.getElementById("puso").play();
+}
+  </script>
+  <audio id="puso" src="puso.mp3" loop="loop" ></audio>
+
+
+</body>
+</html>

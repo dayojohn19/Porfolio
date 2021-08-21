@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+      
+<!--button show and unshow-->
+<p20 class="sulat" id="1"   > 
+    ISANG POINT AY KATUMBAS SA ISANG IBON <br><br>KUNG IKAW AY NAG ENTRY NG 10 NA IBON MERON ANG LOFT MO NA 10 POINTS
+
+    <br><br>
+    halimbawa:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DELA CRUZ LOFT:&nbsp;&nbsp; 10 POINTS<BR>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BATMAN LOFT: &nbsp;&nbsp;10 POINTS<BR>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    
+    <br><br>
+    IBIG SABIHIN NITO MERON SILANG 10 ENTRY NA IBON
+    <br><br>
+    AT KUNG SINO ANG MAY PINAKA MADAMI NA NAG CLOCK SA TEAM NA IBON SIYA ANG TATANGHALIN NA "KING" NG KANILANG TEAM
+  
+
+ </p20>
+<!--button show and unshow-->
+ <button onclick="first()"> <h20>
+  PAANO ANG POINT SYSTEM ?
+ </h20> </button>
+ <p id="1.1"></p>
+<!---second-->
+<!--button show and unshow-->
+
+
+ <p20 class="sulat" id="2"   > 
+    KUNG IKAW SA UNANG LAP AY MERON 10 POINTS <br><br>AT PANALO KAPA DIN NG 10 POINTS
+
+    <br><br>
+    PERO MASAMA ANG TAMA NG 5 NA IBON MO AT HINDI NA NITO KAYANG LUMIPAD SA SUNOD NA RACE
+    <br><br>
+    PUWEDE MO ITONG PALITAN NG IBANG IBON BASTA AT SA LOFT MO PARIN ITO UMUUWI
+    <br><br>
+    halimbawa:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;si IBON mo na ang pangalan ay si ALFRED<br>meron ka na 1 POINTS<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;si ALFRED ay nakauwi at nanalo sa unang lap at meron ka pa din na 1POINTS para sa  kasunod na LAP<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;NGUNIT hindi na ni ALFRED kakayanin ang kasunod na LAP dahil masama ang kanyang lagay<br>
+    PWEDE MONG PALTAN SI ALFRED NG IBANG IBON UPANG LUMABAN PARA SA IYONG LOFT SA KASUNOD NA LAP<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;Basta ito ay mag mumula din sa sarili mong LOFT
+
+    <br><br>
+ </p20>
+ <button onclick="second()"> <h20>
+    PAANO ANG LAP POINT SYSTEMs
+    </h20> </button>
+
+ <p id="2.2"></p>
+ 
+ 
+ <script>
+    let x = document.getElementById("1").innerHTML
+    let y = document.getElementById("2").innerHTML   
+
+function first() {
+            document.getElementById("1.1").innerHTML = x;
+    var y = document.getElementById("1.1");
+    if (y.style.display === "none") {
+          y.style.display = "block";
+                     } else {
+                      y.style.display = "none";
+                    }
+}
+
+
+function second() {
+  document.getElementById("2.2").innerHTML = y;
+  var x = document.getElementById("2.2");
+    if (y.style.display === "none") {
+          y.style.display = "block";
+                     } else {
+                      y.style.display = "none";
+                    }
+}
+
+
+</script>
+
+</body>
+</html>

@@ -62,7 +62,7 @@ const subject = document.querySelector('#compose-subject').value;
 const recipients = document.querySelector('#compose-recipients').value;
 
 alert('send');
-fetch('application/emails', {
+fetch('/app_mail/application/emails', {
   method: 'POST',
   body: JSON.stringify({
       recipients: recipients,

@@ -1,0 +1,20 @@
+{% extends "a_index/layout.html" %}
+
+{% load static %}
+    {% block body %}
+    <link rel="stylesheet" href="{% static 'games/color_pigeon/color_pigeon.css' %}">
+
+<div class="color_body">
+    <span class="img2" style="object-fit: contain;">  
+        <a href="yellow.html"> <img class="am" src="{% static 'games/color_pigeon/images/yellow.png' %}"></a>
+        <a href="black.html"> <img class="am" src="{% static 'games/color_pigeon/images/black.png' %}"></a>
+        <a href="orange.html"><img class="am" src="{% static 'games/color_pigeon/images/orange.png' %}"></a>
+        <a href="green.html"><img class="am" src="{% static 'games/color_pigeon/images/green.png' %}"></a>
+        <a href="blue.html"><img class="am" src="{% static 'games/color_pigeon/images/blue.png' %}"></a>
+        <a href="violet.html"><img class="am" src="{% static 'games/color_pigeon/images/violet.png' %}"></a>
+        <a href="white.html"><img class="am" src="{% static 'games/color_pigeon/images/white.png' %}"></a>
+        <a href="red.html"><img class="am" src="{% static 'games/color_pigeon/images/red.png' %}"></a>
+      </span>
+      
+</div>
+{% endblock %}
