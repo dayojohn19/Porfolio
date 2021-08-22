@@ -1,0 +1,65 @@
+.calendar-heading {
+    background-color: rgba(79, 80, 80, 0.363);
+    padding: 0.4em;
+}
+.calendar-container {
+    margin: 0 auto;
+    text-align: center;
+}
+th, td {
+    border: 1px solid black;
+    width: 50px;
+    height: 50px;
+  }
+  td {
+      background: rgba(210, 105, 30, 0.212);
+      border-radius: 5px;
+  }
+  td:hover {
+      background: rgba(0, 255, 255, 0.562);
+
+  }
+  td:active{
+      background: darkblue;
+  }
+  td::after {
+      background: darkcyan;
+  }
+  td::before {
+      background: darkcyan;
+  }
+
+  th {
+      background: rgba(128, 255, 0, 0.219);
+  }
+  .sat {
+      background: rgba(255, 255, 255, 0.185);
+  }
+
+  table{
+    margin-left: auto; 
+    margin-right: auto;
+    width: 100%;
+    border: solid 3px rgba(255, 0, 0, 0.253);
+    border-radius: 10px;
+    box-shadow: rgba(255, 255, 0, 0.212) 0px 0px 5px;
+  }
+  .log {
+    flex: grow shrink basis;
+    text-align:center;
+  }
+  .log2 {
+    background-color: rgba(116, 116, 116, 0.199);
+    border-radius: 10px;
+    overflow:scroll;
+    flex: grow shrink basis;
+    max-width: 50%;
+    text-align:center;
+  }
+  .calendar-log {
+      background: rgba(61, 61, 61, 0.356);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+    Justify-content: space-evenly
+  }

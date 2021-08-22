@@ -1,0 +1,72 @@
+
+body{
+    background-color: aqua;
+}
+p{
+  font-size: larger;
+}
+strong {
+  font-size: larger;
+}
+.mar-l{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+.b-mid {
+
+    margin-top: 2%;
+    height: fit-content;
+    padding: 1%;
+    background-color: rgba(77, 71, 71, 0.281);
+    border-radius: 15px;
+    border: rgba(240, 128, 128, 0.473) solid 1px;
+    box-shadow: 0px 0px 3px 3px rgba(128, 240, 175, 0.342) inset;
+}
+.b-par {
+  text-align: justify;
+  text-justify: inter-word;
+  text-indent: 20%;
+}
+
+.parallax {
+    background-image: url('images/unwanted.jpg');
+  }
+  .parallax2 {
+    background-image: url('images/takip.jpg');
+  }
+  .parallax3 {
+    background-image: url('images/desiderata3.png');
+  }
+  .parallax4 {
+    background-image: url('images/24.png');
+  }
+
+  .parallax5 {
+    background-image:  
+    url('../a_blog/images/gr.jpg')    ;
+  }
+
+  .parallax6 {
+
+    background-image:  
+    url('../a_blog/images/sea.png')    ;
+
+  }
+  .para_add {
+
+    height: 500px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-size: 80% 50%;
+    position: relative;
+    display: flex;
+  }
+
+  .b-opa:hover{
+      opacity: 1;
+  }
+  .b-opa {
+    border-radius: 100px;
+  }
