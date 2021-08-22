@@ -17,8 +17,6 @@ def map(request):
     return render(request, 'map/map.html')
 def games(request):
     return render(request, 'games/games.html')
-def application(request):
-    return render(request, 'application/application.html')
-def app_mail(request):
-    return render(request, 'application/mail/inbox.html')
+
+
 

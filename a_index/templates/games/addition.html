@@ -8,6 +8,7 @@
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     <title>Using React To add</title>
+    
     <script>
         function time() {
             alert('TIme is up');
@@ -15,6 +16,10 @@
         setTimeout(time, 100000);
     </script>
     <style>
+        .footer {
+            background-color: rgba(255, 235, 205, 0.582);
+            font-size: larger;
+        }
         #app {
             text-align: center;
             font-family: sans-serif;
@@ -33,10 +38,15 @@
         div {
             text-align: center;
         }
+        #scored{
+            opacity: 0.5;
+            text-shadow: blanchedalmond;
+            text-emphasis-color: red;
+        }
     </style>    
 </head>
 <body>
-    
+    <div class="footer"> Using React to manipulate the page and its Computation</div>
     <div id="app_add"></div>
     
     <div id="app2"></div>

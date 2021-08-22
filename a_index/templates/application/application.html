@@ -3,22 +3,22 @@
 {% load static %}
     {% block body %}
     <link rel="stylesheet" href="{% static 'application/application.css' %}">
-<link rel="stylesheet" href="{% static 'games/games.css' %}">
+    <link rel="stylesheet" href="{% static 'games/games.css' %}">
 
 <div class="games_container">
     <div class="game">
         <img src="{% static 'application/images/mail.png' %}">
-        <a href="{% url 'mail:index' %}">E-Mail</a>
+        <a href="{% url 'application:mail' %}">E-Mail</a>
     </div>
 
     <div class="game">
         <img src="{% static 'application/images/earthquake.png' %}">
-        <a href="{% url 'index:earthquake' %}">World Earthquake Report</a>
+        <a href="{% url 'application:earthquake' %}">World Earthquake Report</a>
     </div>
 
     <div class="game">
         <img src="{% static 'application/images/calendar.png' %}">
-        <a href="{% url 'index:calendar' %}">Calendar</a>
+        <a href="{% url 'application:calendar' %}">Calendar</a>
     </div>
 
 </div>
