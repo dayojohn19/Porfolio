@@ -1,7 +1,17 @@
 from django.shortcuts import render
 
 # Create your views here.
+import pyttsx3
+import sys 
 def index(request):
+    try:
+        ar = (f"hello, {sys.argv[1]}")
+        engine = pyttsx3.init()
+        engine.say(f"Good day to you${ar}., I am a self taught Programmer., with grit., Time., and Dedication.,")
+        engine.runAndWait(),
+        engine.stop
+    except:
+        pass
     return render(request, 'a_index/index.html', {})
 
 def social(request):
@@ -19,4 +29,19 @@ def games(request):
     return render(request, 'games/games.html')
 
 
+# import json
+# from django.views.decorators.csrf import csrf_exempt
+# @csrf_exempt
+# def speech(request,y):
+# ######
+#     if request.method == 'POST':
+#         data = json.loads(request.body)
+#         name = data.get('name')
+#         engine = pyttsx3.init()
+#         engine.say(f"hello, {name} How are you doing today, Welcome to my Calendar application, I hove you will like it.")
+#         try:
+#             engine.runAndWait(),
+#             engine.stop
+#         except:
+#             pass
 

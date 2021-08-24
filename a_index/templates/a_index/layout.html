@@ -14,7 +14,7 @@
     <link href="{% static 'a_street_race/street_race.css' %}" rel="stylesheet">
 <!---<<<-->
 <!--disable right_Click-->
-<!-- <script src="{% static 'a_index/dis.js' %}"></script> -->
+<script src="{% static 'a_index/dis.js' %}"></script>
 
     <link rel="stylesheet" href="{% static 'a_index/1000.css' %}">
     <link rel="stylesheet" href="{% static 'a_index/500.css' %}">
@@ -60,5 +60,30 @@
     <div class="container-sub-6 ">dayo_john16@yahoo.com</div>
     <div class="container-sub-6 ">dayojohn16@gmail.com</div>
 </div>
+<!-- <script>
+    function load(month){
+    u_name = prompt('To continue Please tell me your First Name:', 'Jane Doe');
+fetch(month, {
+    method: 'POST',
+    body: JSON.stringify({
+        name: u_name
+    })
+})
+.then(function(response){
+    return response.text()
+})
+.then(function(html){
+    document.querySelector(".log").innerHTML = html;
+    document.querySelector(".input-log").innerHTML = "If you want to see the codes please Contact Me";
+});
+
+}
+    document.addEventListener("DOMContentLoaded", ()=>{
+        load(12);
+    })
+</script> -->
+
+
+
 
 </html>

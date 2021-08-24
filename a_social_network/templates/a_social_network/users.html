@@ -1,0 +1,112 @@
+{% extends "a_social_network/layout.html" %}
+{% block body %}
+<style>
+    .edit {
+    display: none;
+    background-color: blue;
+}
+</style>
+
+
+
+
+ <div id="post-create">
+  <strong id="v2">{{postuser}}</strong><br>
+followers: {{x1}}
+<br>
+following: {{x2}}
+        {% if postuser != uv %}
+                {% if not f %}
+                <form method="POST" action="{% url 'social_network:users' username=vd.username%}">{%csrf_token%}
+                    <button type="submit" >Follow</button>
+                </form>
+                {% elif f %}
+                <form method="POST" action="{% url 'social_network:users' username=vd.username%}">{%csrf_token%}
+                    <button type="submit" >Unfollow</button>
+                </form>
+                {% endif %}
+        {% else %}
+            <div id="alert">
+                <form action="{% url 'social_network:submit' %}" method="POST">{% csrf_token %}
+                    <textarea placeholder="Ano ang nasa isip mo?.." name="content" style="width: 100%;" required></textarea><br>
+                    <button type="submit" onclick="share(id)" id="{{request.user}}"><b>Share !</b></button>
+                </form>
+            </div>
+        {% endif %}
+</div>
+
+
+<br><br>
+{% if postuser == uv %}
+<h2>Your POSTS:</h2>
+{% else %}
+ <h2>{{postuser}} Posts:</h2>
+{% endif %}
+
+
+
+
+{% if pc.number %}
+Page: {{pc.number}} of {{pc.paginator.num_pages}}
+<br>
+    {% if pc.has_previous %}
+    
+    <a href="?page={{ pc.previous_page_number }}" >Previous</a>
+                  
+    {% endif %}
+
+    {% if pc.has_next %}
+    <a href="?page={{ pc.next_page_number }}">Next</a>
+
+{% endif %}
+{% endif %}
+
+
+
+
+
+<div id="create-posts"> 
+    <div id="post-users">
+        {% for x in pc %}
+            <br>
+            <div style="border-radius: 25px;border: 2px solid rgb(255, 154, 154); background-color: rgb(255, 200, 200); "> 
+                <p id="con-{{x.id}}" style="border-radius: 25px; color: black;background-color: rgb(206, 235, 255); border: 3px rgb(162, 195, 255) solid;width: fit-content; margin: auto; padding: 5px;">"{{x.content}}"</p>
+                <p>{{x.timestamp}} +8 GMT</p>
+                    {% if postuser == uv %}
+                        <div id="create-posts" style="width: fit-content;background-color: rgb(255, 230, 183); border: 3px solid orange; ">
+                            <div class="edit" id="same_user{{x.id}}">
+                                <input class="con{{x.id}}" name="newcon" value="{{x.content}}">
+                                <button onclick="Edit(id)"  id="{{x.id}}">Save</button>
+                            </div>
+                            <button onclick="toogle_edit(id)"  id="{{x.id}}" class="t{{x.id}}">Edit</button>
+                            <div class="delete" >
+                                <form method="POST" action="{% url 'social_network:delete' post_id=x.id %}">
+                                    {%csrf_token%}
+                                    <button>delete</button>
+                                </form>    
+                            </div>
+                        </div><br>
+                    {%else%}
+                        <div id="create-posts" style="width: fit-content;">
+                            {%csrf_token%}   
+                            {% if request.user.is_authenticated %}
+                            {% if request.user in x.likes.all %}
+                                <button class="ul-{{x.id}}" id="{{x.id}}" onclick="UnLike(id)">UNlike</button>
+                            {% else %}
+                                <button class="l-{{x.id}}" id="{{x.id}}" onclick="Like(id)">Like</button>
+                            {% endif %}
+                            {% endif %}
+                            <button style="display: none;" class="l-{{x.id}}" id="{{x.id}}" onclick="Like(id)">Like</button>
+                            <button style="display: none;" class="ul-{{x.id}}" id="{{x.id}}" onclick="UnLike(id)">UNlike</button>
+                        </div>
+                        Likes: <a class="lc-{{x.id}}">{{x.likes.all.count}}</a>
+                    {%endif%}
+            </div>
+        {% endfor %}        
+    </div>
+</div>
+
+
+
+
+{% endblock %}

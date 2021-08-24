@@ -30,6 +30,7 @@ ALLOWED_HOSTS = ['https://lit-river-78167.herokuapp.com','127.0.0.1','lit-river-
 # Application definition
 
 INSTALLED_APPS = [
+    'a_social_network',
     'app_mail',
     'a_street_race',
     'a_index',

@@ -24,5 +24,6 @@ urlpatterns = [
     path('games/', include('games.urls')),
     path('app_mail/', include('app_mail.urls')),
     path('application/', include('application.urls')),
+    path('a_social_network/', include('a_social_network.urls')),
 
 ]

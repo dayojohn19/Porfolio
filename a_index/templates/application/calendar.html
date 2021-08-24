@@ -5,7 +5,8 @@
     <link rel="stylesheet" href="{% static 'application/application.css' %}">
     <link rel="stylesheet" href="{% static 'application/calendar/calendar.css' %}">
     
-
+<a href="{% url 'application:speech' %}">Speech</a>
+<a href="{% url 'application:qrcode' %}">QR COde</a>
 {% now " F j Y h:i a" %}
 <div class="calendar-container">
     <h1 class="calendar-heading">Calendar</h1>
@@ -70,7 +71,13 @@
 }
 
 function load(month){
-fetch(month)
+    u_name = prompt('To continue Please tell me your First Name:', 'Jane Doe');
+fetch(month, {
+    method: 'POST',
+    body: JSON.stringify({
+        name: u_name
+    })
+})
 .then(function(response){
     return response.text()
 })
