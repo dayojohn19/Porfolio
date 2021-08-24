@@ -1,8 +1,7 @@
 from django.urls import path
 from . import views
 from . import earthquake
-from . import calendar_print,qrcode
-# , speech
+from . import calendar_print,qrcode, speech
 
 
 app_name="application"
@@ -12,6 +11,6 @@ urlpatterns = [
     path("earthquake/", earthquake.main, name="earthquake"),
     path("calendar/", calendar_print.calendar_print , name="calendar"),
     path("calendar/<int:y>", calendar_print.calendar_get , name="calendar_y"),
-    # path("speech/", speech.main, name="speech"),
+    path("speech/", speech.main, name="speech"),
     path("qrcode/", qrcode.main, name="qrcode")
 ]

@@ -9,17 +9,17 @@
 from django.shortcuts import render
 
 # Create your views here.
-# import pyttsx3
-# import sys 
+import pyttsx3
+import sys 
 def index(request):
-    # try:
-    #     ar = 'Visitor'
-    #     engine = pyttsx3.init()
-    #     engine.say(f"Good day to you {ar}., I am a self taught Programmer., with grit., Time., and Dedication.,")
-    #     engine.runAndWait(),
-    #     engine.stop
-    # except:
-    #     pass
+    try:
+        ar = 'Visitor'
+        engine = pyttsx3.init()
+        engine.say(f"Good day to you {ar}., I am a self taught Programmer., with grit., Time., and Dedication.,")
+        engine.runAndWait(),
+        engine.stop
+    except:
+        pass
     return render(request, 'a_index/index.html', {})
 
 def social(request):
