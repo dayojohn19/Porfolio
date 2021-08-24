@@ -29,6 +29,7 @@ ALLOWED_HOSTS = ['guarded-shore-42693.herokuapp.com','127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'a_social_network',
     'app_mail',
     'a_street_race',
     'a_index',

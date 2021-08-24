@@ -1,0 +1,56 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}Social Network{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+        <link href="{% static 'a_social_network/styles.css' %}" rel="stylesheet">
+        <script src="{% static 'a_social_network/layout.js' %}">
+        </script>       
+       
+    </head>
+    <body style="align-items: center; text-align: center; align-items: center;">
+
+<h1><strong style="float:left;">{{request.user}} {{request.user.email}}</strong></h1>
+
+<br>
+<br>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" style="top: -1%;background-color: rgb(179, 179, 255);position: fixed;right: 1%; background-color:rgb(3, 111, 179) ;border-radius: 15px;">
+            <a id="tab-net" class="navbar-brand" href="#" style="background-color: rgb(182, 170, 248); border-radius: 25px; padding: 5px; border: 3px solid rgb(159, 142, 255);">Network</a>
+                <div id="tab-top" style="background-color: rgb(255, 185, 255); border-radius: 25px; border: 3px solid rgb(255, 122, 255);">
+                <ul class="navbar-nav mr-auto">
+                    {% if user.is_authenticated %}
+                   
+                        <li class="nav-item"><a class="nav-link" href="{% url 'social_network:users' username=request.user %}"><strong>{{ user.username }}</strong></a></li><hr>
+                    {% endif %}
+                        <li class="nav-item"><a id="apl" class="nav-link" href="{% url 'social_network:index' %}" >All Posts</a></li><hr>
+                    
+                        {% if user.is_authenticated %}
+                            <li class="nav-item"><a class="nav-link" href="{% url 'social_network:following' username=user.username %}">Following</a></li><hr>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'mail:logout' %}">Log Out</a></li><hr>
+                        {% else %}
+                            <li class="nav-item"><a class="nav-link" href="{% url 'mail:login' %}">Log In</a></li><hr>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'mail:register' %}">Register</a></li>
+                        {% endif %}  
+                </ul>
+            </div>
+          </nav>
+        
+       
+
+
+        <div class="body">
+
+
+
+
+            {% block body %}
+            {% endblock %}
+        </div>
+        <script src="{% static 'a_social_network/layout.js' %}">
+        </script>       
+    </body>
+</html>

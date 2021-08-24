@@ -1,0 +1,58 @@
+{% extends "a_social_network/layout.html" %}
+{% block body %}
+
+<br>
+<h1>Posts of Users You're Following</h1>
+
+{% if p.number %}
+Page: {{p.number}} of {{p.paginator.num_pages}}
+<br>
+    {% if p.has_previous %}
+    
+    <a href="?page={{ p.previous_page_number }}" >Previous</a>
+    {% else %}  
+    This is First Page                    
+    {% endif %}
+
+    {% if p.has_next %}
+    <a href="?page={{ p.next_page_number }}" >Next</a>
+    {% else %}
+    This is last page
+{% endif %}
+{% endif %}
+
+
+
+
+<div id="create-posts"> 
+{% for pp in p %}
+<div id="post-create">
+    <p>By:  <a id="user-id" href="{% url 'social_network:users' username=pp.user %}">{{pp.user}}</a></p>
+
+    <p  style="    border-radius: 25px; color: black;background-color: rgb(206, 235, 255); border: 3px rgb(162, 195, 255) solid;">"{{pp.content}}"</p><br>
+    <p>{{pp.timestamp}}</p>
+    <div id="create-posts" style="width: fit-content;">
+
+        {%csrf_token%}   
+        {% if request.user.is_authenticated %}
+        {% if request.user in pp.likes.all %}
+            <button class="ul-{{pp.id}}" id="{{pp.id}}" onclick="UnLike(id)">UNlike</button>
+        {% else %}
+            <button class="l-{{pp.id}}" id="{{pp.id}}" onclick="Like(id)">Like</button>
+        {% endif %}
+        {% endif %}
+<button style="display: none;" class="l-{{pp.id}}" id="{{pp.id}}" onclick="Like(id)">Like</button>
+<button style="display: none;" class="ul-{{pp.id}}" id="{{pp.id}}" onclick="UnLike(id)">UNlike</button>
+</div>
+Likes: <a class="lc-{{pp.id}}">{{pp.likes.all.count}}</a>
+
+</div>
+<hr>
+{% endfor %}
+</div>
+
+
+
+
+
+{% endblock %}

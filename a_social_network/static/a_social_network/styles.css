@@ -1,0 +1,40 @@
+body {
+    background-color: bisque;
+}
+#post-create {
+    margin: auto;
+width: 60%;
+border: 5px solid #FFFF00;
+background-color: #ffffd1;
+border-radius: 25px;
+padding: 10px;
+border-radius: 25px;
+}
+
+p {
+    color: rgb(163, 163, 163);
+}
+
+#create-posts {
+    margin: auto;
+    width: 100%;
+    border: 5px solid #91ff8e;
+    background-color: #cfffcd;
+    padding: 10px;
+    border-radius: 25px;
+}
+
+button {
+    background-color: rgb(210, 210, 255);
+    border: solid 3px rgb(173, 173, 255);
+    border-radius: 25px;
+}
+
+.edit {
+    display: none;
+    background-color: blue;
+}
+#edit {
+    display: none;
+    background-color: blue;
+}

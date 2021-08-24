@@ -1,0 +1,101 @@
+{% extends "a_index/layout.html" %}
+
+{% block body %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'a_social_network/index.css' %}">
+
+<style>
+    .edit {
+    display: none;
+    background-color: blue;
+}
+</style>
+
+{% if user.is_authenticated %}
+
+<div class="container-share">
+    <div>
+        <form action="{% url 'social_network:submit' %}" method="POST">{% csrf_token %}
+            <textarea placeholder="HI {{vuser}} !... Share What is in your mind ! :,)" name="content" style="width: 100%;" required></textarea><br>
+            <button type="submit" onclick="share(id)" id="{{request.user}}"><b>Share !</b></button>
+        </form>
+    </div>
+</div>
+{% endif %}
+
+
+
+    <div>
+
+
+        <div class="container-post"> 
+            <div id="container-post-sub">
+                {% for p in posts %}
+                    <br> 
+                <div class="container-post-each">
+                    <p class="time left-a">{{p.timestamp}} +8GMT</p>
+                        <p>  <a href="{% url 'social_network:users' username=p.user %}">{{p.user}}</a></p>
+                        
+                        <div>
+                            <p id="con-{{p.id}}" style="    border-radius: 25px; color: black;background-color: rgb(206, 235, 255); border: 3px rgb(162, 195, 255) solid; width: fit-content; margin: auto; padding: 5px;">"{{p.content}}"</p>
+                            
+
+                            Likes: <a class="lc-{{p.id}}">{{p.likes.all.count}}</a>
+                            <br>
+                            {% if p.user == request.user.username %}
+                                <div id="create-posts" style="width: fit-content; background-color: rgb(255, 230, 183); border: 3px solid orange;">
+                                    <div class="edit" id="same_user{{p.id}}">
+                                        <input class="con{{p.id}}" name="newcon" value="{{p.content}}">
+                                        <button onclick="Edit(id)"  id="{{p.id}}">Save</button>
+                                    </div>
+                                    <button onclick="toogle_edit(id)"  id="{{p.id}}" class="t{{p.id}}">Edit</button>
+                                    <div class="delete" id="same_user">
+                                        <form method="POST" action="{% url 'social_network:delete' post_id=p.id %}">
+                                            {%csrf_token%}
+                                            <button>delete</button>
+                                        </form>    
+                                    </div>
+                                </div>
+                            {% else %}
+                                    <div id="create-posts" style="width: fit-content;">
+                                        {%csrf_token%}   
+                                        {% if request.user.is_authenticated %}
+                                        {% if request.user in p.likes.all %}
+                                            <button class="ul-{{p.id}}" id="{{p.id}}" onclick="UnLike(id)">UNlike</button>
+                                        {% else %}
+                                            <button class="l-{{p.id}}" id="{{p.id}}" onclick="Like(id)">Like</button>
+                                        {% endif %}
+                                        {% endif %}
+                                    <button style="display: none;" class="l-{{p.id}}" id="{{p.id}}" onclick="Like(id)">Like</button>
+                                    <button style="display: none;" class="ul-{{p.id}}" id="{{p.id}}" onclick="UnLike(id)">UNlike</button>
+                                    </div>
+                            {% endif %}
+                            <br>
+                            
+                        </div>
+                </div> 
+                {% endfor %}
+            </div>
+        </div>
+
+        {% if posts.number %}
+            Page: {{posts.number}} of {{posts.paginator.num_pages}}
+        {%endif%}
+        <br>
+        {% if posts.has_previous %}
+            <a href="?page={{ posts.previous_page_number }}" >Previous</a>
+            {% else %}  
+            This is First Page                    
+        {% endif %}
+        {% if posts.has_next %}
+            <a href="?page={{ posts.next_page_number }}" >Next</a>
+            {% else %}
+            This is last page
+        {% endif %}
+
+
+
+    </div>
+
+ 
+{% endblock %}
