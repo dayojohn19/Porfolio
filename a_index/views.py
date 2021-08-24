@@ -10,12 +10,12 @@ from django.shortcuts import render
 
 # Create your views here.
 import pyttsx3
-import sys 
+# import sys 
 def index(request):
     try:
-        ar = (f"hello, {sys.argv[1]}")
+        ar = 'Visitor'
         engine = pyttsx3.init()
-        engine.say(f"Good day to you${ar}., I am a self taught Programmer., with grit., Time., and Dedication.,")
+        engine.say(f"Good day to you {ar}., I am a self taught Programmer., with grit., Time., and Dedication.,")
         engine.runAndWait(),
         engine.stop
     except:
