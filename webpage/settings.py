@@ -79,29 +79,29 @@ import os
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'djdb',
-    }
-}
-# #if secured 
-DATABASES = {
-    'default':{
-    'ENGINE': 'djongo',
-    'NAME': 'djdb',
-    'ENFORCE_SCHEMA':False,
-    'CLIENT': {
-        'host': 'mongodb+srv://dj19:aa09094553940@cluster0.hpgnf.mongodb.net/test'
-    }
-    }
-}
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#         'ENGINE': 'djongo',
+#         'NAME': 'djdb',
 #     }
 # }
+# #if secured 
+# DATABASES = {
+#     'default':{
+#     'ENGINE': 'djongo',
+#     'NAME': 'djdb',
+#     'ENFORCE_SCHEMA':False,
+#     'CLIENT': {
+#         'host': 'mongodb+srv://dj19:aa09094553940@cluster0.hpgnf.mongodb.net/test'
+#     }
+#     }
+# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
 
 
