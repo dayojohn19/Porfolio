@@ -1,3 +1,11 @@
+# from pymongo import MongoClient
+# client = pymongo.MongoClient('connection_string')
+# db = client['db_name']
+# connection_string = mongodb+srv://dj19:aa09094553940@cluster0.hpgnf.mongodb.net/test
+
+
+
+###############
 from django.shortcuts import render
 
 # Create your views here.
