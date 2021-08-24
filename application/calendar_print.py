@@ -7,7 +7,7 @@ from dateutil.relativedelta import relativedelta
 import datetime
 from datetime import datetime
 
-import pyttsx3
+# import pyttsx3
 from datetime import date
 from django.views.decorators.csrf import csrf_exempt
 
@@ -31,16 +31,16 @@ def calendar_get(request,y):
     for i in range(1, 13):
         months.append(calendar.month_name[i])
 ######
-    if request.method == 'POST':
-        data = json.loads(request.body)
-        name = data.get('name')
-        engine = pyttsx3.init()
-        engine.say(f"hello, {name} How are you doing today, Welcome to my Calendar application, I hove you will like it.")
-        try:
-            engine.runAndWait(),
-            engine.stop
-        except:
-            pass
+    # if request.method == 'POST':
+    #     data = json.loads(request.body)
+    #     name = data.get('name')
+    #     engine = pyttsx3.init()
+    #     engine.say(f"hello, {name} How are you doing today, Welcome to my Calendar application, I hove you will like it.")
+    #     try:
+    #         engine.runAndWait(),
+    #         engine.stop
+    #     except:
+    #         pass
 
 #######
     y = y
