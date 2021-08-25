@@ -1,0 +1,21 @@
+{% extends "a_index/layout.html" %}
+{% block body %}
+
+
+{% for a in all_loaded %}
+{{a.pigeon_name}} <br>
+{{a.pigeon_id}}<br>
+{{a.pigeon_hcode}}<br>
+race_name : {{a.race_name}} <br>
+Released : {{a.lap_name}}<br>
+
+
+{% if a.release_time == "" %}
+Not yet Released<br>
+{% else %}
+Released : {{a.release_time}}<br>
+{% endif %}
+
+<hr>
+{%endfor%}
+{%endblock%}

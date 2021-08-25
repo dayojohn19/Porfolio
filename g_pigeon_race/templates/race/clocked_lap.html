@@ -1,0 +1,18 @@
+{% extends "a_index/layout.html" %}
+
+{% block body %}
+<h3>{{lap_name}}</h3>
+<h4>Released: {{lap_release}}</h4>
+<h4>Clocked Birds:</h4> 
+{% for c in clocked %}
+<div style="border:solid orange 2px">
+{{c.pigeon_name}}   <br>
+{{c.ring}}  <br>
+speed: {{c.speed}} <br>
+{{c.id}}
+
+
+</div>
+{% endfor %}
+
+{%endblock%}

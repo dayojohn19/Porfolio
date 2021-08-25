@@ -1,0 +1,121 @@
+{% extends "a_index/layout.html" %}
+{% block body %}
+<style>
+    p{
+        border-radius: 10px;
+        padding: 3%;
+    }
+</style>
+<form action="{% url 'g_pigeon_race:entry2' %}">
+    {% csrf_token %}
+    <input type="submit" value="View all Entries">
+</form>
+
+<a style="text-decoration: none;" href="{% url 'g_pigeon_race:view_codes' %}"># View Codes</a><br>
+
+<br><br>
+<form method="post" accept="{% url 'g_pigeon_race:measure' %}"> 
+    {%csrf_token%}
+    <label>Measure Your Loft</label>
+    <input name="place">
+    <input type="submit">
+</form>
+
+<div class="add_point" style="border: 3px red solid;">
+    Your Loft Place
+    <form method="post" action="{% url 'g_pigeon_race:measure' %}">
+        {% csrf_token %}
+        <input name="place" placeholder="input loft place here">
+        <br>
+        <input type="submit">
+    </form>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="add_point" style="border: 3px red solid;">
+    Add Point:
+    <form method="post" action="{% url 'g_pigeon_race:add_point' %}">
+        {% csrf_token %}
+        <input name="place" placeholder="input place here">
+        <br>
+        <input type="submit">
+    </form>
+</div>
+
+
+<hr>
+
+<div class="add_lap" style="border:solid 5px blue">
+    Add Lap:
+    <form method="post" action="{% url 'g_pigeon_race:add_lap' %}">
+        {% csrf_token %}
+        <select name="race">
+            {% for r in races %}
+            <option value="{{r.id}}">{{r.racename}}</option>
+            {% endfor %}
+        </select>
+
+        <select name="point">
+            {% for p in point %}
+            <option value="{{p.id}}">{{p.place}}</option>
+            {% endfor %}
+        </select>
+        <input placeholder="loading cost" name="loading_cost">
+        <input type="submit">
+    </form>
+</div>
+<hr>
+
+{% if laps %}
+    <div style="border: solid red 3px;">
+        <h2>Unreleased Laps : </h2>
+        <hr>
+        {% for l in laps %}
+            <div style="border: solid 2px yellow;">
+            <h2>{{l.race}}</h2>
+            Loading cost :     {{l.loading_cost}}  <br>
+            <br>
+                <h3>{{l.release}}</h3>
+                Lat : {{l.release_lat}}<br>
+                Long : {{l.release_long}} <br>
+                
+                <br>
+                Set Release Time: {{l.release_time}} <br>
+                {% if l.released != True %}
+                <form action="{% url 'g_pigeon_race:release' id=l.id %}" method="post">
+                    {%csrf_token%}
+                    <input value="{{now}}" name="release_time">
+                    <br>
+                    <button type="submit">Release Now</button>
+                </form>  
+                {% endif %}
+            </div>
+            <hr>
+        {% endfor %}
+    </div>
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

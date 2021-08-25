@@ -1,0 +1,20 @@
+{% extends "a_index/layout.html" %}
+
+{% block body %}
+
+
+{% for qw in q%}
+<div class="entries">
+<p>Name: {{qw.name}}</p>
+<p>Registry ID: {{qw.id}}</p>
+<p>Encoder: {{qw.user}}</p>
+<p>Ring: {{qw.ring}}</p>
+<p>Code: {{qw.code}}</p>
+<p>Registry Time: {{qw.time}}</p>
+<img class="xtest" src="{{qw.linkimage}}">
+</div>
+<br>
+{% endfor %}
+
+
+{% endblock %}

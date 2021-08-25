@@ -1,0 +1,14 @@
+{% extends "a_index/layout.html" %}
+
+{% block body %}
+
+<h1>Codes :!</h1>
+{% for c in cc %}
+Code : {{c.code}}<br>
+Hcode : {{c.hcode}}<br>
+Ring Code : {{c.ring_code}}<br>
+Pigeon Id : {{c.pigeon_id}}<br>
+<hr>
+{%endfor %}
+
+{%endblock %}

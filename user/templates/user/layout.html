@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="font-family: Poppins, sans-serif;
+height: 100vh;">
+
+    <style>
+        .pigeon_profile_image_container {
+            text-align: center;
+            align-items: center;
+            max-height: 30%;
+            padding: 2%;
+            background-color: rgb(211, 184, 165);
+            border-radius: 5px;
+            box-shadow: 0 0 5px khaki;
+        }
+
+        .pigeon_profile_image {
+            height: 150px;
+            max-width: 80%;
+            position:sticky;
+            box-shadow: 0 0 5px khaki;
+        }
+        a {
+            text-decoration: none;
+
+
+        }
+        body {
+            animation: fadeIn 2s;
+  -webkit-animation: fadeIn 2s;
+  -moz-animation: fadeIn 2s;
+  -o-animation: fadeIn 2s;
+  -ms-animation: fadeIn 2s;
+  
+        }
+        img {
+            max-width: 250px;
+            max-height: 250px;
+            border-radius: 25px;
+            
+        }
+  
+
+table,td {
+  border: 1px solid black;
+}
+td{
+    background-color: violet;
+    border-radius: 25px;
+    border: solid gold 10px;
+    text-align: center;
+    
+}
+
+.my_pigeon {
+    padding: 5px;
+    margin: 10px;
+    margin-left: 10px;
+    width: 80%;
+}
+
+
+        .user_list{padding: 3px;
+            margin: 0;
+            background-color: greenyellow;
+             width: fit-content;
+             border-radius: 25px;
+              border: solid rgb(235, 255, 206) 3px;}
+
+
+        @media (min-width: 600px){
+            table{width: 50%;}
+
+            body {background-color: rgb(255, 206, 206);}
+            .my_pigeon{width: 50%; border: yellow solid 4px;border-radius: 25px; background-color:rgb(255, 255, 200);text-align: center;}
+            .image{max-width: 95%; max-height: 50%; border: solid 4px yellow;}
+            
+            }
+
+        @media (max-width: 599px) {
+
+            .reg_image {  max-width: 50%;
+            float: right;
+            height: inherit;
+            border-radius: 15px;
+            max-height: 100%;
+
+        }
+
+
+        .reg_pigeon {border: 5px solid chartreuse;  clear: both; height: 100px;
+            position: fixed;
+            width:90%;
+            margin-right: 10%;
+            background-color: rgb(207, 255, 159);
+            max-height: fit-content;
+            font-size: 90%;
+            align-items: center;
+            text-align: center;
+            box-shadow: 5px 5px 5px grey;
+            top: 1%
+        }
+
+
+            table{width: 100%;}
+            body {background-color: rgb(214, 214, 255);} 
+            .user_style {display: none;}
+            .header{
+                border: yellow solid 3px;
+                border-radius: 25px;
+                padding:7px;
+                background-color: aqua;
+                position: fixed;
+                bottom: 5%;
+                box-shadow: 0px 0px 5px grey;
+                line-height: 1.5; text-align: center;
+                display: none;
+                text-decoration: none;
+            }
+@keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-moz-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-webkit-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-o-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-ms-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+
+
+
+            .show_header {
+                font-size: large;
+                box-shadow: 0px 0px 5px rgb(0, 238, 255);
+                border: rgb(0, 110, 255) solid 1px;
+                border-radius: 25px;
+                padding:7px;
+                background-color: aqua;
+                position: fixed;
+                bottom: 5%;
+                right: 5%;
+                line-height: 1.5; text-align: center;
+                    animation: fadeIn 2s;
+                -webkit-animation: fadeIn 2s;
+                -moz-animation: fadeIn 2s;
+                -o-animation: fadeIn 2s;
+                -ms-animation: fadeIn 2s;
+            }
+            .show_header2 {
+                box-shadow: 0px 0px 10px rgb(255, 109, 189);
+                border: rgb(241, 109, 182) solid 3px;
+                border-radius: 25px;
+                padding:7px;
+                background-color: aqua;
+                position: fixed;
+                bottom: 5%;
+                left: 5%;
+                line-height: 1.5; text-align: center;
+                    animation: fadeIn 2s;
+                -webkit-animation: fadeIn 2s;
+                -moz-animation: fadeIn 2s;
+                -o-animation: fadeIn 2s;
+                -ms-animation: fadeIn 2s;
+            }
+            .header2{position: fixed; right: 5%; background-color: rgb(179, 255, 255);border-radius: 25px; padding: 5px;}
+            .my_pigeon{
+                border-radius: 25px;border: rgb(91, 255, 91) 3px solid;width: 100%; background-color:rgb(185, 255, 185);text-align: center;}
+            .image{ border: 2.5px yellow solid;border-radius: 25px; padding: 5px; margin: 5px;max-width: 50%; max-height: 150px;}
+            .user-head{background-color: rgb(255, 255, 199);width: fit-content;padding: 5px;text-align: center; border:solid yellow 5px;border-radius: 25px;margin: auto;position: fixed;left: 35%;}
+
+
+            .user_image{display: none;}
+            .user-head{display: none;}
+
+            }    
+
+
+    </style>
+
+    <h1 class="user_style">User</h1>
+    <div class="header2">
+
+    </div>
+
+
+    <button class="show_header" onclick="show()">Menu</button>
+    <a class="show_header2" href="javascript:history.back()">Back</a>
+    <div class="header">
+        {% if user.is_authenticated %}
+        <a  href="{% url 'race:index' %}"><h2 class="inactive underlineHover">View Races</h2></a>
+        <a href="{% url 'user:register' %}"><h2 class="inactive underlineHover">Sign Up a Friend</h2></a>
+        <a href="{%url 'user:logout' %}">Logout</a>
+        <br><hr>
+        <a href="{% url 'user:upload' %}">Add Pigeon</a>
+        <br><hr>
+        <a href="{% url 'user:player' username=request.user.username %}">My pigeons</a>
+        {% else %}
+        <a href="{%url 'user:login' %}">Log in</a>
+        <br><hr>
+        <a href="{%url 'user:register' %}">Register</a>
+        <br><hr>
+        {% endif %}
+        <br><hr>
+        <a href="{%url 'user:index' %}">Home</a>
+    </div>
+
+
+<script>
+    function show(){
+        x = document.querySelector('.header');
+        if (x.style.display == 'none')
+        {x.style.display = 'block'}
+        else
+        {x.style.display = 'none'}
+    }
+</script>
+    {% block body %}
+    {% endblock %}
+</body>
+</html>

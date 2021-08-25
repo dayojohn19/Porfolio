@@ -1,0 +1,122 @@
+{% extends "a_index/layout.html" %}
+
+{% block body %}
+
+
+<h1 id="race_name" style="background: #ffe7e8; border: 2px solid #e66465; margin: 15px; line-height: 1.5; text-align: center;border-radius:25px">{{rn.racename}}</h1>
+<h3>Next Lap: <div id="lap_name" style="border:3px greenyellow solid; width: fit-content;"></div></h3>
+<input hidden  id="race_id" value="{{rn.id}}">
+<hr>
+<h1>Load Available pigeons:</h1>
+<div id="e1"></div>
+<hr>
+    <div style="border: 4px solid red; width:fit-content;" hidden> 
+        <strong>Active Lap</strong>
+        <div id="lap_id"></div>
+        <div id="race_id2">{{rn.id}}</div>
+    </div>
+<h4>Lap:</h4>
+{% for l in lap  %}
+<div style="border:3px solid yellow;margin: 5px; padding: 4px; width: fit-content;">
+    <p id="lapid" hidden>{{l.id}}</p>
+    
+    <p id="lap_lat">{{l.lat}}</p>
+    <p id="lat_long">{{l.long}}</p>
+
+
+    <p id="valued" >{{l.release}}</p>
+    Release: {{l.release_time}}<br>
+    <a href="{% url 'g_pigeon_race:view_clocked' lid=l.id %}">View Clocked on this Lap </a><br>
+    <button  id="{{l.id}}"   onclick="truck(id)" >Truck</button>
+    <hr>
+</div>
+{% endfor %}
+
+<script>
+
+
+    // getting active lap
+
+lap_id = document.querySelector("#lapid").innerHTML;
+lap_name = document.querySelector("#valued").innerHTML;
+document.querySelector("#lap_id").innerHTML = lap_id;
+document.querySelector("#lap_name").innerHTML = lap_name;
+// end of getting active lap
+function putpigeon(id) {
+        //try put the pigeon to pigeon lap
+        fetch(`/race/test/${id}`);
+}
+function truck(x) {
+    yy = `On Truck ${x} `
+    alert(x);
+}
+
+
+function loadit(id, state, lapid, lap_num) {
+    //putting the pigeon to Loaded MODEL
+    code = document.querySelector(`#code-${id}`).value;   
+    race_id = document.querySelector("#race_id2").innerHTML;
+    race_name = document.querySelector("#race_name").innerHTML;
+    fetch(`/race/loadpigeon/${id}/${lapid}`, {
+        method: "PUT",
+        body: JSON.stringify({
+            lapid:lapid,
+            race_name:race_name,
+            pid:id,
+            lap_num:lap_num,
+            race_id:race_id,
+            loaded_code: code, 
+            loaded: !state
+        })
+    });
+   location.reload();
+   //alert(id + " Successfully loaded" + state + "lap:ID" + lapid + "code" + code);
+}
+
+    document.addEventListener('DOMContentLoaded', function() {
+    rd = document.querySelector("#race_id").value;
+
+    fetch(`lap_pigeon/${rd}`)
+.then(response => response.json())
+.then(pigeons => {
+    pigeons.forEach(element => {
+        const e = element;
+        const ee = document.createElement('div');
+        eee = `<div class="eee"; id="eee-${e.id}"
+        style="border: 5px solid violet; padding:3px; margin:3px; border-radius:25px; padding:10px; margin: 15px; line-height: 1.5; text-align: center; width:device-width">
+            <p style="border-radius:1px; background-color:#ddf0d2">
+                "${e.name}" <br>
+            Ring: <a style="background-color:lightgreen;padding-left:10px;padding-right:10px">${e.ring}</a> <br>
+            Last Load: ${e.loads} <br>
+            </p>
+            <input id="code-${e.id}"  placeholder="Put Code Here"  >
+            <button id="x-${e.id}">load</button>
+            <br>
+            
+            {{lap.id}}
+            </div>`;
+        ee.innerHTML = eee;
+        document.querySelector("#e1").append(ee);
+
+
+            //put on clock load 
+// !! cant find load 
+            let lapid = document.querySelector("#valued").innerHTML;
+            let lap_num = document.querySelector("#lapid").innerHTML;
+            let loaded_code = document.querySelector(`#code-${e.id}`).value;
+            let x = document.querySelector(`#x-${e.id}`)
+        x.addEventListener("click", event => {
+            loadit(e.id, e.loaded, lapid, lap_num);
+        });
+    //    button.addEventListener("click", event => {
+    //        testb(loaded_code)
+    //    });
+    });
+
+});
+
+    });
+
+
+</script>
+{%endblock%}

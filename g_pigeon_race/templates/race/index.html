@@ -1,0 +1,117 @@
+{% extends "a_index/layout.html" %}
+
+{% block body %}
+<style>
+    .clock-1 {
+        border: lawngreen solid 2px;
+        border-radius: 10px;
+    }
+    .clock-2 {
+        border: lightcoral solid 2px;
+        border-radius: 10px;
+    }
+    .clock-3 {
+        border: lightseagreen solid 2px;
+        border-radius: 10px;
+    }
+    .clock-button {
+        background-color: lightskyblue;
+        padding: 4%;
+        border-radius: 10px;
+        font-size: larger;
+    }
+    .clock-input {
+        font-size: larger;  
+        border: 2px solid red;
+        border-radius: 4px;
+        text-align: center; 
+        padding: 4%;
+    }
+    .races-container {
+        padding: 50px;
+        border: 3px lightgreen solid; 
+        margin:3px; 
+        padding:4px; 
+        border-radius: 10px;
+        background-color: rgb(218, 253, 218); 
+        align-items: center;
+    }
+</style>
+<a href="{% url 'g_pigeon_race:manager_page' %}">manager</a>
+
+<hr>
+<h5>Good Day, {{request.user.username}}</h5>
+<h3><a href="{% url 'user:index' %}">Users</a></h3>
+<div class="clock-1">
+    <div class="clock-2" >
+        <div class="clock-3">
+            <h2>Clock:</h2>
+            
+                {% if message %}
+                    <h1>{{message}}</h1>
+                    {{now}}
+                    {% if new %}
+                        <h1><strong>{{message}}</strong></h1>
+                        <p>{{new}}<br>
+                        {{lat}}<br>
+                        {{long}}<br></p>
+                    {% endif %}
+                {% endif %}
+            
+            <form style="text-align: center;" action="{% url 'g_pigeon_race:clock' %}" method="post">
+                {% csrf_token %}
+                <input class="clock-input" placeholder="Type Code Here" name="clock_code" ><br><br>
+                <button class="clock-button" type="submit">CLock</button>
+            </form>
+            <br>
+                <div style="text-align: center; border: 2px blue solid;border-radius: 25px;">
+                    {% if count %}
+                        <hr>
+                        <a style="align-items: center; text-align: center;">" {{x.pigeon_name}} "</a><br>
+                        Race count : {{count}}<br>
+                        Released : {{x.lap_name}}<br>
+
+                        Pigeon ID is Y : {{y}} <br>
+                        Pigeon ID 2 : {{x.pigeon_id}}<br>
+                        Race ID : {{x.race_name}}<br>
+
+                        Released Time: {{x.release_time}} <br>
+                        Clock Time : {{x.clock_time}}<br>
+                        <hr>
+                        <h2>Record</h2>
+                            {% for r in records %}
+                                {{r.lap_name}} <br>
+                                {{r.speed}}<br>
+                                <hr>
+                            {% endfor %}
+                    {%endif %}
+                </div>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+
+
+{% if races %}
+<h1>Races:</h1>
+<ul>
+        {% for race in races %}
+    <div class="races-container">
+        <h2><a href="{%url 'g_pigeon_race:race' race.id %}" style="margin: 15px; line-height: 1.5; text-align: center;text-decoration: none;">{{race.racename}}
+        </a></h2>
+        <form action="{%url 'g_pigeon_race:race' race.id %}" style="text-align: center;">
+            <button  class="button">Join !!</button>
+        </form>
+            <p style="background-color: white;border-radius:1px; ">Price {{race.price}}</p>
+
+            
+    </div>
+    <hr>
+        {% endfor %}
+</ul>
+{% endif %} 
+<br>
+
+{% endblock %}

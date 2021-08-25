@@ -25,11 +25,13 @@ SECRET_KEY = 'django-insecure-rmxq3lkq@nhlwgg)deu@q5e_nfmz8((qqe)v9s0vt*o5&i(ez%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0','127.0.0.1','lit-river-78167.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
 INSTALLED_APPS = [
+    'user',
+    'g_pigeon_race',
     'a_social_network',
     'app_mail',
     'a_street_race',
@@ -147,9 +149,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 # Base url to serve media files
-MEDIA_URL = '/blogs/'
+MEDIA_URL = '/images/'
 # Path where media is stored
-MEDIA_ROOT = os.path.join(BASE_DIR, 'blogs/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'images/')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

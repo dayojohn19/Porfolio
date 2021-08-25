@@ -1,0 +1,84 @@
+{% extends "a_index/layout.html" %}
+{% block body %}
+
+
+
+
+
+<h1>Add Pigeon</h1>
+<style>
+.form {
+    text-align: center;
+  background: #fff;
+  box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
+  border-radius: 5px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  left: 0;
+  right: 0;
+  position: absolute;
+  border-top: 5px solid #0e3721;
+/*   z-index: 1; */
+  animation: bounce 1.5s infinite;
+}
+::-webkit-input-placeholder {
+  font-size: 1.3em;
+  
+}
+.name:hover {
+  border-bottom: 5px solid #0e3721;
+  height: 30px;
+  width: 50%;
+  transition: ease 0.5s;
+}
+
+.submit {
+  width: 200px;
+  color: white;
+  background-color: #236e46;
+  font-size: 20px;
+  box-shadow: 0px 0px 10px khaki;
+}
+</style>
+<div class="form">
+        <div class="initial" >
+            <form onsubmit="show()" method="post" enctype="multipart/form-data" >
+                {%csrf_token%}
+                {{form.as_p}}
+                <button class="submit" class="before_upload" type="submit">Upload</button>
+                </form>
+        </div>
+        {% if img_obj %}
+ 
+        <div class="after_upload" >
+            <img src="{{img_obj.image.url}}" alt="connect" style="height:100px; width: 100px;">
+            <form action="{%url 'user:submit'  %}" method="POST" >
+                {%csrf_token%}
+                Pigeon Name:<br>  <input value="{{img_obj.name}}" name="name" class="name"> 
+                <br>
+                Ring :<br><input type="number" name="ring" class="name">
+                <br>
+                <input hidden value="{{img_obj.image.url}}" name="link">
+                <br>
+                <button class="submit" type="submit" style="width: 50%;height: 50px; border-radius: 20px; font-size: larger;">Add Pigeon</button>
+            </form>
+        </div>
+</div>
+
+<hr>
+
+<hr>
+
+
+<script>
+    function show() {
+        document.querySelector(".after_upload").style.display = 'block';
+        }
+        document.addEventListener('DOMContentLoaded', function() { 
+        })
+</script>
+{%endif%}
+{% endblock %}

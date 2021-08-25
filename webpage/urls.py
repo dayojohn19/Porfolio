@@ -25,5 +25,16 @@ urlpatterns = [
     path('app_mail/', include('app_mail.urls')),
     path('application/', include('application.urls')),
     path('a_social_network/', include('a_social_network.urls')),
+    path('g_pigeon_race/', include('g_pigeon_race.urls')),
+    path('user/', include('user.urls')),
 
 ]
+
+### Pigeon Config
+from django.conf import settings
+from django.conf.urls.static import static
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
+##

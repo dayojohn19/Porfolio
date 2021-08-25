@@ -1,0 +1,31 @@
+{% extends "a_index/layout.html" %}
+{% block body %}
+
+
+
+
+<div class="reg_pigeon">
+    <img class="reg_image" src="{{mpl}}">
+    <h3>Pigeon Profile:</h3>
+    " {{pid}} "<br>Clock Count: {{count}} <br>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br><br>
+
+{%for z in zz %}
+
+    {{z.race_name}} <br>
+    {{z.lap_name}}    <br>
+    Speed:    {{z.speed}} <br> 
+    Flight Time: {{z.time}}   <br>
+    Distance: {{z.distance}}    <br>
+        <hr>
+{% endfor %}
+
+
+
+{% endblock %}
