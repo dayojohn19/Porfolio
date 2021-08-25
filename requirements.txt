@@ -19,3 +19,4 @@ virtualenvwrapper==4.8.4
 webdriver-manager==3.4.2
 websocket-client==0.59.0
 Werkzeug==2.0.1
+whitenoise==5.3.0
