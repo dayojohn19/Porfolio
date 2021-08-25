@@ -1,0 +1,12 @@
+{% extends "a_index/layout.html" %}
+
+{% load static %}
+    {% block body %}
+    Message: {{message}}
+    <form method="post" action="{% url 'application:qrcode' %}">
+        {% csrf_token %}
+        <p>Input website: <input name="qrcode"></p>
+        <input type="submit">
+    </form>
+    
+    {% endblock %}
