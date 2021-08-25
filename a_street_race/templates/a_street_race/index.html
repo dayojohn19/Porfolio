@@ -18,7 +18,8 @@ user{{request.user}}<br>
 <div class="container-main-main">
     <div>
         <div class="r-container-form">
-            {{pass}}
+            {{pass}}<br>
+            
             <form method="post" action="{% url 'street_race:create' %}">
                 {% csrf_token %}
                 {{form.name}}<br>

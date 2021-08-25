@@ -4,7 +4,7 @@ from django import forms
 # Create your views here.
 class NewRace(forms.Form):
     name = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Nick Name'}))
-    code = forms.IntegerField(label="",widget=forms.TextInput(attrs={'placeholder': 'Password Number'}))
+    code = forms.IntegerField(label="",widget=forms.NumberInput(attrs={'placeholder': 'Password Number'}))
 def index(request):
     return render(request, 'a_street_race/index.html', {
         'room': Room.objects.filter(full=False).order_by('id').reverse(),
@@ -50,10 +50,17 @@ def create(request):
                     'player2':rm.player2,
                     'user':np.host
                 })
+        
         else:
             return render(request, 'a_street_race/index.html', {
-                'form':NewRace()
-            })
+                'form':NewRace(),
+                'message':'Password as number'
+            })        
+    else:
+        return render(request, 'a_street_race/index.html', {
+            'form':NewRace(),
+            'message':'Password as number'
+        })
         
 from django.views.decorators.csrf import csrf_exempt
 import json
