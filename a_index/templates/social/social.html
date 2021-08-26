@@ -1,21 +1,26 @@
 {% extends "a_index/layout.html" %}
 
 {% load static %}
+
     {% block body %}
     <link rel="stylesheet" href="{% static 'a_socials/socials.css' %}">
+
+
+
 
 
     <body>
         <div class="container-main-main">
             <div class="h-head">
-                
                 <h1 class="p-green">My Socials</h1>
                 <ul>
                     <li>#foreignjohn19</li>
                 </ul>
             </div>
+
+            
         
-        
+
         
             <div class="row">
                 <div class="col-12 col-md-4 p-3 d-flex justify-content-center pb">
@@ -36,7 +41,10 @@
                           <img class="zz card-img-top" src="{% static 'a_socials/images/ig.png' %}" alt="Card image cap">
                             <a href="{% url 'index:map' %}" class="btn btn-primary bgc">View <strong>Instagram</strong></a>  
                     </div>
-                </div>        
+                </div>    
+                
+
+
                 <div class="col-12 col-md-4 p-3 d-flex justify-content-center pb">
                     <div class="card">
                           <img class="zz card-img-top" src="{% static 'a_socials/images/yt.png' %}" alt="Card image cap">

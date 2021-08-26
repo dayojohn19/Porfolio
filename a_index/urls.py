@@ -10,4 +10,5 @@ urlpatterns = [
     path("blog/", views.blog, name="blog"),
     path("map/", views.map, name="map"),
     path("games/", views.games, name="games"),
+
 ]
