@@ -136,9 +136,7 @@ def logout_view(request):
     return HttpResponseRedirect(reverse("user:index"))
 
 def register(request):
-    if not request.user.is_authenticated:
-        #return redirect('user:login')
-        return render((request), "user/login.html", {"message": "You Need a Friend To Register for You."})
+
     if request.method == "POST":
         username = request.POST["username"]
         email = request.POST["email"]
@@ -147,7 +145,7 @@ def register(request):
         if password != confirmation:
             return render(request, "user/register.html", { "message": "Passwords must match."})
         try:
-            user = User.objects.create_user(
+            user = mail.User.objects.create_user(
                 username,
                   email,
                    password)
@@ -172,7 +170,6 @@ def view_record(request, pid):
     z1 = mp.id
     zz = mp.entry.all().order_by('id').reverse()
     return render(request, "user/pigeon_record.html", {
-
         "records": Record.objects.filter(entry=pid).order_by('id').reverse(),
         "count": len(Record.objects.filter(entry=pid)),
         "zz":zz,

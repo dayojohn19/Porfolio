@@ -173,75 +173,70 @@ def release_it(request, id):
 
 def clock_it(request):
     if request.method == "POST":
-        #try:
-        hcode = request.POST["clock_code"]
-#            
-#
-#            if hcode != "":
-#                try:
-        loaded = Loaded.objects.get(pigeon_hcode=hcode)
-        idd = loaded.pigeon_id
+        try:
+            hcode = request.POST["clock_code"]
+            loaded = Loaded.objects.get(pigeon_hcode=hcode)
+            idd = loaded.pigeon_id
+            loaded.save()
+    # here get the distance                    
+            pigeon = Mypigeons.objects.get(pk=idd)
+            pigeon_id = pigeon.id
+            pigeon_name = pigeon.name
+            pigeon_ring = pigeon.ring
+            loaded_lap_id = loaded.lap
+            loaded_lap_name = loaded.lap_name
+            loaded_race = loaded.race_id
+            loaded_race_name = loaded.race_name
+            loaded_release = loaded.release_time
+            #loaded.clock_time = add the clock time
+            #loaded.save()
 
-        loaded.save()
-# here get the distance                    
-        pigeon = Mypigeons.objects.get(pk=idd)
-        pigeon_id = pigeon.id
-        pigeon_name = pigeon.name
-        pigeon_ring = pigeon.ring
-        loaded_lap_id = loaded.lap
-        loaded_lap_name = loaded.lap_name
-        loaded_race = loaded.race_id
-        loaded_race_name = loaded.race_name
-        loaded_release = loaded.release_time
-        #loaded.clock_time = add the clock time
-        #loaded.save()
+            loaded_speed = 321
+    ##              time_get GET :
+            now = time.time()
+            time1 = loaded.release_time
+            time2 = now
+            s_time = (float(time2)-float(time1))/60
+    ##              distance_get ;
+            lat1 = loaded.release_lat
+            long1 = loaded.release_long
 
-        loaded_speed = 321
-##              time_get GET :
-        now = time.time()
-        time1 = loaded.release_time
-        time2 = now
-        s_time = (float(time2)-float(time1))/60
-##              distance_get ;
-        lat1 = loaded.release_lat
-        long1 = loaded.release_long
+            lat2 = loaded.pigeon_lat
+            long2 = loaded.pigeon_long
+            s_distance = geodesic((lat1,long1),(lat2,long2)).meters
+    ##              speed_get
+            s_speed = s_distance/s_time
 
-        lat2 = loaded.pigeon_lat
-        long2 = loaded.pigeon_long
-        s_distance = geodesic((lat1,long1),(lat2,long2)).meters
-##              speed_get
-        s_speed = s_distance/s_time
-
-        record = Record()
-        #  record.entry = idd
-        record.time = s_time
-        record.distance = s_distance
-        record.ring = pigeon_ring
-        record.pigeon_name = pigeon_name
-        record.lap_name = loaded_lap_name
-        record.lap_id = loaded_lap_id
-        record.race = loaded_race
-        record.release = loaded_release
-        record.speed = s_speed
-        record.clock = now
-        record.race_name = loaded_race_name
-        record.save()
-        record.entry.add(idd)
-        #remove from the loaded 
-        loaded.delete()
-        #put the Mypigeons Loaded to False
-        mp = Mypigeons.objects.get(id=idd)
-        mp.loaded = False
-        mp.save()
+            record = Record()
+            #  record.entry = idd
+            record.time = s_time
+            record.distance = s_distance
+            record.ring = pigeon_ring
+            record.pigeon_name = pigeon_name
+            record.lap_name = loaded_lap_name
+            record.lap_id = loaded_lap_id
+            record.race = loaded_race
+            record.release = loaded_release
+            record.speed = s_speed
+            record.clock = now
+            record.race_name = loaded_race_name
+            record.save()
+            record.entry.add(idd)
+            #remove from the loaded 
+            loaded.delete()
+            #put the Mypigeons Loaded to False
+            mp = Mypigeons.objects.get(id=idd)
+            mp.loaded = False
+            mp.save()
 
 
-        return render(request, "race/index.html", {
-            "message":"Clocked !!",
-                "x":loaded,
-                "xx":idd,
-                "records": Record.objects.filter(entry=idd).order_by('id').reverse(),
-                "count": len(Record.objects.filter(entry=idd))
-                })
+            return render(request, "race/index.html", {
+                "message":"Clocked !!",
+                    "x":loaded,
+                    "xx":idd,
+                    "records": Record.objects.filter(entry=idd).order_by('id').reverse(),
+                    "count": len(Record.objects.filter(entry=idd))
+                    })
 #                except:
 #                    return render(request, "race/index.html", {
 #                        "message":"You Entered Wrong Code",
@@ -249,11 +244,10 @@ def clock_it(request):
 #                        })
 #            else:
 #                return render(request, "race/index.html", {"message":"Please Enter Code"})
-        #except:
-     #       return render(request, "race/index.html", {"message":"Please Enter Right Codeee"})
+        except:
+           return render(request, "race/index.html", {"message":"Please Enter Right Code"})
 
  #   return render(request, "race/index.html", {"message":"hi you're clocked"})
-
 
 
 
@@ -408,9 +402,9 @@ def lap_pigeon(request, rd):
 
 from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
-def load_pigeon(request, pid, lapid):
+def load_pigeon(request, pid):
     if request.method == "PUT":
-        
+
         data = json.loads(request.body)
         pigeon_id = data.get("pid")
         pigeon = Mypigeons.objects.get(id=pigeon_id)
@@ -418,6 +412,7 @@ def load_pigeon(request, pid, lapid):
         pigeon_name = pigeon.name
         pigeon_code = data.get("loaded_code")
         pigeon_loaded_code = data.get("loaded_code")
+        lapid = data.get("lapid")
 ###
         pigeon2 = Mypigeons.objects.get(owner=request.user, pk=pigeon_id)
 

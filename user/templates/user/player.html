@@ -2,12 +2,17 @@
 {% block body %}
 <style>
     .player_pigeon{
-    height: 100px;
+    height: 15rem;
     width: auto;
-    background: rgb(245,245,245);
-    background: linear-gradient(55deg, rgba(245,245,245,1) 0%, rgba(207,207,207,1) 35%, rgba(183,183,183,1) 57%, rgba(138,138,137,1) 78%, rgba(109,109,108,1) 100%, rgba(33,33,32,1) 100%);    box-shadow: 0px 0px 5px grey;
+    background: rgba(245, 245, 245, 0.212);
+    background: linear-gradient(55deg, rgba(245,245,245, 0.308) 0%, rgba(207,207,207,0.308) 35%, rgba(183,183,183,0.3) 57%, rgba(138,138,137,0.3) 78%, rgba(109,109,108,0.3) 100%, rgba(33,33,32,0.3) 100%);    box-shadow: 0px 0px 5px rgba(128, 128, 128, 0.24);
     text-align: center;
     margin-bottom: 5%;
+}
+.player_pigeon p {
+    opacity: 1;
+    color: hotpink;
+    padding-top:1%;
 }
 
 .player_pigeon_image {
@@ -20,7 +25,6 @@
 body {
         margin: 0;
         padding: 0;
-        margin-top: 35%;
     }
 .p-name {
     color: black;
@@ -28,16 +32,16 @@ body {
     border: 1.3px blue solid;
     padding: 1%;
     border-radius: 10px;
-
+    text-decoration: none;
 }
 </style>
 
+<div style="height: 1000px;">
 
 
 
-
-<div class="reg_pigeon" style="background-color: rgba(248, 255, 209, 0.493); border: solid 3px  rgb(255, 248, 185); 
-box-shadow: 0px 0px 20px rgba(255, 255, 0, 0.568); width: 100% ;">
+<div class="reg_pigeon" style="background-color: rgba(248, 255, 209, 0.219); border: solid 3px  rgba(135, 252, 135, 0.219); 
+box-shadow: 0px 0px 20px rgba(255, 255, 0, 0.199); width: 100% ;">
     <img class="reg_image" src="{{pic}}">
     <h1>{{lo}} <br> Pigeons:</h1>
 
@@ -54,9 +58,9 @@ box-shadow: 0px 0px 20px rgba(255, 255, 0, 0.568); width: 100% ;">
 
     <div class="player_pigeon"  id="{{l.id}} "    
         {% if l.loaded is True %}
-            style=" color: red;background-color: rgb(255, 234, 234);box-shadow: 0px 0px 15px red;">
+            style=" color: rgba(255, 0, 0, 0.212);background-color: rgba(255, 234, 234, 0.24);box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.322);">
         {% else %}
-            style="color: rgb(199, 255, 188);background-color: rgb(199, 255, 188);box-shadow: 0px 0px 15px green;"> 
+            style="color: rgba(199, 255, 188, 0.192);background-color: rgba(199, 255, 188, 0.267);box-shadow: 0px 0px 15px rgba(0, 128, 0, 0.322);"> 
         {% endif %}
             " <a class="p-name" href="{% url 'user:view_record' pid=l.id %}">
                 <strong>{{l.name}}</strong>
@@ -70,5 +74,5 @@ box-shadow: 0px 0px 20px rgba(255, 255, 0, 0.568); width: 100% ;">
 
 
 
-
+</div>
 {% endblock %}

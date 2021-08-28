@@ -28,13 +28,13 @@
     }
 </style>
 
-<br>
-<a href="{% url 'g_pigeon_race:races_registered' race_id=race.id %}">View Registered Pigeons on this Race</a>
-<br>
-<a href="{% url 'g_pigeon_race:view_loaded' id=race.id %}">view Loaded Pigeon on this Race</a>
+<div style="padding: 1.5rem; background-color: rgba(156, 151, 151, 0.075); width: 70%; margin: 1%;">
+    <a style="text-decoration: none; padding: 5%;" href="{% url 'g_pigeon_race:races_registered' race_id=race.id %}">View Registered Pigeons on this Race</a>
+    <br><br>
+    <a style="text-decoration: none; padding: 5%;" href="{% url 'g_pigeon_race:view_loaded' id=race.id %}">view Loaded Pigeon on this Race</a>
+</div>
 
-
-<h1>{{race.racename}}</h1>
+<h1 style="background-color: rgba(220, 20, 60, 0.116); width: fit-content; padding: 5px; margin: 1%;">{{race.racename}}</h1>
 <div hidden class="side">Total Entries {{total}}</div>
 
 <a href="{% url 'g_pigeon_race:lap' race.id %}"><button class="button"  >LOAD PIGEON</button></a>
@@ -50,12 +50,12 @@
         <p id="time">txtxddd</p>
     </div>
         <div class="reg_pigeon" style="border: 1px solid grey; margin: 1px; padding:1%; box-shadow: 0px 0px 5px rgb(199, 198, 255);">
-            <img class="reg_image" src="{{up.link}}">   
+            <img class="reg_image" src="{{up.link}}" style="height: 10rem; float: left;">   
             <br>
             <p style="background-color: white ;border-radius: 1px;"> " {{up.name}} "</p>
             <p style="background-color: white ;border-radius: 1px;">Ring: {{up.ring}}</p>
             <p style="background-color: white ;border-radius: 1px;">Last Release: {{up.loads}}</p>
-                <form  onsubmit="entry()"  action="{% url 'race:entry' race.id %}" method="POST">
+                <form  onsubmit="entry()"  action="{% url 'g_pigeon_race:entry' race.id %}" method="POST">
                     {%csrf_token%}
                     <input hidden class="pigeon" name="pigeon" value="{{up.id}}">
                     <input style="background-color: rgb(182, 238, 255); border-radius: 25px; width: 30%;" type="submit" value="Entry">
@@ -63,7 +63,8 @@
         </div>
 
             {% empty %}
-                <h1>All your Pigeons are registered</h1>
+                <h1>You have No Available Pigeon</h1>
+                <h2><a href="{% url 'user:upload' %}">Register more pigeon</a></h2>
                 <hr><hr>
 {% endfor %}
 
@@ -116,6 +117,6 @@
     }
 </script>
 
-
+<div style="height: 1000px;"></div>
 
 {% endblock %}

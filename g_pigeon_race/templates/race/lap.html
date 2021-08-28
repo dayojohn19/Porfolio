@@ -1,12 +1,18 @@
 {% extends "a_index/layout.html" %}
 
 {% block body %}
+<style>
+    .eee {
+        background-color: rgba(0, 110, 255, 0.123);
+        border: solid 1.2px green;
+    }
+</style>
 
-
-<h1 id="race_name" style="background: #ffe7e8; border: 2px solid #e66465; margin: 15px; line-height: 1.5; text-align: center;border-radius:25px">{{rn.racename}}</h1>
-<h3>Next Lap: <div id="lap_name" style="border:3px greenyellow solid; width: fit-content;"></div></h3>
+<h1 id="race_name" style="background: #fd747831; border: 2px solid #e664646c; margin: 15px; line-height: 1.5; text-align: center;border-radius:25px">{{rn.racename}}</h1>
+<h3>Next Lap: <div id="lap_name" style="padding: 1% ;border:3px rgba(172, 255, 47, 0.219) solid; width: fit-content;"></div></h3>
 <input hidden  id="race_id" value="{{rn.id}}">
 <hr>
+
 <h1>Load Available pigeons:</h1>
 <div id="e1"></div>
 <hr>
@@ -15,9 +21,10 @@
         <div id="lap_id"></div>
         <div id="race_id2">{{rn.id}}</div>
     </div>
+    
 <h4>Lap:</h4>
 {% for l in lap  %}
-<div style="border:3px solid yellow;margin: 5px; padding: 4px; width: fit-content;">
+<div style="background-color: rgba(255, 140, 0, 0.11);border:3px solid rgba(255, 255, 0, 0.192);margin: 5px; padding: 5%; width: fit-content;">
     <p id="lapid" hidden>{{l.id}}</p>
     
     <p id="lap_lat">{{l.lat}}</p>
@@ -57,7 +64,7 @@ function loadit(id, state, lapid, lap_num) {
     code = document.querySelector(`#code-${id}`).value;   
     race_id = document.querySelector("#race_id2").innerHTML;
     race_name = document.querySelector("#race_name").innerHTML;
-    fetch(`/race/loadpigeon/${id}/${lapid}`, {
+    fetch(`/g_pigeon_race/loadpigeon/${id}`, {
         method: "PUT",
         body: JSON.stringify({
             lapid:lapid,
@@ -68,8 +75,15 @@ function loadit(id, state, lapid, lap_num) {
             loaded_code: code, 
             loaded: !state
         })
-    });
-   location.reload();
+    })
+    .then((response) => {
+                if (!response.ok) {
+                    // error processing
+                    throw 'Error';
+                }
+                return response.json()
+            });
+//    location.reload();
    //alert(id + " Successfully loaded" + state + "lap:ID" + lapid + "code" + code);
 }
 
@@ -83,8 +97,8 @@ function loadit(id, state, lapid, lap_num) {
         const e = element;
         const ee = document.createElement('div');
         eee = `<div class="eee"; id="eee-${e.id}"
-        style="border: 5px solid violet; padding:3px; margin:3px; border-radius:25px; padding:10px; margin: 15px; line-height: 1.5; text-align: center; width:device-width">
-            <p style="border-radius:1px; background-color:#ddf0d2">
+        style=" padding:3px; margin:3px; border-radius:25px; padding:10px; margin: 15px; line-height: 1.5; text-align: center; width:device-width">
+            <p class="pnp">
                 "${e.name}" <br>
             Ring: <a style="background-color:lightgreen;padding-left:10px;padding-right:10px">${e.ring}</a> <br>
             Last Load: ${e.loads} <br>
@@ -119,4 +133,5 @@ function loadit(id, state, lapid, lap_num) {
 
 
 </script>
+<div style="height: 1000px;"></div>
 {%endblock%}

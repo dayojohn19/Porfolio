@@ -8,26 +8,26 @@
         padding: 0;
     }
 .player_pigeon{
-    height: 100px;
+    height: 15rem;
     width: auto;
-    background: rgb(245,245,245);
-    background: linear-gradient(270deg, rgba(245,245,245,1) 0%, rgba(207,207,207,1) 35%, rgba(183,183,183,1) 57%, rgba(138,138,137,1) 78%, rgba(109,109,108,1) 100%, rgba(33,33,32,1) 100%);    box-shadow: 0px 0px 5px grey;
+    background: rgba(245, 245, 245, 0.116);
+  
     box-shadow: 0px 0px 5px grey;
     text-align: center;
     margin-bottom: 5%;
 }
 .player_pigeon>a {
     color: black;
-    padding: 1%;
-    background-color: rgb(226, 226, 255);
+    padding-left: 3%;
+    padding-right: 3%;
+    background-color: rgb(159, 228, 255);
     border-radius:10px;
-    top: 34%;
-    position:relative;
-    border: 1.5px solid rgb(136, 136, 255);
+    font-size: larger;
+    text-decoration: none;
 }
 .player_pigeon_image {
     width: 40%;
-    height: 100%;
+    max-height: 100%;
     border-radius: 10px;
     border-radius: 0px;
     float: left; 
@@ -51,14 +51,13 @@
 
 }
 </style>
-<hr>
-<hr>
+<h2><a href="{% url 'g_pigeon_race:index' %}" style="text-decoration: none; color: rgb(255, 44, 44); background-color: rgba(243, 250, 151, 0.678);padding: 1%; border-radius: 10px;">Race</a></h2>
     {% if user.is_authenticated %}
     <img class="user-i" src="{{request.user.email}}">    
         <h2>
             Good Day <strong>{{user.username}}</strong>
         </h2>
-        
+
         
         <div class="i-heading">
             <h1>Player List </h1>
@@ -66,9 +65,9 @@
         </div>
         {% for users in au %}
             <div class="player_pigeon">
-                <a href="{% url 'user:player' username=users.username %}">
+                  <img class="player_pigeon_image" src="{{users.email}}" >
+                    <a href="{% url 'user:player' username=users.username %}">
                     <strong>{{users.username}}</strong>
-                    <img class="player_pigeon_image" src="{{users.email}}" >
                 </a>
             </div>
         {%endfor%}

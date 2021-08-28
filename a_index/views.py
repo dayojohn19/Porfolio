@@ -35,7 +35,8 @@ def map(request):
     return render(request, 'map/map.html')
 def games(request):
     return render(request, 'games/games.html')
-
+def s(request):
+    return render(request, 'social/s.html')
 
 # import json
 # from django.views.decorators.csrf import csrf_exempt

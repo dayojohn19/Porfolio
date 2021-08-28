@@ -3,22 +3,28 @@
 {% block body %}
 <style>
     .clock-1 {
-        border: lawngreen solid 2px;
+        border: rgba(139, 255, 23, 0.144) solid 2px;
         border-radius: 10px;
     }
     .clock-2 {
-        border: lightcoral solid 2px;
+        border: rgba(240, 128, 128, 0.253) solid 2px;
         border-radius: 10px;
     }
     .clock-3 {
-        border: lightseagreen solid 2px;
+        border: rgba(32, 178, 171, 0.26) solid 2px;
         border-radius: 10px;
+        background-color: rgba(219, 184, 202, 0.075);
+        padding-top: 4%;
     }
+
     .clock-button {
-        background-color: lightskyblue;
+        background-color: rgba(244, 255, 85, 0.63);
         padding: 4%;
         border-radius: 10px;
         font-size: larger;
+    }
+    .clock-button:hover {
+        background-color: rgb(105, 200, 255);
     }
     .clock-input {
         font-size: larger;  
@@ -29,26 +35,32 @@
     }
     .races-container {
         padding: 50px;
-        border: 3px lightgreen solid; 
+        border: 3px rgba(144, 238, 144, 0.192) solid; 
         margin:3px; 
-        padding:4px; 
+        padding:4%; 
         border-radius: 10px;
-        background-color: rgb(218, 253, 218); 
+        background-color: rgba(218, 253, 218, 0.089); 
         align-items: center;
+        margin-bottom: 3%;
+    }
+    .races-container button {
+        background-color: rgba(124, 205, 92, 0.575);
+        border:solid 2px greenyellow;
+        border-radius: 10px;
+        margin: 4%;
+        font-size: larger;
     }
 </style>
 <a href="{% url 'g_pigeon_race:manager_page' %}">manager</a>
 
 <hr>
-<h5>Good Day, {{request.user.username}}</h5>
-<h3><a href="{% url 'user:index' %}">Users</a></h3>
+<h5 style="background-color: rgba(255, 105, 180, 0.137); padding: 2%;">Good Day, {{request.user.username}}</h5>
+<h3><a style="text-decoration: none; background-color: rgba(105, 255, 138, 0.082);padding: 1%;" href="{% url 'user:index' %}">Users</a></h3>
 <div class="clock-1">
     <div class="clock-2" >
         <div class="clock-3">
-            <h2>Clock:</h2>
-            
                 {% if message %}
-                    <h1>{{message}}</h1>
+                    <h1 style="background-color: rgba(255, 0, 0, 0.253); margin: 4%; padding: 2%;">{{message}} ! ! !</h1>
                     {{now}}
                     {% if new %}
                         <h1><strong>{{message}}</strong></h1>
@@ -64,10 +76,10 @@
                 <button class="clock-button" type="submit">CLock</button>
             </form>
             <br>
-                <div style="text-align: center; border: 2px blue solid;border-radius: 25px;">
+                <div style="text-align: center; border: 2px rgba(0, 195, 255, 0.247) solid;border-radius: 25px;">
                     {% if count %}
                         <hr>
-                        <a style="align-items: center; text-align: center;">" {{x.pigeon_name}} "</a><br>
+                        <a style="align-items: center; text-align: center; ">" {{x.pigeon_name}} "</a><br>
                         Race count : {{count}}<br>
                         Released : {{x.lap_name}}<br>
 
@@ -96,22 +108,17 @@
 
 {% if races %}
 <h1>Races:</h1>
-<ul>
         {% for race in races %}
     <div class="races-container">
-        <h2><a href="{%url 'g_pigeon_race:race' race.id %}" style="margin: 15px; line-height: 1.5; text-align: center;text-decoration: none;">{{race.racename}}
+        <h2><a href="{%url 'g_pigeon_race:race' race.id %}" style="background-color: rgba(240, 255, 240, 0.178);color: rgb(255, 255, 255); padding: 2%; margin: 15px; line-height: 1.5; text-align: center;text-decoration: none;">{{race.racename}}
         </a></h2>
         <form action="{%url 'g_pigeon_race:race' race.id %}" style="text-align: center;">
             <button  class="button">Join !!</button>
         </form>
-            <p style="background-color: white;border-radius:1px; ">Price {{race.price}}</p>
-
-            
+            <p style="justify-content: center;align-items: center;background-color: rgba(2, 255, 15, 0.137);border-radius:1px; ">Price {{race.price}}</p>            
     </div>
-    <hr>
         {% endfor %}
-</ul>
 {% endif %} 
 <br>
-
+<div style="height: 500px;"></div>
 {% endblock %}

@@ -1,29 +1,44 @@
 {% extends "a_index/layout.html" %}
 {% block body %}
-
+<style>
+    .pigeon_record {
+        background-color: rgba(220, 253, 169, 0.205);
+        margin-bottom: 1rem;
+    }
+    .reg_image {
+        border:solid 2px rgba(172, 255, 47, 0.26);
+        box-shadow: 0px 0px 15px inset rgba(172, 255, 47, 0.822);
+        padding: 2%;
+        margin-bottom: 5%;
+    }
+    .reg_pigeon {
+        background-color: rgba(255, 105, 180, 0.096);
+        text-align: center;
+        padding:2%
+    }
+</style>
 
 
 
 <div class="reg_pigeon">
     <img class="reg_image" src="{{mpl}}">
-    <h3>Pigeon Profile:</h3>
+    <h3>Pigeon Record:</h3>
+    <h2><a >Race</a></h2>
     " {{pid}} "<br>Clock Count: {{count}} <br>
 </div>
 <br>
-<br>
-<br>
-<br>
-<br>
+
 <br><br>
 
 {%for z in zz %}
 
+<div class="pigeon_record">
     {{z.race_name}} <br>
     {{z.lap_name}}    <br>
     Speed:    {{z.speed}} <br> 
     Flight Time: {{z.time}}   <br>
     Distance: {{z.distance}}    <br>
-        <hr>
+</div>
 {% endfor %}
 
 

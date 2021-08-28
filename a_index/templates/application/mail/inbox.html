@@ -2,12 +2,13 @@
 {% load static %}
 
 {% block body %}
+<h2><a href="{% url 'g_pigeon_race:index' %}" style="text-decoration: none; color: rgb(255, 44, 44); background-color: rgba(243, 250, 151, 0.678);padding: 1%; border-radius: 10px;">Race</a></h2>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <link rel="stylesheet" href="{% static 'application/mail/styles.css' %}">
 <script src="{% static 'application/mail/inbox.js' %}"></script>
 
-    <h2>{{ request.user.email }} is online for <a id="h4"></a></h2>
+    <h2>You are online for <a id="h4"></a></h2>
     <button class="btn btn-sm btn-outline-primary" id="inbox">Inbox</button>
     <button class="btn btn-sm btn-outline-primary" id="compose">Compose</button>
     <button class="btn btn-sm btn-outline-primary" id="sent">Sent</button>

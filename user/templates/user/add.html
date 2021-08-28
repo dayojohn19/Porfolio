@@ -6,6 +6,8 @@
 
 
 <h1>Add Pigeon</h1>
+
+
 <style>
 .form {
     text-align: center;
@@ -43,16 +45,18 @@
   box-shadow: 0px 0px 10px khaki;
 }
 </style>
-<div class="form">
+<div style="height: 1000px;">
+<div class="form" style="background-color: rgba(90, 116, 148, 0.4);">
+  
         <div class="initial" >
-            <form onsubmit="show()" method="post" enctype="multipart/form-data" >
+            <form onsubmit="show()" method="post" enctype="multipart/form-data"  >
                 {%csrf_token%}
                 {{form.as_p}}
                 <button class="submit" class="before_upload" type="submit">Upload</button>
                 </form>
         </div>
         {% if img_obj %}
- 
+        
         <div class="after_upload" >
             <img src="{{img_obj.image.url}}" alt="connect" style="height:100px; width: 100px;">
             <form action="{%url 'user:submit'  %}" method="POST" >
@@ -65,13 +69,14 @@
                 <br>
                 <button class="submit" type="submit" style="width: 50%;height: 50px; border-radius: 20px; font-size: larger;">Add Pigeon</button>
             </form>
+            
         </div>
+        
 </div>
 
 <hr>
-
+</div>
 <hr>
-
 
 <script>
     function show() {

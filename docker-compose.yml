@@ -1,13 +1,15 @@
-version: '3'
+version: '3.1'
 
 services:
-    db:
-        image: postgres
+    mongo:
+        image: mongo
+        restart: always
         environment:
-          POSTGRES_HOST_AUTH_METHOD: trust
+            MONGO_INITDB_ROOT_USERNAME: dj19
+            MONGO_INITDB_ROOT_PASSWORD: aa09094553940
 
     web:
-        build: .
+        build: .    
         volumes:
             - .:/usr/src/app
         ports:

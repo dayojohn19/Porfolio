@@ -92,7 +92,7 @@ import os
 # DATABASES = {
 #     'default':{
 #     'ENGINE': 'djongo',
-#     'NAME': 'djdb',
+#     'NAME': 's25',
 #     'ENFORCE_SCHEMA':False,
 #     'CLIENT': {
 #         'host': 'mongodb+srv://dj19:aa09094553940@cluster0.hpgnf.mongodb.net/test'

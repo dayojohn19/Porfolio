@@ -96,7 +96,7 @@ document.querySelector('#compose-view').style.display = 'none';
 document.querySelector('#side').style.display = 'none';
 // Show the mailbox name
 document.querySelector('#emails-view').innerHTML = `<strong><h3>${mailbox.charAt(0).toUpperCase() + mailbox.slice(1)}</h3></strong>`;
-
+ 
 
 //fetch the emails 
 fetch(`/app_mail/application/emails/${mailbox}`)

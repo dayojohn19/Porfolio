@@ -1,6 +1,24 @@
 {% extends "a_index/layout.html" %}
 {% block body %}
+<style>
+    .reg_pigeon {
+        background-color: rgba(255, 140, 0, 0.178);
+        text-align: center;
+        height: 15rem;
+        
+    }
+    .reg_pigeon img{
+        height: 15rem;
+        float: left;
+        max-width: 50%;
+    }
+    button, input {
+        background-color: rgba(0, 255, 55, 0.205);
+        border-radius: 10px;
+        border:solid 1px green;
+    }
 
+</style>
 <div style="text-align: center;">
     <h1>" {{race}} "</h1>
     <h4>Registered Birds</h4>
