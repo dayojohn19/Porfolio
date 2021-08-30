@@ -27,6 +27,7 @@ urlpatterns = [
     path('a_social_network/', include('a_social_network.urls')),
     path('g_pigeon_race/', include('g_pigeon_race.urls')),
     path('user/', include('user.urls')),
+    path('app_food/', include('app_food.urls')),
 
 ]
 

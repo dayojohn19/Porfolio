@@ -30,6 +30,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'app_food',
     'user',
     'g_pigeon_race',
     'a_social_network',

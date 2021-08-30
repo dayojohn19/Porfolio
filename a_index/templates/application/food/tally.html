@@ -1,0 +1,30 @@
+{% extends "a_index/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+{% if message %}
+{{message}}
+{% else %}
+    {{foods.count}}
+    {% for f in foods %}
+    <p>{{f.user}} :</p>
+    <p>Ambag :{{f.cost}}</p>
+    <p>Kain: {{f.food}}</p>
+    <p>{{f.am}}</p>
+    <p>{{f.pm}}</p>
+    <p>{{f.eve}}</p>
+    <p>{{f.cost}}</p>
+
+    <hr>
+    <hr>
+    <hr>
+    {% endfor %}
+{% endif %}
+
+
+
+{% endblock %}
+{% block script %}
+    <script src="{% static 'application/mail/inbox.js' %}"></script>
+{% endblock %}

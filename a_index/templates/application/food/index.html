@@ -1,0 +1,66 @@
+{% extends "a_index/layout.html" %}
+{% load static %}
+
+{% block body %}
+<style>
+    .first {
+        background-color: khaki;
+        display: block;
+        width: fit-content;
+        margin: 2%;
+        padding: 1%;
+        border-radius: 10px;
+        letter-spacing: 5px;
+    }
+    .time-input {
+        width: 100%;
+    }
+</style>
+<h2><a href="{% url 'food:cook' %}">Cook</a></h2>
+
+<h3><input required class="time-input" type="text" value="{% now "jS F Y A H:i" %}"></h3>
+
+{% if request.user.is_anonymous %}
+    aa
+{% else %}
+
+
+<h3>{{request.user}}</h3>
+    <h1>Food</h1>
+    {% for t in today %}
+    
+
+        <form method="post" action="{% url 'food:submit' %}">
+            {% csrf_token %}
+            <!--user-->
+            <h2><input required readonly type="text" name="user" value="{{request.user}}" style="color: white ;background-color: rgba(0, 0, 255, 0);"></h2>
+
+            <input type="checkbox" name="AM" value="{{t.u_cost}}">
+            Umagahan: {{t.umaga}}
+            <span><input name="u_cost" value="{{t.u_cost}}"></span>
+            <br>
+
+            <input type="checkbox" name="PM" value="{{t.t_cost}}">
+            Tanghali: {{t.tanghali}}
+            <span><input name="pm_cost" value="{{t.t_cost}}"></span>
+            <br>
+
+            <input type="checkbox" name="EVE" value="{{t.g_cost}}">
+            Gabi: {{t.gabi}}
+            <span><input name="eve_cost" value="{{t.g_cost}}"> </span>
+            <br>
+
+
+            <div>
+                <input required type="submit" name="" id="   ">
+            </div>
+            
+        </form>
+    {% endfor %}
+{% endif %}
+
+
+{% endblock %}
+{% block script %}
+    <script src="{% static 'application/mail/inbox.js' %}">s</script>
+{% endblock %}

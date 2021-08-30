@@ -1,0 +1,52 @@
+
+{% extends "a_index/layout.html" %}
+{% load static %}
+
+{% block body %}
+{% now 'jm' %}
+<hr>
+{{n}}
+
+{% if n > 12 %}
+n is greater than 12
+{% else %}
+still less than 
+{% endif %}
+<hr>
+<form method="post" action="{% url 'food:cook' %}">
+    {% csrf_token %}
+    <p>Date<input readonly required name="date" value="{% now 'jm' %}"></p>
+    <p>umaga<input required name="umaga" placeholder="Ulam">
+        <input required name="umaga_cost" placeholder="Magkano">
+    </p>
+
+    <p>Tanhalian<input required name="tanghali" placeholder="Ulam">
+        <input required name="tanghali_cost" placeholder="Magkano">
+    
+    </p>
+
+    <p>Gabi<input required name="gabi" placeholder="Ulam">
+        <input required name="gabi_cost" placeholder="Magkano">
+    </p>
+    <input type="submit">
+</form>
+
+{{today}}
+{% for t in today %}
+
+<p>{{t.date}}</p>
+<p>{{t.umaga}}</p>
+<p>{{t.tanghali}}</p>
+<p>{{t.gabi}}</p>
+
+<hr><hr>
+
+{% endfor %}
+
+
+
+
+{% endblock %}
+{% block script %}
+    <script src="{% static 'application/mail/inbox.js' %}">s</script>
+{% endblock %}
