@@ -90,22 +90,22 @@ import os
 #     }
 # }
 # #if secured 
-# DATABASES = {
-#     'default':{
-#     'ENGINE': 'djongo',
-#     'NAME': 's25',
-#     'ENFORCE_SCHEMA':False,
-#     'CLIENT': {
-#         'host': 'mongodb+srv://dj19:aa09094553940@cluster0.hpgnf.mongodb.net/test'
-#     }
-#     }
-# }
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    'default':{
+    'ENGINE': 'djongo',
+    'NAME': 's25',
+    'ENFORCE_SCHEMA':False,
+    'CLIENT': {
+        'host': 'mongodb+srv://dj19:aa09094553940@cluster0.hpgnf.mongodb.net/test'
+    }
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 
 
