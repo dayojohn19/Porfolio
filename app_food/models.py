@@ -14,6 +14,7 @@ class Food(models.Model):
 
 
 class Tally(models.Model):
+    date = models.TextField(max_length=64)
     user = models.TextField(max_length=64)
     am = models.TextField(max_length=64,blank=True, null=True)
     pm = models.TextField(max_length=64,blank=True, null=True)

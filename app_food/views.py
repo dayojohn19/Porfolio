@@ -22,7 +22,7 @@ def index(request):
 
 def submit(request):
     if request.method == 'POST':
-        user = request.POST.get('user')
+        user = request.user.username
         am = 0
         pm = 0
         eve = 0
@@ -32,8 +32,11 @@ def submit(request):
             pm = request.POST.get('PM')
         if request.POST.get('EVE'):
             eve = request.POST.get('EVE')
-        
+        now = datetime.now()
+        current_time = now.strftime("%d%m")
+  
         tt = Tally(
+            date = current_time,
             user = user,
             am = am,
             pm = pm,
@@ -41,9 +44,27 @@ def submit(request):
             ### cost
             cost = int(am)+int(pm)+int(eve)
         )
-        tt.save()
+        zz = 0
+        try:
+            Tally.objects.get(user=user)
+            zz = ' You already registered'
+        except:
+            tt.save()
+        # if 'npr' in zz.user.all() :
+        #     x = 'already'
+        # else:
+        #     
+        #### solve all 
+        all_cost = Tally.objects.filter(date=current_time)
+        z = []
+        for a in all_cost:
+            z.append(int(a.cost))
+        s = sum(z)
+                
         context = {
-            'foods': Tally.objects.all().order_by('id').reverse(),
+            'foods': Tally.objects.filter(date=current_time).order_by('id').reverse(),
+            'yy':zz,
+            'sum':s
             # 'filter': Tally.objects.filter()
         }
         return render(request, "application/food/tally.html",context)
@@ -83,9 +104,41 @@ def cook(request):
             'today': Food.objects.filter(date=request.POST.get('date')).order_by('id').reverse(),
             'n': len(Food.objects.filter(date=current_time))
         }
-        return render(request, "application/food/cook.html", context)
+        return render(request, "application/food/index.html", context)
     else:
         return render(request, "application/food/cook.html", {
             'message':'please complete the form',
             'n': len(Food.objects.filter(date=current_time))
             })
+
+
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from django.db import IntegrityError
+from app_mail import models as mail
+def register(request):
+    if request.method == "POST":
+        email = request.POST["email"]
+
+        # Ensure password matches confirmation
+        password = request.POST["password"]
+        confirmation = request.POST["confirmation"]
+        if password != confirmation:
+            return render(request, "application/mail/register.html", {
+                "message": "Passwords must match."
+            })
+
+        # Attempt to create new user
+        try:
+            user = mail.User.objects.create_user(email, email, password)
+            user.save()
+        except IntegrityError as e:
+            print(e)
+            return render(request, "application/mail/register.html", {
+                "message": "Email address already taken."
+            })
+        login(request, user)
+        return HttpResponseRedirect(reverse("food:index"))
+    else:
+        return HttpResponseRedirect(reverse("food:index"))
+

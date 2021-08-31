@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block body %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 <style>
     .first {
         background-color: khaki;
@@ -14,51 +15,136 @@
     }
     .time-input {
         width: 100%;
+        font-size: 1rem;
+        color: rgba(245, 222, 179, 0.61);
     }
+    * {color:white;}
+    input {
+        background-color: rgba(39, 39, 33, 0.137);
+    }
+    .cook {
+        background-color: rgb(255, 0, 200);
+        text-decoration: none;
+        padding: 2%;
+        margin: 5%;
+        border-radius: 10px;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        color: white;
+    }
+    .cook:hover {
+        background-color: rgba(255, 0, 0, 0.171);
+        color: red;
+    }
+    .cook:active {
+        background-color: greenyellow;
+    }
+    .nn {
+        background-color: rgba(245, 222, 179, 0.295);
+        padding: 2%;
+        margin: 3%;
+        border-radius: 10px;
+        border:none;
+        font-size: 1.3rem;
+    }
+    .form-control {
+        font-size: larger;
+    }
+    input[type=checkbox]
+{
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(5); /* IE */
+  -moz-transform: scale(5); /* FF */
+  -webkit-transform: scale(5); /* Safari and Chrome */
+  -o-transform: scale(5); /* Opera */
+  transform: scale(5);
+  padding: 10px;
+  margin: 10px;
+  margin-right:2rem;
+}
+.pagkain {
+    background-color: rgba(245, 222, 179, 0.199);
+    border-radius: 10px;
+    margin: 2%;
+    
+    padding: 5%;
+    font-size: larger;
+}
+.btn {
+    margin-top: 5%;
+
+}
+span .nn {
+    background-color: rgba(172, 255, 47, 0.164);
+    text-align: center;
+}
+.cook2 {
+    font-size: larger;
+    background-color: rgba(245, 245, 245, 0.11);
+    padding: 3%;
+    border-radius: 10px;
+}
+
 </style>
-<h2><a href="{% url 'food:cook' %}">Cook</a></h2>
+<h2><a class="cook" href="{% url 'food:cook' %}">Cook</a></h2>
 
 <h3><input required class="time-input" type="text" value="{% now "jS F Y A H:i" %}"></h3>
 
 {% if request.user.is_anonymous %}
-    aa
+
+
+<form action="{% url 'food:register' %}" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <input  class="form-control" type="email" name="email" placeholder="Email Address">
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="password" name="password" placeholder="Password">
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
+    </div>
+    <input class="btn btn-primary" type="submit" value="Register">
+</form>
+
+
 {% else %}
 
 
-<h3>{{request.user}}</h3>
-    <h1>Food</h1>
-    {% for t in today %}
-    
 
+    <h1 style="text-align: center;">Pagkain Bukas </h1>
+    {% for t in today %}
+        <span class="cook2">Cook: {{t.cook}}</span>
         <form method="post" action="{% url 'food:submit' %}">
             {% csrf_token %}
             <!--user-->
-            <h2><input required readonly type="text" name="user" value="{{request.user}}" style="color: white ;background-color: rgba(0, 0, 255, 0);"></h2>
-
+            <div class="pagkain">
             <input type="checkbox" name="AM" value="{{t.u_cost}}">
             Umagahan: {{t.umaga}}
-            <span><input name="u_cost" value="{{t.u_cost}}"></span>
+            <span><input class="nn" readonly name="u_cost" value="{{t.u_cost}}"></span>
             <br>
-
+            </div>
+            <div class="pagkain">
             <input type="checkbox" name="PM" value="{{t.t_cost}}">
             Tanghali: {{t.tanghali}}
-            <span><input name="pm_cost" value="{{t.t_cost}}"></span>
+            <span><input class="nn" readonly name="pm_cost" value="{{t.t_cost}}"></span>
             <br>
-
+            </div>
+            <div class="pagkain">
             <input type="checkbox" name="EVE" value="{{t.g_cost}}">
             Gabi: {{t.gabi}}
-            <span><input name="eve_cost" value="{{t.g_cost}}"> </span>
+            <span><input class="nn" readonly name="eve_cost" value="{{t.g_cost}}"></span>
             <br>
+            </div>
 
-
+            <h2><input class="nn" required readonly type="text" name="user" value="{{request.user}}" ></h2>
             <div>
-                <input required type="submit" name="" id="   ">
+                <input  class="btn btn-primary" required type="submit" name="" id="   ">
             </div>
             
         </form>
     {% endfor %}
 {% endif %}
-
+<div style="height: 800px;"></div>
 
 {% endblock %}
 {% block script %}

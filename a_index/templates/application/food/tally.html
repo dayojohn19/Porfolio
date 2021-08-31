@@ -2,23 +2,58 @@
 {% load static %}
 
 {% block body %}
-
+    <style>
+        * {
+            font-size: large;
+        }
+        .container {
+            background-color: rgba(121, 121, 121, 0.288);
+            padding: 1%;
+            border: solid 1px red;
+            border-radius: 10px;
+            color: white;
+        }
+        p span {
+            background-color: rgba(217, 255, 127, 0.281);
+            padding: 1.5%;
+            margin: 10px;
+            border-radius: 10px;
+            font-size: larger;
+        }
+        .top {
+            margin-top: 3rem;
+        }
+        .name {
+            background-color: rgba(0, 255, 179, 0.164);
+            width: fit-content;
+            margin-bottom: 2%;
+            padding: 1%;
+            font-size: larger;
+            width: auto;
+        }
+        .ambag {
+            background-color: rgba(0, 204, 255, 0.363);
+            width: fit-content;
+            margin-bottom: 2%;
+            padding: 1%;
+            font-size: larger;
+            width: auto;
+        }
+    </style>
+    <p class="top">Bilang ng tao: <span>{{foods.count}}</span></p>
+    <p class="top">Kabuoan na Pera: <span>{{sum}}</span></p>
 {% if message %}
 {{message}}
-{% else %}
-    {{foods.count}}
-    {% for f in foods %}
-    <p>{{f.user}} :</p>
-    <p>Ambag :{{f.cost}}</p>
-    <p>Kain: {{f.food}}</p>
-    <p>{{f.am}}</p>
-    <p>{{f.pm}}</p>
-    <p>{{f.eve}}</p>
-    <p>{{f.cost}}</p>
 
-    <hr>
-    <hr>
-    <hr>
+{% else %}
+    {% for f in foods %}
+        <div class="container">
+            <div class="name">{{f.user | slice:":-6"}} : <span class="ambag">{{f.cost}}</span></div>
+            <div>Umaga: {{f.am}}</div>
+            <div>Tanghali: {{f.pm}}</div>
+            <div>Gabi: {{f.eve}}</div>
+        </div>
+            <hr>
     {% endfor %}
 {% endif %}
 

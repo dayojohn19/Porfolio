@@ -3,8 +3,26 @@
 {% load static %}
 
 {% block body %}
-{% now 'jm' %}
-<hr>
+<style>
+    input {
+        background-color: rgba(255, 105, 180, 0.171);
+        padding: 2%;
+        display: block;
+        color: wheat;
+        font-size: larger;
+        margin: 1%;
+    }
+    p{
+        font-size: larger;
+    }
+    .magkano {background-color: rgba(153, 205, 50, 0.164);}
+
+    form {
+        margin: 10%; 
+        background-color: rgba(78, 50, 205, 0.082);
+        padding: 2%;
+    }
+</style>
 {{n}}
 
 {% if n > 12 %}
@@ -15,20 +33,20 @@ still less than
 <hr>
 <form method="post" action="{% url 'food:cook' %}">
     {% csrf_token %}
-    <p>Date<input readonly required name="date" value="{% now 'jm' %}"></p>
-    <p>umaga<input required name="umaga" placeholder="Ulam">
-        <input required name="umaga_cost" placeholder="Magkano">
+    <p><input hidden readonly required name="date" value="{% now 'jm' %}"></p>
+    <p>Umaga<input required name="umaga" placeholder="Ulam">
+        <input required name="umaga_cost" placeholder="Magkano" class="magkano">
     </p>
 
     <p>Tanhalian<input required name="tanghali" placeholder="Ulam">
-        <input required name="tanghali_cost" placeholder="Magkano">
+        <input required name="tanghali_cost" placeholder="Magkano" class="magkano">
     
     </p>
 
     <p>Gabi<input required name="gabi" placeholder="Ulam">
-        <input required name="gabi_cost" placeholder="Magkano">
+        <input required name="gabi_cost" placeholder="Magkano" class="magkano">
     </p>
-    <input type="submit">
+    <input class="btn btn-primary" type="submit">
 </form>
 
 {{today}}
