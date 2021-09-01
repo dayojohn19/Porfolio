@@ -37,6 +37,8 @@ def games(request):
     return render(request, 'games/games.html')
 def s(request):
     return render(request, 'social/s.html')
+def fish(request):
+    return render(request, 'fish/index.html')
 
 # import json
 # from django.views.decorators.csrf import csrf_exempt
