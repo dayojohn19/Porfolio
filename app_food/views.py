@@ -85,7 +85,7 @@ def cook(request):
         g_cost = request.POST.get('gabi_cost')
         cook = request.user.username
         ff = Food(
-            date = request.POST.get('date'),
+            date = current_time,
             umaga = request.POST.get('umaga'),
             tanghali = request.POST.get('tanghali'),
             gabi = request.POST.get('gabi'),
@@ -101,7 +101,7 @@ def cook(request):
         else:
             ff.save()
         context = {
-            'today': Food.objects.filter(date=request.POST.get('date')).order_by('id').reverse(),
+            'today': Food.objects.filter(date=current_time).order_by('id').reverse(),
             'n': len(Food.objects.filter(date=current_time))
         }
         return render(request, "application/food/index.html", context)

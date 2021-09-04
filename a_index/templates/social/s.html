@@ -10,5 +10,29 @@
     <video class="vid" src="720.mp4" autoplay controls>
         <p>Your browser doesn't support HTML5 video. Here is a <a href="rabbit320.webm">link to the video</a> instead.</p>
       </video>
+
+      byline=0&amp;portrait=0&amp;color=ff0179&amp;autoplay=1&mute=1&enablejsapi=1
+
+      modestbranding=1&autohide=1&showinfo=0&controls=0
+<!---this below -->
+      <div>
+        <div class="in" style="width: 100%;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero quam beatae, iste porro reiciendis ipsam temporibus assumenda, earum ab dolorem veniam sint labore tempora, deserunt repellat dolor blanditiis pariatur quo!</div>  
+        <video class="vid" style="width: 99.9%;position: absolute;left: 0px;position: fixed; top: 20%; height: 70%;" src="{% static '720.mov' %}" autoplay controls>
+            <p>Your browser doesn't support HTML5 video. Here is a <a href="rabbit320.webm">link to the video</a> instead.</p>
+          </video>
+    </div>
+
+    <!-- asfasdasdas
+    {% load embed_video_tags %}
+    {% video item.video as my_vide %}
+        URL: {{my_video.url}}
+        Thumbnail: {{my_video.thumbnail}}
+        Backend: {{my_video.backend}}
+    {% video my_video "large" %}
+    {% endvideo %}
+
+    {% video my_video '800x600' %} -->
+
+
 </body>
 </html>

@@ -10,6 +10,7 @@ urlpatterns = [
 
     # API Routes
     path("application/emails", views.compose, name="compose"),
+    path("application/contact", views.contact, name="contact"),
     path("application/emails/<int:email_id>", views.email, name="email"),
     path("application/emails/<str:mailbox>", views.mailbox, name="mailbox"),
 ]

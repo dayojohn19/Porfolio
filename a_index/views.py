@@ -11,6 +11,10 @@ from django.shortcuts import render
 # Create your views here.
 import pyttsx3
 import sys 
+from django.shortcuts import render 
+from .models import Item
+from app_mail import models as recepient
+
 def index(request):
     try:
         ar = 'Visitor'
@@ -21,9 +25,23 @@ def index(request):
     except:
         pass
     return render(request, 'a_index/index.html', {})
+def send(request):
+    if request.method != "POST":
+        return render(request, 'a_index/index.html')
+    users = set()
+    for user in users:
+        sent = recepient.Email(
+            user = 'm@l.com',
+            sender = 'random@l.com',
+            subject = 'I like Your Post',
+            body = request.POST.get("body"),
+        )
+        sent.save()
+    return  render(request, 'a_index/index.html')
 
 def social(request):
-    return render(request, 'social/social.html')
+    obj = Item.objects.all()
+    return render(request, 'social/social.html',{'obj':obj})
 
 def colreg(request):
     return render(request, 'colregs/colregs.html')
@@ -39,6 +57,7 @@ def s(request):
     return render(request, 'social/s.html')
 def fish(request):
     return render(request, 'fish/index.html')
+
 
 # import json
 # from django.views.decorators.csrf import csrf_exempt
