@@ -28,6 +28,7 @@ urlpatterns = [
     path('g_pigeon_race/', include('g_pigeon_race.urls')),
     path('user/', include('user.urls')),
     path('app_food/', include('app_food.urls')),
+    path('app_news/', include('app_news.urls')),
 
 ]
 

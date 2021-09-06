@@ -1,0 +1,52 @@
+{% extends "a_index/layout.html" %}
+{% load static %}
+
+{% block body %}
+{% include 'app_layout.html' %}
+<style>
+    .special{
+        background-color: aqua;
+        width: 100%;
+        display: block;
+        height: 40%;
+    }
+</style>
+<a href="{% url 'news:index' %}">Got to Publish</a>
+
+
+
+Articles: {{articles}}
+
+<form method="POST" action="{% url 'news:publish' %}">
+    {% csrf_token %}
+    {{form.as_p}}
+       <input type="submit" value="Publish">
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style="height: 1000px;"></div>
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

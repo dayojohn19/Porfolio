@@ -1,0 +1,87 @@
+{% extends "a_index/layout.html" %}
+{% load static %}
+
+{% block body %}
+{% include 'app_layout.html' %}
+
+<a href="{% url 'news:publish' %}">Got to publish</a>
+
+Articles: 
+
+<div class="main-container-article">
+    {% for a in articles %}
+        <span class="container-article">
+            <div class="title">{{a.title}}</div>
+            <img src="{{a.link}}" alt="image">
+            
+            <p>{{a.id}}<br>
+                {{a.date}}<br>
+                {{a.content}}</p>
+        </span>
+    {% endfor %}
+</div>
+
+
+<style>
+    .title{
+        font: larger;
+        text-align: center;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size: 150%;
+        background: rgb(255, 0, 191);
+    }
+    .main-container-article {
+        display: flex;
+        flex-wrap: wrap;
+        background: rgba(240, 230, 140, 0.301);
+        justify-content: center;
+    }
+    .container-article{
+        /* background: chartreuse; */
+        max-height: 25%;
+        height: 500px;
+        overflow: scroll;
+        margin: auto;
+        background: rgba(240, 128, 128, 0.082);
+        width: 500px;
+        text-align: center;
+        margin-bottom: 3%;
+    }
+    img {
+        max-width: 100%;
+    }
+    p {
+        display: grid;
+        background: rgba(32, 178, 171, 0.322);
+        text-align: justify;
+        padding: 1%;
+    }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style="height: 1000px;"></div>
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

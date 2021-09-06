@@ -6,6 +6,12 @@
     <link rel="stylesheet" href="{% static 'games/games.css' %}">
 
 <div class="games_container">
+
+    <div class="game">
+        <img src="{% static 'application/images/news.png' %}">
+        <a href="{% url 'application:news' %}">News</a>
+    </div>
+
     <div class="game">
         <img src="{% static 'application/images/mail.png' %}">
         <a href="{% url 'application:mail' %}">E-Mail</a>

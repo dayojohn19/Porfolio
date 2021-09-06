@@ -58,7 +58,6 @@ def s(request):
 def fish(request):
     return render(request, 'fish/index.html')
 
-
 # import json
 # from django.views.decorators.csrf import csrf_exempt
 # @csrf_exempt

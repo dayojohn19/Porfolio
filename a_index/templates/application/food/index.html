@@ -113,7 +113,7 @@ span .nn {
 
     <h1 style="text-align: center;">Pagkain Bukas </h1>
     {% for t in today %}
-        <span class="cook2">Cook: {{t.cook}}</span>
+        <span class="cook2">Cook: {{t.cook | slice:":-6"}}</span>
         <form method="post" action="{% url 'food:submit' %}">
             {% csrf_token %}
             <!--user-->
