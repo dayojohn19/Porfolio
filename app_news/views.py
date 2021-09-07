@@ -7,7 +7,7 @@ from django.urls import reverse
 from django import forms
 
 class ArticleForm(forms.Form):
-    sections=('1', 'Political'), ('2', 'Sports'),('3','Health'),('4','Military'),('5','Business'),('6','Lifestyle'),('7','Biography'),('8','Maritime'),('9','Personal Growth'),('101','Others')
+    sections=('1', 'Political'), ('2', 'Sports'),('3','Health'),('4','Military'),('5','Business'),('6','Lifestyle'),('7','Biography'),('8','Maritime'),('9','Personal Growth'),('10','Farm'),('101','Others')
     title = forms.CharField(label="Title")
     link = forms.CharField(label="link")
     content = forms.CharField(label="Content",widget=forms.TextInput(attrs={'class': 'special'}))

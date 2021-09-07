@@ -1,0 +1,38 @@
+{% extends "a_index/layout.html" %}
+{% load static %}
+
+{% block body %}
+{% include 'course_layout.html' %}
+{% include 'course2_layout.html' %}
+<style>
+
+    .book_form {
+        background: rgb(0, 153, 255);
+        align-items: center;
+
+    }
+</style>
+        <h1>Course Booking</h1>
+        <a href="{% url 'course_booking:index' %}">Home</a>
+            <form class="book_form" method="post" action="{% url 'course_booking:create_course' %}">
+                {% csrf_token %}
+                {{create.as_p}}
+                <input type="submit" value="Create">
+            </form>
+        
+        {{courses}}
+        {{a}}
+
+
+
+
+
+
+
+
+<div style="height: 1000px;"></div>
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

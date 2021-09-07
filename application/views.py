@@ -11,3 +11,5 @@ def application(request):
 
 def news(request):
     return render(request, 'news/index.html')
+def course_booking(request):
+    return render(request, 'course_booking/index.html')

@@ -25,22 +25,27 @@ def measure(request):
             long = mea.geocode(place).longitude
             new_m = set()
             new_m.add(place)
-            for new in new_m:
-                new = Measurement(
-                    uid = xx.id,
-                    latitude=lat,
-                    longitude=long
-                )
-                new.save()
+            try:
+                Measurement.objects.get(uid=xx.id)
+            except:
+                for new in new_m:
+                    new = Measurement(
+                        uid = xx.id,
+                        latitude=lat,
+                        longitude=long
+                    )
+                    new.save()
             return render(request, "race/index.html", {
                 "races": Race.objects.all().order_by('id').reverse() , 
+                'message':'Your Loft place is measured',
                 "now":'Measureed',
                 "now2":1628050985.684767,
         })
     else:
         return render(request, "race/index.html", {
             "races": Race.objects.all().order_by('id').reverse() , 
-            "now":'Measureed',
+            'message':'Error Measurement ',
+            "now":'Not Measured',
             "now2":1628050985.684767,
     })
 def index(request):

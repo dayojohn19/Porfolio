@@ -107,6 +107,8 @@ def userpictures(request):
     return render(request, 'user/register.html', {'form':form})
 
 def index(request):
+    if request.user.is_anonymous:
+        return redirect('user:login')
     user = request.user
     bb = mail.User
     users = bb.objects.all().order_by('id').reverse()  

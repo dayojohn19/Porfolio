@@ -16,8 +16,8 @@
 }
 
 .player_pigeon_image {
-    width: 40%;
-    height: 100%;
+    max-width: 40%;
+    max-height: 100%;
     border-radius: 10px;
     border-radius: 0px;
     float: left; 
@@ -36,25 +36,24 @@ body {
 }
 </style>
 
-<div style="height: 1000px;">
+<div style="height: fit-content;">
+
+
+    <a href="{% url 'user:index' %}">Home</a>
+    <div class="reg_pigeon" style="background-color: rgba(248, 255, 209, 0.219); border: solid 3px  rgba(135, 252, 135, 0.219); 
+    box-shadow: 0px 0px 20px rgba(255, 255, 0, 0.199); width: 100% ;">
+        <img class="reg_image" src="{{pic}}">
+        <h1>{{lo}} <br> Pigeons:</h1>
+    </div>
 
 
 
-<div class="reg_pigeon" style="background-color: rgba(248, 255, 209, 0.219); border: solid 3px  rgba(135, 252, 135, 0.219); 
-box-shadow: 0px 0px 20px rgba(255, 255, 0, 0.199); width: 100% ;">
-    <img class="reg_image" src="{{pic}}">
-    <h1>{{lo}} <br> Pigeons:</h1>
-
-</div>
-
-
-
-{% if error %}
-<h1 style="align-items: center; text-align:center;background: #ffe7e8; border: 2px solid #e66465;">{{error}}</h1>
-<h2 style="text-align: center;margin: 15px; line-height: 1.5; text-align: center;">{{error2}}</h2>
-{% endif %}
-<hr>
-    {%for l in list%}
+    {% if error %}
+        <h1 style="align-items: center; text-align:center;background: #ffe7e8; border: 2px solid #e66465;">{{error}}</h1>
+        <h2 style="text-align: center;margin: 15px; line-height: 1.5; text-align: center;">{{error2}}</h2>
+    {% endif %}
+        <hr>
+            {%for l in list%}
 
     <div class="player_pigeon"  id="{{l.id}} "    
         {% if l.loaded is True %}

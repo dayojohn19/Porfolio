@@ -1,0 +1,113 @@
+{% extends "a_index/layout.html" %}
+{% load static %}
+
+{% block body %}
+{% include 'course_layout.html' %}
+<style>
+    * {
+        border-radius: 10px;
+    }
+    .aa {
+        width: 50%;
+        background-color: none;
+        background: none;
+        right:1px;
+    }
+    .lef{
+        background-color: none;
+        background: none;
+        right:1px;
+    }
+    .container-span {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .container-span span {
+        background: rgba(128, 255, 0, 0.384);
+        margin: 1.5%;
+        margin: auto;
+        margin-bottom: 1%;
+        padding: 2%;
+    }
+    .book_form {
+        background: rgb(0, 153, 255);
+        align-items: center;
+    }
+    span div {
+        background: chocolate;
+        margin: 1%;
+    }
+    .a-i {font-size: small;
+        float: right;
+        padding: 1%;
+    }
+    .a-d {
+        text-align: center;
+        overflow: scroll;
+    }
+    .a-image {
+        text-align: center;
+        background: rgba(255, 230, 0, 0.253);
+    }
+    .a-image img {
+        max-width: 100%;
+        max-height: 200px;
+        width: 80%;
+    }
+    .a-t {
+        background: royalblue;
+        text-align: center;
+    }
+    .a-container {
+        max-width: 500px;
+    }
+    .a-button {
+        background: rgb(255, 217, 0);
+    }
+</style>
+
+        <div class="container-sub-2-1 a-right aa">
+            {{request.user.id}}
+            <span><a class=""  href="{% url 'news:section' x=1 %}"><img class="h-icon th hg left" src="{% static 'app_images/politics.png' %}" alt=""></a></span>
+            <span style="margin-right:35%;"><a class=""  href="{% url 'news:section' x=2 %}"><img class="h-icon th hg left" src="{% static 'app_images/sports.png' %}" alt=""></a></span>
+        </div>
+        
+        <h1>Course Booking</h1>
+        {{student}}<br>
+        ID :{{id}}
+        <a href="{% url 'course_booking:create' %}">Create</a>
+
+        <div class="container-span">
+            {% for c in courses %}
+            <span class="a-container">
+                <form method="POST" action="{% url 'course_booking:enroll' %}">
+                    {% csrf_token %}
+                    <div class="a-id">{{c.id}}<input hidden name="book_id" value="{{c.id}}"> </div>
+                    <div class="a-t"><h3>{{c.title}}</h3></div>
+                    <div class="a-image"><img src="{{c.link}}"></div>
+                    <div class="a-d">Description: {{c.description}}</div>
+                    <div class="a-i">by: {{c.instructor}}</div>
+                    <button type="submit" class="a-button">book na</button>
+                </form>    
+            </span>        
+            {% endfor %}
+        </div>
+
+        
+
+
+
+
+
+
+<div style="height: 1000px;"></div>
+<script>
+    function button(x){
+        alert(x);
+    }
+</script>
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

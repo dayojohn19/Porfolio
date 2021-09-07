@@ -55,7 +55,7 @@
 
 <hr>
 <h5 style="background-color: rgba(255, 105, 180, 0.137); padding: 2%;">Good Day, {{request.user.username}}</h5>
-<h3><a style="text-decoration: none; background-color: rgba(105, 255, 138, 0.082);padding: 1%;" href="{% url 'user:index' %}">Users</a></h3>
+<h3><a style="text-decoration: none; background-color: rgba(105, 255, 138, 0.082);padding: 1%;" href="{% url 'user:index' %}">View Players</a></h3>
 <div class="clock-1">
     <div class="clock-2" >
         <div class="clock-3">
@@ -107,7 +107,7 @@
 
 
 {% if races %}
-<h1>Races:</h1>
+<h1>Open Races:</h1>
         {% for race in races %}
     <div class="races-container">
         <h2><a href="{%url 'g_pigeon_race:race' race.id %}" style="background-color: rgba(240, 255, 240, 0.178);color: rgb(255, 255, 255); padding: 2%; margin: 15px; line-height: 1.5; text-align: center;text-decoration: none;">{{race.racename}}
@@ -120,5 +120,16 @@
         {% endfor %}
 {% endif %} 
 <br>
+Please Measure Your Loft Place Before Joining the race 
+<div class="add_point" style="border: 3px rgba(255, 0, 0, 0.349) solid; margin-bottom: 2%; padding: 2%; border-radius:10px; background-color:rgba(255, 0, 0, 0.253)">
+    Your Loft Place
+    <form method="post" action="{% url 'g_pigeon_race:measure' %}">
+        {% csrf_token %}
+        <input name="place" placeholder="input loft place here">
+        <br>
+        <input class="measure" type="submit">
+    </form>
+</div>
+
 <div style="height: 500px;"></div>
 {% endblock %}

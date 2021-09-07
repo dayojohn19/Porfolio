@@ -13,5 +13,6 @@ urlpatterns = [
     path("calendar/<int:y>", calendar_print.calendar_get , name="calendar_y"),
     # path("speech/", speech.main, name="speech"),
     path("qrcode/", qrcode.main, name="qrcode"),
-    path("news/", views.news, name="news")
+    path("news/", views.news, name="news"),
+    path("app_course_booking/", views.course_booking, name="course_booking")
 ]

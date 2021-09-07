@@ -4,7 +4,7 @@
 <style>
     .eee {
         background-color: rgba(0, 110, 255, 0.123);
-        border: solid 1.2px green;
+        border: solid 1.2px rgba(0, 128, 0, 0.233);
     }
 </style>
 
@@ -33,9 +33,9 @@
 
     <p id="valued" >{{l.release}}</p>
     Release: {{l.release_time}}<br>
-    <a href="{% url 'g_pigeon_race:view_clocked' lid=l.id %}">View Clocked on this Lap </a><br>
-    <button  id="{{l.id}}"   onclick="truck(id)" >Truck</button>
+    <a style="text-decoration: none;" href="{% url 'g_pigeon_race:view_clocked' lid=l.id %}">View Clocked Pigeon </a><br>
     <hr>
+    <button  id="{{l.id}}"   onclick="truck(id)" >Truck</button>
 </div>
 {% endfor %}
 
@@ -100,10 +100,10 @@ function loadit(id, state, lapid, lap_num) {
         style=" padding:3px; margin:3px; border-radius:25px; padding:10px; margin: 15px; line-height: 1.5; text-align: center; width:device-width">
             <p class="pnp">
                 "${e.name}" <br>
-            Ring: <a style="background-color:lightgreen;padding-left:10px;padding-right:10px">${e.ring}</a> <br>
+            Ring: <a style="background-color:rgba(0, 128, 0, 0.233);padding-left:10px;padding-right:10px">${e.ring}</a> <br>
             Last Load: ${e.loads} <br>
             </p>
-            <input id="code-${e.id}"  placeholder="Put Code Here"  >
+            <input id="code-${e.id}"  placeholder="Load Code"  >
             <button id="x-${e.id}">load</button>
             <br>
             
