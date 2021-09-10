@@ -1,0 +1,60 @@
+{% extends "auction/layout.html" %}
+{% block body %}
+<div class="container">
+    <h2>Sell Your Item</h2>
+
+</div>
+<div class="container">
+<hr>       
+      <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }} 
+        <button type="submit"  class="btn btn-danger">Upload</button>
+      </form>
+
+      {% if img_obj %}
+        <h3>Succesfully uploaded : {{img_obj.title}}</h3>
+        <img src="{{ img_obj.image.url}}" alt="connect" style="max-height:300px">
+      {% endif %}
+<hr>
+
+       
+ 
+    <form action="{% url 'auction:submit' %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          
+          <input value="{{img_obj.title}}" type="hidden" class="form-control" id="exampleFormControlInput1" placeholder="Item Name..." name="title" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">What is this</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Description..." name="description" required></textarea>
+        </div>
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Category</label>
+            <select class="form-control" id="exampleFormControlSelect1" name="category" required>
+              <option>Materials</option>
+              <option>Animals</option>
+              <option>Services</option>
+              <option>Goods</option>
+
+            </select>
+          </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Initial Bid</label>
+            <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Starting bid..." name="price" required>
+          </div>
+       
+          <div class="form-group">
+            
+            <input value="{{ img_obj.image.url}}" type="hidden" class="form-control" id="exampleFormControlInput1" placeholder="Image Link..." name="link">
+          </div>
+
+        <button class="btn btn-outline-info" style="color: lightcoral;"  type="submit"><b>Submit</b></button>
+
+      </form>
+</div>
+
+
+{% endblock %}

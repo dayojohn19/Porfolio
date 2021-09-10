@@ -30,6 +30,8 @@ ALLOWED_HOSTS = ['webpagedj19.herokuapp.com', 'localhost','127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'com_auction',
+    'commerce',
     'app_course_booking',
     'app_news',
     'app_food',
@@ -169,5 +171,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'app_mail.User'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'application/static/'),
-
+    os.path.join(BASE_DIR, 'commerce/static/'),
 ]

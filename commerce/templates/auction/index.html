@@ -1,0 +1,31 @@
+{% extends "auction/layout.html" %}
+{% block body %}
+
+<div class="container">
+    <h2>Active Listings</h2>
+
+</div>
+<div class="container" id="listings">
+    {% for i in items %}
+    <div class="card mb-3" style="max-width: 100%;" id="card-listings">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img src="{{i.link}}" class="card-img" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <div class="alert alert-success" role="alert" style="width:fit-content; margin: auto;"  >
+              <h5 class="card-title">{{i.title}}</h5></div>
+              <p class="card-text">{{i.description}}</p>
+              <div class="alert alert-warning" role="alert" style="width:fit-content; margin: auto;"><p class="card-text">Highest Bid: <br><strong>Php {{i.price}}</strong> </p></div>
+              <p class="card-text">{{i.category}}</p>
+              <a href="{% url 'auction:listingpage' i.id %}"><button class="btn btn-outline-success">Bid Now!</button></a>
+              <p class="card-text"><small class="text-muted">{{i.time}}</small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+</div>
+ <div style="height: 500px;"></div>
+{% endblock %}

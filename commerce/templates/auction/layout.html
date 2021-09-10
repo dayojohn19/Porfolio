@@ -1,0 +1,135 @@
+
+{% include 'a_index/layout.html' %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}Auctions{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+        <style>
+                #lower {
+        background-color: rgb(59, 53, 54);
+        border-radius: 25px;
+        top: 75%;
+        right: 8%;
+        position: fixed;
+        z-index:12;
+        align-items: center;
+        text-align: center;
+ 
+    }
+    .l {
+        background-color: rgba(255, 245, 98, 0.301);
+        padding: 10px;
+        border-radius: 50%;
+        border: 10px solid rgba(65, 151, 111, 0.425);
+        top: 80%;
+        right: 2%;
+        position: fixed;
+        z-index:12;
+        align-items: center;
+        text-align: center;
+    }
+
+    button {
+    background-color: rgb(210, 210, 255);
+    border: solid 3px rgb(173, 173, 255);
+    border-radius: 25px;
+
+}
+.card-img {
+    max-width: 100%;
+}
+.col-md-4 {
+    padding: 1%;
+
+    background-color: rgba(167, 167, 255, 0.315);
+}
+.mb-3 {
+    background-color: rgba(53, 255, 255, 0.178);
+    text-align: center;
+}
+.no-gutters {
+    
+}
+.nav-item {
+    padding-top: 1em;
+    padding-left: 1em;
+}
+        </style>
+    </head>
+
+ 
+
+
+
+
+    <div>
+        {% if user.is_authenticated %}
+            Signed in as <h10><strong>{{ user.username }}</strong>.</h10>
+        {% else %}
+            Not signed in.
+        {% endif %}
+    </div>
+<div class="text-center">
+    <h1>Auctions</h1>
+
+</div>
+
+    <body style="background-color: rgba(254, 255, 217, 0.89);">
+        <div style=" background-color: rgba(190, 255, 255, 0.438);">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'auction:index' %}" style="background-color: rgba(25, 0, 255, 0.205); border-radius: 10px;">Auction</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'auction:categories' %}">Categories</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'auction:watchlistpage' user.username %}">Watchlist <span class="badge badge-danger">{{wcount}}</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'auction:create' %}" style="background-color: rgba(128, 255, 0, 0.363); border-radius: 10px;">Create Auction</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'auction:mywinnings' %}">Your Winnings</a>
+                </li>
+
+                {% else %}
+
+                {% endif %}
+            </ul>
+            <hr>
+        </div>
+
+    <div class="text-center" style=" align-items: center; background-color: rgba(236, 253, 189, 0.493);">
+        {% block body %}
+        {% endblock %}
+    </div>
+<div style="height: 500px;"></div>
+               
+    {% if user.is_authenticated %}             
+    <div>
+<p class="test" style="position: fixed;
+width: 50%;
+top: 2%;
+left: 80%;
+right: 50%;
+transform: translate(-50%, -50%);
+text-align: center;
+align-items: center;
+background-color: rgb(245, 207, 175);"> 
+
+
+
+<a class="nav-link" href="{% url 'auction:watchlistpage' user.username %}">My Watchlist <span class="badge badge-danger">{{wcount}}</span></a>
+
+
+</p></div> 
+
+
+{% endif %}
+    </body>
+</html>

@@ -57,6 +57,8 @@ def s(request):
     return render(request, 'social/s.html')
 def fish(request):
     return render(request, 'fish/index.html')
+def commerce(request):
+    return render(request, 'commerce/commerce.html')
 
 # import json
 # from django.views.decorators.csrf import csrf_exempt

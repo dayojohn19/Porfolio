@@ -1,0 +1,37 @@
+{% extends "a_index/layout.html" %}
+
+{% load static %}
+    {% block body %}
+    <link rel="stylesheet" href="{% static 'application/application.css' %}">
+    <link rel="stylesheet" href="{% static 'games/games.css' %}">
+
+<div class="games_container">
+
+    <div class="game">
+        <img src="{% static 'commerce/images/auction.png' %}">
+        <a href="{% url 'commerce:auction' %}">Auction</a>
+    </div>
+    <div class="game">
+        <img src="{% static 'commerce/images/store.png' %}">
+        <a href="{% url 'commerce:auction' %}">Store</a>
+    </div>
+
+
+    <form method="POST" action="{% url 'commerce:last_name' %}">
+        {% csrf_token %}
+        <h2>Reload</h2>
+        <ul>
+            <li><input placeholder="input amount" type="text" name="last_name" id=""></li>
+            <li><input type="submit" value="reload"></li>
+        </ul>
+
+    </form>
+    USER: {{user}}  <br>
+    Balance:    {{last}}    <br>
+
+</div>
+
+<div style="height: 1000px"></div>
+
+
+    {% endblock %}
