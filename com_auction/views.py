@@ -12,7 +12,7 @@ from django.shortcuts import render
 from .forms import ImageForm
 from app_mail.models import User
 def math(request):
-    return render(request, "auction/math.html")
+    return render(request, "commerce/auction/math.html")
 def create(request):
     try:
         w = Watchlist.objects.filter(user=request.user.username)
@@ -22,10 +22,10 @@ def create(request):
         if form.is_valid():
             form.save()
             img_obj = form.instance
-            return render(request, 'auction/create.html', {'form': form, 'img_obj': img_obj})
+            return render(request, 'commerce/auction/create.html', {'form': form, 'img_obj': img_obj})
     except:
         wcount=None
-    return render(request,"auction/create.html",{
+    return render(request,"commerce/auction/create.html",{
         "wcount":wcount,
         'form': form2
     })
@@ -39,7 +39,7 @@ def index(request):
         wcount=len(w)
     except:
         wcount=None
-    return render(request, "auction/index.html",{
+    return render(request, "commerce/auction/index.html",{
         "items":items,
         "wcount":wcount
     })
@@ -52,7 +52,7 @@ def categories(request):
         wcount=len(w)
     except:
         wcount=None
-    return render(request,"auction/categpage.html",{
+    return render(request,"commerce/auction/categpage.html",{
         "items": items,
         "wcount":wcount
     })
@@ -64,7 +64,7 @@ def category(request,category):
         wcount=len(w)
     except:
         wcount=None
-    return render(request,"auction/category.html",{
+    return render(request,"commerce/auction/category.html",{
         "items":catitems,
         "cat":category,
         "wcount":wcount
@@ -116,10 +116,10 @@ def image_upload_view(request):
             form.save()
             # Get the current instance object to display in the template
             img_obj = form.instance
-            return render(request, 'auction/create.html', {'form': form, 'img_obj': img_obj})
+            return render(request, 'commerce/auction/create.html', {'form': form, 'img_obj': img_obj})
     else:
         form = ImageForm()
-    return render(request, 'auction/create.html', {'form': form})
+    return render(request, 'commerce/auction/create.html', {'form': form})
     ##############
 
 
@@ -130,7 +130,7 @@ def listingpage(request,id):
     except:
         return redirect('auction:index')
     try:
-        comments = Comment.objects.filter(listingid=id)
+        comments = Comment.objects.filter(listingid=id).order_by('id').reverse()
     except:
         comments = None
     if request.user.username:
@@ -155,7 +155,7 @@ def listingpage(request,id):
         wcount=len(w)
     except:
         wcount=None
-    return render(request,"auction/listingpage.html",{
+    return render(request,"commerce/auction/listingpage.html",{
         "i":item,
         "error":request.COOKIES.get('error'),
         "errorgreen":request.COOKIES.get('errorgreen'),
@@ -214,7 +214,7 @@ def cmntsubmit(request,listingid):
     if request.method == "POST":
         ltz = pytz.timezone('Asia/Manila')
         now = datetime.now(ltz)
-        dt = now.strftime("%AC %d %B %Y %X ")
+        dt = now.strftime("%A %d %B %Y %X ")
         c = Comment()
         c.comment = request.POST.get('comment')
         c.user = request.user.username
@@ -259,7 +259,7 @@ def watchlistpage(request,username):
                 wcount=len(w)
             except:
                 wcount=None
-            return render(request,"auction/watchlistpage.html",{
+            return render(request,"commerce/auction/watchlistpage.html",{
                 "items":items,
                 "wcount":wcount
             })
@@ -269,7 +269,7 @@ def watchlistpage(request,username):
                 wcount=len(w)
             except:
                 wcount=None
-            return render(request,"auction/watchlistpage.html",{
+            return render(request,"commerce/auction/watchlistpage.html",{
                 "items":None,
                 "wcount":wcount
             })
@@ -329,7 +329,7 @@ def closebid(request,listingid):
             wcount=len(w)
         except:
             wcount=None
-        return render(request,"auction/winningpage.html",{
+        return render(request,"commerce/auction/winningpage.html",{
             "cb":cblist,
             "title":title,
             "wcount":wcount
@@ -353,7 +353,7 @@ def mywinnings(request):
             wcount=len(w)
         except:
             wcount=None
-        return render(request,'auction/mywinnings.html',{
+        return render(request,'commerce/auction/mywinnings.html',{
             "items":items,
             "wcount":wcount,
             "wonitems":wonitems
@@ -375,11 +375,11 @@ def login_view(request):
             login(request, user)
             return HttpResponseRedirect(reverse("auction:index"))
         else:
-            return render(request, "auction/login.html", {
+            return render(request, "commerce/auction/login.html", {
                 "message": "Invalid username and/or password."
             })
     else:
-        return render(request, "auction/login.html")
+        return render(request, "commerce/auction/login.html")
 
 
 def logout_view(request):
@@ -396,7 +396,7 @@ def register(request):
         password = request.POST["password"]
         confirmation = request.POST["confirmation"]
         if password != confirmation:
-            return render(request, "auctions/register.html", {
+            return render(request, "commerce/auctions/register.html", {
                 "message": "Passwords must match."
             })
 
@@ -405,10 +405,10 @@ def register(request):
             user = User.objects.create_user(username, email, password)
             user.save()
         except IntegrityError:
-            return render(request, "auctions/register.html", {
+            return render(request, "commerce/auctions/register.html", {
                 "message": "Username already taken."
             })
         login(request, user)
         return HttpResponseRedirect(reverse("auction:index"))
     else:
-        return render(request, "auctions/register.html")
+        return render(request, "commerce/auctions/register.html")

@@ -1,10 +1,10 @@
-{% extends "auction/layout.html" %}
+{% extends "commerce/auction/layout.html" %}
 
 {% block body %}
 <div class="container">
-    <h2>Your Winnings</h2>
+    <h2>My  Watchlist</h2>
+  
 </div>
-
 <div class="container" id="listings">
     {% for item in items %}
     {% for i in item %}
@@ -17,20 +17,16 @@
             <div class="card-body">
               <h5 class="card-title">{{i.title}}</h5>
               <p class="card-text">{{i.description}}</p>
-              {% for j in wonitems %}
-              {% if i.listingid == j.listingid %}
-              <p class="card-text"><b>Winning Bid:</b>${{j.winprice}}</p>
-              <p class="card-text"><b>Owner:</b>{{j.owner}}</p>
-              {% endif %}
-              {% endfor %}
+              <p class="card-text">${{i.price}}</p>
+              <a href="{% url 'auction:listingpage' i.id %}"><button class="btn btn-outline-success">Bid Now!</button></a>
+              <p class="card-text"><small class="text-muted">{{i.time}}</small></p>
             </div>
           </div>
         </div>
       </div>
-      
       {% endfor %}
+      {% empty %}
+      <h3>No listings found in your watchlist...</h3>
       {% endfor %}
 </div>
 {% endblock %}
-
-

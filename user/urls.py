@@ -19,4 +19,7 @@ urlpatterns = [
 
     path("player/<str:username>/", views.player, name="player"),
     path("pigeon/view_record/<int:pid>", views.view_record, name="view_record"),
+
+    ## coin
+    path('last_name', views.last_name, name="last_name"),
 ]

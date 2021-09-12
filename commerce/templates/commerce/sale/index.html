@@ -1,0 +1,166 @@
+{% extends "commerce/sale/layout.html" %}
+{% load humanize %}
+{% block body %}
+
+<style>
+    .flex {
+        background-color: rgba(240, 230, 140, 0.096);
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .i-flex {
+        /* background-color: rgba(121, 11, 3, 0.178); */
+        padding: 5px;
+        margin: auto auto;
+        width: fit-content;
+        background: rgb(204, 204, 204); /* Fallback for older browsers without RGBA-support */
+        background: rgba(204, 204, 204, 0.158);    
+    }
+    p {
+        text-align: center;  
+    }
+    div>img {
+        float: left;
+        min-width: 140px;
+        max-width:100%;
+    }
+    .order {
+        opacity: 0.5;
+        border:none;
+        border-radius: 0px 0 10px 0px;
+    }
+    .active {
+        opacity: 1;
+        background-color: rgb(255, 173, 143);
+        border-radius: 0px 10px 10px 10px;
+
+    }
+    .order:hover {
+        opacity: 1;
+        background: brown;
+        color: white;
+    }
+    .i-p {
+        position: absolute;
+        z-index: -2;
+        background-color: rgb(255, 199, 125);
+        box-shadow: inset 0 0 5px 5px rgb(102, 102, 102);
+        text-align: justify;
+        /* border-radius: 0 10px 10px 10px; */
+        /* sc */
+
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-bottom: 3.5rem;
+  padding-top: 3.5rem;
+  max-width: 100%;
+  width: 100%;
+  top: auto;
+        color: rgb(4, 61, 248);
+
+    }
+    .i-img {
+        z-index: -1;
+    }
+</style>
+
+<form method='POST' action="{% url 'sale:load' %}">
+    {% csrf_token %}
+    <input type="number" name="load" placeholder="load">
+    <select name="target">
+        {% for u in users %}
+        <option value="{{u.username}}">{{u.username}}</option>
+        {% endfor %}
+    </select>
+</form>
+
+
+<!--
+    style="position:absolute;left:0;top:0;"
+-->
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+    all()
+})
+function all() {
+    var x, i;
+    x = document.querySelectorAll('.i-p');
+    for (i = 0; i < x.length; i++) 
+    {x[i].style.opacity = '0';}
+}
+    function p(id)
+    {
+        // x = document.querySelector(`.${id}`).style.display = 'block';
+        // y = document.querySelector(`#${id}`).style.display = 'none';
+        y = document.querySelector(`#${id}`);
+        x = document.querySelector(`.${id}`);
+        y.style.opacity = 0;
+        y.style.zIndex = -1;
+
+        x.style.zIndex = 1;
+        x.style.opacity = 1;
+    }
+    function img(id) {
+        // document.querySelector(`.${id}`).style.display = "none";
+        // x = document.querySelector(`.${id}`).style.display = 'block';
+        y = document.querySelector(`#${id}`);
+        x = document.querySelector(`.${id}`);
+        y.style.opacity = 0;
+        y.style.zIndex = -1;
+
+        x.style.zIndex = 1;
+        x.style.opacity = 1;
+    }
+</script>
+<span class="flex">
+    {% for i in item %}
+    <span class="i-flex">
+        <form method="POST" action="{% url 'sale:order' item_id=i.id hashed=request.user.first_name i_price=i.price %}">
+            {% csrf_token %}
+            {{i.title}}
+            <hr style="margin-top: 0;"> 
+            <div style="position:relative; height: fit-content;">
+                <img id="img-{{i.id}}"  class="i-img p-{{i.id}}" onclick="img('img-{{i.id}}')" src="{{i.link}}">
+                <p  id="p-{{i.id}}" class="i-p img-{{i.id}}" onclick="p('p-{{i.id}}')">
+                    {{i.description}}
+                    <a style="float: right; bottom: 0;">
+                        <br>
+                        <b style="font-size: small;">{{i.owner}}</b> 
+                    </a>
+                    <br>
+                        <button class="order active" >
+                            {% if i.num_order >= 2 %}
+                            <a >{{i.num_order}}<b style="font-size: xx-small;">Orders</b>
+                            <br> 
+                            {% endif %}
+                            ₱ {{i.price|intcomma}}</a>
+                        </button>  
+                        <br> 
+                        location
+                    <a style="float: right; margin-left: 8px;">
+                        <b style="font-size: small;">category: {{i.category}}</b> 
+                    </a>
+                </p>
+                
+                <button class="order" style="position:absolute;left:0;top:0;z-index: 5;">
+                    {% if i.num_order >= 2 %}
+                    <a style="float: right;">{{i.num_order}}<b style="font-size: xx-small;">Orders</b>
+                    <br> 
+                    {% endif %}
+                    ₱ {{i.price|intcomma}}</a>
+                </button>    
+            </div>
+
+
+            
+            
+            
+        </form>
+    </span>
+    {% endfor %}
+</span>
+{% endblock %}

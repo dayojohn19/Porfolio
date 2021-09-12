@@ -1,0 +1,34 @@
+
+
+{% include 'commerce/sale/tabs.html' %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}Auctions{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    </head>
+
+ 
+
+<div class="text-center">
+    <h1>Sale</h1>
+</div>
+
+    <body style="color: wheat;background-color: rgba(63, 63, 58, 0.938);">
+    <div class="text-center" style=" align-items: center; background-color: rgba(236, 253, 189, 0.493);">
+        {% block body %}
+        {% endblock %}
+    </div>
+
+    <div style="float: left; display: block; margin-top: 1rem;">
+        {% if user.is_authenticated %}
+             <h10><strong>{{ user.username }}</strong> ₱ <a id="value">{{request.user.last_name}}</a></h10><br>hash: {{request.user.first_name}}
+        {% else %}
+            Not signed in.
+        {% endif %}
+    </div>
+
+
+<div style="height: 500px;"></div>
+    </body>
+</html>

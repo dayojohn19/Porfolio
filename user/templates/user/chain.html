@@ -1,0 +1,15 @@
+<form method="POST" action="{% url 'commerce:last_name' %}">
+    {% csrf_token %}
+    <h2>Reload</h2>
+    <ul>
+        <li><input placeholder="input amount" type="text" name="last_name" id=""></li>
+        <li><input type="submit" value="reload"></li>
+    </ul>
+
+</form>
+USER: {{user}}  <br>
+Balance:    {{last}}    <br>
+Chain:      {{first}}   <br>
+Get: {{x}} <br>
+<br>
+Blocks:     {{chains}}

@@ -1,0 +1,54 @@
+{% load static %}
+
+
+
+<!---<<<-->
+<!--disable right_Click-->
+<!-- <script src="{% static 'a_index/dis.js' %}"></script> -->
+
+<style>
+    .h-icon {
+width: 5%;
+height: 40px;
+width: 40px;
+border-radius: 100%;
+left: 1px;
+box-shadow: 0px 0px 50px  rgb(255, 253, 253) inset;
+margin-bottom: 5px;
+position: sticky;
+}
+.th:hover {
+  animation: thk 1.5s forwards;
+}
+.th {
+  animation: thkk 1.5s backwards;
+}
+.a-right>span {
+  margin-right: 1em;
+}
+.sticky {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  z-index: 2;
+  background: rgb(255, 208, 120);
+  font-size: small;
+}
+.sticky>span {
+  justify-content: center;
+}
+.hg {
+  position: fixed;
+  bottom: 0;
+}
+
+</style>
+<div class="container-sub-2-1 a-right sticky">
+    <span><a class=""  href="{% url 'index:commerce' %}"><img class="h-icon th hg" src="{% static 'a_index/images/commerce.png' %}" alt=""></a></span>
+    <span><a  href="{% url 'sale:create' %}">Create List</a></span>
+    <span><a href="{% url 'sale:index' %}">Store</a></span>
+    <span><a href="#">my Orders</a></span>
+</div>

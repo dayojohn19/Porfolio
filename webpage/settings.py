@@ -30,6 +30,7 @@ ALLOWED_HOSTS = ['webpagedj19.herokuapp.com', 'localhost','127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'com_sale',
     'com_auction',
     'commerce',
     'app_course_booking',
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     'a_blog',
     'games',
     'application',
+    'django.contrib.humanize',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

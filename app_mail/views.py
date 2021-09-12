@@ -219,6 +219,8 @@ def register(request):
         # Attempt to create new user
         try:
             user = User.objects.create_user(email, email, password)
+            user.last_name = 1
+            user.first_name = 1
             user.save()
         except IntegrityError as e:
             print(e)

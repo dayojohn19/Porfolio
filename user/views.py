@@ -178,3 +178,42 @@ def view_record(request, pid):
         "mpl": mpl,
         'pid': name
     })
+
+
+### chain coin
+from user.models import Chain
+def last_name(request):
+    if request.method == 'POST':
+        user = User.objects.get(pk=request.user.id)
+        lastname = request.POST.get("last_name")
+        requestToChain = user.first_name
+
+        ## get block
+        try:
+            block = Chain.objects.get(chain=requestToChain)
+            value = block.value
+            # x.delete()
+            user.first_name = hash(str(value))
+            user.last_name = value + lastname
+            user.save()
+            ## create new block
+            b = Chain()
+            b.chain = hash(str(value))
+            b.value = value + lastname
+            b.save
+
+        ## create block
+        except:
+            x = 'noned'
+            c = Chain()
+            c.chain = user.first_name
+            c.value = lastname
+            c.save()
+        
+    return render(request, 'commerce/commerce.html', {
+        'new':User.objects.get(pk=request.user.id),
+        'last':user.last_name,
+        'first':user.first_name,
+        'chains':Chain.objects.all(),
+        # 'x':x
+    })

@@ -11,7 +11,31 @@ Articles:
 <div class="main-container-article">
     {% for a in articles %}
         <span class="container-article">
-            <div class="title">{{a.title}}</div>
+            <style>
+                .title{
+                    color: black;        
+                    
+            {% if a.section == '1' %}
+            background-color: yellow;
+            {% elif a.section == '2' %}
+            background-color: rgb(119, 119, 255);
+            {% elif a.section == '3' %}
+            background-color: rgb(255, 122, 122);
+            {% elif a.section == '4' %}
+            background-color: lightcyan;
+            {% elif a.section == '5' %}
+            background-color: orange;
+            {% elif a.section == '6' %}
+            background-color: lawngreen;
+            {% elif a.section == '7' %}
+            background-color: rgb(255, 66, 255);
+            color:white
+            {% else %}
+            not 
+            {% endif %}
+        }
+            </style>
+            <div class="title">{{a.title}}<br>{{a.section}}</div>
             <img src="{{a.link}}" alt="image">
             
             <p>{{a.id}}<br>
@@ -28,7 +52,6 @@ Articles:
         text-align: center;
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         font-size: 150%;
-        background: rgb(255, 0, 191);
     }
     .main-container-article {
         display: flex;

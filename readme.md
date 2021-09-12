@@ -65,5 +65,18 @@ Unlike any other projects that focus on business and networking, My Project focu
 - `view Players` view players
 - `player_name `view player pigeons
 - `pigeon_name`  to view players pigeon records 
+## Hash Function
+x = user
+y = coin
+z = chain
+r = request
+
+x+y = z
+(r/z)-x = y
+(y*z)+x = r
+
+
+
+
 
     

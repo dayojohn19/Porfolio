@@ -32,6 +32,7 @@ urlpatterns = [
     path('app_course_booking/', include('app_course_booking.urls')),
     path('commerce/', include('commerce.urls')),
     path('com_auction/', include('com_auction.urls')),
+    path('com_sale/', include('com_sale.urls')),
 ]
 
 ### Pigeon Config

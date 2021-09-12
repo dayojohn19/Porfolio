@@ -5,7 +5,6 @@
     <head>
         <title>{% block title %}Auctions{% endblock %}</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
         <style>
                 #lower {
@@ -50,9 +49,7 @@
     background-color: rgba(53, 255, 255, 0.178);
     text-align: center;
 }
-.no-gutters {
-    
-}
+
 .nav-item {
     padding-top: 1em;
     padding-left: 1em;
@@ -60,22 +57,21 @@
         </style>
     </head>
 
- 
-
-
-
-
     <div>
-        {% if user.is_authenticated %}
-            Signed in as <h10><strong>{{ user.username }}</strong>.</h10>
-        {% else %}
-            Not signed in.
-        {% endif %}
-    </div>
-<div class="text-center">
-    <h1>Auctions</h1>
 
-</div>
+    </div>
+    <div>
+        <p class="test" style="position: fixed;
+        width: 20%;
+        top: 2%;
+        left: 80%;
+        right: 50%;
+        text-align: center;
+        align-items: center;
+        background-color: rgba(43, 40, 37, 0.301);"> 
+            <a class="nav-link" href="{% url 'auction:watchlistpage' user.username %}">My Watchlist <span class="badge badge-danger">{{wcount}}</span></a>
+        </p>
+    </div> 
 
     <body style="background-color: rgba(254, 255, 217, 0.89);">
         <div style=" background-color: rgba(190, 255, 255, 0.438);">
@@ -96,7 +92,13 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'auction:mywinnings' %}">Your Winnings</a>
                 </li>
-
+                <li class="nav-item">
+                    {% if user.is_authenticated %}
+                    <a class="nav-link"><h10><strong>{{ user.username }}</strong>. $ {{request.user.last_name}}</h10></a>
+                {% else %}
+                    Not signed in.
+                {% endif %}
+                </li>
                 {% else %}
 
                 {% endif %}
@@ -111,23 +113,7 @@
 <div style="height: 500px;"></div>
                
     {% if user.is_authenticated %}             
-    <div>
-<p class="test" style="position: fixed;
-width: 50%;
-top: 2%;
-left: 80%;
-right: 50%;
-transform: translate(-50%, -50%);
-text-align: center;
-align-items: center;
-background-color: rgb(245, 207, 175);"> 
 
-
-
-<a class="nav-link" href="{% url 'auction:watchlistpage' user.username %}">My Watchlist <span class="badge badge-danger">{{wcount}}</span></a>
-
-
-</p></div> 
 
 
 {% endif %}

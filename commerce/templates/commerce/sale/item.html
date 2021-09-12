@@ -1,0 +1,82 @@
+{% extends "commerce/sale/layout.html" %}
+{% load humanize %}
+{% block body %}
+<style>
+    .grid-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  /* align-content: flex-end; */
+  /* grid-template-columns: auto auto auto; */
+  grid-gap: 10px;
+  background-color: #2196F3;
+  padding: 10px;
+}
+.grid-container > div {
+    width: 20%;
+}
+.grid-container > div > img {
+  background-color: rgba(255, 255, 255, 0.158);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+  max-width: 100%;
+}
+.item1 {
+  /* grid-column: 1 / span 2; */
+  order: 5;
+  flex-basis: auto;
+}
+.item2 {
+    align-self: flex-end;
+}
+
+</style>
+
+<h1>{{message}}</h1>
+
+Owner: {{item.owner}}<br>
+Price: {{item.price}}<br>
+<img style="max-width: 100%;" src="{{item.link}}"> <br>
+Orders: {{item.num_order}}<br>
+Delivered: {{item.delivered}}<br>
+<form method="GET" action="{% url 'sale:order' item_id=item.id hashed=request.user.first_name i_price=item.price %}">
+    {% csrf_token %}
+    {% if request.user in item.orders.all %}
+        <input type="submit" value="Stop Order">
+    {% else %}
+        <input type="submit" value="Order now">
+    {% endif %}
+</form>
+<div class="grid-container">
+    <div class="item1"><img src="{{item.link2}}"> </div>
+    <div class="item1"><img src="{{item.link3}}"> </div>
+    <div class="item1"><img src="{{item.link4}}"> </div>
+    <div class="item1"><img src="{{item.link5}}"> </div>
+    <div class="item1"><img src="{{item.link6}}"> </div>
+    <div class="item1"><img src="{{item.link7}}"> </div>
+    <div class="item1"><img src="{{item.link8}}"> </div>
+    <div class="item1"><img src="{{item.link9}}"> </div>
+    <div class="item1"><img src="{{item.link10}}"> </div>
+
+
+</div>
+
+
+
+ID: {{item.id}}
+
+<hr>
+{% for o in ordered %}
+{{o.id}}    <br>
+{{o.user}}  <br>
+{{o.item}}  <br>
+Delivered: {{o.delivered}} <br>
+ordered: {{o.time|naturalday}}  <br>
+<hr>
+{% endfor %}
+
+{% endblock %}
