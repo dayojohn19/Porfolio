@@ -27,10 +27,15 @@ class Item(models.Model):
         return f"{self.title} ₱ {self.price}"
 
 class Order(models.Model):
+    i_id = models.CharField(max_length=64)
+    owner = models.CharField(max_length=64)
     user = models.ForeignKey('app_mail.User', on_delete=models.CASCADE)
     item = models.ForeignKey('Item', on_delete=models.CASCADE)
+    select = models.URLField(blank=True)
     delivered = models.BooleanField(default=False)
-    time = models.DateField(auto_now_add=True)
+    del_time = models.DateTimeField(auto_now_add=True, blank=True)
+    time = models.DateTimeField(auto_now_add=True, blank=True)
+    qty = models.IntegerField()
 
 
 

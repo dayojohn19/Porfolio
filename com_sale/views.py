@@ -4,24 +4,61 @@ from com_sale.models import Item, Order
 from django.shortcuts import redirect
 from django.http import HttpResponse
 from app_mail.models import User
+import datetime
 class Sale(forms.Form):
     cat=('1', 'Service'), ('2', 'Goods')
-    title = forms.CharField(label="Title")
-    link = forms.CharField(label="link")
-    link2 = forms.CharField(label="link")
-    link3 = forms.CharField(label="link")
-    link4 = forms.CharField(label="link")
-    link5 = forms.CharField(label="link")
-    link6 = forms.CharField(label="link")
-    link7 = forms.CharField(label="link")
-    link8 = forms.CharField(label="link")
-    link9 = forms.CharField(label="link")
-    link10 = forms.CharField(label="link")
-    price = forms.IntegerField()
-    description = forms.CharField(label="Description",widget=forms.TextInput(attrs={'class': 'special'}))
-    category = forms.ChoiceField(widget=forms.RadioSelect,choices=cat)
+    title = forms.CharField(required=True ,label="Title")
+    link = forms.CharField(required=True ,label="link", widget=forms.TextInput(attrs={'placeholder': 'Picture Link'}))
+    link2 = forms.CharField(required=False, label="link",widget=forms.TextInput(attrs={'placeholder': 'Picture Link (Optional)'}))
+    link3 = forms.CharField(required=False, label="link2",widget=forms.TextInput(attrs={'placeholder': 'Picture Link (Optional)'}))
+    link4 = forms.CharField(required=False, label="link3",widget=forms.TextInput(attrs={'placeholder': 'Picture Link (Optional)'}))
+    link5 = forms.CharField(required=False, label="link4",widget=forms.TextInput(attrs={'placeholder': 'Picture Link (Optional)'}))
+    link6 = forms.CharField(required=False, label="link5",widget=forms.TextInput(attrs={'placeholder': 'Picture Link (Optional)'}))
+    link7 = forms.CharField(required=False, label="link6",widget=forms.TextInput(attrs={'placeholder': 'Picture Link (Optional)'}))
+    link8 = forms.CharField(required=False, label="link7",widget=forms.TextInput(attrs={'placeholder': 'Picture Link (Optional)'}))
+    link9 = forms.CharField(required=False, label="link8",widget=forms.TextInput(attrs={'placeholder': 'Picture Link (Optional)'}))
+    link10 = forms.CharField(required=False, label="link9",widget=forms.TextInput(attrs={'placeholder': 'Picture Link (Optional)'}))
+    price = forms.IntegerField(required=True)
+    description = forms.CharField(required=True ,label="Description",widget=forms.TextInput(attrs={'class': 'special'}))
+    category = forms.ChoiceField(required=True ,widget=forms.RadioSelect,choices=cat)
 
-    
+
+
+
+def mylist(request):
+    filtered = Item.objects.filter(owner=request.user).order_by('id').reverse()
+    contents = {
+        'items':filtered
+    }
+    return render(request, 'commerce/sale/mylist.html', contents)
+def myorder(request):
+    filtered = Order.objects.filter(user=request.user).order_by('id').reverse()
+    contents = {
+        'items':filtered
+    }
+    return render(request, 'commerce/sale/myorder.html', contents)
+def mybuyer(request):
+    ##  Post Deliver
+    if request.method == 'POST':
+        item_id = request.POST.get("item_id")
+        x = Order.objects.get(id=item_id)
+        user = x.user
+        order = Item.objects.get(id=x.i_id)
+        if user in order.orders.all():
+            o = Order.objects.get(item = order, user=user, delivered=False)
+            o.delete()
+            order.orders.remove(user)
+            x.delivered = True
+            x.del_time = datetime.datetime.now()
+            x.save()
+            return redirect('sale:mybuyer')
+    ## end POST deliver
+    filtered = Order.objects.filter(owner=request.user).order_by('id').reverse()
+    contents = {
+        'items':filtered,
+        'date':datetime.datetime.now()
+    }
+    return render(request, 'commerce/sale/mybuyer.html',contents)
 
 def add_check(user, hashed, i_price):
     ####### update value
@@ -144,13 +181,17 @@ def order(request, item_id, hashed, i_price):
         # item_id = request.GET['item_id']
         order = Item.objects.get(id=item_id)
         user = request.user
-
+        owner = order.owner
+        time = datetime.datetime.now()
+        select = request.GET.get("select")
+        qty = request.GET.get("qty")
+        i_price = i_price * int(qty)
         if order.notavailable == False:
             if user in order.orders.all():
                 if add_check(user, hashed, i_price) == 'hacker':
                     return HttpResponse('hacked')
                 ######## end update value
-                o = Order.objects.get(item=order, user=user)
+                o = Order.objects.get(i_id=order.id, item=order, user=user)
                 if o.delivered == True:
                     return HttpResponse('Fail to Unorder, Item already delivered')
                 o.delete()
@@ -162,14 +203,16 @@ def order(request, item_id, hashed, i_price):
                 v = sub_check(user, hashed, i_price)
                 if v == 'hacker':
                     return HttpResponse('hacked')
+                elif v == 'poor':
+                    return HttpResponse('poor')
                 elif v <= 0:
                     return HttpResponse('poor')
                 ######## end update value
-                o = Order.objects.create(user=user, item=order)
+                o = Order.objects.create(i_id=order.id, user=user, item=order, select=select, qty=qty, owner=order.owner, time=time)
                 order.orders.add(user)
                 order.save()
 
-                return redirect('sale:item', item_id)
+                return redirect('sale:myorder')
         else:
             return redirect('sale:item', item_id)
             # return HttpResponse('fail Already Delivered')

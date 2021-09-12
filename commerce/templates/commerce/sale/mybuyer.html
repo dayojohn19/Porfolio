@@ -1,0 +1,88 @@
+{% extends "commerce/sale/layout.html" %}
+{% load humanize %}
+{% block body %}
+
+<style>
+       .grid-container {
+  display: flex;
+justify-content: space-evenly;
+  flex-direction: row;
+  align-items: center;
+  /* flex-wrap: nowrap; */
+  flex-flow: row wrap;
+  /* justify-content: flex-start; */
+  /* justify-content:right;
+  align-items: right; */
+  /* align-content: flex-end; */
+  /* grid-template-columns: auto auto auto; */
+  grid-gap: 10px;
+  background-color: #2196F3;
+  padding: 10px;
+}
+.span {
+    float: right;
+    position: absolute;
+    text-align: center;
+}
+.grid-item {
+    width: 100%
+}
+.grid-container2 {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgb(206, 205, 255);
+    column-gap: 20px;
+    color: black;
+    padding: 0.5rem;
+    justify-content: space-evenly;
+}
+.f-title {
+    width: 100%;
+    text-align: center;
+}
+.f-detail {
+    text-align: center;
+}
+.small {
+    font-size: x-small;
+}
+</style>
+<h1>Your Buyer Order Lists</h1>
+m:{{message}}
+{% now "jS F Y H:i" %}
+{{date}}
+<div class="grid-container">
+    {% for i in items %}
+            <form>
+                <div class="grid-container2" style="position: relative;">
+                    <div class="f-title"><h4>{{i.item}}</h4></div>
+                    <!-- <img style="width: 100px;height: auto;" src="{{i.link}}"> -->
+                    <span class="f-detail">
+                        <div><a class="small">Buyer:</a> {{i.user}}</div>
+                        <div>Qty: {{i.qty}}</div>
+                    </span>
+                    {% if i.delivered != True %}
+                    <span class="f-detail">
+                        <div><a class="small">Ordered: <br>{{i.del_time}}</a></div>
+                        <form method="POST" action="{% url 'sale:create' %}">
+                        </form>
+                        <form method="POST" action="{% url 'sale:mybuyer' %}">
+                            {% csrf_token %}
+                            <a class="small"><input hidden value="{{i.id}}" name="item_id"></a>
+                            <input placeholder="Input Rider">
+                            <input type="submit" value="Deliver">
+                        </form>
+                    </span>
+                    {% else %}
+                    <span class="f-detail">
+                        <div class="small">ord: {{i.time}}</div>
+                        <div class="small">del: {{i.del_time}}</div>
+                    </span>
+                    {% endif %}
+                </div>
+            </form>
+    {% endfor %}
+</div>
+
+{% endblock %}

@@ -29,41 +29,82 @@
   /* grid-column: 1 / span 2; */
   order: 5;
   flex-basis: auto;
+  position: relative;
 }
 .item2 {
     align-self: flex-end;
 }
-
+#selected {
+    border:rgba(0, 128, 0, 0.432) solid 5px;
+    box-shadow: 5px 5px 10px rgba(172, 255, 47, 0.37);
+    margin-top: 0.2rem;
+}
+.form-item-two {
+    max-width: 50%;
+}
 </style>
-
+<script>
+    function change(x){
+        target = document.querySelector("#selected");
+        target.src = x;
+        target2 = document.querySelector("#select");
+        target2.value = x;
+    }
+</script>
 <h1>{{message}}</h1>
 
-Owner: {{item.owner}}<br>
-Price: {{item.price}}<br>
-<img style="max-width: 100%;" src="{{item.link}}"> <br>
-Orders: {{item.num_order}}<br>
-Delivered: {{item.delivered}}<br>
-<form method="GET" action="{% url 'sale:order' item_id=item.id hashed=request.user.first_name i_price=item.price %}">
-    {% csrf_token %}
-    {% if request.user in item.orders.all %}
-        <input type="submit" value="Stop Order">
-    {% else %}
-        <input type="submit" value="Order now">
-    {% endif %}
-</form>
-<div class="grid-container">
-    <div class="item1"><img src="{{item.link2}}"> </div>
-    <div class="item1"><img src="{{item.link3}}"> </div>
-    <div class="item1"><img src="{{item.link4}}"> </div>
-    <div class="item1"><img src="{{item.link5}}"> </div>
-    <div class="item1"><img src="{{item.link6}}"> </div>
-    <div class="item1"><img src="{{item.link7}}"> </div>
-    <div class="item1"><img src="{{item.link8}}"> </div>
-    <div class="item1"><img src="{{item.link9}}"> </div>
-    <div class="item1"><img src="{{item.link10}}"> </div>
 
 
+<div style="z-index: 10;max-width: 100%; position: sticky; top: 0;background-color: rgba(124, 218, 112, 0.493);">
+    <form style="color: black;align-items: center;justify-content: space-evenly;display: flex;flex-wrap: wrap;" method="GET" action="{% url 'sale:order' item_id=item.id hashed=request.user.first_name i_price=item.price %}">
+        {% csrf_token %}
+        <div class="form-item-one">
+            <img id="selected" style="max-width: 100%; height: 40%; " src="{{item.link}}" value="{{item.link}}"><br>
+            <input hidden id="select" value="{{item.link}}" name="select">
+        </div>        
+        <div class="form-item-two">
+            <div class="">
+                description: {{item.description}}
+            </div>
+            Price: {{item.price}}<br>
+            <div class="" style="position: relative;z-index: 15; ">
+                <select name="qty">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+                {% if request.user in item.orders.all %}
+                    <input type="submit" value="Stop Order">
+                {% else %}
+                    <input type="submit" value="Order now">
+                {% endif %}
+            </div>
+            <a style="float: right;position:absolute; right: 10;font-size: smaller;">
+                Owner: {{item.owner}}<br>
+                <div class="">
+                    Orders: {{item.num_order}}
+                </div>
+            </a>
+        </div>
+    </form>
 </div>
+
+
+
+    <div class="grid-container">
+        <div onclick="change('{{item.link}}')" class="item1"><img src="{{item.link}}"> </div>
+        <div onclick="change('{{item.link2}}')" class="item1"><img src="{{item.link2}}"> </div>
+        <div onclick="change('{{item.link3}}')" class="item1"><img src="{{item.link3}}"> </div>
+        <div onclick="change('{{item.link4}}')" class="item1"><img src="{{item.link4}}"> </div>
+        <div onclick="change('{{item.link5}}')" class="item1"><img src="{{item.link5}}"> </div>
+        <div onclick="change('{{item.link6}}')" class="item1"><img src="{{item.link6}}"> </div>
+        <div onclick="change('{{item.link7}}')" class="item1"><img src="{{item.link7}}"> </div>
+        <div onclick="change('{{item.link8}}')" class="item1"><img src="{{item.link8}}"> </div>
+        <div onclick="change('{{item.link9}}')" class="item1"><img src="{{item.link9}}"> </div>
+        <div onclick="change('{{item.link10}}')" class="item1"><img src="{{item.link10}}"> </div>
+    </div>
+
 
 
 
@@ -76,6 +117,8 @@ ID: {{item.id}}
 {{o.item}}  <br>
 Delivered: {{o.delivered}} <br>
 ordered: {{o.time|naturalday}}  <br>
+Selected: {{o.select}}<br>
+Quantity: {{o.qty}}<br>
 <hr>
 {% endfor %}
 

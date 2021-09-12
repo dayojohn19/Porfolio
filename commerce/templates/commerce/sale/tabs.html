@@ -50,5 +50,8 @@ position: sticky;
     <span><a class=""  href="{% url 'index:commerce' %}"><img class="h-icon th hg" src="{% static 'a_index/images/commerce.png' %}" alt=""></a></span>
     <span><a  href="{% url 'sale:create' %}">Create List</a></span>
     <span><a href="{% url 'sale:index' %}">Store</a></span>
-    <span><a href="#">my Orders</a></span>
+    <span><a href="{% url 'sale:mylist' %}">my Listings</a></span>
+    <span><a href="{% url 'sale:myorder' %}">my Order</a></span>
+    <span><a href="{% url 'sale:mybuyer' %}">my Buyer</a></span>
+    <b style="color: black;">{{request.user}}</b>
 </div>
