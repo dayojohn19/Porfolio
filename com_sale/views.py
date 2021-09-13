@@ -44,10 +44,14 @@ def mybuyer(request):
         x = Order.objects.get(id=item_id)
         user = x.user
         order = Item.objects.get(id=x.i_id)
+        order_price = int(order.price) * int(x.qty)
+        add_check(request.user, request.user.first_name, order_price)
         if user in order.orders.all():
             o = Order.objects.get(item = order, user=user, delivered=False)
             o.delete()
             order.orders.remove(user)
+            order.bought= int(order.bought) + int(x.qty)
+            order.save()
             x.delivered = True
             x.del_time = datetime.datetime.now()
             x.save()
@@ -67,7 +71,7 @@ def add_check(user, hashed, i_price):
     else:
         new_hash = hash(str(hashed))
         user.first_name = new_hash
-        user.last_name = int(user.last_name) + i_price
+        user.last_name = int(user.last_name) + int(i_price)
         user.save()
     
     ######## end update value
@@ -191,7 +195,7 @@ def order(request, item_id, hashed, i_price):
                 if add_check(user, hashed, i_price) == 'hacker':
                     return HttpResponse('hacked')
                 ######## end update value
-                o = Order.objects.get(i_id=order.id, item=order, user=user)
+                o = Order.objects.get(i_id=order.id, item=order, user=user, delivered=False)
                 if o.delivered == True:
                     return HttpResponse('Fail to Unorder, Item already delivered')
                 o.delete()

@@ -19,6 +19,7 @@ class Item(models.Model):
     price = models.IntegerField()
     category = models.CharField(max_length=64)
     orders = models.ManyToManyField('app_mail.User', default=None, blank=True, related_name="item_order")
+    bought = models.IntegerField(default=0)
     notavailable = models.BooleanField(default=False)
     @property
     def num_order(self):
@@ -33,8 +34,8 @@ class Order(models.Model):
     item = models.ForeignKey('Item', on_delete=models.CASCADE)
     select = models.URLField(blank=True)
     delivered = models.BooleanField(default=False)
-    del_time = models.DateTimeField(auto_now_add=True, blank=True)
-    time = models.DateTimeField(auto_now_add=True, blank=True)
+    del_time = models.DateTimeField(auto_now_add=True)
+    time = models.DateTimeField()
     qty = models.IntegerField()
 
 

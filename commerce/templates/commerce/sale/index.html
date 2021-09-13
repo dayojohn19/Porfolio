@@ -44,27 +44,35 @@
         position: absolute;
         z-index: -2;
         background-color: rgb(255, 199, 125);
-        box-shadow: inset 0 0 5px 5px rgb(102, 102, 102);
-        text-align: justify;
+        /* box-shadow: inset 0 0 5px 5px rgb(102, 102, 102);
+        text-align: center; */
         /* border-radius: 0 10px 10px 10px; */
         /* sc */
 
-  margin-left: auto;
+  /* margin-left: auto;
   margin-right: auto;
   margin-top: auto;
-  margin-bottom: auto;
-  padding-left: 1.5rem;
+  margin-bottom: auto; */
+  
+  /* padding-left: 1.5rem;
   padding-right: 1.5rem;
   padding-bottom: 3.5rem;
   padding-top: 3.5rem;
-  max-width: 100%;
-  width: 100%;
-  top: auto;
+   */
+   width: 100%;
+   text-align: center;
+     margin: auto auto;
+     height: 20rem;
         color: rgb(4, 61, 248);
-
+        left: 0;
+        top: 0;
+        overflow: scroll;
     }
     .i-img {
         z-index: -1;
+    }
+    .form-container {
+        height: fit-content;
     }
 </style>
 
@@ -119,18 +127,15 @@ function all() {
 <span class="flex">
     {% for i in item %}
     <span class="i-flex">
-        <form method="POST" action="{% url 'sale:order' item_id=i.id hashed=request.user.first_name i_price=i.price %}">
+        <form class="form-container" method="POST" action="{% url 'sale:order' item_id=i.id hashed=request.user.first_name i_price=i.price %}">
             {% csrf_token %}
-            {{i.title}}
-            <hr style="margin-top: 0;"> 
-            <div style="position:relative; height: fit-content;">
+            <div style="position:relative; height:fit-content;">
                 <img id="img-{{i.id}}"  class="i-img p-{{i.id}}" onclick="img('img-{{i.id}}')" src="{{i.link}}">
-                <p  id="p-{{i.id}}" class="i-p img-{{i.id}}" onclick="p('p-{{i.id}}')">
-                    {{i.description}}
-                    <a style="float: right; bottom: 0;">
-                        <br>
-                        <b style="font-size: small;">{{i.owner}}</b> 
-                    </a>
+                <span  id="p-{{i.id}}" class="i-p img-{{i.id}}" onclick="p('p-{{i.id}}')">
+                    <br>
+                    <br>
+                    {{i.description}}<br>
+                    <a>{{i.title}}</a><br>
                     <br>
                         <button class="order active" >
                             {% if i.num_order >= 2 %}
@@ -139,16 +144,23 @@ function all() {
                             {% endif %}
                             ₱ {{i.price|intcomma}}</a>
                         </button>  
-                        <br> 
+                        <br>
+                    <a style="float: right; bottom: 0;">
                         location
-                    <a style="float: right; margin-left: 8px;">
+                        <br>
+                        <b style="font-size: small;">{{i.owner}}</b> 
+                            <br>
                         <b style="font-size: small;">category: {{i.category}}</b> 
                     </a>
-                </p>
+                </span>
                 
                 <button class="order" style="position:absolute;left:0;top:0;z-index: 5;">
                     {% if i.num_order >= 2 %}
                     <a style="float: right;">{{i.num_order}}<b style="font-size: xx-small;">Orders</b>
+                    <br> 
+                    {% endif %}
+                    {% if i.bought >= 2 %}
+                    <a style="float: right;">{{i.bought}}<b style="font-size: xx-small;">Bought</b>
                     <br> 
                     {% endif %}
                     ₱ {{i.price|intcomma}}</a>

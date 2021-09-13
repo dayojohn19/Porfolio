@@ -57,7 +57,7 @@ m:{{message}}
             <form>
                 <div class="grid-container2" style="position: relative;">
                     <div class="f-title"><h4>{{i.item}}</h4></div>
-                    <!-- <img style="width: 100px;height: auto;" src="{{i.link}}"> -->
+                    <img style="width: 100px;height: auto;" src="{{i.select}}">
                     <span class="f-detail">
                         <div><a class="small">Buyer:</a> {{i.user}}</div>
                         <div>Qty: {{i.qty}}</div>
@@ -65,7 +65,7 @@ m:{{message}}
                     {% if i.delivered != True %}
                     <span class="f-detail">
                         <div><a class="small">Ordered: <br>{{i.del_time}}</a></div>
-                        <form method="POST" action="{% url 'sale:create' %}">
+                        <form method="POST" action="{% url 'sale:mybuyer' %}">
                         </form>
                         <form method="POST" action="{% url 'sale:mybuyer' %}">
                             {% csrf_token %}
