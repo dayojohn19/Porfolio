@@ -2,7 +2,7 @@
 
 {% block body %}
 {% load static %}
-user{{request.user}}<br>
+{{request.user.username}}<br>
 <script src="{% static 'a_street_race/street_race.js' %}"></script>
 
  {% now " F j g:m  a " %}<br>

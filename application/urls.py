@@ -14,5 +14,6 @@ urlpatterns = [
     # path("speech/", speech.main, name="speech"),
     path("qrcode/", qrcode.main, name="qrcode"),
     path("news/", views.news, name="news"),
-    path("app_course_booking/", views.course_booking, name="course_booking")
+    path("app_course_booking/", views.course_booking, name="course_booking"),
+    path("blog", views.blog, name="blog")
 ]

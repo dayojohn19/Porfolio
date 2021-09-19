@@ -12,14 +12,14 @@
   /* align-content: flex-end; */
   /* grid-template-columns: auto auto auto; */
   grid-gap: 10px;
-  background-color: #2196F3;
+
   padding: 10px;
 }
 .grid-container > div {
     width: 20%;
 }
 .grid-container > div > img {
-  background-color: rgba(255, 255, 255, 0.158);
+
   text-align: center;
   padding: 20px 0;
   font-size: 30px;
@@ -36,11 +36,32 @@
 }
 #selected {
     border:rgba(0, 128, 0, 0.432) solid 5px;
-    box-shadow: 5px 5px 10px rgba(172, 255, 47, 0.37);
+    box-shadow: 5px 5px 10px rgba(172, 255, 47, 0.158);
     margin-top: 0.2rem;
+    border-radius: 0px 0px 20px 20px;
+    margin-top: 1rem;
 }
 .form-item-two {
     max-width: 50%;
+}
+.blurred {
+    color: black;align-items: center;
+    justify-content: space-evenly;
+    display: flex;
+    flex-wrap: wrap;
+}
+.blurred-container {
+        /* text-shadow: 2px 2px 2px #000000; */
+        box-shadow: 0 0 5px 0 ;
+    background: inherit;
+
+  backdrop-filter: saturate(100%) blur(1px);    
+    -webkit-backdrop-filter: blur(3px);
+    z-index: 10;width: 100%; position: sticky; top: 0;
+}
+.description {
+    background-color: rgba(0, 255, 255, 0.274);
+    padding: 1rem;
 }
 </style>
 <script>
@@ -55,18 +76,19 @@
 
 
 
-<div style="z-index: 10;max-width: 100%; position: sticky; top: 0;background-color: rgba(124, 218, 112, 0.493);">
-    <form style="color: black;align-items: center;justify-content: space-evenly;display: flex;flex-wrap: wrap;" method="GET" action="{% url 'sale:order' item_id=item.id hashed=request.user.first_name i_price=item.price %}">
+<div class="blurred-container">
+    <form class="blurred" method="GET" action="{% url 'sale:order' item_id=item.id hashed=request.user.first_name i_price=item.price %}">
         {% csrf_token %}
         <div class="form-item-one">
             <img id="selected" style="max-width: 100%; height: 40%; " src="{{item.link}}" value="{{item.link}}"><br>
             <input hidden id="select" value="{{item.link}}" name="select">
         </div>        
         <div class="form-item-two">
-            <div class="">
+            <div class="description">
                 description: {{item.description}}
+                    <br>
+                Price: {{item.price}}
             </div>
-            Price: {{item.price}}<br>
             <div class="" style="position: relative;z-index: 15; ">
                 <select name="qty">
                     <option value="1">1</option>
@@ -106,11 +128,9 @@
     </div>
 
 
-
-
 ID: {{item.id}}
 
-<hr>
+
 {% for o in ordered %}
 {{o.id}}    <br>
 {{o.user}}  <br>

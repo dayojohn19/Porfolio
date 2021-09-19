@@ -14,6 +14,10 @@ import sys
 from django.shortcuts import render 
 from .models import Item
 from app_mail import models as recepient
+from django.http import HttpResponse
+
+def path(request, path):
+    return HttpResponse(f"Requested Path: {path}")
 
 def index(request):
     try:
@@ -24,7 +28,7 @@ def index(request):
         engine.stop
     except:
         pass
-    return render(request, 'a_index/index.html', {})
+    return render(request, 'a_index/index.html')
 def send(request):
     if request.method != "POST":
         return render(request, 'a_index/index.html')
@@ -45,12 +49,6 @@ def social(request):
 
 def colreg(request):
     return render(request, 'colregs/colregs.html')
-
-def blog(request):
-    return render(request, 'blog/blog.html')
-
-def map(request):
-    return render(request, 'map/map.html')
 def games(request):
     return render(request, 'games/games.html')
 def s(request):

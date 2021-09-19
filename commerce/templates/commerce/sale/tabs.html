@@ -1,7 +1,5 @@
 {% load static %}
 
-
-
 <!---<<<-->
 <!--disable right_Click-->
 <script src="{% static 'a_index/dis.js' %}"></script>
@@ -34,9 +32,9 @@ position: sticky;
   display: flex;
   justify-content: space-between;
   z-index: 25;
-  background: rgb(255, 208, 120);
-  font-size: small;
-
+  background: rgba(255, 208, 120, 0.192);
+  /* font-size: small; */
+  
 }
 .sticky>span {
   justify-content: center;
@@ -49,10 +47,79 @@ position: sticky;
 </style>
 <div class="container-sub-2-1 a-right sticky">
     <span><a class=""  href="{% url 'index:commerce' %}"><img class="h-icon th hg" src="{% static 'a_index/images/commerce.png' %}" alt=""></a></span>
-    <span><a  href="{% url 'sale:create' %}">Create List</a></span>
-    <span><a href="{% url 'sale:index' %}">Store</a></span>
-    <span><a href="{% url 'sale:mylist' %}">my Listings</a></span>
-    <span><a href="{% url 'sale:myorder' %}">my Order</a></span>
-    <span><a href="{% url 'sale:mybuyer' %}">my Buyer</a></span>
-    <b style="color: black;">{{request.user}}</b>
+<div style="text-align: center;">
+  <ul class="tab-container" style="margin: auto;">
+    {{request.user.username}}
+    <li class="tab-list dropdown">
+      <span><a href="{% url 'sale:index' %}" style="color: rgb(210, 255, 164);">Store</a></span>
+        <div class="dropdown-content">
+                <div class="drop-list"><a href="{% url 'sale:category' category=1%}">Service</a></div>
+                <div class="drop-list"><a href="{% url 'sale:category' category=2%}">Goods</a></div>
+        </div>
+    </li>
+    {% if request.user.is_anonymous %}
+    <div class="tab-list"><span><a href="{% url 'sale:login' %}">Log in</a></span></div>
+    <div class="tab-list"><span><a href="{% url 'sale:register' %}">Register</a></span></div>
+    {% else %}
+    <li class="tab-list dropdown" style="color: rgb(255, 212, 255);">Profile
+        <div class="dropdown-content">
+                <div class="drop-list"><span><a href="{% url 'sale:create' %}">Create List</a></span></div>
+                <div class="drop-list"><span><a href="{% url 'sale:mylist' %}">my Listings</a></span></div>
+                <div class="drop-list"><span><a href="{% url 'sale:myorder' %}">my Order <span class="badge badge-danger">{{orders}}</span></a></span></div>
+                <div class="drop-list"><span><a href="{% url 'sale:mybuyer' %}">my Buyer <span class="badge badge-danger">{{buyers}}</span></a></span></div>
+                {% if request.user.is_anonymous %}
+
+                {% else %}
+                <div class="drop-list"><span><a href="{% url 'sale:logout' %}">Log out</a></span></div>
+                <div class="drop-list"><span><a href="#"><b style="color: rgb(117, 0, 0);">{{request.user.username}}</b></a></span></div>
+                {% endif %}
+        </div>
+    </li>
+    {% endif %}
+    <li class="tab-list">Help Line</li>
+</ul>
+</div>
+</div>
+
+
+ 
+<style>
+  .dropdown-content {
+      display: none;
+position: absolute;
+
+min-width: 160px;
+box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+padding: 12px 16px;
+background: rgba(255, 255, 255, 0.904);
+  }
+  .dropdown:hover .dropdown-content {
+display: block;
+}
+.drop-list {
+  list-style-type: none;
+  margin: 0;
+  color: greenyellow;
+}
+.drop-list span a{
+  color: black;
+}
+.drop-ul {
+}
+.tab-container {
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+
+}
+.tab-list {
+  background-color: rgba(0, 255, 255, 0.253);
+  text-shadow: rgb(252, 255, 253) 0 0 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+</style>
+<div class="text-center">
+
+  <h1>Sale</h1>
 </div>

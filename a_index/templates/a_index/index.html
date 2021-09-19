@@ -28,7 +28,15 @@
      </div> 
 
 
-
+<style>
+    .m-icon {
+        z-index: 100;
+        position: relative;
+    }
+    .img-fluid {
+        opacity: 0.4;
+    }
+</style>
      <div class="test flex-container btm-icon-container ">
 
         <div class="a-css3 btm-icon-cont m-icon">
@@ -181,53 +189,167 @@
 
         <div class="container-main-4">
             <div class="container-sub-4 th">
-                <h1 class="robo p-green">Some of my Projects</h1>
+                <h1 class="robo p-green">Some of my Project</h1>
             </div>
-            <div class="container-sub-4">
+            <div class="container-sub-4 th">
+                <h1 class="robo p-green">Application</h1>
             </div>
         </div>
 
 
+<style>
+    .pad {
+  padding:15px;
+}
+.container-sub-5 {
+    max-height: 50%;
+}
+.container-main-5 {
+    position: relative;
+    z-index: 10;
+}
+</style>
+            <div class="container-main-5">
 
-            <div class="container-main-5 ">
+                <div class="container-sub-5">
+                    <a href="{% url 'application:blog' %}">
+                    <img class="sub-5-img zz pad"  src="{% static 'application/images/blog.png' %}">
+                   </a>
+                </div>
+                <div class="container-sub-5">
+                    <a href="{% url 'application:course_booking' %}">
+                    <img class="sub-5-img zz pad"  src="{% static 'application/images/course_booking.png' %}">
+                    </a>
+                </div>
+                <div class="container-sub-5">
+                    <a href="{% url 'application:news' %}">
+                    <img class="sub-5-img zz pad"  src="{% static 'application/images/news.png' %}">
+                    </a>
+                </div>
+                <div class="container-sub-5">
+                    <a href="{% url 'application:mail' %}">
+                    <img class="sub-5-img zz pad"  src="{% static 'application/images/mail.png' %}">
+                </a>
+                </div>
+                <div class="container-sub-5">
+                    <a href="{% url 'application:earthquake' %}">
+                    <img class="sub-5-img zz pad"  src="{% static 'application/images/earthquake.png' %}"><script src="index/dis.js"></script>
+                </a>
+                </div>
+                <div class="container-sub-5">
+                    <a href="{% url 'application:calendar' %}">
+                    <img class="sub-5-img zz pad"  src="{% static 'application/images/calendar.png' %}">
+                </a>
+                </div>
+                <div class="container-sub-5">
+                    <a href="{% url 'social_network:index' %}">
+                    <img class="sub-5-img zz pad"  src="{% static 'application/images/social_network.png' %}">
+                </a>
+                </div>
+                <div class="container-sub-5">
+                    <a href="{% url 'application:qrcode' %}">
+                    <img class="sub-5-img zz pad"  src="{% static 'application/images/qrcode.png' %}">
+                </a>
+                </div>
+                <div class="container-sub-5">
+                    <a href="{% url 'food:index' %}">
+                    <img class="sub-5-img zz pad"  src="{% static 'application/images/food.png' %}">
+                </a>
+                </div>
+
+
+            </div>
+
+            
+                <div class="container-main-4">
+                    <div class="container-sub-4 th">
+                        <h1 class="robo p-green">Some of my Project</h1>
+                    </div>
+                    <div class="container-sub-4 th">
+                        <h1 class="robo p-green">Entertainments</h1>
+                    </div>
+                </div>
+
+            <div class="container-main-5">
 
                 <div class="container-sub-5">
-                    <img class="sub-5-img zz"  src="{% static 'a_index/images/work/work1.png' %}">
+                    <a href="{% url 'street_race:index' %}">
+                    <img class="sub-5-img zz pad"  src="{% static 'games/images/logo3.png' %}">
+                    </a>
                 </div>
                 <div class="container-sub-5">
-                    <img class="sub-5-img zz"  src="{% static 'a_index/images/work.png' %}">
+                    <a href="{% url 'games:addition' %}">
+                    <img class="sub-5-img zz pad"  src="{% static 'games/images/math.png' %}">
+                    </a>
                 </div>
                 <div class="container-sub-5">
-                    <img class="sub-5-img zz"  src="{% static 'a_index/images/work2.png' %}">
+                    <a href="{% url 'games:color_game' %}">
+                    <img class="sub-5-img zz pad"  src="{% static 'games/images/logo.png' %}">
+                    </a>
                 </div>
                 <div class="container-sub-5">
-                    <img class="sub-5-img zz"  src="{% static 'a_index/images/work3.png' %}">
+                    <a href="{% url 'g_pigeon_race:index' %}">
+                    <img class="sub-5-img zz pad"  src="{% static 'games/images/pigeon_race.png' %}">
+                    </a>
                 </div>
-                <div class="container-sub-5">
-                    <img class="sub-5-img zz"  src="{% static 'a_index/images/work4.png' %}"><script src="index/dis.js"></script>
-                </div>
-                <div class="container-sub-5">
-                    <img class="sub-5-img zz"  src="{% static 'a_index/images/work5.png' %}">
-                </div>
-                <div class="container-sub-5">
-                    <img class="sub-5-img zz"  src="{% static 'a_index/images/work6.png' %}">
-                </div>
-                <div class="container-sub-5">
-                    <img class="sub-5-img zz"  src="{% static 'a_index/images/work7.png' %}">
-                </div>
-                <div class="container-sub-5">
-                    <img class="sub-5-img zz"  src="{% static 'a_index/images/work8.png' %}">
-                </div>
-                <div class="container-sub-5">
-                    <img class="sub-5-img zz"  src="{% static 'a_index/images/work9.png' %}">
-                </div>
-
             </div>
 <!--Some Projects-->
 
 
 
 </div>
+
+<!-- Maps -->
+<!-- Contacts -->
+<br><br>
+<br><br>
+<br><br>
+<h1>Contact Me</h1>
+<link rel="stylesheet" href="{% static 'map/map.css' %}">
+<div class="container-main-maps">
+    <div class="">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d7949426.37729477!2d119.57401255460233!3d13.377870856738133!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sph!4v1628821992885!5m2!1sen!2sph" ></iframe>
+        <div class="map-form-container">
+                <div class="mb-3">
+                    <input name="sender" type="email" class="form-control" id="sender" placeholder="Your Email">
+                </div>
+                <div class="mb-3">
+    
+                     <strong><div id="rec" style="font-size: 30px;"></div></strong>
+                    <label for="exampleFormControlTextarea1" class="form-label">Say Something</label>
+                    <input  name="body" type="textarea" class="form-control ta" id="compose-body" rows="3" value="Hi John, I like your Website, ">
+                </div>
+                <input type="submit" onclick="cc()" value="Send"class="btn btn-primary">    
+
+        </div>
+    </div>
+</div>
+<script>
+    function cc() {
+const body = document.querySelector('#compose-body').value;
+const subject = document.querySelector("#sender").value;
+const recipients = 'm@l.com';
+
+alert('send');
+fetch('/app_mail/application/contact', {
+  method: 'POST',
+  body: JSON.stringify({
+      recipients: recipients,
+      subject: subject,
+      body: body
+  })
+})
+.then(response => response.json())
+.then(result => {
+    // Print result
+    console.log(result);
+    load_mailbox('sent');
+});
+alert('message sent');
+load_mailbox('sent');
+console.log('sending');
+}
+</script>
 
 
 

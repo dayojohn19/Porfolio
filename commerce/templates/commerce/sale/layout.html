@@ -8,11 +8,8 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     </head>
 
- 
 
-<div class="text-center">
-    <h1>Sale</h1>
-</div>
+
 <style>
     body {
         background: rgb(2,0,36);
@@ -21,14 +18,14 @@ color: white;
     }
 </style>
     <body >
-    <div  style=" background-color: rgba(15, 15, 13, 0.432);">
+    <div>
         {% block body %}
         {% endblock %}
     </div>
 
     <div style="float: left; display: block; margin-top: 1rem;">
         {% if user.is_authenticated %}
-             <h10><strong>{{ user.username }}</strong> ₱ <a id="value">{{request.user.last_name}}</a></h10><br>hash: {{request.user.first_name}}
+             <h10><strong>{{ user.username }}</strong> ₱ <a id="value">{{request.user.last_name}}</a></h10>
         {% else %}
             Not signed in.
         {% endif %}

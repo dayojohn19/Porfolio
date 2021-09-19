@@ -5,15 +5,31 @@
     <link rel="stylesheet" href="{% static 'application/application.css' %}">
     <link rel="stylesheet" href="{% static 'games/games.css' %}">
 
+
+
+    <form method='POST' action="{% url 'commerce:load' %}">
+        {% csrf_token %}
+        <input type="number" name="load" placeholder="load">
+        <select name="target">
+            {% for u in users %}
+            <option value="{{u.username}}">{{u.username}} {{u.last_name}}</option>
+            {% endfor %}
+        </select>
+
+    </form>
+    
 <div class="games_container">
 
     <div class="game">
         <img src="{% static 'commerce/images/auction.png' %}">
-        <a href="{% url 'commerce:auction' %}">Auction</a>
+        <a href="{% url 'auction:index' %}">Auction</a>
+        <a href="#">Instruction</a>
+
     </div>
     <div class="game">
         <img src="{% static 'commerce/images/store.png' %}">
         <a href="{% url 'sale:index' %}">Store</a>
+        <a href="#">Instruction</a>
     </div>
 
 

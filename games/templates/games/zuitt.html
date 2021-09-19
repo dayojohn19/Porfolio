@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <title>Hello</title>
+    </head>
+    <body>
+<style>
+    .nav{
+        background: rgba(170, 170, 170, 0.459);
+        font-size: x-large;
+    }
+    .navbar {
+        margin-right: 1em;
+    }
+    .nav {
+        background: rgba(128, 128, 128, 0.418);
+        padding: 1rem;
+    }
+    .body {
+        text-align: center;
+        margin-left: 30%;
+        margin-right: 30%;
+    }
+</style>
+        <div class="nav" id="navbar"></div>
+        <div class="body">
+            <h1 id="header"></h1>
+            <button>Enroll Now!</button>
+            <div id="content"></div>
+        </div>
+
+<script type="text/babel">
+    function App() {
+        return (
+            <div>
+                <Bar id="Zuitter" />
+                <Bar id="Home" />
+                <Bar id="Courses" />
+            </div>
+        );
+    }
+    function Bar(props) {
+        return (
+            <span class="navbar">{props.id}</span>
+        );
+    }
+
+    function Head() {
+        return (
+            <h1>Zuit Coding BootCamp</h1>
+        )
+    }
+    function Pone(){
+        return (
+            <p>Opportunities for everyone, everywhere</p>,
+            <Button />
+        )
+    }
+    function Content() {
+        return (
+            <div>
+            <Cont />
+            <Cont />
+            <Cont />
+            </div>
+        )
+    }
+    function Cont() {
+        return (
+            <span class="conten"><h2>Learning From Home</h2>
+                </span>
+        )
+    }
+            ReactDOM.render(<App />, document.querySelector("#navbar"));        
+            ReactDOM.render(<Head />, document.querySelector("#header"));        
+            ReactDOM.render(<Content />, document.querySelector("#content"));        
+
+            
+            </script>
+    </body>
+</html>

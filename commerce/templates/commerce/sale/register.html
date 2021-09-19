@@ -1,0 +1,506 @@
+{% extends "a_index/layout.html" %}
+{%block body%}
+<h2>Register</h2>
+{%if message %}
+<div>{{message}}</div>
+{%endif%}
+
+<div class="wrapper fadeInDown">
+    <div id="" style="text-align: center;">
+        <form onsubmit="show()" action="{% url 'user:uploaduser' %}" method="POST" enctype="multipart/form-data">
+            {%csrf_token%}
+            {{form.as_p}}
+            <button class="before_upload" type="submit"  style="width: 50%; height: 50px; font-size: larger; border-radius: 25px;">Upload</button>
+    </form>
+    {% if img_obj %}
+    <div class="after_upload" style="display: block;">
+        <div class="fadeIn first">
+            <img src="{{img_obj.image.url}}" alt="connect" style="height:100px; width: 100px;">
+        </div>{{message}}
+        <form action="{% url 'sale:register' %}" method="POST">
+            {% csrf_token %}
+            <div>
+                <input required class="fadeIn third" name="username" placeholder="Username">
+                <input hidden required class="fadeIn third" name="email" value="{{img_obj.image.url}}"><br>
+                <input required class="fadeIn third" name="password" placeholder="password"><br>
+                <input required class="fadeIn third" name="confirmation" placeholder="retype-password"><br>
+                <input required type="submit" class="fadeIn fourth" value="Register" ><br>
+                </div>
+                Already have an account? <a href="{% url 'sale:login' %}">Log in Here.</a>
+            </form>
+      {% endif %}
+        </div>
+    </div>
+</div>
+<script>
+
+    function show() {
+        document.querySelector(".after_upload").style.display = 'block';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+           
+        })
+
+</script>
+        <style>
+
+            /* BASIC */
+            
+            html {
+              background-color: #56baed;
+            }
+            
+            body {
+              font-family: "Poppins", sans-serif;
+              height: 100vh;
+            }
+            
+            a {
+              color: #92badd;
+              display:inline-block;
+              text-decoration: none;
+              font-weight: 400;
+            }
+            
+            h2 {
+              text-align: center;
+              font-size: 16px;
+              font-weight: 600;
+              text-transform: uppercase;
+              display:inline-block;
+              margin: 40px 8px 10px 8px; 
+              color: #cccccc;
+            }
+            
+            
+            
+            /* STRUCTURE */
+            
+            .wrapper {
+              display: flex;
+              align-items: center;
+              flex-direction: column; 
+              justify-content: center;
+              width: 100%;
+              min-height: 100%;
+              padding: 20px;
+            }
+            
+            #formContent {
+              -webkit-border-radius: 10px 10px 10px 10px;
+              border-radius: 10px 10px 10px 10px;
+              background: #fff;
+              padding: 30px;
+              width: 90%;
+              max-width: 450px;
+              position: relative;
+              padding: 0px;
+              -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+              box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+              text-align: center;
+            }
+            
+            #formFooter {
+              background-color: #f6f6f6;
+              border-top: 1px solid #dce8f1;
+              padding: 25px;
+              text-align: center;
+              -webkit-border-radius: 0 0 10px 10px;
+              border-radius: 0 0 10px 10px;
+            }
+            
+            
+            
+            /* TABS */
+            
+            h2.inactive {
+              color: #cccccc;
+            }
+            
+            h2.active {
+              color: #0d0d0d;
+              border-bottom: 2px solid #5fbae9;
+            }
+            
+            
+            
+            /* FORM TYPOGRAPHY*/
+            
+            input[type=button], input[type=submit], input[type=reset]  {
+              background-color: #56baed;
+              border: none;
+              color: white;
+              padding: 15px 80px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              text-transform: uppercase;
+              font-size: 13px;
+              -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+              box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+              -webkit-border-radius: 5px 5px 5px 5px;
+              border-radius: 5px 5px 5px 5px;
+              margin: 5px 20px 40px 20px;
+              -webkit-transition: all 0.3s ease-in-out;
+              -moz-transition: all 0.3s ease-in-out;
+              -ms-transition: all 0.3s ease-in-out;
+              -o-transition: all 0.3s ease-in-out;
+              transition: all 0.3s ease-in-out;
+            }
+            
+            input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
+              background-color: #39ace7;
+            }
+            
+            input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
+              -moz-transform: scale(0.95);
+              -webkit-transform: scale(0.95);
+              -o-transform: scale(0.95);
+              -ms-transform: scale(0.95);
+              transform: scale(0.95);
+            }
+            
+            input[type=text] {
+              background-color: #f6f6f6;
+              border: none;
+              color: #0d0d0d;
+              padding: 15px 32px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 16px;
+              margin: 5px;
+              width: 85%;
+              border: 2px solid #f6f6f6;
+              -webkit-transition: all 0.5s ease-in-out;
+              -moz-transition: all 0.5s ease-in-out;
+              -ms-transition: all 0.5s ease-in-out;
+              -o-transition: all 0.5s ease-in-out;
+              transition: all 0.5s ease-in-out;
+              -webkit-border-radius: 5px 5px 5px 5px;
+              border-radius: 5px 5px 5px 5px;
+            }
+            
+            input[type=text]:focus {
+              background-color: #fff;
+              border-bottom: 2px solid #5fbae9;
+            }
+            
+            input[type=text]:placeholder {
+              color: #cccccc;
+            }
+            
+            
+            
+            /* ANIMATIONS */
+            
+            /* Simple CSS3 Fade-in-down Animation */
+            .fadeInDown {
+              -webkit-animation-name: fadeInDown;
+              animation-name: fadeInDown;
+              -webkit-animation-duration: 1s;
+              animation-duration: 1s;
+              -webkit-animation-fill-mode: both;
+              animation-fill-mode: both;
+            }
+            
+            @-webkit-keyframes fadeInDown {
+              0% {
+                opacity: 0;
+                -webkit-transform: translate3d(0, -100%, 0);
+                transform: translate3d(0, -100%, 0);
+              }
+              100% {
+                opacity: 1;
+                -webkit-transform: none;
+                transform: none;
+              }
+            }
+            
+            @keyframes fadeInDown {
+              0% {
+                opacity: 0;
+                -webkit-transform: translate3d(0, -100%, 0);
+                transform: translate3d(0, -100%, 0);
+              }
+              100% {
+                opacity: 1;
+                -webkit-transform: none;
+                transform: none;
+              }
+            }
+            
+            /* Simple CSS3 Fade-in Animation */
+            @-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+            @-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+            @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+            
+            .fadeIn {
+              opacity:0;
+              -webkit-animation:fadeIn ease-in 1;
+              -moz-animation:fadeIn ease-in 1;
+              animation:fadeIn ease-in 1;
+            
+              -webkit-animation-fill-mode:forwards;
+              -moz-animation-fill-mode:forwards;
+              animation-fill-mode:forwards;
+            
+              -webkit-animation-duration:1s;
+              -moz-animation-duration:1s;
+              animation-duration:1s;
+            }
+            
+            .fadeIn.first {
+              -webkit-animation-delay: 0.4s;
+              -moz-animation-delay: 0.4s;
+              animation-delay: 0.4s;
+            }
+            
+            .fadeIn.second {
+              -webkit-animation-delay: 0.6s;
+              -moz-animation-delay: 0.6s;
+              animation-delay: 0.6s;
+            }
+            
+            .fadeIn.third {
+              -webkit-animation-delay: 0.8s;
+              -moz-animation-delay: 0.8s;
+              animation-delay: 0.8s;
+            }
+            
+            .fadeIn.fourth {
+              -webkit-animation-delay: 1s;
+              -moz-animation-delay: 1s;
+              animation-delay: 1s;
+            }
+            
+            /* Simple CSS3 Fade-in Animation */
+            .underlineHover:after {
+              display: block;
+              left: 0;
+              bottom: -10px;
+              width: 0;
+              height: 2px;
+              background-color: #56baed;
+              content: "";
+              transition: width 0.2s;
+            }
+            
+            .underlineHover:hover {
+              color: #0d0d0d;
+            }
+            
+            .underlineHover:hover:after{
+              width: 100%;
+            }
+            
+            
+            
+            /* OTHERS */
+            
+            *:focus {
+                outline: none;
+            } 
+            
+            #icon {
+              width:60%;
+            }
+            
+            * {
+              box-sizing: border-box;
+            }
+
+
+
+  .pigeon_profile_image_container {
+      text-align: center;
+      align-items: center;
+      max-height: 30%;
+      padding: 2%;
+      background-color: rgb(211, 184, 165);
+      border-radius: 5px;
+      box-shadow: 0 0 5px khaki;
+  }
+
+  .pigeon_profile_image {
+      height: 150px;
+      max-width: 80%;
+      position:sticky;
+      box-shadow: 0 0 5px khaki;
+  }
+  a {
+      text-decoration: none;
+
+
+  }
+  body {
+      animation: fadeIn 2s;
+-webkit-animation: fadeIn 2s;
+-moz-animation: fadeIn 2s;
+-o-animation: fadeIn 2s;
+-ms-animation: fadeIn 2s;
+
+  }
+  img {
+      max-width: 250px;
+      max-height: 250px;
+      border-radius: 25px;
+      
+  }
+
+
+table,td {
+border: 1px solid black;
+}
+td{
+background-color: violet;
+border-radius: 25px;
+border: solid gold 10px;
+text-align: center;
+
+}
+
+.my_pigeon {
+padding: 5px;
+margin: 10px;
+margin-left: 10px;
+width: 80%;
+}
+
+
+  .user_list{padding: 3px;
+      margin: 0;
+      background-color: greenyellow;
+       width: fit-content;
+       border-radius: 25px;
+        border: solid rgb(235, 255, 206) 3px;}
+
+
+  @media (min-width: 600px){
+      table{width: 50%;}
+
+      body {background-color: rgb(255, 206, 206);}
+      .my_pigeon{width: 50%; border: yellow solid 4px;border-radius: 25px; background-color:rgb(255, 255, 200);text-align: center;}
+      .image{max-width: 95%; max-height: 50%; border: solid 4px yellow;}
+      
+      }
+
+  @media (max-width: 599px) {
+
+      .reg_image {  max-width: 50%;
+      float: right;
+      height: inherit;
+      border-radius: 15px;
+      max-height: 100%;
+
+  }
+
+
+  .reg_pigeon {border: 5px solid chartreuse;  clear: both; height: 100px;
+      position: fixed;
+      width:90%;
+      margin-right: 10%;
+      background-color: rgb(207, 255, 159);
+      max-height: fit-content;
+      font-size: 90%;
+      align-items: center;
+      text-align: center;
+      box-shadow: 5px 5px 5px grey;
+      top: 1%
+  }
+
+
+      table{width: 100%;}
+      body {background-color: rgb(214, 214, 255);} 
+      .user_style {display: none;}
+      .header{
+          border: yellow solid 3px;
+          border-radius: 25px;
+          padding:7px;
+          background-color: aqua;
+          position: fixed;
+          bottom: 5%;
+          box-shadow: 0px 0px 5px grey;
+          line-height: 1.5; text-align: center;
+          display: none;
+          text-decoration: none;
+      }
+@keyframes fadeIn {
+0% {opacity:0;}
+100% {opacity:1;}
+}
+
+@-moz-keyframes fadeIn {
+0% {opacity:0;}
+100% {opacity:1;}
+}
+
+@-webkit-keyframes fadeIn {
+0% {opacity:0;}
+100% {opacity:1;}
+}
+
+@-o-keyframes fadeIn {
+0% {opacity:0;}
+100% {opacity:1;}
+}
+
+@-ms-keyframes fadeIn {
+0% {opacity:0;}
+100% {opacity:1;}
+}
+
+
+
+
+      .show_header {
+          font-size: large;
+          box-shadow: 0px 0px 5px rgb(0, 238, 255);
+          border: rgb(0, 110, 255) solid 1px;
+          border-radius: 25px;
+          padding:7px;
+          background-color: aqua;
+          position: fixed;
+          bottom: 5%;
+          right: 5%;
+          line-height: 1.5; text-align: center;
+              animation: fadeIn 2s;
+          -webkit-animation: fadeIn 2s;
+          -moz-animation: fadeIn 2s;
+          -o-animation: fadeIn 2s;
+          -ms-animation: fadeIn 2s;
+      }
+      .show_header2 {
+          box-shadow: 0px 0px 10px rgb(255, 109, 189);
+          border: rgb(241, 109, 182) solid 3px;
+          border-radius: 25px;
+          padding:7px;
+          background-color: aqua;
+          position: fixed;
+          bottom: 5%;
+          left: 5%;
+          line-height: 1.5; text-align: center;
+              animation: fadeIn 2s;
+          -webkit-animation: fadeIn 2s;
+          -moz-animation: fadeIn 2s;
+          -o-animation: fadeIn 2s;
+          -ms-animation: fadeIn 2s;
+      }
+      .header2{position: fixed; right: 5%; background-color: rgb(179, 255, 255);border-radius: 25px; padding: 5px;}
+      .my_pigeon{
+          border-radius: 25px;border: rgb(91, 255, 91) 3px solid;width: 100%; background-color:rgb(185, 255, 185);text-align: center;}
+      .image{ border: 2.5px yellow solid;border-radius: 25px; padding: 5px; margin: 5px;max-width: 50%; max-height: 150px;}
+      .user-head{background-color: rgb(255, 255, 199);width: fit-content;padding: 5px;text-align: center; border:solid yellow 5px;border-radius: 25px;margin: auto;position: fixed;left: 35%;}
+
+
+      .user_image{display: none;}
+      .user-head{display: none;}
+
+      }    
+
+
+</style>
+
+    {%endblock%}

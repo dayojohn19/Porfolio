@@ -11,6 +11,25 @@ from datetime import datetime
 from django.shortcuts import render
 from .forms import ImageForm
 from app_mail.models import User
+
+    ######## end update value
+def sub_check(user, hashed, i_price):
+    ####### update value
+    if hashed != user.first_name:
+        return ('hacker')
+    if int(user.last_name) <= 0 :
+        return ('poor')
+    else:
+        new_hash = hash(str(hashed))
+        user.first_name = new_hash
+        value = int(user.last_name) - i_price
+        if value <= 0:
+            return value
+        user.last_name = value
+        user.save()
+        return value
+    ######## end update value
+    
 def math(request):
     return render(request, "commerce/auction/math.html")
 def create(request):
@@ -166,25 +185,30 @@ def listingpage(request,id):
     })
 
 def bidsubmit(request,listingid):
-    current_bid = Listing.objects.get(id=listingid)
-    current_bid=current_bid.price
+    current_item = Listing.objects.get(id=listingid)
+    current_bid=current_item.price
     if request.method == "POST":
         user_bid = int(request.POST.get("bid"))
+        user = request.user
         if user_bid > current_bid:
-            user = User.objects.get(pk=request.user.id)
-            user.last_name = int(user_bid) - int(user.last_name)
-            if user.last_name <=  0:
-                return
+            if (int(user.last_name) - int(user_bid)) <=  0:
+                return HttpResponse('no money')
+            #### to hash
+            hashed=request.user.first_name
+            i_price = current_bid
+            user = request.user
+            sub_check(user, hashed, i_price)
+            # user.last_name = int(user_bid) - int(user.last_name)
             listing_items = Listing.objects.get(id=listingid)
             listing_items.price = user_bid
             listing_items.save()
-
-            user.save()
-
+            # user.save()
             try:
                 if Bid.objects.filter(id=listingid):
                     bidrow = Bid.objects.filter(id=listingid)
                     bidrow.delete()
+                    ## PUT add the value to the user bidder
+                    
                 bidtable = Bid()
                 bidtable.user=request.user.username
                 bidtable.title = listing_items.title

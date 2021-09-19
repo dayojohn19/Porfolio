@@ -45,3 +45,18 @@ class Wishlist(models.Model):
     wish = models.ForeignKey('Item', on_delete=models.CASCADE)
     def __str__(self):
         return str(self.wish)
+
+class Image(models.Model):
+    name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='fancier')
+    def __str__(self):
+        return self.name
+
+
+class Userimage(models.Model):
+    name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='fancier_profiles')
+    def __str__(self):
+        return self.name
+from django.core.files.storage import FileSystemStorage
+fs = FileSystemStorage(location='/user/pigeons/')

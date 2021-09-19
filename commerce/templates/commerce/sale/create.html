@@ -1,13 +1,22 @@
 {% extends "commerce/sale/layout.html" %}
 {% block body %}
-<h1 style="display: block;">{{message}}</h1>
-Form: 
-<form method="POST" action="{% url 'sale:create' %}">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit">
-</form>
-<br>
+
+<style>
+    .create-container{
+        text-align: center;
+    }
+</style>
+<div class="create-container">
+
+    <h1 style="display: block;">{{message}}</h1>
+    Form: 
+    <form method="POST" action="{% url 'sale:create' %}">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit">
+    </form>
+    <br>
+</div>
 {{request.user.last_name}}
 
 {% endblock %}

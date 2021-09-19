@@ -10,7 +10,7 @@ from django.contrib.auth.models import AbstractUser
 #try upload images
 from django.core.files import storage
 class Chain(models.Model):
-    chain = models.CharField(max_length=64)
+    chain = models.CharField(max_length=64, default=1)
     value = models.CharField(max_length=64, blank=True)
 
 class Image(models.Model):

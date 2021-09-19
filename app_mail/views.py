@@ -18,7 +18,7 @@ def index(request):
 
     # Everyone else is prompted to sign in
     else:
-        return HttpResponseRedirect(reverse("mail:login"))
+        return HttpResponseRedirect(reverse("sale:login"))
 
 
 @csrf_exempt

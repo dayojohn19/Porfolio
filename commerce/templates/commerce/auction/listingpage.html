@@ -1,5 +1,6 @@
 {% extends "commerce/auction/layout.html" %}
 {% block body %}
+
 {% if error %}
 <div class="alert alert-danger" role="alert">
     {{error}}
@@ -52,7 +53,7 @@
             {% csrf_token %}
               <span class="form-row align-items-center">
                 <span class="col-auto">
-                  <input type="number" class="form-control mb-2" id="inlineFormInput" name="bid" placeholder="your bid...">
+                  <input required type="number" class="form-control mb-2" id="inlineFormInput" name="bid" placeholder="your bid...">
                 </span>
                 <span class="col-auto">
                   <button type="submit" class="btn btn-primary mb-2">Place Bid</button>

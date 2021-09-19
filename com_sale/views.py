@@ -5,6 +5,12 @@ from django.shortcuts import redirect
 from django.http import HttpResponse
 from app_mail.models import User
 import datetime
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import HttpResponse, HttpResponseRedirect, render
+from django.urls import reverse
+from django.db import IntegrityError
+
 class Sale(forms.Form):
     cat=('1', 'Service'), ('2', 'Goods')
     title = forms.CharField(required=True ,label="Title")
@@ -24,19 +30,30 @@ class Sale(forms.Form):
 
 
 
-
+def category(request, category):
+    orders = Order.objects.filter(user=request.user).order_by('id').reverse()
+    categorized = Item.objects.filter(category=category).order_by('id').reverse()
+    contents = {
+        'item':categorized,
+        'orders':len(orders)
+    }
+    return render(request, 'commerce/sale/index.html', contents)
 def mylist(request):
+    orders = Order.objects.filter(user=request.user).order_by('id').reverse()
     filtered = Item.objects.filter(owner=request.user).order_by('id').reverse()
     contents = {
-        'items':filtered
+        'items':filtered,
+        'orders':len(orders)
     }
     return render(request, 'commerce/sale/mylist.html', contents)
+
 def myorder(request):
     filtered = Order.objects.filter(user=request.user).order_by('id').reverse()
     contents = {
         'items':filtered
     }
     return render(request, 'commerce/sale/myorder.html', contents)
+
 def mybuyer(request):
     ##  Post Deliver
     if request.method == 'POST':
@@ -91,40 +108,47 @@ def sub_check(user, hashed, i_price):
         user.save()
         return value
     ######## end update value
-def reload(user, hashed, load, target):
-    #### add object that error when less than 0
-    if hashed != user.first_name:
-        return ('hacker')
-    new_hash = hash(str(hashed))
-    user.first_name = new_hash
-    user.last_name = int(user.last_name) - int(load)
-    user.save()
-    target.first_name = new_hash
-    target.last_name = int(target.last_name) + int(load)
-    target.save()
-def load(request):
-    if request.method == 'POST':
-        user = request.user
-        hashed = user.first_name
-        load = request.POST.get("load")
-        target = User.objects.get(username=request.POST.get("target"))
-        value = reload(user, hashed, load, target)
-        if value == 'hacker':
-            return HttpResponse('error')
-        return HttpResponse('reloaded the target')
+# def reload(user, hashed, load, target):
+#     #### add object that error when less than 0
+#     if hashed != user.first_name:
+#         return ('hacker')
+#     new_hash = hash(str(hashed))
+#     user.first_name = new_hash
+#     user.last_name = int(user.last_name) - int(load)
+#     user.save()
+#     target.first_name = new_hash
+#     target.last_name = int(target.last_name) + int(load)
+#     target.save()
+# def load(request):
+#     if request.method == 'POST':
+#         user = request.user
+#         hashed = user.first_name
+#         load = request.POST.get("load")
+#         target = User.objects.get(username=request.POST.get("target"))
+#         value = reload(user, hashed, load, target)
+#         if value == 'hacker':
+#             return HttpResponse('error')
+#         return HttpResponse('reloaded the target')
 # Create your views here.
 def index(request):
-    return render(request, 'commerce/sale/index.html', {
-        'item':Item.objects.all().order_by('id').reverse(),
-        'users':User.objects.all()
-    })
+    if request.user.is_authenticated:
+        return render(request, 'commerce/sale/index.html', {
+            'item':Item.objects.all().order_by('id').reverse(),
+            'users':User.objects.all()
+        })
+    else:
+        return HttpResponseRedirect(reverse("sale:login"))
+
+
 
 def item(request, id):
     # return render(request, 'commerce/sale/item.html')
     # return redirect('sale:index')
+    orders = Order.objects.filter(user=request.user).order_by('id').reverse()
 
     items = Item.objects.get(id=id)
     return render(request, 'commerce/sale/item.html',{
+        'orders':len(orders),
         'item':Item.objects.get(id=id),
         'ordered':Order.objects.filter(item=items)
     })
@@ -223,10 +247,84 @@ def order(request, item_id, hashed, i_price):
     ### get user items
     elif request.method == 'POST':
         items = Item.objects.get(id=item_id)
+        orders = Order.objects.filter(user=request.user).order_by('id').reverse()
         content = {
         'item' : Item.objects.get(id=item_id),
-        'ordered' : Order.objects.all()
+        'ordered' : Order.objects.all(),
+        'orders':len(orders)
         }
     return redirect('sale:item', item_id)
 
 
+from .forms import ImageForm, UserImageForm
+def register_view(request):
+    if request.method == "POST":
+        username = request.POST["username"]
+        email = request.POST["email"]
+        password = request.POST["password"]
+        confirmation = request.POST["confirmation"]
+        if password != confirmation:
+            return render(request, "user/register.html", {
+                "message": "Passwords must match."
+            })
+        try:
+            user = mail.User.objects.create_user(
+                username,
+                email,
+                password
+            )
+            user.last_name = 1
+            user.first_name = 1
+            user.save()
+        except IntegrityError:
+            return render(request, "user/register.html", {
+                "message": "Username already taken. "
+            })
+        login(request, user)
+        return HttpResponseRedirect(reverse("sale:index"))
+    else:
+        form = UserImageForm()
+        return render(request, "commerce/sale/register.html",
+        {'form':form})
+
+def register_view_alpha(request):
+    if request.method == "POST":
+        email = request.POST["email"]
+        password =  request.POST["password"]
+        confirmation = request.POST["confirmation"]
+        if password != confirmation:
+            return render(request, "commerce/sale/register.html", {
+                "message":"Passwords must match"
+            })
+        try:
+            user = User.objects.create_user(email, email, password)
+            user.last_name = 1
+            user.first_name = 1
+            user.save()
+        except IntegrityError as e:
+            print(e)
+            return render(request, "commerce/sale/register.html", {
+                "message":  "Email address already taken."
+            })
+        login(request, user)
+        return HttpResponseRedirect(reverse("sale:index"))
+    else:
+        return render(request, "commerce/sale/register.html")
+def login_view(request):
+    if request.method == "POST":
+        email = request.POST["email"]
+        password = request.POST["password"]
+        user = authenticate(request, username=email, password=password)
+        if user is not None:
+            login(request, user)
+            return HttpResponseRedirect(reverse("sale:index"))
+        else:
+            return render(request, "commerce/sale/login.html", {
+                "message":"Invalid email and/or password."
+            })
+    else:
+        return render(request, "commerce/sale/login.html")
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect(reverse("sale:login"))

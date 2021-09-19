@@ -137,8 +137,37 @@ def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse("user:index"))
 
-def register(request):
+def register_sec(request):
+    if request.method == "POST":
+        username = request.POST["email"]
+        email = request.POST["username"]
+        password = request.POST["password"]
+        confirmation = request.POST["confirmation"]
+        if password != confirmation:
+            return render(request, "user/register.html", {
+                "message": "Passwords must match."
+            })
+        try:
+            user = mail.User.objects.create_user(
+                username,
+                email,
+                password
+            )
+            user.last_name = 1
+            user.first_name = 1
+            user.save()
+        except IntegrityError:
+            return render(request, "user/register.html", {
+                "message": "Username already taken. "
+            })
+        login(request, user)
+        return HttpResponseRedirect(reverse("sale:index"))
+    else:
+        form = UserImageForm()
+        return render(request, "user/register.html",
+        {'form':form})
 
+def register(request):
     if request.method == "POST":
         username = request.POST["username"]
         email = request.POST["email"]
@@ -149,8 +178,11 @@ def register(request):
         try:
             user = mail.User.objects.create_user(
                 username,
-                  email,
-                   password)
+                email,
+                password
+            )
+            user.last_name = 1
+            user.first_name = 1
             user.save()
         except IntegrityError:
             return render(request, "user/register.html", {"message": "Username already taken."})

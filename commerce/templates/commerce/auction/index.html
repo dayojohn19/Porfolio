@@ -19,7 +19,7 @@
               <p class="card-text">{{i.description}}</p>
               <div class="alert alert-warning" role="alert" style="width:fit-content; margin: auto;"><p class="card-text">Highest Bid: <br><strong>Php {{i.price}}</strong> </p></div>
               <p class="card-text">{{i.category}}</p>
-              <a href="{% url 'auction:listingpage' i.id %}"><button class="btn btn-outline-success">Bid Now!</button></a>
+              <a href="{% url 'auction:listingpage' i.id %}"><button class="btn btn-outline-danger">Bid Now!</button></a>
               <p class="card-text"><small class="text-muted">{{i.time}}</small></p>
             </div>
           </div>
