@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}Bank{% endblock %}</title>
+    </head>
+    <body>
+        <div>
+            <ul>
+                <li><a href="{% url 'bank:index' %}">Home</a></li>
+                {% if request.user.is_authenticated %}
+                <li>
+                    <form>
+                        {% csrf_token %}
+                        <a href="{% url 'bank:account' csrf_token %}">{{request.user}}</a>
+                    </form>
+                </li>
+                    {% if request.user.isadmin %}
+                    <li>
+                        <form>
+                            {% csrf_token %}
+                            <a href="{% url 'bank:manager' csrf_token %}">Manage</a>
+                        </form>
+                    </li>
+                    {% else %}
+                    <li>
+                        <form>
+                            {% csrf_token %}
+                            <a href="{% url 'bank:manager' csrf_token %}">Manage</a>
+                        </form>
+                    </li>
+                    Not admin
+                    {% endif %}
+                {% else %}
+                {% endif %}
+            </ul>
+        </div>
+        <div style="background-color: rgba(236, 253, 189, 0.493); text-align: center;">
+            <h1>Banking</h1>
+            {% block body %}
+            {% endblock %}
+        </div>
+        <div style="height: 500px;"></div>
+                
+        {% if user.is_authenticated %}             
+        {{request.user}} {{request.user.last_name}}
+        <br>
+        Logout
+        {% else %}
+        Log in
+        {% endif %}
+    </body>
+</html>

@@ -1,0 +1,59 @@
+{% extends "commerce/bank/layout.html" %}
+{% block body %}
+<h1>Account</h1>
+
+<style>
+    .a-item {
+
+        box-shadow: 0 0 10px 10px rgba(172, 255, 47, 0.342);
+    }
+    .a-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .a-item {
+        background-color: blanchedalmond;
+        width: 150px;
+        margin: 15px;
+    }
+    .a-form { 
+      padding: 0;
+      margin: 0;
+      outline: none;
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 16px;
+      color: #667;
+      background-color: rgba(205, 92, 92, 0.308);
+
+      padding: 10px 0;
+      margin: auto;
+      border-radius: 5px; 
+      border: solid 1px #ccc;
+      box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
+      background: #ebebeb; 
+      }
+</style>
+
+<div class="a-container">
+    <div class="a-item">
+        <form class="a-form" action="/">
+            <p>My schedule</p>
+            <div id="calendar">
+                Calendar
+            </div>
+            <p>Remaining: Time To withdraw</p>
+            <p>Remaining: Balance</p>
+            <input placeholder="amount">
+            <button>Pay</button>
+            <input placeholder="comment">
+            <a href="#"> 
+                Manager 
+                09105185555
+            </a>
+        </form>
+    </div>
+
+</div>
+{% endblock %}

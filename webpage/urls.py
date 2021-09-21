@@ -33,6 +33,7 @@ urlpatterns = [
     path('commerce/', include('commerce.urls')),
     path('com_auction/', include('com_auction.urls')),
     path('com_sale/', include('com_sale.urls')),
+    path('com_bank/', include('com_bank.urls')),
 ]
 
 ### Pigeon Config

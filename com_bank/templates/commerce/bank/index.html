@@ -1,0 +1,40 @@
+{% extends "commerce/bank/layout.html" %}
+{% block body %}
+<hr>
+<h1>Index </h1>
+<hr>
+<hr>
+
+
+<ul>
+    <li>
+        <form>
+            {% csrf_token %}
+            <a href="{% url 'bank:schedule' csrf_token %}">Schedule</a>
+        </form>
+    </li>
+</ul>
+
+<style>
+    .a-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .a-item {
+        background-color: blanchedalmond;
+        width: 150px;
+        margin: 15px;
+    }
+</style>
+<div class="a-container">
+    <div class="a-item">
+        <p>1</p>
+        <p>Schedule</p>
+        <p>Amount</p>
+        <p>Manager</p>
+    </div>
+</div>
+
+{% endblock %}

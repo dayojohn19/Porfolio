@@ -21,5 +21,10 @@ urlpatterns = [
     path("add_lap", views.add_lap, name="add_lap"),
     path("add_point", views.add_point, name="add_point"),
     path("manager_x", views.manager, name="manager_page"),
-    path("measure_x", views.measure, name="measure")
+    path("measure_x", views.measure, name="measure"),
+    path("<str:csrf_token>/create_race", views.start_race, name="start_race"),
+    path("<str:csrf_token>/add_code", views.add_code, name="add_code"),
+
+    path("start/<str:rid>", views.started_race, name="started_race"),
+    path("end/<str:rid>", views.ended_race, name="ended_race"),
 ]

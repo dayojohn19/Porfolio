@@ -9,7 +9,7 @@
     }
     .i-flex {
         /* background-color: rgba(121, 11, 3, 0.178); */
-        padding: 5px;
+
         margin: auto auto;
         width: fit-content;
         background: rgba(204, 204, 204, 0.158);    
@@ -34,6 +34,7 @@
         font-size: 1.35rem;
         min-height: 2rem;
         text-align: center;
+        padding: 0.3rem;
     }
     .active {
         opacity: 1;
@@ -61,12 +62,10 @@
         text-align: center; */
         /* border-radius: 0 10px 10px 10px; */
         /* sc */
-
   /* margin-left: auto;
   margin-right: auto;
   margin-top: auto;
   margin-bottom: auto; */
-  
   /* padding-left: 1.5rem;
   padding-right: 1.5rem;
   padding-bottom: 3.5rem;
@@ -80,21 +79,22 @@
         left: 0;
         top: 0;
         overflow: scroll;
+        color: rgb(7, 3, 3);
+	text-shadow: 2px 2px 2px #b9b8b8;
 
-
-
-        color: white;
-	text-shadow: 2px 2px 2px #000000;
-    box-shadow: 0 0 5px 0 ;
     background: inherit;
     backdrop-filter: blur(50%);
-  backdrop-filter: saturate(180%) blur(10px);    
+    backdrop-filter: saturate(180%) blur(10px);    
     background-image: url('{{i.link}}');
     height: auto;
     -webkit-backdrop-filter: blur(10px);
+
+    border-radius: 0 15px 5.5px 15px;
+
     }
     .i-img {
         z-index: 30;
+        border-radius: 0 15px 5.5px 15px;
     }
     .form-container {
         height: fit-content;
@@ -152,6 +152,9 @@ function all() {
 <!--  -->
 <!--  -->
 <style>
+    .item-container {
+        position:relative; height:fit-content;
+    }
 .flex  ul {
   display: flex;
   flex-wrap: wrap;
@@ -205,6 +208,12 @@ function all() {
     min-width: 0;
   }
 }
+.lower-right {
+    font-size: xx-small;
+}
+* {
+    border-radius: 30px;
+}
 </style>
 
 <!--  -->
@@ -222,15 +231,11 @@ function all() {
     <span class="i-flex">
         <form class="form-container" method="POST" action="{% url 'sale:order' item_id=i.id hashed=request.user.first_name i_price=i.price %}">
             {% csrf_token %}
-            <div style="position:relative; height:fit-content;">
+            <div class="item-container">
                 <img id="img-{{i.id}}"  class="i-img p-{{i.id}}" onclick="img('img-{{i.id}}')" src="{{i.link}}">
-                <span  id="p-{{i.id}}" class="i-p img-{{i.id}}" onclick="p('p-{{i.id}}')">
+                <span  id="p-{{i.id}}" class="i-p img-{{i.id}}"  onclick="p('p-{{i.id}}')">
                     <br>
                     <br>
-
-                 
-
-
                     {{i.description}}<br>
                     <a>{{i.title}}</a><br>
                     <br>
@@ -243,11 +248,11 @@ function all() {
                         </button>  
                         <br>
                     <a style="float: right; bottom: 0;">
-                        location
+                        <b class="lower-right">location</b>
                         <br>
-                        <b style="font-size: small;">{{i.owner}}</b> 
+                        <b class="lower-right">{{i.owner}}</b> 
                             <br>
-                        <b style="font-size: small;">category: {{i.category}}</b> 
+                        <b class="lower-right">category: {{i.category}}</b> 
                     </a>
                 </span>
                 

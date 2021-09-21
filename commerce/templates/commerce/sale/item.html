@@ -2,6 +2,32 @@
 {% load humanize %}
 {% block body %}
 <style>
+    *{
+        border-radius: 5.8px;
+    }
+       .order {
+        opacity: 0.5;
+        border:none;
+        border-radius: 5px 5px 10px 5px;
+        color: rgb(255, 255, 255);
+        text-shadow: rgb(0, 0, 0) 2px 2px 10px;
+        width: fit-content;
+        max-width: 50%;
+        background-color: rgb(64, 136, 28);
+
+        min-height: 2rem;
+        text-align: center;
+        padding: 0.3rem;
+        opacity: 1;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    .order:hover {
+        opacity: 1;
+        background: brown;
+        color: white;
+    }
+
     .grid-container {
   display: flex;
   flex-direction: row;
@@ -16,12 +42,13 @@
   padding: 10px;
 }
 .grid-container > div {
+    border-radius: 5.6px 5.6px 5.6px 5.6px;
     width: 20%;
 }
 .grid-container > div > img {
-
+    border-radius: 5.6px 5.6px 5.6px 5.6px;
+    padding: 1rem;
   text-align: center;
-  padding: 20px 0;
   font-size: 30px;
   max-width: 100%;
 }
@@ -30,38 +57,104 @@
   order: 5;
   flex-basis: auto;
   position: relative;
+  border-radius: 20px;
+  padding:0 !important;
+}
+.item1-img {
+    border-radius: 20px;
+    padding:0 !important;
 }
 .item2 {
     align-self: flex-end;
 }
+
 #selected {
-    border:rgba(0, 128, 0, 0.432) solid 5px;
-    box-shadow: 5px 5px 10px rgba(172, 255, 47, 0.158);
-    margin-top: 0.2rem;
-    border-radius: 0px 0px 20px 20px;
-    margin-top: 1rem;
+    /* border:rgba(0, 128, 0, 0.151) solid 5px; */
+    box-shadow: 5px 5px 10px rgba(153, 255, 0, 0.973) inset;
+    border-radius: 5.6px 5.6px 5.6px 5.6px;
+    max-width: 100%;
+     height: 100%;
+    position: relative;
 }
 .form-item-two {
-    max-width: 50%;
+    max-width: 90%;
+    position: relative;
+    box-shadow: 10px 10px 10px rgba(72, 73, 72, 0.192);
+
+}
+.form-item-one {
+    max-width: 40%;
+    max-height: 100%;
+    box-shadow: 10px 10px 10px rgba(72, 73, 72, 0.192);
 }
 .blurred {
-    color: black;align-items: center;
+    color: black;
+    align-items: center;
     justify-content: space-evenly;
     display: flex;
     flex-wrap: wrap;
+    border:none;
+    height: 12rem;
 }
 .blurred-container {
         /* text-shadow: 2px 2px 2px #000000; */
-        box-shadow: 0 0 5px 0 ;
+        /* box-shadow: 0 0 5px 0 ; */
     background: inherit;
-
-  backdrop-filter: saturate(100%) blur(1px);    
-    -webkit-backdrop-filter: blur(3px);
-    z-index: 10;width: 100%; position: sticky; top: 0;
+    background-color: rgba(0, 0, 0, 0.171);
+    backdrop-filter: saturate(100%) blur(1px);    
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 10;width: 100%; position: sticky; top:0;
+    background: rgba(0, 0, 0, 0.116);
+    padding: 0.1rem;
+    box-shadow: 10px 10px 10px rgba(74, 75, 74, 0.123);
 }
 .description {
-    background-color: rgba(0, 255, 255, 0.274);
-    padding: 1rem;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5.6px 5.6px 5.6px 5.6px;
+    padding: 0.5rem;
+    background: linear-gradient(270deg, rgba(2,0,36,1) 0%, rgba(255,255,255,1) 0%, rgba(176,242,255,0.4500175070028011) 100%, rgba(0,212,255,1) 100%);
+}
+@media (min-width:600px) {
+    .blurred {
+        height: 20rem;
+    }
+}
+@media (max-width:600px) {
+.form-item-one {
+    /* background: yellow;
+    padding: 10px;
+    width: 100% !important ;
+    padding: 0;
+    max-width: 100%;
+    margin:auto; */
+    flex-grow: 2;
+    flex-shrink: 1 0;
+    min-width: 50% !important;
+}
+.form-item-one {
+    flex-grow: auto;
+}
+.blurred {
+    display: flex;
+    flex-wrap: nowrap;
+    flex: 0 1;
+    flex-grow: 1;
+}
+* {
+    padding: 0;
+}
+
+
+}
+#selected {
+    max-width: 100%;
+    max-height: 100%;
+}
+.ordered {
+    font-size: x-small;
+}
+.owner {
+    float: left;position:absolute; z-index: 1; left: 0.5rem;font-size: smaller;
 }
 </style>
 <script>
@@ -74,57 +167,61 @@
 </script>
 <h1>{{message}}</h1>
 
-
-
 <div class="blurred-container">
     <form class="blurred" method="GET" action="{% url 'sale:order' item_id=item.id hashed=request.user.first_name i_price=item.price %}">
         {% csrf_token %}
         <div class="form-item-one">
-            <img id="selected" style="max-width: 100%; height: 40%; " src="{{item.link}}" value="{{item.link}}"><br>
+            <a class="owner">
+                {{item.owner}}
+            </a>
+            <img id="selected"  src="{{item.link}}" value="{{item.link}}"><br>
             <input hidden id="select" value="{{item.link}}" name="select">
         </div>        
+
         <div class="form-item-two">
+
             <div class="description">
                 description: {{item.description}}
                     <br>
-                Price: {{item.price}}
-            </div>
-            <div class="" style="position: relative;z-index: 15; ">
-                <select name="qty">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                </select>
-                {% if request.user in item.orders.all %}
-                    <input type="submit" value="Stop Order">
-                {% else %}
-                    <input type="submit" value="Order now">
-                {% endif %}
-            </div>
-            <a style="float: right;position:absolute; right: 10;font-size: smaller;">
-                Owner: {{item.owner}}<br>
-                <div class="">
-                    Orders: {{item.num_order}}
+                    ₱ {{item.price}}
+                <div class="" style="position: relative;z-index: 15; ">
+                    <select name="qty">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                    {% if request.user in item.orders.all %}
+                        <input class="order" type="submit" value="Stop Order">
+                        <a class="ordered">{{item.num_order}} orders</a>
+                    {% else %}
+                        <input class="order" type="submit" value="Order now ">
+                        <a class="ordered">{{item.num_order}} orders</a>
+                    {% endif %}
+
+
                 </div>
-            </a>
+
+            </div>
+
         </div>
+
     </form>
 </div>
 
 
 
     <div class="grid-container">
-        <div onclick="change('{{item.link}}')" class="item1"><img src="{{item.link}}"> </div>
-        <div onclick="change('{{item.link2}}')" class="item1"><img src="{{item.link2}}"> </div>
-        <div onclick="change('{{item.link3}}')" class="item1"><img src="{{item.link3}}"> </div>
-        <div onclick="change('{{item.link4}}')" class="item1"><img src="{{item.link4}}"> </div>
-        <div onclick="change('{{item.link5}}')" class="item1"><img src="{{item.link5}}"> </div>
-        <div onclick="change('{{item.link6}}')" class="item1"><img src="{{item.link6}}"> </div>
-        <div onclick="change('{{item.link7}}')" class="item1"><img src="{{item.link7}}"> </div>
-        <div onclick="change('{{item.link8}}')" class="item1"><img src="{{item.link8}}"> </div>
-        <div onclick="change('{{item.link9}}')" class="item1"><img src="{{item.link9}}"> </div>
-        <div onclick="change('{{item.link10}}')" class="item1"><img src="{{item.link10}}"> </div>
+        <div onclick="change('{{item.link}}')" class="item1"><img class="item1-img"  src="{{item.link}}"> </div>
+        <div onclick="change('{{item.link2}}')" class="item1"><img class="item1-img"  src="{{item.link2}}"> </div>
+        <div onclick="change('{{item.link3}}')" class="item1"><img class="item1-img"  src="{{item.link3}}"> </div>
+        <div onclick="change('{{item.link4}}')" class="item1"><img  class="item1-img" src="{{item.link4}}"> </div>
+        <div onclick="change('{{item.link5}}')" class="item1"><img  class="item1-img" src="{{item.link5}}"> </div>
+        <div onclick="change('{{item.link6}}')" class="item1"><img  class="item1-img" src="{{item.link6}}"> </div>
+        <div onclick="change('{{item.link7}}')" class="item1"><img  class="item1-img" src="{{item.link7}}"> </div>
+        <div onclick="change('{{item.link8}}')" class="item1"><img  class="item1-img" src="{{item.link8}}"> </div>
+        <div onclick="change('{{item.link9}}')" class="item1"><img  class="item1-img" src="{{item.link9}}"> </div>
+        <div onclick="change('{{item.link10}}')" class="item1"><img  class="item1-img" src="{{item.link10}}"> </div>
     </div>
 
 
@@ -137,7 +234,7 @@ ID: {{item.id}}
 {{o.item}}  <br>
 Delivered: {{o.delivered}} <br>
 ordered: {{o.time|naturalday}}  <br>
-Selected: {{o.select}}<br>
+Selected: <input type="text" value="{{o.select}}">p<br>
 Quantity: {{o.qty}}<br>
 <hr>
 {% endfor %}

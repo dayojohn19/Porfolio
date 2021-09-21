@@ -20,6 +20,8 @@ class BookCourse(forms.Form):
 
 # Create your views here.
 def index(request):
+    if request.user.is_anonymous:
+        return HttpResponseRedirect(reverse("sale:login"))
     if request.method == "GET":
         x = request.user.id
         try:

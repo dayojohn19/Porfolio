@@ -1,0 +1,41 @@
+{% extends "commerce/bank/layout.html" %}
+{% block body %}
+<style>
+    .a-form { 
+      padding: 0;
+      margin: 0;
+      outline: none;
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 16px;
+      color: #667;
+      background-color: rgba(205, 92, 92, 0.308);
+
+      padding: 10px 0;
+      margin: auto;
+      border-radius: 5px; 
+      border: solid 1px #ccc;
+      box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
+      background: #ebebeb; 
+      }
+</style>
+
+<h1>Client</h1>
+<form class="a-form">
+    <p>Name,</p>
+    <p>Manager,</p>
+    <p>Schedule ID,</p>
+
+    <img style="width: 100px;" src="#">
+    <p>time: Comments,</p>
+    <p>Total Payments,</p>
+    <p>Total Remaining Balance,</p>
+</form>
+<hr>
+<h3>Manager's Feedback</h3>
+<form action="/" class="a-form">
+    Say:
+    <input placeholder="Comment">
+    <button>comment</button>
+</form>
+<p>Manager Name: <input placeholder="manager's comment"></p>
+{% endblock %}

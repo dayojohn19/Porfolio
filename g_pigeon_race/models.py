@@ -12,6 +12,8 @@ from user.models import Mypigeons
 class Race(models.Model):
     racename = models.CharField(max_length=64)
     price = models.IntegerField()
+    started = models.BooleanField(default=False)
+    finished = models.BooleanField(default=False)
     def __str__(self):
         return f"{self.racename}"
 
@@ -32,6 +34,7 @@ class Lap(models.Model):
 class Code(models.Model):
     code = models.CharField(max_length=64)
     hcode = models.CharField(max_length=64)
+    
     ring_code = models.CharField(max_length=64, blank=True)
     pigeon_id = models.CharField(max_length=65, blank=True)
 class Measurement(models.Model):

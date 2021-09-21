@@ -3,9 +3,15 @@
 {% block body %}
 
 <style>
-    .button {
+    .load-pigeon {
         background: #7fff44fb;
+        border-radius: 10px;
+        padding: 1rem;
+        font-size: larger;
         border:none;
+        font-weight: 800;
+        letter-spacing: 0.6rem;
+
     }
     @media (max-width: 599px) {
         .load_pigeon {
@@ -33,13 +39,17 @@
 </style>
 
 
-
-<h1 style="background-color: rgba(220, 20, 60, 0.116); width: fit-content; padding: 5px; margin: 1%;">{{race.racename}} <a href="{% url 'g_pigeon_race:lap' race.id %}"><button class="button"  >LOAD PIGEON</button></a></h1>
+<h1 style="background-color: rgba(220, 20, 60, 0.116); width: fit-content; padding: 5px; margin: 1%;">
+    {{race.racename}} 
+</h1>
+<!-- <a href="{% url 'g_pigeon_race:lap' race.id %}">
+    <button class="load-pigeon">LOAD PIGEON</button>
+</a> -->
 <div hidden class="side">Total Entries {{total}}</div>
+<hr>
 
 
-
-
+<p>Entry your pigeon on a Race</p>
 {% for up in unpigeons %}
     <div hidden>
         <p id="name">{{up.name}}</p>
@@ -49,12 +59,12 @@
         <p hidden id="link">{{up.link}}</p>
         <p id="time">txtxddd</p>
     </div>
-        <div class="reg_pigeon" style="border: 1px solid grey; margin: 1px; padding:1%; box-shadow: 0px 0px 5px rgb(199, 198, 255);">
+        <div class="reg_pigeon" style="text-align: center ;border: 1px solid grey; margin: 1px; padding:1%; box-shadow: 0px 0px 5px rgb(199, 198, 255);">
             <img class="reg_image" src="{{up.link}}" style="height: 10rem; float: left;">   
             <br>
-            <p style="background-color: rgba(255, 255, 255, 0.041) ;border-radius: 1px;"> " {{up.name}} "</p>
-            <p style="background-color: rgba(255, 255, 255, 0.075) ;border-radius: 1px;">Ring: {{up.ring}}</p>
-            <p style="background-color: rgba(255, 255, 255, 0.089) ;border-radius: 1px;">Last Release: {{up.loads}}</p>
+            <p> " {{up.name}} "</p>
+            <p>Ring: {{up.ring}}</p>
+            <p>Last Release: {{up.loads}}</p>
                 <form  onsubmit="entry()"  action="{% url 'g_pigeon_race:entry' race.id %}" method="POST">
                     {%csrf_token%}
                     <input hidden class="pigeon" name="pigeon" value="{{up.id}}">
@@ -63,11 +73,10 @@
         </div>
 
             {% empty %}
-                <h1>You have No Available Pigeon</h1>
-
-                <hr><hr>
+                <hr>
+                <h1 style="margin-top:5rem;">You have No Available Pigeon to Entry</h1>
                 <div style="padding: 1.5rem; background-color: rgba(156, 151, 151, 0.075); width: 70%; margin: 1%;">
-                    <a style="text-decoration: none; padding: 5%;" href="{% url 'user:upload' %}">Register more pigeon</a>
+                    <a style="text-decoration: none; padding: 5%;" href="{% url 'user:upload'  %}">Register more pigeon {{race.id}}</a>
                     <br><br>
                     <a style="text-decoration: none; padding: 5%;" href="{% url 'g_pigeon_race:races_registered' race_id=race.id %}">View Registered Pigeons on this Race</a>
                     <br><br>

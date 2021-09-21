@@ -1,7 +1,7 @@
 {% extends "commerce/sale/layout.html" %}
 {% load humanize %}
 {% block body %}
-{{request.user.email}}
+{{request.user}}
 <h1>Your Order</h1>
 {% for i in items %}
 <div>{{i.i_id}}</div>

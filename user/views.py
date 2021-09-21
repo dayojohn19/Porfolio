@@ -45,7 +45,6 @@ def addpigeon(request):
         now = datetime.now(ltz)
         dt = now.strftime("%A %d %B %Y %X")
 
-
         np = Mypigeons()
         np.owner = request.user.username
         np.name = request.POST.get('name')
@@ -64,7 +63,7 @@ def addpigeon(request):
         viewing = get_object_or_404(mail.User, username=username)
         lists = Mypigeons.objects.filter(owner=viewing).order_by('id').reverse()
 
-        return render(request, "user/player.html", {'list':lists})
+        return redirect('g_pigeon_race:index')
 
 from django.http import JsonResponse
 import json

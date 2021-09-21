@@ -7,13 +7,18 @@
         border: solid 1.2px rgba(0, 128, 0, 0.233);
     }
 </style>
-
+<a href="{% url 'g_pigeon_race:index' %}">Home / Clock</a>
 <h1 id="race_name" style="background: #fd747831; border: 2px solid #e664646c; margin: 15px; line-height: 1.5; text-align: center;border-radius:25px">{{rn.racename}}</h1>
-<h3>Next Lap: <div id="lap_name" style="padding: 1% ;border:3px rgba(172, 255, 47, 0.219) solid; width: fit-content;"></div></h3>
+<h3>Next Lap: </h3>
+    <p style="font-size:smaller">The Pigeons will be release on this address </p>
+   <h1> 
+        <div id="lap_name" style="padding: 1% ;border:3px rgba(172, 255, 47, 0.219) solid; width: fit-content;">
+        </div>
+    </h1>
 <input hidden  id="race_id" value="{{rn.id}}">
 <hr>
-
 <h1>Load Available pigeons:</h1>
+<p style="font-size: smaller;">Get the code and Load the Pigeon on the Truck</p>
 <div id="e1"></div>
 <hr>
     <div style="border: 4px solid red; width:fit-content;" hidden> 
@@ -83,7 +88,8 @@ function loadit(id, state, lapid, lap_num) {
                 }
                 return response.json()
             });
-//    location.reload();
+   location.reload();
+   alert('successfully LOADED');
    //alert(id + " Successfully loaded" + state + "lap:ID" + lapid + "code" + code);
 }
 

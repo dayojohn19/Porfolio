@@ -1,8 +1,25 @@
 {% extends "a_index/layout.html" %}
 
 {% block body %}
-
+<style>
+    strong {
+        color: tomato;
+    }
+</style>
+<a href="{% url 'g_pigeon_race:manager_page' %}">Manager</a>
 <h1>Codes :!</h1>
+<p>
+    <strong>Readme:</strong>
+    <br>    
+    <strong>Code</strong>
+    is used on loading the pigeon on the race
+    <br>
+    <strong>Hcode</strong>
+    is used to clock the pigeon after they comeback
+    <br>
+    <strong>Ring Code</strong>
+    is the Pigeon's Permanent Ring Number
+</p>
 {% for c in cc %}
 Code : {{c.code}}<br>
 Hcode : {{c.hcode}}<br>

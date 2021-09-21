@@ -2,6 +2,20 @@
 
 {% block body %}
 <style>
+    .manager {
+        color: rgb(30, 255, 0);
+        text-decoration: none;
+        background: rgba(162, 255, 190, 0.151);
+        padding: 0.5rem;
+        border-radius: 5.5px;
+       }
+    .view-players {
+        color: yellow;
+        text-decoration: none;
+        background: rgba(255, 255, 162, 0.151);
+        padding: 0.5rem;
+        border-radius: 5.5px;
+    }
     .clock-1 {
         border: rgba(139, 255, 23, 0.144) solid 2px;
         border-radius: 10px;
@@ -42,6 +56,11 @@
         background-color: rgba(218, 253, 218, 0.089); 
         align-items: center;
         margin-bottom: 3%;
+        text-align: center;
+    }
+    .races-container a {
+        text-decoration: none;
+        color: white;
     }
     .races-container button {
         background-color: rgba(124, 205, 92, 0.575);
@@ -50,12 +69,19 @@
         margin: 4%;
         font-size: larger;
     }
+    .load-pigeon {
+        color: white;
+    }
 </style>
-<a href="{% url 'g_pigeon_race:manager_page' %}">manager</a>
+<h1><a class="manager" href="{% url 'g_pigeon_race:manager_page' %}">manager</a></h1>
+<hr>
+<h5 class="good-day">Good Day, {{request.user.username}}</h5>
+<h3><a class="view-players" href="{% url 'user:index' %}">View Players</a></h3>
 
 <hr>
-<h5 style="background-color: rgba(255, 105, 180, 0.137); padding: 2%;">Good Day, {{request.user.username}}</h5>
-<h3><a style="text-decoration: none; background-color: rgba(105, 255, 138, 0.082);padding: 1%;" href="{% url 'user:index' %}">View Players</a></h3>
+
+{% if measured %}
+<!-- CLock Section -->
 <div class="clock-1">
     <div class="clock-2" >
         <div class="clock-3">
@@ -102,34 +128,48 @@
     </div>
 </div>
 
-<hr>
-
-
-
-{% if races %}
-<h1>Open Races:</h1>
-        {% for race in races %}
-    <div class="races-container">
-        <h2><a href="{%url 'g_pigeon_race:race' race.id %}" style="background-color: rgba(240, 255, 240, 0.178);color: rgb(255, 255, 255); padding: 2%; margin: 15px; line-height: 1.5; text-align: center;text-decoration: none;">{{race.racename}}
-        </a></h2>
-        <form action="{%url 'g_pigeon_race:race' race.id %}" style="text-align: center;">
-            <button  class="button">Join !!</button>
+    {% if races %}
+        <h1>Open Races:</h1>
+            {% for race in races %}
+                {% if race.finished %}
+                    {{race.racename}} has Ended
+                    <hr>
+                {% else %}
+                    <div class="races-container">
+                        <a href="{%url 'g_pigeon_race:race' race.id %}">
+                            <h2>{{race.racename}}
+                        </h2>
+                        <p>Price {{race.price}}</p>    
+                    </a>
+                        {% if race.started %}
+                            <a href="{% url 'g_pigeon_race:lap' race.id %}">
+                                <button class="load-pigeon">LOAD PIGEON</button>
+                            </a>
+                        {% else %}
+                            <form action="{%url 'g_pigeon_race:race' race.id %}" style="text-align: center;">
+                                <button  class="button">Join !!</button>
+                            </form>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+    {% endif %} 
+{% else %}
+    <h2><a class="view-players" href="{% url 'user:upload' %}">Register pigeon</a></h2>
+    Please Measure Your Loft Place Before Joining the race 
+    <div class="add_point" style="border: 3px rgba(255, 0, 0, 0.349) solid; margin-bottom: 2%; padding: 2%; border-radius:10px; background-color:rgba(255, 0, 0, 0.253)">
+        Your Loft Place
+        <form method="post" action="{% url 'g_pigeon_race:measure' %}">
+            {% csrf_token %}
+            <input name="place" placeholder="Your Complete Address" style="width: 100%;">
+            <br>
+            <input class="measure" type="submit">
         </form>
-            <p style="justify-content: center;align-items: center;background-color: rgba(2, 255, 15, 0.137);border-radius:1px; ">Price {{race.price}}</p>            
     </div>
-        {% endfor %}
-{% endif %} 
-<br>
-Please Measure Your Loft Place Before Joining the race 
-<div class="add_point" style="border: 3px rgba(255, 0, 0, 0.349) solid; margin-bottom: 2%; padding: 2%; border-radius:10px; background-color:rgba(255, 0, 0, 0.253)">
-    Your Loft Place
-    <form method="post" action="{% url 'g_pigeon_race:measure' %}">
-        {% csrf_token %}
-        <input name="place" placeholder="input loft place here">
-        <br>
-        <input class="measure" type="submit">
-    </form>
-</div>
+
+{% endif %}
+
+
 
 <div style="height: 500px;"></div>
 {% endblock %}

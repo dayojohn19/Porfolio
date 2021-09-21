@@ -16,6 +16,20 @@ import datetime
 from geopy.geocoders import Nominatim
 from geopy.distance import geodesic
 import time
+
+def started_race(request, rid):
+    if request.method == "POST":
+        update = Race.objects.get(id=rid)
+        update.started = True
+        update.save()
+    return redirect('g_pigeon_race:manager_page')
+def ended_race(request, rid):
+    if request.method == "POST":
+        update = Race.objects.get(id=rid)
+        update.finished = True
+        update.save()
+    return redirect('g_pigeon_race:manager_page')
+
 def measure(request):
     if request.method == "POST":
             place = request.POST["place"]
@@ -35,36 +49,26 @@ def measure(request):
                         longitude=long
                     )
                     new.save()
-            return render(request, "race/index.html", {
-                "races": Race.objects.all().order_by('id').reverse() , 
-                'message':'Your Loft place is measured',
-                "now":'Measureed',
-                "now2":1628050985.684767,
-        })
+            return redirect('g_pigeon_race:index')
     else:
-        return render(request, "race/index.html", {
-            "races": Race.objects.all().order_by('id').reverse() , 
-            'message':'Error Measurement ',
-            "now":'Not Measured',
-            "now2":1628050985.684767,
-    })
+            return redirect('g_pigeon_race:index')
+
 def index(request):
     geolocator = Nominatim(user_agent='race')
- #   location1 = geolocator.geocode("Malate Manila")
-#    location2 = geolocator.geocode("badoc ilocos norte")
-#    distance = geodesic((location1.latitude,location1.longitude),(location2.latitude,location2.longitude)).kilometers
-#######
-#######
-#######
     now = time.time()
-
+    measured = False
     if not request.user.is_authenticated:
         return redirect('user:login')
+    try:
+        xx = User.objects.get(username=request.user.username)
+        x = Measurement.objects.get(uid = xx.id)
+        measured = True
+    except:
+        pass
     return render(request, "race/index.html", {
         "races": Race.objects.all().order_by('id').reverse() , 
         "now":now,
-        "now2":1628050985.684767,
-        "mea":Measurement.objects.all()
+
 
 #######
 #######
@@ -74,10 +78,35 @@ def index(request):
 def manager(request):
     return render(request, "race/manager.html", {
         "laps": Lap.objects.filter(released=False).all().order_by('id').reverse(),
-        'races':Race.objects.all(),
+        'races':Race.objects.filter(finished=False).order_by('id').reverse(),
         'point':Point.objects.all(),
         "now":datetime.datetime.now()
     })
+
+def start_race(request, csrf_token):
+    if request.method == "POST":
+        r = Race(
+            racename=request.POST.get("race_name"),
+            price=request.POST.get("price")
+        )
+        r.save()
+        context = {
+            'races':Race.objects.filter(finished=False).order_by('id').reverse()
+        }
+        # return render(request, 'race/index.html', context)
+        return redirect('g_pigeon_race:manager_page')
+def add_code(request, csrf_token):
+    if request.method == "POST":
+        c = Code(
+            code = request.POST.get("code"),
+            hcode = request.POST.get("hcode")
+        )
+        c.save()
+        context = {
+            'cc':Code.objects.order_by('id').reverse()
+        }
+        return render(request, 'race/codes.html', context)
+        # return redirect('g_pigeon_race:view_codes')
 def add_point(request):
     if request.method == "POST":
         try:
@@ -95,24 +124,21 @@ def add_point(request):
                 )
                 new.save()
         except:    
-            return render(request, "race/manager.html", {
-        #'lat':lat,
-        #'long':long,
-        #'new':new,
-        'message':"error place"
+            return redirect('g_pigeon_race:manager_page')
+        return redirect('g_pigeon_race:manager_page')
         
         #'long':long
-    })
 
 
-    return render(request, "race/manager.html", {
-        'lat':lat,
-        'long':long,
-        'new':new,
-        'message':"New Point Saved"
+
+    # return render(request, "race/manager.html", {
+    #     'lat':lat,
+    #     'long':long,
+    #     'new':new,
+    #     'message':"New Point Saved"
         
-        #'long':long
-    })
+    #     # 'long':long
+    # })
 
 def add_lap(request):
     if request.method == "POST":
@@ -137,13 +163,9 @@ def add_lap(request):
     
     return render(request, "race/manager.html", {
     'x':'failed',
-    'races':Race.objects.all(),
+    'races':Race.objects.filter(finished=False),
     'point':Point.objects.all().order_by('id').reverse(),
     })
-
-
-
-
 
 def release_it(request, id):
     if request.method == "POST":
@@ -170,10 +192,12 @@ def release_it(request, id):
         return render(request, "race/index.html", {
             "message":"released!",
             "x":x,
-            "load":load
+            "load":load,
+            'measured':True
             })
     return render(request, "race/index.html", {
-        "message":"released!"
+        "message":"released!",
+        'measured':True
         })
 
 def clock_it(request):
@@ -240,7 +264,8 @@ def clock_it(request):
                     "x":loaded,
                     "xx":idd,
                     "records": Record.objects.filter(entry=idd).order_by('id').reverse(),
-                    "count": len(Record.objects.filter(entry=idd))
+                    "count": len(Record.objects.filter(entry=idd)),
+                    'measured':True
                     })
 #                except:
 #                    return render(request, "race/index.html", {
@@ -293,7 +318,7 @@ def entry(request, race_id):
 #record is to pigeon_id
         pigeon = Mypigeons.objects.get(pk=pigeon_id)
         pigeon.races.add(race)  
-        return HttpResponseRedirect(reverse("g_pigeon_race:lap", args=(race.id,)))
+        return HttpResponseRedirect(reverse("g_pigeon_race:race", args=(race.id,)))
 ##define clock
 
 ##get entry_id from the lap codes
@@ -388,10 +413,10 @@ def lap(request, race_id):
     if not request.user.is_authenticated:
         return redirect('user:login')
     race = Race.objects.get(pk=race_id)
-    x = request.user
+    x = request.user.username
     race = Race.objects.get(id=race_id)
     pigeons = race.registered.filter(owner=x).order_by('id').reverse()
-    lap = Lap.objects.filter(race=race).order_by('id').reverse()
+    lap = Lap.objects.filter(race=race, released=False).order_by('id').reverse()
     return render(request, "race/lap.html", {
         "lap": lap,
         "rn":race,

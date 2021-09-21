@@ -1,0 +1,49 @@
+{% extends "commerce/bank/layout.html" %}
+{% block body %}
+<h1>Manager</h1>
+<style>
+    .a-form { 
+      padding: 0;
+      margin: 0;
+      outline: none;
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 16px;
+      color: #667;
+      background-color: rgba(205, 92, 92, 0.308);
+
+      padding: 10px 0;
+      margin: auto;
+      border-radius: 5px; 
+      border: solid 1px #ccc;
+      box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
+      background: #ebebeb; 
+      }
+</style>
+<div>
+    <p>Unpaid</p>
+    <div>
+            <form  class="a-form">
+                <a href="{% url 'bank:client' csrf_token %}">Name</a>
+                <br>
+                <input placeholder="Message">
+                <button>Send Message</button>
+                <br>
+                <input placeholder="Amount Due ">
+                <br>
+                <button>Pay</button>
+            </form>
+    </div>
+</div>
+<hr><hr>
+<div>
+    <p>Paid</p>
+    filter manager's client
+
+    <form class="a-form">
+        <p><a href="{% url 'bank:client' csrf_token %}">Name</a></p>
+        <p>Amount: P</p>
+        <p>Time:</p>
+        <p>Message</p>
+    </form>
+</div>
+{% endblock %}

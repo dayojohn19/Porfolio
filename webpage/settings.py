@@ -30,6 +30,7 @@ ALLOWED_HOSTS = ['webpagedj19.herokuapp.com', 'localhost','127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'com_bank',
     'com_sale',
     'com_auction',
     'commerce',
@@ -81,6 +82,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'user.context_processors.add_variable_to_context',
+                'g_pigeon_race.context_processors.add_variable_to_context',
             ],
         },
     },

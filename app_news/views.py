@@ -33,6 +33,8 @@ def section(request, x):
 
 
 def publish(request):
+    if request.user.is_anonymous:
+        return HttpResponseRedirect(reverse("sale:login"))
     if request.method == 'POST':
         form = ArticleForm(request.POST)
         if form.is_valid():
