@@ -12,9 +12,7 @@
             font-family: 'Times New Roman', Times, serif;
             font-size: larger;
         }
-        .a-right {
-            z-index: 100;
-        }
+
     </style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -41,7 +39,7 @@
             <h1 class="o-green">John Foreign</h1>
         </div>
 
-        <div class="container-sub-2-1 a-right">
+        <div class="container-sub-2-1 a-right" style="z-index: 100;">
             {% if request.user.is_anonymous %}
             <span><a class=""  href="{% url 'user:login' %}">Login</a></span>
             {% else %}
@@ -49,11 +47,11 @@
             {% endif %}
 
 
-            <span><a class=""  href="{% url 'index:index' %}"><img class="h-icon th hg" src="{% static 'a_index/images/home.png' %}" alt=""></a></span>
-            <span><a class=""  href="{% url 'index:social' %}"><img class="h-icon th hg" src="{% static 'a_index/images/socials.png' %}" alt=""></a></span>
-            <span><a class=""  href="{% url 'index:games' %}"><img class="h-icon th hg" src="{% static 'a_index/images/games2.png' %}" alt=""></a></span>
-            <span><a class=""  href="{% url 'index:commerce' %}"><img class="h-icon th hg" src="{% static 'a_index/images/commerce.png' %}" alt=""></a></span>
-            <span><a class=""  href="{% url 'application:application' %}"><img class="h-icon th hg" src="{% static 'a_index/images/apps2.png' %}" alt=""></a></span>
+            <span><a class="zindex"  href="{% url 'index:index' %}"><img class="h-icon th hg" src="{% static 'a_index/images/home.png' %}" alt=""></a></span>
+            <span><a class="zindex"  href="{% url 'index:social' %}"><img class="h-icon th hg" src="{% static 'a_index/images/socials.png' %}" alt=""></a></span>
+            <span><a class="zindex"  href="{% url 'index:games' %}"><img class="h-icon th hg" src="{% static 'a_index/images/games2.png' %}" alt=""></a></span>
+            <span><a class="zindex"  href="{% url 'index:commerce' %}"><img class="h-icon th hg" src="{% static 'a_index/images/commerce.png' %}" alt=""></a></span>
+            <span><a class="zindex"  href="{% url 'application:application' %}"><img class="h-icon th hg" src="{% static 'a_index/images/apps2.png' %}" alt=""></a></span>
         </div>
 </head>
 <!---end-->
