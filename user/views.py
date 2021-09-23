@@ -180,8 +180,8 @@ def register(request):
                 email,
                 password
             )
-            user.last_name = 1
-            user.first_name = 1
+            user.last_name = 1000
+            user.first_name = 1000
             user.save()
         except IntegrityError:
             return render(request, "user/register.html", {"message": "Username already taken."})
