@@ -1,19 +1,35 @@
 {% extends "commerce/sale/layout.html" %}
 {% load humanize %}
 {% block body %}
-{{request.user}}
-<h1>Your Order</h1>
-{% for i in items %}
-<div>{{i.i_id}}</div>
-<div>{{i.item}}</div>
-<div>Seller {{i.owner}}</div>
-<div>Buyer {{i.user}}</div>
-<div>del: {{i.delivered}}</div>
-<div>del Time: {{i.del_time}}</div>
-<div>ord: {{i.time}}</div>
-<div>qty: {{i.qty}}</div>
+<style>
+    section div {
+        margin: 1rem;
+    }
+</style>
+<h1>Your Order: </h1>
+<section>
+    {% for i in items %}
+    <hr style="background-color: yellow;">
+    <h2><div>₱{{i.i_total_price}} <br> {{i.qty}}pcs {{i.item}} </div></h2>
+    <div>Seller: {{i.owner}}</div>
+    <div>Buyer: {{i.user}}</div>
+    {% if i.delivered %}
+        <div>delivered Time: {{i.del_time}}</div>
+    {% else %}
+        <div>not Yet Delivered</div>
+        <form action="{% url 'sale:order' item_id=i.i_id hashed=request.user.first_name i_price=i.i_price %}" method="GET">
+            {% csrf_token %}
+            <input hidden name="qty" value="{{i.qty}}">
+            <input class="order" type="submit" value="Stop Order">
+        </form>
 
-<hr style="background-color: yellow;">
+    {% endif %}
+    <div>order date: {{i.time}}</div>
+    <!-- <div>qty: {{i.qty}}</div> -->
+
 {% endfor %}
+
+</section>
+
 
 {% endblock %}

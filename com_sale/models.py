@@ -1,7 +1,10 @@
 from django.db import models
-
+import datetime
 # Create your models here.
 class Item(models.Model):
+    notavailable = models.BooleanField(default=False)
+    duration = models.DurationField(datetime.timedelta(days=20, hours=10),default=3)
+
     title = models.CharField(max_length=64)
     owner = models.CharField(max_length=64)
     time = models.DateTimeField(auto_now_add=True)
@@ -20,15 +23,17 @@ class Item(models.Model):
     category = models.CharField(max_length=64)
     orders = models.ManyToManyField('app_mail.User', default=None, blank=True, related_name="item_order")
     bought = models.IntegerField(default=0)
-    notavailable = models.BooleanField(default=False)
+    
     @property
     def num_order(self):
         return self.orders.all().count()
     def __str__(self):
-        return f"{self.title} ₱ {self.price}"
+        return f"{self.title}"
 
 class Order(models.Model):
     i_id = models.CharField(max_length=64)
+    i_price = models.IntegerField(default=1)
+    i_total_price = models.IntegerField(default=2)
     owner = models.CharField(max_length=64)
     user = models.ForeignKey('app_mail.User', on_delete=models.CASCADE)
     item = models.ForeignKey('Item', on_delete=models.CASCADE)

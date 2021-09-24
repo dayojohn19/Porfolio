@@ -11,7 +11,11 @@ from django.shortcuts import HttpResponse, HttpResponseRedirect, render
 from django.urls import reverse
 from django.db import IntegrityError
 
+from durationfield.forms import DurationField as FDurationField
 class Sale(forms.Form):
+    class MyForm(forms.ModelForm):
+        duration = FDurationField()
+        
     cat=('1', 'Service'), ('2', 'Goods')
     title = forms.CharField(required=True ,label="Title")
     link = forms.CharField(required=True ,label="link", widget=forms.TextInput(attrs={'placeholder': 'Picture Link'}))
@@ -101,7 +105,7 @@ def sub_check(user, hashed, i_price):
     else:
         new_hash = hash(str(hashed))
         user.first_name = new_hash
-        value = int(user.last_name) - i_price
+        value = int(user.last_name) - int(i_price)
         if value <= 0:
             return value
         user.last_name = value
@@ -133,7 +137,7 @@ def sub_check(user, hashed, i_price):
 def index(request):
     if request.user.is_authenticated:
         return render(request, 'commerce/sale/index.html', {
-            'item':Item.objects.all().order_by('id').reverse(),
+            'item':Item.objects.filter(notavailable=False).order_by('id').reverse(),
             'users':User.objects.all()
         })
     else:
@@ -213,22 +217,23 @@ def order(request, item_id, hashed, i_price):
         time = datetime.datetime.now()
         select = request.GET.get("select")
         qty = request.GET.get("qty")
-        i_price = i_price * int(qty)
+        i_price2 = i_price * int(qty)
         if order.notavailable == False:
             if user in order.orders.all():
-                if add_check(user, hashed, i_price) == 'hacker':
+                ####### update value
+                if add_check(user, hashed, i_price2) == 'hacker':
                     return HttpResponse('hacked')
                 ######## end update value
-                o = Order.objects.get(i_id=order.id, item=order, user=user, delivered=False)
+                o = Order.objects.get(i_id=order.id, user=user, item=order,  delivered=False)
                 if o.delivered == True:
                     return HttpResponse('Fail to Unorder, Item already delivered')
                 o.delete()
                 order.orders.remove(user)
-                ####### update value
+                
                 return redirect('sale:item', item_id)
             else:
                 ####### update value
-                v = sub_check(user, hashed, i_price)
+                v = sub_check(user, hashed, i_price2)
                 if v == 'hacker':
                     return HttpResponse('hacked')
                 elif v == 'poor':
@@ -236,7 +241,7 @@ def order(request, item_id, hashed, i_price):
                 elif v <= 0:
                     return HttpResponse('poor')
                 ######## end update value
-                o = Order.objects.create(i_id=order.id, user=user, item=order, select=select, qty=qty, owner=order.owner, time=time)
+                o = Order.objects.create(i_total_price=i_price2, i_price=i_price, i_id=order.id, user=user, item=order, select=select, qty=qty, owner=order.owner, time=time)
                 order.orders.add(user)
                 order.save()
 

@@ -4,6 +4,7 @@
 
 <style>
        .grid-container {
+
   display: flex;
 justify-content: space-evenly;
   flex-direction: row;
@@ -25,9 +26,11 @@ justify-content: space-evenly;
     text-align: center;
 }
 .grid-item {
-    width: 100%
+    width: 100%;
 }
 .grid-container2 {
+    border-radius: 8px;
+
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -51,7 +54,7 @@ justify-content: space-evenly;
             <form>
                 <div class="grid-container2" style="position: relative;">
                     <div class="f-title"><h4>{{i.title}}</h4></div>
-                    <img style="width: 100px;height: auto;" src="{{i.link}}">
+                    <img style="max-width: 100px;height: auto;" src="{{i.link}}">
                     <span class="f-detail">
                         <div>Bought: {{i.bought}}</div>
                         <div>Orders: {{i.num_order}}</div>

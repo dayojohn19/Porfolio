@@ -21,18 +21,13 @@
     }
 </style>
     <body >
-    <div>
+    <div style="margin-left:3em;margin-right: 3em;">
+
         {% block body %}
         {% endblock %}
     </div>
 
-    <div style="float: left; display: block; margin-top: 1rem;">
-        {% if user.is_authenticated %}
-             <h10><strong>{{ user.username }}</strong> ₱ <a id="value">{{request.user.last_name}}</a></h10>
-        {% else %}
-            Not signed in.
-        {% endif %}
-    </div>
+
 
 
 <div style="height: 500px;"></div>

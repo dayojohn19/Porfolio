@@ -188,7 +188,7 @@ def register(request):
 
 
         login(request, user)
-        return HttpResponseRedirect(reverse("user:index"))
+        return HttpResponseRedirect(reverse("sale:index"))
     else:
         form = UserImageForm()
 

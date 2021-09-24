@@ -18,6 +18,8 @@ justify-content: space-evenly;
   grid-gap: 10px;
   background-color: #2196F3;
   padding: 10px;
+  border-radius: 5.6px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.342);
 }
 .span {
     float: right;
@@ -28,6 +30,8 @@ justify-content: space-evenly;
     width: 100%
 }
 .grid-container2 {
+    border-radius: 8px;
+
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -36,6 +40,7 @@ justify-content: space-evenly;
     color: black;
     padding: 0.5rem;
     justify-content: space-evenly;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.24);
 }
 .f-title {
     width: 100%;
@@ -49,9 +54,8 @@ justify-content: space-evenly;
 }
 </style>
 <h1>Your Buyer Order Lists</h1>
-m:{{message}}
 {% now "jS F Y H:i" %}
-{{date}}
+<br>
 <div class="grid-container">
     {% for i in items %}
             <form>

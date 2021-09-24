@@ -177,9 +177,6 @@
             <img id="selected"  src="{{item.link}}" value="{{item.link}}"><br>
             <input hidden id="select" value="{{item.link}}" name="select">
         </div>        
-
-        <div class="form-item-two">
-
             <div class="description">
                 description: {{item.description}}
                     <br>
@@ -224,19 +221,5 @@
         <div onclick="change('{{item.link10}}')" class="item1"><img  class="item1-img" src="{{item.link10}}"> </div>
     </div>
 
-
-ID: {{item.id}}
-
-
-{% for o in ordered %}
-{{o.id}}    <br>
-{{o.user}}  <br>
-{{o.item}}  <br>
-Delivered: {{o.delivered}} <br>
-ordered: {{o.time|naturalday}}  <br>
-Selected: <input type="text" value="{{o.select}}">p<br>
-Quantity: {{o.qty}}<br>
-<hr>
-{% endfor %}
 
 {% endblock %}
