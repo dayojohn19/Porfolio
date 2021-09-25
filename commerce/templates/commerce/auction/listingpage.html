@@ -1,6 +1,19 @@
 {% extends "commerce/auction/layout.html" %}
 {% block body %}
 
+
+{% for b in bid %}
+{{b.user}}
+<br>
+{{b.title}}
+<br>
+{{b.listingid}}
+<br>
+{{b.bid}}
+<br>
+{{b.date}}
+<hr>
+{% endfor %}
 {% if error %}
 <div class="alert alert-danger" role="alert">
     {{error}}

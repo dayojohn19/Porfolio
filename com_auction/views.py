@@ -181,7 +181,8 @@ def listingpage(request,id):
         "comments":comments,
         "added":added,
         "owner":owner,
-        "wcount":wcount
+        "wcount":wcount,
+        "bid":Bid.objects.filter(listingid=id).order_by('id').reverse()
     })
 
 def bidsubmit(request,listingid):
@@ -190,12 +191,14 @@ def bidsubmit(request,listingid):
     if request.method == "POST":
         user_bid = int(request.POST.get("bid"))
         user = request.user
-        if user_bid > current_bid:
+        highest = current_bid+(current_bid*0.50)
+
+        if user_bid > highest:
             if (int(user.last_name) - int(user_bid)) <=  0:
                 return HttpResponse('no money')
             #### to hash
             hashed=request.user.first_name
-            i_price = current_bid
+            i_price = user_bid
             user = request.user
             sub_check(user, hashed, i_price)
             # user.last_name = int(user_bid) - int(user.last_name)
@@ -228,7 +231,7 @@ def bidsubmit(request,listingid):
             return response
         else :
             response = redirect('auction:listingpage',id=listingid)
-            response.set_cookie('error','Bid should be greater than  Highest Bid',max_age=3)
+            response.set_cookie('error','Bid should be greater than'+str(highest),max_age=3)
             return response
     else:
         return redirect('auction:index')

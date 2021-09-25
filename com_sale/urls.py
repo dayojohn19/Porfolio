@@ -14,5 +14,6 @@ urlpatterns = [
     path('sale/register', views.register_view, name="register"),
     path('sale/login', views.login_view, name="login"),
     path('sale/logout', views.logout_view, name="logout"),
-    path('sale/<int:category>', views.category, name="category")
+    path('sale/<int:category>', views.category, name="category"),
+    path('<int:id>/<str:csrf_token>/update_create', views.update_create, name="update_create"),
 ]

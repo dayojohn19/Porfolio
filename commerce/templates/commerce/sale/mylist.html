@@ -17,7 +17,7 @@ justify-content: space-evenly;
   /* align-content: flex-end; */
   /* grid-template-columns: auto auto auto; */
   grid-gap: 10px;
-  background-color: #f321ad23;
+
   padding: 10px;
 }
 .span {
@@ -30,7 +30,7 @@ justify-content: space-evenly;
 }
 .grid-container2 {
     border-radius: 8px;
-
+    
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -39,6 +39,7 @@ justify-content: space-evenly;
     color: black;
     padding: 0.5rem;
     justify-content: space-evenly;
+    margin: 10px;
 }
 .f-title {
     width: 100%;
@@ -48,13 +49,13 @@ justify-content: space-evenly;
     text-align: center;
 }
 </style>
-<h1 style="background-color: rgba(0, 255, 255, 0.062);">Item Lists</h1>
+<h1 style="background-color: rgba(0, 255, 255, 0.062);">Your Products</h1>
 <div class="grid-container">
     {% for i in items %}
             <form>
                 <div class="grid-container2" style="position: relative;">
                     <div class="f-title"><h4>{{i.title}}</h4></div>
-                    <img style="max-width: 100px;height: auto;" src="{{i.link}}">
+                    <img style="max-width: 100px;max-height: 100px;" src="{{i.link}}">
                     <span class="f-detail">
                         <div>Bought: {{i.bought}}</div>
                         <div>Orders: {{i.num_order}}</div>
@@ -65,7 +66,16 @@ justify-content: space-evenly;
                     <span class="f-detail">
                         <div>{{i.time}}</div>
                         <div>time left</div>
-                        <button>Update</button>
+                        <div>Listing Date = {{i.listing_date}}</div>
+                        <div>Paid Date = {{i.paid_date}} Weeks</div>
+                        <div>Expiration Date = {{i.expiration_date|naturaltime}}</div>
+                        <br>{{i.expiration_date}}<br>
+                        <form method="POST" action="#"></form>
+                        <form method="POST" action="{% url 'sale:update_create' i.id csrf_token %}">
+                            {% csrf_token %}
+                            <input required type="number" name="updated_day">
+                            <button value="submit">Update</button>
+                        </form>
                     </span>
                 </div>
             </form>

@@ -13,7 +13,7 @@
     font-family: Arial, Helvetica, sans-serif;
   }
   * a {
-    text-decoration: none;
+    text-decoration: none !important;
   }
     .h-icon {
 width: 5%;
@@ -90,8 +90,11 @@ position: sticky;
       <div class="tab-list"><span><a href="{% url 'sale:login' %}">Log in</a></span></div>
       <div class="tab-list"><span><a href="{% url 'sale:register' %}">Register</a></span></div>
       {% else %}
+   
+      <li class="tab-list dropdown"><div class=""><span><a href="{% url 'auction:watchlistpage' request.user %}"><div class="tabs-cart">Watchlist <span class="badge badge-danger"><a class="tabs-count">{{wcount}}</span></div></a></a></span></div>
       <li class="tab-list dropdown"><div class=""><span><a href="{% url 'sale:myorder' %}"><div class="tabs-cart">Cart <span class="badge badge-danger"><a class="tabs-count">{{orders}}</span></div></a></a></span></div>
           <div class="dropdown-content">
+                  
                   <div class="drop-list"><span><a href="{% url 'sale:create' %}">Sell</a></span></div>
                   <div class="drop-list"><span><a href="{% url 'sale:mylist' %}"><b style="color: rgb(117, 0, 0);">{{request.user.username}}</b></a></span></div>
                   
@@ -112,6 +115,19 @@ position: sticky;
 </div>
 
 
+
+<!-- <div>
+  <p class="test" style="position: fixed;
+  width: 20%;
+  top: 2%;
+  left: 80%;
+  right: 50%;
+  text-align: center;
+  align-items: center;
+  background-color: rgba(43, 40, 37, 0.301);"> 
+      <a class="nav-link" href="{% url 'auction:watchlistpage' request.user %}">My Watchlist <span class="badge badge-danger">{{wcount}}</span></a>
+  </p>
+</div>  -->
  
 <style>
   .help-line {

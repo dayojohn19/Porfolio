@@ -188,13 +188,18 @@
                         <option value="3">3</option>
                         <option value="4">4</option>
                     </select>
-                    {% if request.user in item.orders.all %}
-                        <input class="order" type="submit" value="Stop Order">
-                        <a class="ordered">{{item.num_order}} orders</a>
+                    {% if item.notavailable %}
+                    Not available
                     {% else %}
-                        <input class="order" type="submit" value="Order now ">
-                        <a class="ordered">{{item.num_order}} orders</a>
+                        {% if request.user in item.orders.all %}
+                            <input class="order" type="submit" value="Stop Order">
+                            <a class="ordered">{{item.num_order}} orders</a>
+                        {% else %}
+                            <input class="order" type="submit" value="Order now ">
+                            <a class="ordered">{{item.num_order}} orders</a>
+                        {% endif %}
                     {% endif %}
+
 
 
                 </div>

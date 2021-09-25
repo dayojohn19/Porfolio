@@ -28,6 +28,7 @@ class Bid(models.Model):
     title = models.CharField(max_length=64)
     listingid = models.IntegerField()
     bid = models.IntegerField()
+    date = models.DateTimeField(auto_now_add=True)
 
 class Comment(models.Model):
     user = models.CharField(max_length=64)

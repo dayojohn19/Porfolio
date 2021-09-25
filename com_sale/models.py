@@ -3,7 +3,9 @@ import datetime
 # Create your models here.
 class Item(models.Model):
     notavailable = models.BooleanField(default=False)
-    duration = models.DurationField(datetime.timedelta(days=20, hours=10),default=3)
+    listing_date = models.DateTimeField()
+    paid_date = models.IntegerField()
+    expiration_date = models.DateTimeField()
 
     title = models.CharField(max_length=64)
     owner = models.CharField(max_length=64)

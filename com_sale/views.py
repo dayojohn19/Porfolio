@@ -4,34 +4,18 @@ from com_sale.models import Item, Order
 from django.shortcuts import redirect
 from django.http import HttpResponse
 from app_mail.models import User
-import datetime
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import HttpResponse, HttpResponseRedirect, render
 from django.urls import reverse
 from django.db import IntegrityError
 
-from durationfield.forms import DurationField as FDurationField
-class Sale(forms.Form):
-    class MyForm(forms.ModelForm):
-        duration = FDurationField()
-        
-    cat=('1', 'Service'), ('2', 'Goods')
-    title = forms.CharField(required=True ,label="Title")
-    link = forms.CharField(required=True ,label="link", widget=forms.TextInput(attrs={'placeholder': 'Picture Link'}))
-    link2 = forms.CharField(required=False, label="link",widget=forms.TextInput(attrs={'placeholder': 'Picture Link (Optional)'}))
-    link3 = forms.CharField(required=False, label="link2",widget=forms.TextInput(attrs={'placeholder': 'Picture Link (Optional)'}))
-    link4 = forms.CharField(required=False, label="link3",widget=forms.TextInput(attrs={'placeholder': 'Picture Link (Optional)'}))
-    link5 = forms.CharField(required=False, label="link4",widget=forms.TextInput(attrs={'placeholder': 'Picture Link (Optional)'}))
-    link6 = forms.CharField(required=False, label="link5",widget=forms.TextInput(attrs={'placeholder': 'Picture Link (Optional)'}))
-    link7 = forms.CharField(required=False, label="link6",widget=forms.TextInput(attrs={'placeholder': 'Picture Link (Optional)'}))
-    link8 = forms.CharField(required=False, label="link7",widget=forms.TextInput(attrs={'placeholder': 'Picture Link (Optional)'}))
-    link9 = forms.CharField(required=False, label="link8",widget=forms.TextInput(attrs={'placeholder': 'Picture Link (Optional)'}))
-    link10 = forms.CharField(required=False, label="link9",widget=forms.TextInput(attrs={'placeholder': 'Picture Link (Optional)'}))
-    price = forms.IntegerField(required=True)
-    description = forms.CharField(required=True ,label="Description",widget=forms.TextInput(attrs={'class': 'special'}))
-    category = forms.ChoiceField(required=True ,widget=forms.RadioSelect,choices=cat)
+from datetime import date, time, datetime, timedelta
+# from datetime import time
+# from datetime import datetime
+# from datetime import timedelta
 
+import datetime
 
 
 def category(request, category):
@@ -137,7 +121,7 @@ def sub_check(user, hashed, i_price):
 def index(request):
     if request.user.is_authenticated:
         return render(request, 'commerce/sale/index.html', {
-            'item':Item.objects.filter(notavailable=False).order_by('id').reverse(),
+            'item':Item.objects.all().order_by('id').reverse(),
             'users':User.objects.all()
         })
     else:
@@ -146,23 +130,62 @@ def index(request):
 
 
 def item(request, id):
+    import datetime
+    from datetime import date, time, datetime, timedelta
+
     # return render(request, 'commerce/sale/item.html')
     # return redirect('sale:index')
     orders = Order.objects.filter(user=request.user).order_by('id').reverse()
-
-    items = Item.objects.get(id=id)
+    item = Item.objects.get(id=id)
+            ###############
+    current_date = datetime.now()
+    if item.expiration_date < current_date:
+        item.notavailable = True
+    else:
+        item.notavailable = False
+        #############
     return render(request, 'commerce/sale/item.html',{
         'orders':len(orders),
         'item':Item.objects.get(id=id),
-        'ordered':Order.objects.filter(item=items)
+        'ordered':Order.objects.filter(item=item)
     })
 
+
+class Sale(forms.Form):
+    
+    cat=('1', 'Service'), ('2', 'Goods')
+    title = forms.CharField(required=True ,label="Title")
+    link = forms.CharField(required=True ,label="link", widget=forms.TextInput(attrs={'placeholder': 'Picture Link'}))
+    link2 = forms.CharField(required=False, label="link",widget=forms.TextInput(attrs={'placeholder': 'Picture Link (Optional)'}))
+    link3 = forms.CharField(required=False, label="link2",widget=forms.TextInput(attrs={'placeholder': 'Picture Link (Optional)'}))
+    link4 = forms.CharField(required=False, label="link3",widget=forms.TextInput(attrs={'placeholder': 'Picture Link (Optional)'}))
+    link5 = forms.CharField(required=False, label="link4",widget=forms.TextInput(attrs={'placeholder': 'Picture Link (Optional)'}))
+    link6 = forms.CharField(required=False, label="link5",widget=forms.TextInput(attrs={'placeholder': 'Picture Link (Optional)'}))
+    link7 = forms.CharField(required=False, label="link6",widget=forms.TextInput(attrs={'placeholder': 'Picture Link (Optional)'}))
+    link8 = forms.CharField(required=False, label="link7",widget=forms.TextInput(attrs={'placeholder': 'Picture Link (Optional)'}))
+    link9 = forms.CharField(required=False, label="link8",widget=forms.TextInput(attrs={'placeholder': 'Picture Link (Optional)'}))
+    link10 = forms.CharField(required=False, label="link9",widget=forms.TextInput(attrs={'placeholder': 'Picture Link (Optional)'}))
+    price = forms.IntegerField(required=True)
+    description = forms.CharField(required=True ,label="Description",widget=forms.TextInput(attrs={'class': 'special'}))
+    category = forms.ChoiceField(required=True ,widget=forms.RadioSelect,choices=cat)
+    paid = forms.IntegerField(required=True)
+
+
 def create(request):
+    from datetime import date, time, datetime, timedelta
+
     if request.method == 'POST':
         form = Sale(request.POST)
         if form.is_valid():
             value = int(form.cleaned_data["price"])
+            list_d = datetime.now()
+            paid_int = form.cleaned_data["paid"]
+            paid_d = (timedelta(weeks=paid_int))
             o = Item(
+            listing_date=list_d,
+            paid_date=paid_int,
+            expiration_date=list_d + paid_d,
+
             owner = request.user,
             link = form.cleaned_data["link"],
             link2 = form.cleaned_data["link2"],
@@ -204,6 +227,28 @@ def create(request):
     return render(request, 'commerce/sale/create.html',{
         'form':Sale()
     })
+# class Update(forms.Form):
+    # day = forms.IntegerField(required=True, label="Duration")
+def update_create(request, id, csrf_token):
+
+    if request.method == 'POST':
+        update_day = int(request.POST.get('updated_day'))
+        item = Item.objects.get(pk=id)
+        add_date = int(item.paid_date) + int(update_day)
+        item.paid_date = add_date
+        item.expiration_date = item.expiration_date + timedelta(weeks=update_day)
+        ###############
+        current_date = datetime.now()
+        if item.expiration_date < current_date:
+            item.notavailable = True
+        else:
+            item.notavailable = False
+        #############
+        item.save()
+        return redirect('sale:mylist')
+    return redirect('sale:mylist')
+    
+
 
 def order(request, item_id, hashed, i_price):
     if request.user.is_anonymous:
