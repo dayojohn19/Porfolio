@@ -4,14 +4,14 @@
 <h3>{{lap_name|naturalday}}</h3>
 <h4>Released: {{lap_release}}</h4>
 <h4>Clocked Birds:</h4> 
-{{time}}
+
 {% for c in clocked %}
 <div style="border:solid orange 2px">
  <strong>{{c.pigeon_name}}</strong>   <br>
-
 Release: {{c.release}}<br>
-Time: {{c.time}} Minutes<br>
 Clock: {{c.clock}}  <br>
+
+Flight: {{c.time}} Minutes<br>
 speed: {{c.speed}} meter per Hour<br> 
 Distance: {{c.distance}} meters<br>
 {{c.id}}

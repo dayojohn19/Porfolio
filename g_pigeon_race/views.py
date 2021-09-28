@@ -69,7 +69,7 @@ def index(request):
     d = 200
     t1 = 1632645662.55295
     t2 = time.time()
-    t3 = (float(t2)-float(t1)) / 60
+    t3 = (float(t2)-float(t1)) /60
     s = d / t3
     # t_speed = (float(time2)-float(int(time1)))
     t_speed = time2 - int(time1)
@@ -86,7 +86,7 @@ def index(request):
         "races": Race.objects.all().order_by('id').reverse() , 
         "now":now,
         "test":t_speed,
-        "test2":s
+        "test2":t3
 
 
 #######
@@ -117,15 +117,23 @@ def start_race(request, csrf_token):
         return redirect('g_pigeon_race:manager_page')
 def add_code(request, csrf_token):
     if request.method == "POST":
-        c = Code(
-            code = request.POST.get("code"),
-            hcode = request.POST.get("hcode")
-        )
-        c.save()
-        context = {
-            'cc':Code.objects.order_by('id').reverse()
-        }
-        return render(request, 'race/codes.html', context)
+        code = request.POST.get("code"),
+        try:
+            x = Code.objects.get(code=code)
+            return render(request, 'race/codes.html',{
+                "message":"code already registered"
+            })
+        except:
+            x = Code.objects.get(code=code)
+            c = Code(
+                code = request.POST.get("code"),
+                hcode = request.POST.get("hcode")
+            )
+            c.save()
+            context = {
+                'cc':Code.objects.order_by('id').reverse()
+            }
+            return render(request, 'race/codes.html', context)
         # return redirect('g_pigeon_race:view_codes')
 def add_point(request):
     if request.method == "POST":
@@ -244,14 +252,14 @@ def clock_it(request):
             loaded_release = loaded.release_time
             loaded_clock_time = loaded.clock_time
 
-
             # loaded_speed = 321  I dont know this
     ##              time_get GET :
             # now = time.time()
+
             time1 = loaded.release_time
-            time2 = loaded.clock_time
-            s_time = ((float(time2)-float(time1))/60)/60
-            minutes_time = (time2-time1)/60
+            time2 = time.time()
+            s_time = (time2-time1/60)
+            minutes_time = float(time2-time1)
     ##              distance_get ;
             lat1 = loaded.release_lat
             long1 = loaded.release_long
@@ -260,7 +268,7 @@ def clock_it(request):
             long2 = loaded.pigeon_long
             s_distance = geodesic((lat1,long1),(lat2,long2)).meters
     ##              speed_get
-            s_speed = s_distance/s_time
+            s_speed = s_time/s_distance
 
             record = Record()
             #  record.entry = idd
@@ -272,8 +280,12 @@ def clock_it(request):
             record.lap_id = loaded_lap_id
             record.race = loaded_race
             # stry =  time.ctime(int(loaded_release))
-            # record.release = str(stry)
-            record.release = time.strftime("%a %I:%m %p %b %d %Y ", time.localtime(loaded_release))
+            # str(datetime.datetime.fromtimestamp(loaded_release))
+            # record.release2 = int(loaded_release)
+            record.release = str(time.strftime(" %b %d %Y, %I:%m %p ", time.localtime(loaded_release)))
+            record.clock = time2
+            # record.release2 = str(stry)
+
             record.speed = s_speed
             record.race_name = loaded_race_name
             record.save()

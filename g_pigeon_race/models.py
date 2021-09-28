@@ -60,7 +60,6 @@ class Loaded(models.Model):
     pigeon_long = models.CharField(max_length=64)
     pigeon_loader = models.CharField(max_length=64)
 
-
     release_lat = models.CharField(max_length=64)
     release_long = models.CharField(max_length=64)
 
@@ -112,10 +111,11 @@ class Record(models.Model):
     race_name = models.CharField(max_length=64)
 
     # release = models.CharField(max_length=64)
-    release = models.CharField(max_length=128, unique=True)
-    time = models.DateTimeField()
-    clock = models.DateTimeField()
-    speed = models.CharField(max_length=50)
+    release = models.CharField(max_length=64)
+    # release2 = models.DateTimeField(auto_now_add=True)
+    time = models.IntegerField()
+    clock = models.CharField(max_length=64)
+    speed = models.DecimalField(max_digits=20, decimal_places=2)
     distance = models.CharField(max_length=64)
     def serialize(self):
         return {

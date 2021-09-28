@@ -1,4 +1,4 @@
-{% extends "a_index/layout.html" %}
+{% extends "race/layout.html" %}
 {% block body %}
 <style>
     .pigeon_record {
@@ -40,7 +40,8 @@
 
     {{z.race_name}} <br>
     {{z.lap_name}}    <br>
-    {{z.release}}   <br>
+    Clock Time: {{z.clock}}<br>
+    Release Time: {{z.release}}   <br>
     Speed:    {{z.speed}} <br> 
     Flight Time: {{z.time}}   <br>
     Distance: {{z.distance}}    <br>
