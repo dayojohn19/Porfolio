@@ -1,22 +1,39 @@
-{% extends "a_index/layout.html" %}
+{% extends "race/layout.html" %}
 {% block body %}
 
-
+<style>
+    div  {
+        text-align: center;
+    }
+    span {
+        background-color: rgba(184, 222, 135, 0.507);
+        padding: 0.5rem;
+        border-radius: 5px;
+    }
+    a {
+        text-decoration: none;
+        text-shadow: 0 0 5px black;
+        font-weight: 900;
+        color: white;
+    }
+</style>
 {% for a in all_loaded %}
-{{a.pigeon_name}} <br>
-{{a.pigeon_id}}<br>
-{{a.pigeon_hcode}}<br>
-race_name : {{a.race_name}} <br>
-Released : {{a.lap_name}}<br>
+<div class="load-container">
+    <span><a href="{% url 'user:view_record' pid=a.pigeon_id %}">" {{a.pigeon_name}} "</a></span>
+    <!-- {{a.pigeon_id}}<br> -->
+    <!-- {{a.pigeon_hcode}}<br> -->
+    <p>{{a.race_name}}</p>
+    <p>Release: {{a.lap_name}}</p>
 
 
-{% if a.release_time == "" %}
-Not yet Released<br>
-{% else %}
-Released : {{a.release_time}}<br>
-{% endif %}
+    {% if a.release_time == "" %}
+    Not yet Released<br>
+    {% else %}
+    Released : {{a.release_time}}<br>
+    {% endif %}
 
-<hr>
+    <hr>
+</div>
 {%endfor%}
 
 <div style="height: 1000px;"></div>

@@ -57,6 +57,23 @@ def index(request):
     geolocator = Nominatim(user_agent='race')
     now = time.time()
     measured = False
+
+#   in seconds
+    t_time = 60
+    t_distance = 100
+    #in sec
+    t_speed = t_distance/t_time
+    # in min
+    time1=13.2
+    time2=15.1
+    d = 200
+    t1 = 1632645662.55295
+    t2 = time.time()
+    t3 = (float(t2)-float(t1)) / 60
+    s = d / t3
+    # t_speed = (float(time2)-float(int(time1)))
+    t_speed = time2 - int(time1)
+
     if not request.user.is_authenticated:
         return redirect('user:login')
     try:
@@ -68,6 +85,8 @@ def index(request):
     return render(request, "race/index.html", {
         "races": Race.objects.all().order_by('id').reverse() , 
         "now":now,
+        "test":t_speed,
+        "test2":s
 
 
 #######
@@ -78,7 +97,8 @@ def index(request):
 def manager(request):
     return render(request, "race/manager.html", {
         "laps": Lap.objects.filter(released=False).all().order_by('id').reverse(),
-        'races':Race.objects.filter(finished=False).order_by('id').reverse(),
+        'races':Race.objects.all().order_by('id').reverse(),
+        's_races':Race.objects.filter(started=False).order_by('id').reverse(),
         'point':Point.objects.all(),
         "now":datetime.datetime.now()
     })
@@ -160,7 +180,9 @@ def add_lap(request):
                 loading_cost = loading_cost
             )
             nn.save()
+    return HttpResponseRedirect(reverse("g_pigeon_race:manager_page"))
     
+
     return render(request, "race/manager.html", {
     'x':'failed',
     'races':Race.objects.filter(finished=False),
@@ -171,11 +193,13 @@ def release_it(request, id):
     if request.method == "POST":
         x = Lap.objects.get(pk=id)
         x.released = True
-        initial_time = request.POST["release_time"]
+        char_time = request.POST["release_time"]
+        initial_time = time.time()
 #        o = request.POST['release_timee']
         #initial_time = datetime.strptime(p, '%Y-%m-%dT%H:%M')
 #        final_time = datetime.strptime(p, '%Y-%m-%dT%H:%M')
 #        time_difference = initial_time - final_time
+        x.char_time = char_time
         x.release_time = initial_time
         x.save()
         now = time.time()
@@ -199,13 +223,14 @@ def release_it(request, id):
         "message":"released!",
         'measured':True
         })
-
+import time
 def clock_it(request):
     if request.method == "POST":
-        try:
+        # try:
             hcode = request.POST["clock_code"]
             loaded = Loaded.objects.get(pigeon_hcode=hcode)
             idd = loaded.pigeon_id
+            loaded.clock_time = time.time()
             loaded.save()
     # here get the distance                    
             pigeon = Mypigeons.objects.get(pk=idd)
@@ -217,15 +242,16 @@ def clock_it(request):
             loaded_race = loaded.race_id
             loaded_race_name = loaded.race_name
             loaded_release = loaded.release_time
-            #loaded.clock_time = add the clock time
-            #loaded.save()
+            loaded_clock_time = loaded.clock_time
 
-            loaded_speed = 321
+
+            # loaded_speed = 321  I dont know this
     ##              time_get GET :
-            now = time.time()
+            # now = time.time()
             time1 = loaded.release_time
-            time2 = now
-            s_time = (float(time2)-float(time1))/60
+            time2 = loaded.clock_time
+            s_time = ((float(time2)-float(time1))/60)/60
+            minutes_time = (time2-time1)/60
     ##              distance_get ;
             lat1 = loaded.release_lat
             long1 = loaded.release_long
@@ -238,16 +264,17 @@ def clock_it(request):
 
             record = Record()
             #  record.entry = idd
-            record.time = s_time
+            record.time = minutes_time
             record.distance = s_distance
             record.ring = pigeon_ring
             record.pigeon_name = pigeon_name
             record.lap_name = loaded_lap_name
             record.lap_id = loaded_lap_id
             record.race = loaded_race
-            record.release = loaded_release
+            # stry =  time.ctime(int(loaded_release))
+            # record.release = str(stry)
+            record.release = time.strftime("%a %I:%m %p %b %d %Y ", time.localtime(loaded_release))
             record.speed = s_speed
-            record.clock = now
             record.race_name = loaded_race_name
             record.save()
             record.entry.add(idd)
@@ -274,8 +301,8 @@ def clock_it(request):
 #                        })
 #            else:
 #                return render(request, "race/index.html", {"message":"Please Enter Code"})
-        except:
-           return render(request, "race/index.html", {"message":"Please Enter Right Code"})
+        # except:
+        #    return render(request, "race/index.html", {"message":"Please Enter Right Code"})
 
  #   return render(request, "race/index.html", {"message":"hi you're clocked"})
 
@@ -417,8 +444,10 @@ def lap(request, race_id):
     race = Race.objects.get(id=race_id)
     pigeons = race.registered.filter(owner=x).order_by('id').reverse()
     lap = Lap.objects.filter(race=race, released=False).order_by('id').reverse()
+    rlap = Lap.objects.filter(race=race, released=True).order_by('id').reverse()
     return render(request, "race/lap.html", {
         "lap": lap,
+        "rlap":rlap,
         "rn":race,
         "pigeons":pigeons,
         })
@@ -481,7 +510,8 @@ def load_pigeon(request, pid):
             load.save()
             pigeon2.save()
         else:
-            return render(request, "race/lap.html", {"message":"message this is "})
+            return render(request, "race/lap.html", {
+                "message":"message this is "})
     return HttpResponse(status=204)
         #xx = {"lap_name": aload}return render(request, "race/lap.html",xx)
 def view_loaded(request, id):
@@ -494,13 +524,14 @@ def view_codes(request):
     return render(request, "race/codes.html", {
         "cc": cc,
     })
-
+from django.contrib.humanize.templatetags.humanize import naturalday
 def view_clocked(request, lid):
     clocked = Record.objects.filter(lap_id=lid).order_by('speed').reverse()
     lap = Lap.objects.get(id=lid)
     
 
     return render(request, "race/clocked_lap.html", {
+        "time":naturalday(time.time),
         "clocked": clocked,
         "lap_name": lap.release,
         "lap_release": lap.release_time,

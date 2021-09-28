@@ -1,37 +1,39 @@
-{% extends "a_index/layout.html" %}
+{% extends "race/layout.html" %}
 {% block body %}
 <style>
     .reg_pigeon {
         background-color: rgba(255, 140, 0, 0.178);
         text-align: center;
         height: 15rem;
-        
+        border-radius: 10px;
     }
     .reg_pigeon img{
         height: 15rem;
         float: left;
         max-width: 50%;
+        border-radius: 10px 0 0 10px;
     }
     button, input {
-        background-color: rgba(0, 255, 55, 0.205);
+        background-color: rgba(121, 255, 150, 0.767);
         border-radius: 10px;
         border:solid 1px green;
+        padding: 0.3rem;
+        margin: 0.3rem;
     }
 
 </style>
 <div style="text-align: center;">
-    <h1>" {{race}} "</h1>
+    <h1> {{race}} </h1>
     <h4>Registered Birds</h4>
 </div>
 {% for qw in pigeons %}
     <div class="reg_pigeon">
         <img class="reg_image" src="{{qw.link}}">
-        " {{qw.name}} "  <br>
-        Ring: {{qw.ring}}  <br>
-        Owner: {{qw.owner}}  <br>
+        <p>" {{qw.name}} " </p>
+        <p>Ring: {{qw.ring}} </p>
+        <p>Owner: {{qw.owner}}</p> 
         <a href="{% url 'user:view_record' pid=qw.id %}"><strong><button>view Pigeon</button></strong></a> 
         <br>
-        {{qw.id}}
             {% if qw.owner == request.user.username %}
             <form action="{% url 'g_pigeon_race:remove' race.id %}" method="POST">
                 {%csrf_token%}

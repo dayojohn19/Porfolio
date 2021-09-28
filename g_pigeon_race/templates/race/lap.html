@@ -1,4 +1,4 @@
-{% extends "a_index/layout.html" %}
+{% extends "race/layout.html" %}
 
 {% block body %}
 <style>
@@ -6,16 +6,30 @@
         background-color: rgba(0, 110, 255, 0.123);
         border: solid 1.2px rgba(0, 128, 0, 0.233);
     }
+    * {
+        border-radius: 10px;
+    }
+    * input {
+        border: none;
+    }
+    button {
+        border: none;
+    }
+    #valued {
+        color: rgb(0, 140, 255);
+        font-weight: 700;
+    }
 </style>
 <a href="{% url 'g_pigeon_race:index' %}">Home / Clock</a>
 <h1 id="race_name" style="background: #fd747831; border: 2px solid #e664646c; margin: 15px; line-height: 1.5; text-align: center;border-radius:25px">{{rn.racename}}</h1>
 <h3>Next Lap: </h3>
     <p style="font-size:smaller">The Pigeons will be release on this address </p>
    <h1> 
-        <div id="lap_name" style="padding: 1% ;border:3px rgba(172, 255, 47, 0.219) solid; width: fit-content;">
+        <div id="lap_name" style="color: yellow;padding: 1% ;border:3px rgba(172, 255, 47, 0.219) solid; width: fit-content;">
         </div>
     </h1>
 <input hidden  id="race_id" value="{{rn.id}}">
+
 <hr>
 <h1>Load Available pigeons:</h1>
 <p style="font-size: smaller;">Get the code and Load the Pigeon on the Truck</p>
@@ -29,19 +43,33 @@
     
 <h4>Lap:</h4>
 {% for l in lap  %}
-<div style="background-color: rgba(255, 140, 0, 0.11);border:3px solid rgba(255, 255, 0, 0.192);margin: 5px; padding: 5%; width: fit-content;">
+<div style="background-color: rgba(255, 140, 0, 0.11);border:3px solid rgba(255, 255, 33, 0.192);margin: 5px; padding: 5%; width: fit-content;">
     <p id="lapid" hidden>{{l.id}}</p>
-    
+
     <p id="lap_lat">{{l.lat}}</p>
     <p id="lat_long">{{l.long}}</p>
 
 
     <p id="valued" >{{l.release}}</p>
-    Release: {{l.release_time}}<br>
-    <a style="text-decoration: none;" href="{% url 'g_pigeon_race:view_clocked' lid=l.id %}">View Clocked Pigeon </a><br>
-    <hr>
+    <form action="{% url 'g_pigeon_race:view_loaded' rn.id %}">
+        <input type="submit" value="View Loaded Pigeons">
+    </form>
     <button  id="{{l.id}}"   onclick="truck(id)" >Truck</button>
 </div>
+{% endfor %}
+<h4>Released Lap:</h4>
+{% for r in rlap %}
+<hr>
+<div class="rlap">{{r.release}}</div>
+<div>{{r.char_time}}</div>
+
+<form action="{% url 'g_pigeon_race:view_clocked' lid=r.id %}">
+    <input type="submit" value="View Clocked Pigeons">
+</form>
+
+<form action="{% url 'g_pigeon_race:view_loaded' rn.id %}">
+    <input type="submit" value="View Dead Pigeons">
+</form>
 {% endfor %}
 
 <script>

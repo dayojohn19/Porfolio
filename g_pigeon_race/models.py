@@ -26,7 +26,8 @@ class Lap(models.Model):
     release_long = models.CharField(max_length=64)
 
     released = models.BooleanField(default=False)
-    release_time = models.CharField(max_length=64, blank=True)
+    release_time = models.IntegerField(blank=True,default=1)
+    char_time = models.CharField(blank=True,max_length=64)
     loading_cost= models.IntegerField()
 
 #    release_time
@@ -63,8 +64,8 @@ class Loaded(models.Model):
     release_lat = models.CharField(max_length=64)
     release_long = models.CharField(max_length=64)
 
-    release_time = models.CharField(blank=True, max_length=64)
-    clock_time = models.CharField(blank=True, max_length=64)
+    release_time = models.IntegerField(default=1)
+    clock_time = models.IntegerField(default=1)
 
 #    def __str__(self):
 #        return str(self.lap)
@@ -110,9 +111,10 @@ class Record(models.Model):
     race = models.CharField(max_length=64)
     race_name = models.CharField(max_length=64)
 
-    release = models.CharField(max_length=50)
-    time = models.CharField(max_length=64)
-    clock = models.CharField(max_length=50)
+    # release = models.CharField(max_length=64)
+    release = models.CharField(max_length=128, unique=True)
+    time = models.DateTimeField()
+    clock = models.DateTimeField()
     speed = models.CharField(max_length=50)
     distance = models.CharField(max_length=64)
     def serialize(self):

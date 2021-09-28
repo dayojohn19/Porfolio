@@ -1,5 +1,5 @@
-{% extends "a_index/layout.html" %}
 
+{% extends "race/layout.html" %}
 {% block body %}
 <style>
     .manager {
@@ -79,7 +79,8 @@
 <h3><a class="view-players" href="{% url 'user:index' %}">View Players</a></h3>
 
 <hr>
-
+Time: {{test2}}<br>
+{{test}} m / h
 {% if measured %}
 <!-- CLock Section -->
 <div class="clock-1">
@@ -105,9 +106,12 @@
                 <div style="text-align: center; border: 2px rgba(0, 195, 255, 0.247) solid;border-radius: 25px;">
                     {% if count %}
                         <hr>
-                        <a style="align-items: center; text-align: center; ">" {{x.pigeon_name}} "</a><br>
-                        Race count : {{count}}<br>
-                        Released : {{x.lap_name}}<br>
+                        <a style="align-items: center; text-align: center; ">" <h1>{{x.pigeon_name}}</h1> "</a><br>
+                        " <a class="p-name" href="{% url 'user:view_record' pid=x.pigeon_id %}">
+                            <strong><h1>{{x.pigeon_name}}</h1> </strong>
+                        </a> "
+                        Lap : {{count}}<br>
+                        {{x.lap_name}}<br>
 
                         Pigeon ID is Y : {{y}} <br>
                         Pigeon ID 2 : {{x.pigeon_id}}<br>
@@ -115,6 +119,8 @@
 
                         Released Time: {{x.release_time}} <br>
                         Clock Time : {{x.clock_time}}<br>
+                        <hr>
+                        To:
                         <hr>
                         <h2>Record</h2>
                             {% for r in records %}

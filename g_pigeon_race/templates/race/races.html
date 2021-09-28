@@ -1,4 +1,4 @@
-{% extends "a_index/layout.html" %}
+{% extends "race/layout.html" %}
 
 {% block body %}
 
@@ -75,11 +75,11 @@
             {% empty %}
                 <hr>
                 <h1 style="margin-top:5rem;">You have No Available Pigeon to Entry</h1>
-                <div style="padding: 1.5rem; background-color: rgba(156, 151, 151, 0.075); width: 70%; margin: 1%;">
-                    <a style="text-decoration: none; padding: 5%;" href="{% url 'user:upload'  %}">Register more pigeon {{race.id}}</a>
-                    <br><br>
+                <div style=" border-radius: 5.5px; padding: 1.5rem; background-color: rgba(202, 197, 197, 0.628); width: 70%; margin: 1%;">
+                    <a style="text-decoration: none; padding: 5%;" href="{% url 'user:upload'  %}">Register more pigeon</a>
+                    <br><hr><br>
                     <a style="text-decoration: none; padding: 5%;" href="{% url 'g_pigeon_race:races_registered' race_id=race.id %}">View Registered Pigeons on this Race</a>
-                    <br><br>
+                    <br><hr><br>
                     <a style="text-decoration: none; padding: 5%;" href="{% url 'g_pigeon_race:view_loaded' id=race.id %}">view Loaded Pigeon on this Race</a>
                 </div>
                 

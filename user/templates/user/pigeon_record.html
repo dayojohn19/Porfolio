@@ -26,6 +26,7 @@
 <div class="reg_pigeon">
     <img class="reg_image" src="{{mpl}}">
     <h3>Pigeon Record:</h3>
+    
     <h2><a >Race</a></h2>
     " {{pid}} "<br>Clock Count: {{count}} <br>
 </div>
@@ -36,8 +37,10 @@
 {%for z in zz %}
 
 <div class="pigeon_record">
+
     {{z.race_name}} <br>
     {{z.lap_name}}    <br>
+    {{z.release}}   <br>
     Speed:    {{z.speed}} <br> 
     Flight Time: {{z.time}}   <br>
     Distance: {{z.distance}}    <br>
