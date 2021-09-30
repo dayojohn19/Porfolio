@@ -118,13 +118,17 @@ def start_race(request, csrf_token):
 def add_code(request, csrf_token):
     if request.method == "POST":
         code = request.POST.get("code"),
+        hcode = request.POST.get("hcode")
+
         try:
-            x = Code.objects.get(code=code)
+            Code.objects.get(hcode=hcode)
+            # Code.objects.get(code=code)
             return render(request, 'race/codes.html',{
                 "message":"code already registered"
             })
         except:
-            x = Code.objects.get(code=code)
+            # x = Code.objects.get(hcode=hcode)
+            # Code.objects.get(code=code)
             c = Code(
                 code = request.POST.get("code"),
                 hcode = request.POST.get("hcode")
@@ -258,8 +262,8 @@ def clock_it(request):
 
             time1 = loaded.release_time
             time2 = time.time()
-            s_time = (time2-time1/60)
-            minutes_time = float(time2-time1)
+            s_time = ((time2-time1)/60)
+            minutes_time = float(time2)-float(time1)
     ##              distance_get ;
             lat1 = loaded.release_lat
             long1 = loaded.release_long
@@ -279,10 +283,10 @@ def clock_it(request):
             record.lap_name = loaded_lap_name
             record.lap_id = loaded_lap_id
             record.race = loaded_race
-            # stry =  time.ctime(int(loaded_release))
+            record.release =  time.ctime(int(loaded_release))
             # str(datetime.datetime.fromtimestamp(loaded_release))
             # record.release2 = int(loaded_release)
-            record.release = str(time.strftime(" %b %d %Y, %I:%m %p ", time.localtime(loaded_release)))
+            # record.release = str(time.strftime(" %b %d %Y, %I:%m %p ", time.localtime(loaded_release)))
             record.clock = time2
             # record.release2 = str(stry)
 
