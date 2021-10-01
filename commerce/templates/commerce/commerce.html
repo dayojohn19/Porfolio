@@ -108,9 +108,22 @@ background: linear-gradient(315deg, rgba(245,154,236,0) 0%, rgba(255,144,205,0.7
     <div class="section auction">
             <div class="game">
                 <a href="#"><h2>Auction</h2></a>
-                <b>Instruction</b>
-                <p>&#160&#160  &nbsp;Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque tempora repellat optio qui odio, quisquam dicta, voluptates, ratione unde nam alias animi officiis expedita? Praesentium fuga voluptate quam explicabo aliquid.
+                <p>&#160&#160  &nbsp;
+                    Auction House <strong>Bid</strong>
+                    and <strong>Auciton</strong>
+                    your items here, first you need to have credits, 
+                    
+                    
                     <span><button><a href="{% url 'auction:index' %}">Go Inside</a></button></span></p>
+                    <b>Instruction for Auctioner</b>
+                    <p>Create Auction add title to your item and image file then red Upload 
+                        describe your item and category, put initial Bid, make your lowest bid is below 50% of the item's market price  </p>
+                    <b>Instruction for Bidder</b>
+                    <p>
+                        <strong>Bid Now!</strong>
+                        to see more details of the picture , you can put comment , add it to watchlist to make sure that you can check the item you wanted to win, the Bid should always be higher than 25% of the highest Bid
+                    </p>
+                    
             </div>
 
         <img src="{% static 'commerce/images/auction.png' %}">
@@ -119,9 +132,21 @@ background: linear-gradient(315deg, rgba(245,154,236,0) 0%, rgba(255,144,205,0.7
     <div class="section store">
         <div class="game">
             <a href="#"><h2>Store</h2></a>
-            <b>Instruction</b>
-            <p>&#160&#160  &nbsp;Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptate, illo. Repellat sequi consequuntur repudiandae ab iste magnam neque tempore, voluptatem ullam nesciunt soluta optio illo nihil magni eos accusantium eligendi! Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima animi reiciendis quae nihil iusto quod nam ratione veritatis recusandae porro. Voluptate hic, laudantium amet nulla sunt dolorum est iusto. Sint.</p>
-            <span><button><a href="{% url 'sale:index' %}">Go Inside</a></button></span></p>
+            <p>
+                &#160&#160  &nbsp;
+                Buy and sell your item, you need credit to sell or buy items
+                <span><button><a href="{% url 'sale:index' %}">Go Inside</a></button></span></p>
+            </p>
+            <b>Instruction for Seller</b>
+            <p>&#160&#160  &nbsp;
+                You must have credits the same as the price you wanted to sell, and you need to update your product timely as it has expiration date on the store , you can check your buyers on <strong>Upper right</strong> Cart inside Customers,
+                <strong>Customers</strong> will order and able to cancel order until you deliver .
+            </p>
+            <b>Instruction for Buyer</b>
+            <p>&#160&#160  &nbsp;
+                You must have credits the same as the price you wanted to buy, order item and the price will subtract to your credit, you can still stop the order to regain the credit until the seller deliver your order
+            </p>
+            
         </div>
         <img src="{% static 'commerce/images/store.png' %}">
     </div>

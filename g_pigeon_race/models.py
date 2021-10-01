@@ -43,6 +43,7 @@ class Measurement(models.Model):
     latitude = models.CharField(max_length=64)
     longitude = models.CharField(max_length=64)
 class Loaded(models.Model):
+    isLoaded = models.BooleanField(default=True)
     race_id = models.CharField(max_length=64)
     race_name = models.CharField(max_length=64)
     lap = models.CharField(max_length=64)
@@ -113,7 +114,7 @@ class Record(models.Model):
     # release = models.CharField(max_length=64)
     release = models.CharField(max_length=64)
     # release2 = models.DateTimeField(auto_now_add=True)
-    time = models.IntegerField()
+    time = models.CharField(max_length=64)
     clock = models.CharField(max_length=64)
     speed = models.DecimalField(max_digits=20, decimal_places=2)
     distance = models.CharField(max_length=64)

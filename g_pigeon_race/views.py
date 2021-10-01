@@ -16,7 +16,7 @@ import datetime
 from geopy.geocoders import Nominatim
 from geopy.distance import geodesic
 import time
-
+from time import strftime,localtime
 def started_race(request, rid):
     if request.method == "POST":
         update = Race.objects.get(id=rid)
@@ -54,6 +54,7 @@ def measure(request):
             return redirect('g_pigeon_race:index')
 
 def index(request):
+    
     geolocator = Nominatim(user_agent='race')
     now = time.time()
     measured = False
@@ -86,8 +87,9 @@ def index(request):
         "races": Race.objects.all().order_by('id').reverse() , 
         "now":now,
         "test":t_speed,
-        "test2":t3
-
+        # "test2":str(time.strftime(" %b %d %Y, %I:%m %p ", time.localtime(time.time())))
+        # "test2": time.ctime(int(time.time()))
+        "test2":strftime("%I:%M:%S %p  ,  %a %b %d  %Y  ", localtime())
 
 #######
 #######
@@ -211,19 +213,22 @@ def release_it(request, id):
         #initial_time = datetime.strptime(p, '%Y-%m-%dT%H:%M')
 #        final_time = datetime.strptime(p, '%Y-%m-%dT%H:%M')
 #        time_difference = initial_time - final_time
-        x.char_time = char_time
+        # record.clock = str(time.strftime(" %b %d %Y, %I:%m %p ", time.localtime(time2)))
+        # x.char_time = str(time.strftime(" %b %d %Y, %I:%m %p ", time.localtime(initial_time)))
+        x.char_time = strftime("%I:%M:%S %p  ,  %a %b %d  %Y  ", localtime())
+        # x.char_time = char_time
         x.release_time = initial_time
         x.save()
-        now = time.time()
-        long = x.release_long
-        lat = x.release_lat
-        Loaded.objects.filter(lap=id).update(release_time=now)
-        Loaded.objects.filter(lap=id).update(release_lat=lat)
-        Loaded.objects.filter(lap=id).update(release_long=long)
+
+        # long = x.release_long
+        # lat = x.release_lat
+        Loaded.objects.filter(lap=id).update(release_time=initial_time)
+        Loaded.objects.filter(lap=id).update(release_lat=x.release_lat)
+        Loaded.objects.filter(lap=id).update(release_long=x.release_long)
         load = Loaded.objects.filter(lap=id).all()
 
         for l in load:
-        #   l.release_time = initial_time
+            l.release_time = initial_time
             l.save()
         return render(request, "race/index.html", {
             "message":"released!",
@@ -247,13 +252,13 @@ def clock_it(request):
     # here get the distance                    
             pigeon = Mypigeons.objects.get(pk=idd)
             pigeon_id = pigeon.id
-            pigeon_name = pigeon.name
-            pigeon_ring = pigeon.ring
-            loaded_lap_id = loaded.lap
-            loaded_lap_name = loaded.lap_name
-            loaded_race = loaded.race_id
-            loaded_race_name = loaded.race_name
-            loaded_release = loaded.release_time
+            # pigeon_name = pigeon.name
+            # pigeon_ring = pigeon.ring
+            # loaded_lap_id = loaded.lap
+            # loaded_lap_name = loaded.lap_name
+            # loaded_race = loaded.race_id
+            # loaded_race_name = loaded.race_name
+            # loaded_release = loaded.release_time
             loaded_clock_time = loaded.clock_time
 
             # loaded_speed = 321  I dont know this
@@ -263,7 +268,7 @@ def clock_it(request):
             time1 = loaded.release_time
             time2 = time.time()
             s_time = ((time2-time1)/60)
-            minutes_time = float(time2)-float(time1)
+            minutes_time = (float(time2)-float(time1))/60
     ##              distance_get ;
             lat1 = loaded.release_lat
             long1 = loaded.release_long
@@ -272,30 +277,37 @@ def clock_it(request):
             long2 = loaded.pigeon_long
             s_distance = geodesic((lat1,long1),(lat2,long2)).meters
     ##              speed_get
-            s_speed = s_time/s_distance
+            s_speed = s_distance/s_time
 
             record = Record()
             #  record.entry = idd
-            record.time = minutes_time
+            # record.time = str(time.strftime(" %b %d %Y, %I:%m %p ", time.localtime(time.time())))
+            record.time = s_time
+
             record.distance = s_distance
-            record.ring = pigeon_ring
-            record.pigeon_name = pigeon_name
-            record.lap_name = loaded_lap_name
-            record.lap_id = loaded_lap_id
-            record.race = loaded_race
-            record.release =  time.ctime(int(loaded_release))
+            record.ring = pigeon.ring
+            record.pigeon_name = pigeon.name
+            record.lap_name = loaded.lap_name
+            record.lap_id = loaded.lap
+            record.race = loaded.race_id
+            # record.release =  time.ctime(int(loaded_release))
+            # record.clock = time.ctime(int(time2))
+
+            # record.release = str(time.strftime(" %b %d %Y, %I:%m %p ", time.localtime(loaded.release_time)))
+            record.release = strftime("%I:%M:%S %p  ,  %a %b %d  %Y  ", localtime(loaded.release_time))
+            # record.clock = str(time.strftime(" %b %d %Y, %I:%m %p ", time.localtime(time2)))
+            record.clock = strftime("%I:%M:%S %p  ,  %a %b %d  %Y  ", localtime())
             # str(datetime.datetime.fromtimestamp(loaded_release))
             # record.release2 = int(loaded_release)
             # record.release = str(time.strftime(" %b %d %Y, %I:%m %p ", time.localtime(loaded_release)))
-            record.clock = time2
             # record.release2 = str(stry)
-
             record.speed = s_speed
-            record.race_name = loaded_race_name
+            record.race_name = loaded.race_name
             record.save()
             record.entry.add(idd)
             #remove from the loaded 
-            loaded.delete()
+            loaded.isLoaded = False
+            loaded.save()
             #put the Mypigeons Loaded to False
             mp = Mypigeons.objects.get(id=idd)
             mp.loaded = False
