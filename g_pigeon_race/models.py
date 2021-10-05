@@ -19,6 +19,7 @@ class Race(models.Model):
 
 
 class Lap(models.Model):
+    num_load = models.ManyToManyField('Loaded', blank=True, related_name="load_count")
     race = models.ForeignKey(Race, on_delete=models.CASCADE, related_name="L")
     release = models.ForeignKey(Point, on_delete=models.CASCADE, related_name="LL")
     
@@ -26,9 +27,13 @@ class Lap(models.Model):
     release_long = models.CharField(max_length=64)
 
     released = models.BooleanField(default=False)
-    release_time = models.IntegerField(blank=True,default=1)
+    release_time = models.IntegerField(blank=True, default=1)
     char_time = models.CharField(blank=True,max_length=64)
     loading_cost= models.IntegerField()
+
+    @property
+    def num_loaded(self):
+        return self.num_load.all().count()
 
 #    release_time
 #   released
@@ -64,13 +69,14 @@ class Loaded(models.Model):
     release_lat = models.CharField(max_length=64)
     release_long = models.CharField(max_length=64)
 
-    release_time = models.IntegerField(default=1)
+    release_time = models.IntegerField(blank=True,null=True, default=1)
     clock_time = models.IntegerField(default=1)
 
 #    def __str__(self):
 #        return str(self.lap)
 #    def __str__(self):
 #        return str(self.loaded_pigeons.count())
+
     def serialize(self):
         return {
             "id": self.loaded_pigeons,
@@ -103,6 +109,7 @@ class Entries(models.Model):
         }
 
 class Record(models.Model):
+    pigeon_id = models.IntegerField(default=1)
     entry = models.ManyToManyField(to='user.Mypigeons', blank=True, related_name="entry")
     ring = models.CharField(max_length=50)
     pigeon_name = models.CharField(max_length=64)
@@ -118,13 +125,15 @@ class Record(models.Model):
     clock = models.CharField(max_length=64)
     speed = models.DecimalField(max_digits=20, decimal_places=2)
     distance = models.CharField(max_length=64)
+    class Meta:
+        ordering = ["-speed"]
     def serialize(self):
         return {
-            "id":self.id,
-            "entry":    self.entry,
+            "id":self.pigeon_id,
+            "pigeon_name":self.pigeon_name,
+            "lap_name":self.lap_name,
             "speed":    self.speed,
             "ring":     self.ring,
-            "lap":      self.lap,
             "release":  self.release,
             "clock":    self.clock
         }

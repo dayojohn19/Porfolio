@@ -16,25 +16,45 @@
         font-weight: 900;
         color: white;
     }
+    #at {
+        color:yellow;
+    }
+    #ar {
+        color:yellowgreen;
+    }
 </style>
+
+<h1>{{mode}}</h1>
+
 {% for a in all_loaded %}
 <div class="load-container">
     <span><a href="{% url 'user:view_record' pid=a.pigeon_id %}">" {{a.pigeon_name}} "</a></span>
     <!-- {{a.pigeon_id}}<br> -->
     <!-- {{a.pigeon_hcode}}<br> -->
-    <p>{{a.race_name}}</p>
-    <p>Release: {{a.lap_name}}</p>
-
-
+    {{a.isLoaded}}
+    <p>{{a.race_name}} <br>
+    Lap: {{a.lap_name}}</p>
+    <p>Loaded By: <b id="ar">{{a.pigeon_loader}}</b></p>
+    
     {% if a.release_time == "" %}
     Not yet Released<br>
     {% else %}
-    Released : {{a.release_time}}<br>
+    Released : <b id="at">
+    <script>
+        var myDate = new Date( `{{a.release_time}}` *1000);
+    document.write("<br>"+myDate.toString());
+    </script>
+</b>
     {% endif %}
 
     <hr>
 </div>
+
 {%endfor%}
+
+
+
+
 
 <div style="height: 1000px;"></div>
 {%endblock%}

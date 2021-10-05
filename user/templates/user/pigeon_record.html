@@ -1,20 +1,23 @@
 {% extends "race/layout.html" %}
+{% load humanize %}
 {% block body %}
 <style>
     .pigeon_record {
         background-color: rgba(220, 253, 169, 0.205);
         margin-bottom: 1rem;
+        padding: 1.5rem;
     }
     .reg_image {
         border:solid 2px rgba(172, 255, 47, 0.26);
         box-shadow: 0px 0px 15px inset rgba(172, 255, 47, 0.822);
         padding: 2%;
         margin-bottom: 5%;
+        max-width: 95%;
     }
     .reg_pigeon {
         background-color: rgba(255, 105, 180, 0.096);
         text-align: center;
-        padding:2%
+        padding:2%;
     }
     img {
         max-width: 100%;
@@ -22,29 +25,27 @@
 </style>
 
 
-
 <div class="reg_pigeon">
     <img class="reg_image" src="{{mpl}}">
-    <h3>Pigeon Record:</h3>
-    
-    <h2><a >Race</a></h2>
-    " {{pid}} "<br>Clock Count: {{count}} <br>
+    <h1>" {{pid}} "</h1><br>Clock Count: {{count}} <br>
 </div>
 <br>
 
 <br><br>
-
+<h3>Pigeon Record:</h3>
 {%for z in zz %}
 
 <div class="pigeon_record">
 
     {{z.race_name}} <br>
-    {{z.lap_name}}    <br>
-    Clock Time: {{z.clock}}<br>
-    Release Time: {{z.release}}   <br>
-    Speed:    {{z.speed}} <br> 
-    Flight Time: {{z.time}}   <br>
-    Distance: {{z.distance}}    <br>
+    <h3 style="text-align: center;color: rgb(25, 201, 255);"> {{z.lap_name}}</h3>
+    <p style="color: yellow;">Clock Time: <b>{{z.clock}}</b></p>
+    
+    <p style="color: rgb(255, 109, 109);">Flight Time: {{z.time|floatformat:"2"|intcomma }} Minutes</p>
+    <p style="color: greenyellow;">Release Time: <b>{{z.release}}</b></p>
+    <p style="color: rgb(255, 109, 109);">Speed:    <b>{{z.speed|floatformat:"0"|intcomma }}</b> meter per minute</p>
+    
+    <p style="color: rgb(255, 109, 109);"> {{z.distance |floatformat:"0"|intcomma }} Meters</p>
 </div>
 {% endfor %}
 

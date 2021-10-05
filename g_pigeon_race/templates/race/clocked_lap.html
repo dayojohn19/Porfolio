@@ -1,23 +1,45 @@
-{% extends "a_index/layout.html" %}
+{% extends "race/layout.html" %}
 {% load humanize %}
 {% block body %}
-<h3>{{lap_name|naturalday}}</h3>
-<h4>Released: {{lap_release}}</h4>
-<h4>Clocked Birds:</h4> 
+    <h2>{{lap_name}}</h2>
+    Released: <h4 style="margin-top: 0;">
+    <script>
+        var myDate = new Date( `{{lap_release}}` *1000);
+        document.write(`  &nbsp&nbsp&nbsp&nbsp&nbsp`+myDate.toString());
+    </script>
+    </h4>
+    <hr>
+    <style>
+        .clock-container {
+            border:solid orange 2px;
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            padding-top: 0;
+            border-radius: 5.5px;
 
-{% for c in clocked %}
-<div style="border:solid orange 2px">
- <strong>{{c.pigeon_name}}</strong>   <br>
-Release: {{c.release}}<br>
-Clock: {{c.clock}}  <br>
+        }
+        .clock-container h1 {
+            text-align: center;
+        }
+        a {
+            text-decoration: none;
+            color: lightblue;
+        }
+    </style>
 
-Flight: {{c.time}} Minutes<br>
-speed: {{c.speed}} meter per Hour<br> 
-Distance: {{c.distance}} meters<br>
-{{c.id}}
 
 
-</div>
-{% endfor %}
+
+    <h4>Clocked Birds:</h4> 
+    {% for c in clocked %}
+        <div class="clock-container">
+            <a class="p-name" href="{% url 'user:view_record' pid=c.pigeon_id %}"><h1 style="margin:0.2rem;">"{{c.pigeon_name}}"</h1></a>
+            <b style="color: yellow;">Clock: {{c.clock}} </b> <br>
+            <b style="color: greenyellow;"> speed: {{c.speed|floatformat:"1"|intcomma}} meter per Minute </b> <br> 
+            <b style="color: lightblue;">{{c.time|floatformat:"2"|intcomma}} Minutes</b><br>
+            <b>{{c.distance |floatformat:"1"|intcomma}} Meters</b><br>
+        </div>
+    {% endfor %}
 
 {%endblock%}

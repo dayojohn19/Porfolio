@@ -59,21 +59,21 @@ def index(request):
     now = time.time()
     measured = False
 
-#   in seconds
-    t_time = 60
-    t_distance = 100
-    #in sec
-    t_speed = t_distance/t_time
-    # in min
-    time1=13.2
-    time2=15.1
-    d = 200
-    t1 = 1632645662.55295
-    t2 = time.time()
-    t3 = (float(t2)-float(t1)) /60
-    s = d / t3
-    # t_speed = (float(time2)-float(int(time1)))
-    t_speed = time2 - int(time1)
+# #   in seconds
+#     t_time = 60
+#     t_distance = 100
+#     #in sec
+#     t_speed = t_distance/t_time
+#     # in min
+#     time1=13.2
+#     time2=15.1
+#     d = 200
+#     t1 = 1632645662.55295
+#     t2 = time.time()
+#     t3 = (float(t2)-float(t1)) /60
+#     s = d / t3
+#     # t_speed = (float(time2)-float(int(time1)))
+#     t_speed = time2 - int(time1)
 
     if not request.user.is_authenticated:
         return redirect('user:login')
@@ -86,7 +86,7 @@ def index(request):
     return render(request, "race/index.html", {
         "races": Race.objects.all().order_by('id').reverse() , 
         "now":now,
-        "test":t_speed,
+        # "test":t_speed,
         # "test2":str(time.strftime(" %b %d %Y, %I:%m %p ", time.localtime(time.time())))
         # "test2": time.ctime(int(time.time()))
         "test2":strftime("%I:%M:%S %p  ,  %a %b %d  %Y  ", localtime())
@@ -243,11 +243,13 @@ def release_it(request, id):
 import time
 def clock_it(request):
     if request.method == "POST":
-        # try:
+        try:
             hcode = request.POST["clock_code"]
-            loaded = Loaded.objects.get(pigeon_hcode=hcode)
+            loaded = Loaded.objects.get(pigeon_hcode=hcode, isLoaded=True)
             idd = loaded.pigeon_id
             loaded.clock_time = time.time()
+                        #remove from the loaded ##DO
+            loaded.isLoaded = False
             loaded.save()
     # here get the distance                    
             pigeon = Mypigeons.objects.get(pk=idd)
@@ -268,7 +270,7 @@ def clock_it(request):
             time1 = loaded.release_time
             time2 = time.time()
             s_time = ((time2-time1)/60)
-            minutes_time = (float(time2)-float(time1))/60
+            # minutes_time = (float(time2)-float(time1))/60
     ##              distance_get ;
             lat1 = loaded.release_lat
             long1 = loaded.release_long
@@ -280,6 +282,7 @@ def clock_it(request):
             s_speed = s_distance/s_time
 
             record = Record()
+            record.pigeon_id = pigeon.id
             #  record.entry = idd
             # record.time = str(time.strftime(" %b %d %Y, %I:%m %p ", time.localtime(time.time())))
             record.time = s_time
@@ -305,9 +308,7 @@ def clock_it(request):
             record.race_name = loaded.race_name
             record.save()
             record.entry.add(idd)
-            #remove from the loaded 
-            loaded.isLoaded = False
-            loaded.save()
+
             #put the Mypigeons Loaded to False
             mp = Mypigeons.objects.get(id=idd)
             mp.loaded = False
@@ -317,22 +318,22 @@ def clock_it(request):
             return render(request, "race/index.html", {
                 "message":"Clocked !!",
                     "x":loaded,
+                    "speed":s_speed,
                     "xx":idd,
                     "records": Record.objects.filter(entry=idd).order_by('id').reverse(),
                     "count": len(Record.objects.filter(entry=idd)),
-                    'measured':True
                     })
 #                except:
 #                    return render(request, "race/index.html", {
 #                        "message":"You Entered Wrong Code",
 
 #                        })
-#            else:
+            # else:
 #                return render(request, "race/index.html", {"message":"Please Enter Code"})
-        # except:
-        #    return render(request, "race/index.html", {"message":"Please Enter Right Code"})
+        except:
+           return render(request, "race/index.html", {"message":"Please Enter Right Code"})
 
- #   return render(request, "race/index.html", {"message":"hi you're clocked"})
+    return render(request, "race/index.html", {"message":"hi you're clocked"})
 
 
 
@@ -509,6 +510,7 @@ def load_pigeon(request, pid):
         xx = User.objects.get(username=request.user.username)
         my_measure = Measurement.objects.get(uid=xx.id)
 
+
         load = Loaded()
         load.race_name = data.get("race_name")
         load.race_id = data.get("race_id")
@@ -537,15 +539,27 @@ def load_pigeon(request, pid):
             c.save()
             load.save()
             pigeon2.save()
+            
+            lp = Lap.objects.get(id=lap_name)
+            lp.num_load.add(load)
+            lp.save()
         else:
+            
             return render(request, "race/lap.html", {
                 "message":"message this is "})
     return HttpResponse(status=204)
         #xx = {"lap_name": aload}return render(request, "race/lap.html",xx)
 def view_loaded(request, id):
-    all_loaded = Loaded.objects.filter(race_id=id).order_by('id').reverse()
+    all_loaded = Loaded.objects.filter(lap=id).order_by('id').reverse()
     return render(request, "race/loaded_pigeons.html",{
         "all_loaded":all_loaded,
+        "mode":"Loaded Pigeon"
+    })
+def view_loaded_dead(request, id):
+    all_loaded = Loaded.objects.filter(race_id=id, isLoaded=True).order_by('id').reverse()
+    return render(request, "race/loaded_pigeons.html",{
+        "all_loaded":all_loaded,
+        "mode":"Did not yet Return"
     })
 def view_codes(request):
     cc = Code.objects.all()
@@ -564,3 +578,31 @@ def view_clocked(request, lid):
         "lap_name": lap.release,
         "lap_release": lap.release_time,
     })
+
+
+def view_race_record(request, id):
+    records = Record.objects.filter(race=id).order_by().values('pigeon_id').distinct()
+    # records = Record.objects.all().order_by().values('pigeon_id').distinct()
+
+    return  render(request, "race/race_record.html", {
+        "records":records,
+        "id":id
+        # 'id':rs
+    })
+@csrf_exempt
+def get_race_record(request):
+    data = json.loads(request.body)
+    race_id = data.get("race_id")
+    pigeon_id = data.get("pigeon_id")
+    records = Record.objects.filter(race=race_id, pigeon_id=pigeon_id).all().order_by('id')
+    # records = Record.objects.filter(pigeon_id=pigeon_id).all().order_by('-speed')
+    # records = Record.objects.filter(pigeon_id=pigeon_id).all()
+
+    return JsonResponse([record.serialize() for record in records], safe=False)
+@csrf_exempt
+def get_name(request):
+    data = json.loads(request.body)
+    id = data.get("x")
+    names = Mypigeons
+    return names
+    # return JsonResponse([name.serialize() for name in names], safe=False)

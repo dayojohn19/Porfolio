@@ -1,5 +1,6 @@
 
 {% extends "race/layout.html" %}
+{% load humanize %}
 {% block body %}
 <style>
     .manager {
@@ -32,13 +33,14 @@
     }
 
     .clock-button {
-        background-color: rgba(244, 255, 85, 0.63);
-        padding: 4%;
+        background-color: rgba(251, 255, 0, 0.966);
+        padding: 0.5rem;
         border-radius: 10px;
+        border:none;
         font-size: larger;
     }
     .clock-button:hover {
-        background-color: rgb(105, 200, 255);
+        background-color: rgb(105, 255, 113);
     }
     .clock-input {
         font-size: larger;  
@@ -63,14 +65,18 @@
         color: white;
     }
     .races-container button {
-        background-color: rgba(124, 205, 92, 0.575);
+        background-color: rgba(72, 255, 0, 0.89);
         border:solid 2px greenyellow;
         border-radius: 10px;
         margin: 4%;
         font-size: larger;
     }
     .load-pigeon {
-        color: white;
+        color: rgb(0, 0, 0);
+    }
+    .p-name {
+        color: lightblue;
+        text-decoration: none;
     }
 </style>
 <h1><a class="manager" href="{% url 'g_pigeon_race:manager_page' %}">manager</a></h1>
@@ -79,8 +85,7 @@
 <h3><a class="view-players" href="{% url 'user:index' %}">View Players</a></h3>
 
 <hr>
-Time: {{test2}}<br>
-{{test}} m / h
+
 {% if measured %}
 <!-- CLock Section -->
 <div class="clock-1">
@@ -110,28 +115,15 @@ Time: {{test2}}<br>
                 <div style="text-align: center; border: 2px rgba(0, 195, 255, 0.247) solid;border-radius: 25px;">
                     {% if count %}
                         <hr>
-                        <a style="align-items: center; text-align: center; ">" <h1>{{x.pigeon_name}}</h1> "</a><br>
-                        " <a class="p-name" href="{% url 'user:view_record' pid=x.pigeon_id %}">
-                            <strong><h1>{{x.pigeon_name}}</h1> </strong>
-                        </a> "
-                        Lap : {{count}}<br>
-                        {{x.lap_name}}<br>
+                        <a class="p-name" href="{% url 'user:view_record' pid=x.pigeon_id %}">
+                            <strong><h1>" {{x.pigeon_name}} "</h1> </strong>
+                        </a>
+                        Speed: <b style="color: tomato;">{{speed|floatformat:2|intcomma}} mpm</b><br>
+                        <b style="color: yellow;">{{x.lap_name}}</b><br>
+                        <b style="color: yellowgreen;">{{x.race_name}}</b><br>
 
-                        Pigeon ID is Y : {{y}} <br>
-                        Pigeon ID 2 : {{x.pigeon_id}}<br>
-                        Race ID : {{x.race_name}}<br>
 
-                        Released Time: {{x.release_time}} <br>
-                        Clock Time : {{x.clock_time}}<br>
-                        <hr>
-                        To:
-                        <hr>
-                        <h2>Record</h2>
-                            {% for r in records %}
-                                {{r.lap_name}} <br>
-                                {{r.speed}}<br>
-                                <hr>
-                            {% endfor %}
+
                     {%endif %}
                 </div>
         </div>
@@ -142,21 +134,23 @@ Time: {{test2}}<br>
         <h1>Open Races:</h1>
             {% for race in races %}
                 {% if race.finished %}
-                    {{race.racename}} has Ended
+                    {{race.racename}} has Ended <a href="{% url 'g_pigeon_race:view_race_record' id=race.id %}">View Result</a>
                     <hr>
                 {% else %}
                     <div class="races-container">
-                        <a href="{%url 'g_pigeon_race:race' race.id %}">
-                            <h2>{{race.racename}}
+
+                            <h2 style="margin-bottom: 0;">{{race.racename}}
                         </h2>
-                        <p>Price {{race.price}}</p>    
-                    </a>
+
                         {% if race.started %}
                             <a href="{% url 'g_pigeon_race:lap' race.id %}">
                                 <button class="load-pigeon">LOAD PIGEON</button>
                             </a>
                         {% else %}
+                        <p style="text-align: left; font-size: large;">₱ {{race.price}}</p>    
                             <form action="{%url 'g_pigeon_race:race' race.id %}" style="text-align: center;">
+                                
+
                                 <button  class="button">Join !!</button>
                             </form>
                         {% endif %}

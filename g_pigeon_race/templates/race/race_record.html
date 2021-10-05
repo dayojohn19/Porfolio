@@ -1,0 +1,80 @@
+{% extends "race/layout.html" %}
+{% load humanize %}
+{% block body %}
+<h1>Race Record</h1>
+<div hidden id="race_id">{{id}}</div>
+
+
+<hr>
+
+{% for r in records %}
+    ID: <b id="id-{{r.pigeon_id}}">{{r.pigeon_id}}</b>
+    <div id="put-{{r.pigeon_id}}"></div>
+    <div id="{{r.pigeon_id}}-record"></div>
+    <div id="record{{r.pigeon_id}}"></div>
+
+    <script>
+        function get_name(x) {
+            nameit = document.querySelector(`#id-{{r.pigeon_id}}`).innerHTML;
+            fetch("{% url 'g_pigeon_race:get_name' %}" ,{
+                method: 'POST',
+                body: JSON.stringify({
+                    x:x
+                })
+            }).then(response => console.log(response));
+            // .then(name=> {
+            //     n = name;
+            //     nameit.innerHTML = `<div>${element.name}</div> `
+            // })
+
+            // .then(console.log())
+
+        }
+ 
+        function get_record(x) {
+            race = document.querySelector("#race_id").innerHTML;
+            pigeon = x;
+            fetch("{% url 'g_pigeon_race:get_race_record2' %}", {
+                method: 'POST',
+                body: JSON.stringify({
+                    race_id:race,
+                    pigeon_id:pigeon
+                })
+            })
+            .then(response => response.json())
+            .then(record => {
+                // Print result
+                // console.log(record);
+                r = record;
+                r.forEach(element => {
+                    e = element;
+                    container = document.createElement('div');
+                    container.innerHTML = `<div class="pigeon_record" id="p-${e.speed}">
+                        <h3><b style="color:lightblue">${e.pigeon_name}</b></h3>
+                            <b style="color:yellow;">${e.lap_name}</b><br>
+                            <b style="color:tomato;">speed: ${e.speed} mpm</b>
+                        `;
+                    // container.innerHTML = context;
+                    // alert(`${x}`);
+                    document.querySelector(`#record${x}`).append(container);
+                });
+                // container.innerHTML = context;
+            });
+
+            // race.append(context);
+            //     pigeon.append(container);
+        }
+
+        get_record(`{{r.pigeon_id}}`);
+        get_name(`{{r.pigeon_id}}`)
+    </script>
+    <hr>
+{% endfor %}
+
+
+
+
+
+
+
+{% endblock %}

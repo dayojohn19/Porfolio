@@ -110,7 +110,7 @@ if (mailbox == "inbox") {
   is_read = "read";
   else
   is_read = "";
-}
+  }
         const e = element
         const ie = document.createElement('div');
                   ur = `<div 
