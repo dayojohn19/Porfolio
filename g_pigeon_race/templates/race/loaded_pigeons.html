@@ -22,6 +22,9 @@
     #ar {
         color:yellowgreen;
     }
+    .load-container {
+        margin-top: 2rem;
+    }
 </style>
 
 <h1>{{mode}}</h1>
@@ -31,12 +34,12 @@
     <span><a href="{% url 'user:view_record' pid=a.pigeon_id %}">" {{a.pigeon_name}} "</a></span>
     <!-- {{a.pigeon_id}}<br> -->
     <!-- {{a.pigeon_hcode}}<br> -->
-    {{a.isLoaded}}
+    <p>{{a.isLoaded}}</p>
     <p>{{a.race_name}} <br>
-    Lap: {{a.lap_name}}</p>
-    <p>Loaded By: <b id="ar">{{a.pigeon_loader}}</b></p>
     
-    {% if a.release_time == "" %}
+    <p>Loaded By: <b id="ar">{{a.pigeon_loader}}</b></p>
+    <b style="color: lightblue;">{{a.lap_name}}</b></p>
+    {% if a.release_time == 1 %}
     Not yet Released<br>
     {% else %}
     Released : <b id="at">
@@ -46,9 +49,12 @@
     </script>
 </b>
     {% endif %}
-
     <hr>
 </div>
+{% empty %}
+    <div style="text-align: center; color: yellow; font-size: xx-large;">
+        <h1>All pigeons returned</h1>
+    </div>
 
 {%endfor%}
 

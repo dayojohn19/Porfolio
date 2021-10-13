@@ -1,19 +1,28 @@
 {% extends "race/layout.html" %}
 {% load humanize %}
 {% block body %}
+<style>
+    .tspeed {
+        color: rgb(71, 255, 163);
+    }
+</style>
+
+
 <h1>Race Record</h1>
 <div hidden id="race_id">{{id}}</div>
+<!-- <h2><a style="text-decoration: none; color: lightblue;" href="{% url 'g_pigeon_race:standing' id %}">View Standing</a></h2> -->
 
+{% for r in standing %}
+    <b  id="id-{{r.pigeon_id}}">{{r.pigeon_id}}</b>
+    <b id="n-{{r.pigeon_id}}"></b>
+    <h1><div id="n-{{r.pigeon_id}}"></div></h1>
+    <h3><div class="tspeed" id="s-{{r.pigeon_id}}"></div></h3>
 
-<hr>
-
-{% for r in records %}
-    ID: <b id="id-{{r.pigeon_id}}">{{r.pigeon_id}}</b>
     <div id="put-{{r.pigeon_id}}"></div>
     <div id="{{r.pigeon_id}}-record"></div>
     <div id="record{{r.pigeon_id}}"></div>
 
-    <script>
+    <script defer>
         function get_name(x) {
             nameit = document.querySelector(`#id-{{r.pigeon_id}}`).innerHTML;
             fetch("{% url 'g_pigeon_race:get_name' %}" ,{
@@ -46,31 +55,66 @@
                 // Print result
                 // console.log(record);
                 r = record;
+                console.log(record);
+                // for (r in record)   {
+                //     console.log(`${r.speed}`);
+                // }
+                ss = 0;
                 r.forEach(element => {
                     e = element;
+                    // getting the TOTAL SPEED of pigeons
+                    xs = e.speed;
+                    if (e.speed <= 1) {
+                        xs = 0;
+                        }
+                        // adding all the sped
+                    ss += +xs;
+                    // ss = e.distance.toFixed(2);
+                    aa = e.distance;
+                    // bb = e.distance;
+                    bb = +(Math.round(e.distance + "e+2") + "e-2");;
+                    // ss = ss.toLocaleString()
                     container = document.createElement('div');
-                    container.innerHTML = `<div class="pigeon_record" id="p-${e.speed}">
-                        <h3><b style="color:lightblue">${e.pigeon_name}</b></h3>
-                            <b style="color:yellow;">${e.lap_name}</b><br>
-                            <b style="color:tomato;">speed: ${e.speed} mpm</b>
+                    container.innerHTML = `
+                            <ul>
+                                <li><b style="color:yellow;">${e.lap_name}</b></li>
+                                <ul>
+                                    <li><b style="color:lightblue;">speed:  ${xs} mpm</b></li>
+                                    <li> Record: ${bb}</li>
+                                </ul>
+                                
+                            </ul>
                         `;
+                    // <h3><b style="color:lightblue">${e.pigeon_name}</b></h3>
+                    // <li><div class="pigeon_record" id="p-${e.speed}"></li>
+
+
                     // container.innerHTML = context;
                     // alert(`${x}`);
+                    document.querySelector(`#n-${x}`).innerHTML = `<h1>${e.pigeon_name}</h1>`;
+                    // document.querySelector(`#s-${x}`).innerHTML = `<h1>${e.speed}</h1>`;
+
+                    document.querySelector(`#s-${x}`).innerHTML = `T speed: ${ss} mpm`;
+
+
+
+                    console.log(e.pigeon_name);
                     document.querySelector(`#record${x}`).append(container);
                 });
+
                 // container.innerHTML = context;
             });
 
             // race.append(context);
             //     pigeon.append(container);
+            document.querySelector(`#id-${x}`).style.display = 'none';
         }
-
+        // to get the record of of race
         get_record(`{{r.pigeon_id}}`);
-        get_name(`{{r.pigeon_id}}`)
+        // get_name(`{{r.pigeon_id}}`)
     </script>
     <hr>
 {% endfor %}
-
 
 
 

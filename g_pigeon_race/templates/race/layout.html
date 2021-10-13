@@ -24,15 +24,27 @@
             position: fixed;
             top: 1%;
             z-index: 5;
+            background-color: turquoise;
+            padding: 0.5rem;
+
+        }
+        .tabs a {
+            text-decoration: none;
+            font-weight: 900;
+            color:rgb(55, 0, 255) !important;
         }
     </style>
     <div class="tabs">
-        <span>
-            <a class="race" href="{% url 'g_pigeon_race:index' %}">Race</a>
-        </span>
-        <span>
-            <a class="race" href="{% url 'g_pigeon_race:manager_page' %}">Manager</a>
-        </span>
+
+        {% if request.user.is_superuser %}
+            <span>
+                <a class="race" href="{% url 'g_pigeon_race:manager_page' %}">Manager</a>
+            </span>
+        {% else %}
+            <span>
+                <a class="race" href="{% url 'g_pigeon_race:index' %}">Race</a>
+            </span>
+        {% endif %}
     </div>
     {% block body %}
 

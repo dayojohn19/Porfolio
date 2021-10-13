@@ -42,6 +42,7 @@
 
 <h1 style="background-color: rgba(220, 20, 60, 0.116); width: fit-content; padding: 5px; margin: 1%;">
     {{race.racename}} 
+    
 </h1>
 <!-- <a href="{% url 'g_pigeon_race:lap' race.id %}">
     <button class="load-pigeon">LOAD PIGEON</button>
@@ -50,42 +51,49 @@
 <hr>
 
 
+{% if race.started %}
+<h1>Race Has Started</h1>
+{% else %}
 
-{% for up in unpigeons %}
-    <div hidden>
-        <p id="name">{{up.name}}</p>
-        <p id="ring">{{up.ring}}</p>
-        <p id="owner">{{up.owner}}</p>
-        <p id="code">{{up.id}}</p>
-        <p hidden id="link">{{up.link}}</p>
-        <p id="time">txtxddd</p>
-    </div>
-        <div class="reg_pigeon" style="text-align: center ;border: 1px solid grey; margin: 1px; padding:1%; box-shadow: 0px 0px 5px rgb(199, 198, 255);">
-            <img class="reg_image" src="{{up.link}}" style="height: 10rem; float: left;">   
-            <br>
-            <p> " {{up.name}} "</p>
-            <p>Ring: {{up.ring}}</p>
-            <p>Last Release: {{up.loads}}</p>
-                <form  onsubmit="entry()"  action="{% url 'g_pigeon_race:entry' race.id %}" method="POST">
-                    {%csrf_token%}
-                    <input hidden class="pigeon" name="pigeon" value="{{up.id}}">
-                    <input style="background-color: rgb(182, 238, 255); border-radius: 25px; width: 30%;" type="submit" value="Entry">
-                </form>
+
+
+    {% for up in unpigeons %}
+        <div hidden>
+            <p id="name">{{up.name}}</p>
+            <p id="ring">{{up.ring}}</p>
+            <p id="owner">{{up.owner}}</p>
+            <p id="code">{{up.id}}</p>
+            <p hidden id="link">{{up.link}}</p>
+            <p id="time">txtxddd</p>
         </div>
-
-            {% empty %}
-                <hr>
-                <h1 style="margin-top:5rem;">You have No Available Pigeon to Entry</h1>
-                <div style=" border-radius: 5.5px; padding: 1.5rem; background-color: rgba(202, 197, 197, 0.628); width: 70%; margin: 1%;">
+            <div class="reg_pigeon" style="text-align: center ;border: 1px solid grey; margin: 1px; padding:1%; box-shadow: 0px 0px 5px rgb(199, 198, 255);">
+                <img class="reg_image" src="{{up.link}}" style="height: 10rem; float: left;">   
+                <br>
+                <p> " {{up.name}} "</p>
+                <p>Ring: {{up.ring}}</p>
+                <p>Last Release: {{up.loads}}</p>
+                    <form  onsubmit="entry()"  action="{% url 'g_pigeon_race:entry' race.id %}" method="POST">
+                        {%csrf_token%}
+                        <input hidden class="pigeon" name="pigeon" value="{{up.id}}">
+                        <input style="background-color: rgb(182, 238, 255); border-radius: 25px; width: 30%;" type="submit" value="Entry">
+                    </form>
+            </div>
+                {% empty %}
+                    <hr>
+                    <h1 style="margin-top:5rem;">You have No Available Pigeon to Entry</h1>
                     <a style="text-decoration: none; padding: 5%;" href="{% url 'user:upload'  %}">Register more pigeon</a>
-                    <br><hr><br>
-                    <a style="text-decoration: none; padding: 5%;" href="{% url 'g_pigeon_race:races_registered' race_id=race.id %}">View Registered Pigeons on this Race</a>
-                    <br><hr><br>
-                    <a style="text-decoration: none; padding: 5%;" href="{% url 'g_pigeon_race:view_loaded' id=race.id %}">view Loaded Pigeon on this Race</a>
-                </div>
-                
-{% endfor %}
-
+                    <br><hr><br>     
+    {% endfor %}
+{% endif %}
+<div
+    style=" border-radius: 5.5px; padding: 1.5rem; background-color: rgba(202, 197, 197, 0.628); width: 70%; margin: 1%;">
+    <a style="text-decoration: none; padding: 5%;"
+        href="{% url 'g_pigeon_race:races_registered' race_id=race.id %}">View Registered Pigeons on this Race</a>
+    <br>
+    <hr><br>
+    <a style="text-decoration: none; padding: 5%;" href="{% url 'g_pigeon_race:view_loaded' id=race.id %}">view Loaded
+        Pigeon on this Race</a>
+</div>
 <script>
 
     //get time 

@@ -79,7 +79,7 @@
         text-decoration: none;
     }
 </style>
-<h1><a class="manager" href="{% url 'g_pigeon_race:manager_page' %}">manager</a></h1>
+<!-- <h1><a class="manager" href="{% url 'g_pigeon_race:manager_page' %}">manager</a></h1> -->
 <hr>
 <h5 class="good-day">Good Day, {{request.user.username}}</h5>
 <h3><a class="view-players" href="{% url 'user:index' %}">View Players</a></h3>
@@ -93,10 +93,7 @@
         <div class="clock-3">
                 {% if message %}
                     <h1 style="background-color: rgba(255, 0, 0, 0.253); margin: 4%; padding: 2%;">{{message}} ! ! !</h1>
-                    X: {{x}}
-                    <br>
-                    Load: {{load}}
-                    <br>
+
                     {{now}}
                     {% if new %}
                         <h1><strong>{{message}}</strong></h1>
@@ -133,10 +130,12 @@
     {% if races %}
         <h1>Open Races:</h1>
             {% for race in races %}
+
                 {% if race.finished %}
-                    {{race.racename}} has Ended <a href="{% url 'g_pigeon_race:view_race_record' id=race.id %}">View Result</a>
+                    {{race.racename}}  <a style="text-decoration: none; color: lightblue; background-color: black;padding: 0.5rem;" href="{% url 'g_pigeon_race:view_race_record' id=race.id %}">View Result</a>
                     <hr>
                 {% else %}
+
                     <div class="races-container">
 
                             <h2 style="margin-bottom: 0;">{{race.racename}}
@@ -146,6 +145,7 @@
                             <a href="{% url 'g_pigeon_race:lap' race.id %}">
                                 <button class="load-pigeon">LOAD PIGEON</button>
                             </a>
+                            <a href="{% url 'g_pigeon_race:view_race_record' id=race.id %}">View Result</a>
                         {% else %}
                         <p style="text-align: left; font-size: large;">₱ {{race.price}}</p>    
                             <form action="{%url 'g_pigeon_race:race' race.id %}" style="text-align: center;">
@@ -156,8 +156,12 @@
                         {% endif %}
                     </div>
                 {% endif %}
+
+                
+                
             {% endfor %}
     {% endif %} 
+    
 {% else %}
     <h2><a class="view-players" href="{% url 'user:upload' %}">Register pigeon</a></h2>
     Please Measure Your Loft Place Before Joining the race 

@@ -2,7 +2,8 @@
 {% load humanize %}
 {% block body %}
     <h2>{{lap_name}}</h2>
-    Released: <h4 style="margin-top: 0;">
+    Released: <h4 style="margin-top: 0; color: yellow;">
+
     <script>
         var myDate = new Date( `{{lap_release}}` *1000);
         document.write(`  &nbsp&nbsp&nbsp&nbsp&nbsp`+myDate.toString());
@@ -27,9 +28,6 @@
             color: lightblue;
         }
     </style>
-
-
-
 
     <h4>Clocked Birds:</h4> 
     {% for c in clocked %}

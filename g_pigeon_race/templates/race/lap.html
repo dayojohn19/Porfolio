@@ -15,8 +15,9 @@
         font-size: large;
         margin-bottom: 0.5rem;
     }
-    button {
+    form input {
         border: none;
+        background-color: rgba(239, 255, 96, 0.966);
     }
     #valued {
         color: rgb(0, 195, 255);
@@ -25,49 +26,58 @@
     .rlap{
         text-align: center;
         font-size: x-large;
+        color: yellow;
     }
-
+    .load_button {
+        background-color: yellowgreen;
+        font-size: x-large;
+        border:none;
+    }
+    * button {
+        border-radius: none;
+    }
 </style>
-
-<h1 id="race_name" style="background: #fd747831; border: 2px solid #e664646c; margin: 15px; line-height: 1.5; text-align: center;border-radius:5.5px">
-    {{rn.racename}}
-</h1>
-<a href="{% url 'g_pigeon_race:view_race_record' id=rn.id %}">View record</a>
-<div style="text-align: center;color: yellow;padding: 1% ;border:3px rgba(172, 255, 47, 0.219) solid; ">
-    <h3 style="margin-bottom: 0; padding-bottom: 0;">Next Lap: </h3>
-    <h1  style="margin-top: 0; padding-top: 0;"> 
-        <div id="lap_name"> 
-        </div>
+<div style="background: #fd747831; border: 2px solid #e664646c; margin: 15px; line-height: 1.5; text-align: center;border-radius:5.5px">
+    <h1 id="race_name">
+        {{rn.racename}}
     </h1>
-</div>
+    <a style="text-decoration:none; color:lightblue;" href="{% url 'g_pigeon_race:view_race_record' id=rn.id %}">View record</a>
+</div>  
+
 <input hidden  id="race_id" value="{{rn.id}}">
 
 <p style="font-size: smaller;">Get the code and Load the Pigeon on the Truck</p>
 <div id="e1"></div>
 <hr>
     <div style="border: 4px solid red; width:fit-content;" hidden> 
-        <strong>Active Lap</strong>
         <div id="lap_id"></div>
         <div id="race_id2">{{rn.id}}</div>
     </div>
     
 <h4>Lap:</h4>
 <div style="text-align:center;">
+    <div style="text-align: left;color: yellow;padding: 1% ;">
+        <div>
+            <h3 style="margin-bottom: 0; padding-bottom: 0;">Next Lap: </h3>
+            <h1 style="margin-top: 0; padding-top: 0;">
+                <div id="lap_name">
+                </div>
+            </h1>
+        </div>
+    </div>
     {% for l in lap  %}
         <div style="padding-top: 0px;background-color: rgba(255, 140, 0, 0.11);border:3px solid rgba(255, 255, 33, 0.192);margin: 5px; padding: 5%;">
+
             <p id="lapid" hidden>{{l.id}}</p>
-            
-            <p id="lap_lat">{{l.lat}}</p>
-            <p id="lat_long">{{l.long}}</p>
-
-
             <h1 style="margin-top: 0;"><p id="valued" >{{l.release}}</p>{{l.num_loaded}} Birds</h1>
-            
             <form action="{% url 'g_pigeon_race:view_loaded' l.id %}">
                 <input type="submit" value="View Loaded Pigeons">
             </form>
-            <button  id="{{l.id}}"   onclick="truck(id)" >Truck</button>
+            <button  id="{{l.id}}" onclick="truck(id)" >Truck</button>
         </div>
+        {% empty %}
+        <h1>No more lap</h1>
+        <a style="text-decoration: none; color: lightblue;" href="{% url 'g_pigeon_race:view_race_record' id=rn.id %}">View Result</a>
     {% endfor %}
 </div>
 <hr>
@@ -75,11 +85,9 @@
 {% for r in rlap %}
     <div class="rlap">{{r.release}}
         <div>{{r.char_time}}</div>
-
         <form action="{% url 'g_pigeon_race:view_clocked' lid=r.id %}">
             <input type="submit" value="View Clocked Pigeons">
         </form>
-
         <form action="{% url 'g_pigeon_race:view_loaded_dead' rn.id %}">
             <input type="submit" value="View Loaded Pigeons">
         </form>
@@ -152,7 +160,7 @@ function loadit(id, state, lapid, lap_num) {
             Ring: <a style="background-color:rgba(0, 128, 0, 0.233);padding-left:10px;padding-right:10px">${e.ring}</a> <br>
             </p>
             <input id="code-${e.id}"  placeholder="Load Code"  >
-            <button id="x-${e.id}">load</button>
+            <button class="load_button" id="x-${e.id}">load</button>
             <br>
             Last Load: ${e.loads} <br>
             

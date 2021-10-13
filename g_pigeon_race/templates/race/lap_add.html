@@ -1,0 +1,41 @@
+{% extends "race/layout.html" %}
+
+{% block body %}
+
+    <h1>4. Add Lap</h1>
+    <p>
+        <strong>Instructions:</strong>
+        <br>
+        <strong>Fourth:</strong>
+        <strong>Add Lap</strong>
+        on each race where pigeon will be released
+        <br>
+        <b style="font-size:small;">** You Can make More than One Lap on each Races **</b>
+    </p>
+
+
+    <form method="post" action="{% url 'g_pigeon_race:add_lap' %}">
+        {% csrf_token %}
+        <select required name="race">
+            {% for r in s_races %}
+            <option value="{{r.id}}">{{r.racename}}</option>
+            {% endfor %}
+        </select>
+    
+        <select name="point">
+            {% for p in point%}
+            <option value="{{p.id}}">{{p.place}}</option>
+            {% endfor %}
+        </select>
+        <input required placeholder="loading cost" name="loading_cost">
+        <input class="button" type="submit">
+    </form>
+
+    <h1>
+        Laps:
+    </h1>
+    {% for l in laps %}
+    <h3 style="color: lightblue;">{{l.release}}</h3>
+    {% endfor %}
+
+{%endblock %}

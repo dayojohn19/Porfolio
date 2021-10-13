@@ -1,33 +1,74 @@
-{% extends "a_index/layout.html" %}
+{% extends "race/layout.html" %}
 
 {% block body %}
 <style>
     strong {
         color: tomato;
     }
+        input {
+        font-size: larger;
+        padding: 0.5rem;
+        border-radius: 5px;
+        border:none;
+    }
+        .button {
+        background: tomato;
+        border:none;
+        padding: 0.5rem;
+        color: white;
+        text-decoration: none;
+        border-radius: 10px;
+    }
 </style>
-<a href="{% url 'g_pigeon_race:manager_page' %}">Manager</a>
-<h1>Codes :!</h1>
-<p>
-    <strong>Readme:</strong>
-    <br>    
-    <strong>Code</strong>
-    is used on <strong>Load</strong> on each <strong>Lap</strong>
-    <br>
-    <strong>Hcode</strong>
-    is used to clock the pigeon after they comeback
-    <br>
-    <strong>Ring Code</strong>
-    is the Pigeon's Permanent Ring Number
-</p>
+    <!-- add code -->
+    <h1>2. Add RaceCode</h1>
+    <p>
+        <strong>Instructions: <br>Second:</strong>
+        Create codes that will be used in sticker tag that will be put on each <strong>pigeon rings</strong>
+        <br>
+        <strong>Code</strong>
+        will be used to <strong>Load</strong> the pigeon into the <strong>Lap</strong>
+        <br>
+        <strong>Sticker Code</strong>
+        will be the hidden code that will be putted on each pigeon ring and when the pigeon comes back they will open the
+        <strong>hidden code</strong>
+        and use to clock their Pigeon
+        and hit <strong>Submit</strong>
+    </p>
+    <form method="POST" action="{% url 'g_pigeon_race:add_code' csrf_token %}">
+        {% csrf_token %}
+        <input name="code" required placeholder="code">
+        <input name="hcode" required placeholder="sticker code">
+        <input class="button" type="submit" value="Create Code">
+    </form>
+    <!-- <a style="text-decoration: none;" href="{% url 'g_pigeon_race:view_codes' %}">View All Codes</a><br> -->
+    <hr>
 
-Message: {{message}}
-{% for c in cc %}
-Code : {{c.code}}<br>
-Hcode : {{c.hcode}}<br>
-Ring Code : {{c.ring_code}}<br>
-Pigeon Id : {{c.pigeon_id}}<br>
+
+
+
+<!-- <a href="{% url 'g_pigeon_race:manager_page' %}">Manager</a> -->
+    <h1 style="color: greenyellow;">Codes: </h1>
+        <p>
+            <strong>Readme:</strong>
+            <br>    
+            <strong>Code</strong>
+            is used on <strong>Load</strong> on each <strong>Lap</strong>
+            <br>
+            <strong>Hcode</strong>
+            is used to clock the pigeon after they cameback
+            <br>
+            <strong>Ring Code</strong>
+            is the Pigeon's Permanent Ring Number
+        </p>
+<h1>{{message}}</h1>
 <hr>
-{%endfor %}
+    {% for c in cc %}
+        Code : {{c.code}}<br>
+        Hcode : {{c.hcode}}<br>
+        Ring Code : {{c.ring_code}}<br>
+        Pigeon Id : {{c.pigeon_id}}<br>
+        <hr>
+    {%endfor %}
 
 {%endblock %}

@@ -22,8 +22,13 @@
     }
 
 </style>
+
 <div style="text-align: center;">
     <h1> {{race}} </h1>
+    {% if race.started %}
+    <h1>Race Started Cannot Register</h1>
+    {% else %}
+
     <h4>Registered Birds</h4>
 </div>
 {% for qw in pigeons %}
@@ -45,7 +50,8 @@
     </div>
     <br>
 {%endfor%}
-
+    not started
+    {% endif %}
 
 
 {% endblock %}

@@ -1,3 +1,10 @@
+from django.http import JsonResponse
+from .forms import ImageForm, UserImageForm
+from user.models import Chain
+import json
+from django.views.decorators.csrf import csrf_exempt
+from datetime import datetime
+import pytz
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
@@ -9,9 +16,11 @@ from g_pigeon_race.models import Record
 from geopy.geocoders import Nominatim
 # xx = User.objects.get(username=request.user.username)
 
-## get user as mail.User
+# get user as mail.User
 from app_mail import models as mail
 ###
+
+
 def player(request, username):
     if request.method == 'GET':
         xx = mail.User.objects.get(username=request.user.username)
@@ -19,28 +28,24 @@ def player(request, username):
         viewer = request.user.username
         viewing = get_object_or_404(mail.User, username=username)
         viewing_pic = mail.User.objects.get(username=username)
-        lists = Mypigeons.objects.filter(owner=viewing).order_by('id').reverse()
+        lists = Mypigeons.objects.filter(
+            owner=viewing).order_by('id').reverse()
         c = len(lists)
-
 
         if request.user.is_anonymous:
             return redirect('user:login')
         else:
             return render(request, "user/player.html", {
-                'list':lists,
-                'lo':viewing,
-                'c':c,
-                'pic':viewing_pic.email
+                'list': lists,
+                'lo': viewing,
+                'c': c,
+                'pic': viewing_pic.email
             })
 
-from .forms import ImageForm, UserImageForm
-import pytz
-from datetime import datetime
-from django.views.decorators.csrf import csrf_exempt
 
 def addpigeon(request):
     if request.method == "POST":
-        #add time
+        # add time
         ltz = pytz.timezone('Asia/Manila')
         now = datetime.now(ltz)
         dt = now.strftime("%A %d %B %Y %X")
@@ -61,12 +66,12 @@ def addpigeon(request):
         username = request.user.username
         viewer = request.user.username
         viewing = get_object_or_404(mail.User, username=username)
-        lists = Mypigeons.objects.filter(owner=viewing).order_by('id').reverse()
+        lists = Mypigeons.objects.filter(
+            owner=viewing).order_by('id').reverse()
 
         return redirect('g_pigeon_race:index')
 
-from django.http import JsonResponse
-import json
+
 @csrf_exempt
 def load_pigeon(request, id):
     if request.method == "PUT":
@@ -79,9 +84,6 @@ def load_pigeon(request, id):
         return HttpResponse(status=204)
 
 
-      
-
-
 @csrf_exempt
 def pictures(request):
     if request.method == 'POST':
@@ -89,10 +91,12 @@ def pictures(request):
         if form.is_valid():
             form.save()
             img_obj = form.instance
-            return render(request, 'user/add.html', {'form':form, 'img_obj':img_obj})
+            return render(request, 'user/add.html', {'form': form, 'img_obj': img_obj})
     else:
         form = ImageForm()
-    return render(request, 'user/add.html', {'form':form})
+    return render(request, 'user/add.html', {'form': form})
+
+
 @csrf_exempt
 def userpictures(request):
     if request.method == 'POST':
@@ -100,28 +104,30 @@ def userpictures(request):
         if form.is_valid():
             form.save()
             img_obj = form.instance
-            return render(request, 'user/register.html', {'form':form, 'img_obj':img_obj})
+            return render(request, 'user/register.html', {'form': form, 'img_obj': img_obj})
     else:
         form = UserImageForm()
-    return render(request, 'user/register.html', {'form':form})
+    return render(request, 'user/register.html', {'form': form})
+
 
 def index(request):
     if request.user.is_anonymous:
         return redirect('user:login')
     user = request.user
     bb = mail.User
-    users = bb.objects.all().order_by('id').reverse()  
+    users = bb.objects.all().order_by('id').reverse()
     count = len(bb.objects.all())
-    return render(request, "user/index.html",{
-        "l":user,
-        "au":users,
-        "user_count": count 
-        })
+    return render(request, "user/index.html", {
+        "l": user,
+        "au": users,
+        "user_count": count
+    })
+
+
 def login_view(request):
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
-
 
         user = authenticate(request, username=username, password=password)
 
@@ -132,9 +138,12 @@ def login_view(request):
             return render((request), "user/login.html", {"message": "invalid username and/or password."})
     else:
         return render(request, "user/login.html")
+
+
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse("user:index"))
+
 
 def register_sec(request):
     if request.method == "POST":
@@ -160,11 +169,12 @@ def register_sec(request):
                 "message": "Username already taken. "
             })
         login(request, user)
-        return HttpResponseRedirect(reverse("sale:index"))
+        return HttpResponseRedirect(reverse("g_pigeon_race:index"))
     else:
         form = UserImageForm()
         return render(request, "user/register.html",
-        {'form':form})
+                      {'form': form})
+
 
 def register(request):
     if request.method == "POST":
@@ -173,7 +183,7 @@ def register(request):
         password = request.POST["password"]
         confirmation = request.POST["confirmation"]
         if password != confirmation:
-            return render(request, "user/register.html", { "message": "Passwords must match."})
+            return render(request, "user/register.html", {"message": "Passwords must match."})
         try:
             user = mail.User.objects.create_user(
                 username,
@@ -186,17 +196,16 @@ def register(request):
         except IntegrityError:
             return render(request, "user/register.html", {"message": "Username already taken."})
 
-
         login(request, user)
-        return HttpResponseRedirect(reverse("sale:index"))
+        return HttpResponseRedirect(reverse("g_pigeon_race:index"))
     else:
         form = UserImageForm()
 
-        return render(request, "user/register.html",{'form':form})
+        return render(request, "user/register.html", {'form': form})
 
 
 def view_record(request, pid):
-#change 195 to pigeon id
+    # change 195 to pigeon id
     mp = Mypigeons.objects.get(id=pid)
     mpl = mp.link
     name = mp.name
@@ -205,21 +214,22 @@ def view_record(request, pid):
     return render(request, "user/pigeon_record.html", {
         "records": Record.objects.filter(entry=pid).order_by('id').reverse(),
         "count": len(Record.objects.filter(entry=pid)),
-        "zz":zz,
+        "zz": zz,
         "mpl": mpl,
         'pid': name
     })
 
 
-### chain coin
-from user.models import Chain
+# chain coin
+
+
 def last_name(request):
     if request.method == 'POST':
         user = User.objects.get(pk=request.user.id)
         lastname = request.POST.get("last_name")
         requestToChain = user.first_name
 
-        ## get block
+        # get block
         try:
             block = Chain.objects.get(chain=requestToChain)
             value = block.value
@@ -227,24 +237,24 @@ def last_name(request):
             user.first_name = hash(str(value))
             user.last_name = value + lastname
             user.save()
-            ## create new block
+            # create new block
             b = Chain()
             b.chain = hash(str(value))
             b.value = value + lastname
             b.save
 
-        ## create block
+        # create block
         except:
             x = 'noned'
             c = Chain()
             c.chain = user.first_name
             c.value = lastname
             c.save()
-        
+
     return render(request, 'commerce/commerce.html', {
-        'new':User.objects.get(pk=request.user.id),
-        'last':user.last_name,
-        'first':user.first_name,
-        'chains':Chain.objects.all(),
+        'new': User.objects.get(pk=request.user.id),
+        'last': user.last_name,
+        'first': user.first_name,
+        'chains': Chain.objects.all(),
         # 'x':x
     })

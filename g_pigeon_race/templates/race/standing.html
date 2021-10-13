@@ -1,0 +1,20 @@
+{% extends "race/layout.html" %}
+
+{% block body %}
+<h1>
+    Ranking
+</h1>
+
+{% for s in standings %}
+    Name: {{s.pigeon_name}}
+    <br>
+    Total Speed: {{s.tspeed}}
+    <br>
+
+
+{% endfor %}
+
+
+<div style="height: 1000px;"></div>
+
+{% endblock %}

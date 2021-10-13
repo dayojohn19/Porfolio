@@ -22,13 +22,13 @@
     }
 
     strong {
-        color: tomato;
+        color: rgb(92, 255, 71);
     }
     h1 {
         color: yellow;
     }
     .lap-name {
-        color:  rgb(0, 149, 255);
+        color:  rgb(0, 217, 255);
         margin-bottom: 0.2rem;
     }
     select {
@@ -42,46 +42,55 @@
         border-radius: 5px;
         border:none;
     }
-
+    .pink {
+        color: rgb(105, 128, 255) !important;
+    }
 </style>
 <h1><a class="race" href="{% url 'g_pigeon_race:index' %}">Race</a></h1>
 <hr>
     <!-- add race -->
     <h1>1. Start a Race</h1>
-    <p>
-        <strong>Instructions:  <br>First:</strong>
-        Start A race by Filling <strong>Race Name</strong>, <strong>Price</strong>
-        and hit <strong>Submit</strong>
-    </p>
-    <form method="POST" action="{% url 'g_pigeon_race:start_race' csrf_token %}">
-        {% csrf_token %}
-        <input name="race_name" placeholder="Race Name" required>
-        <input name="price" type="number" placeholder="Price" required>
-        <input class="button" type="submit" value="Create Race">
-    </form>
-<hr>
+        <p>
+            <strong>Instructions:  <br>First:</strong>
+            Start A race by Filling <strong>Race Name</strong>, <strong>Price</strong>
+            and hit <strong>Submit</strong>
+        </p>
+        <form method="POST" action="{% url 'g_pigeon_race:start_race' csrf_token %}">
+            {% csrf_token %}
+            <input name="race_name" placeholder="Race Name" required>
+            <input name="price" type="number" placeholder="Price" required>
+            <input class="button" type="submit" value="Create Race">
+        </form>
+
+        {% for sr in s_races %}
+            <h2 style="color: lightblue;">{{sr.racename}}</h2>
+            <h3>P {{sr.price}}</h3>
+        {% endfor %}
+    <hr>
     <!-- add code -->
     <h1>2. Add RaceCode</h1>
-    <p>
-        <strong>Instructions:  <br>Second:</strong>
-        Create codes that will be used in sticker tag that will be put on each <strong>pigeon rings</strong> 
-        <br>
-        <strong>Code</strong>
-        will be used to <strong>Load</strong> the pigeon into the <strong>Lap</strong>
-        <br>
-        <strong>Sticker Code</strong>
-        will be the hidden code that will be putted on each pigeon ring and when the pigeon comes back they will open the 
-        <strong>hidden code</strong>
-        and use to clock their Pigeon
-        and hit <strong>Submit</strong>
-    </p>
-    <form method="POST" action="{% url 'g_pigeon_race:add_code' csrf_token %}"> 
+        <p>
+            <strong>Instructions:  <br>Second:</strong>
+            Create codes that will be used in sticker tag that will be put on each <strong>pigeon rings</strong> 
+            <br>
+            <strong>Code</strong>
+            will be used to <strong>Load</strong> the pigeon into the <strong>Lap</strong>
+            <br>
+            <strong>Sticker Code</strong>
+            will be the hidden code that will be putted on each pigeon ring and when the pigeon comes back they will open the 
+            <strong>hidden code</strong>
+            and use to clock their Pigeon
+            and hit <strong>Submit</strong>
+        </p>
+    <!-- <form method="POST" action="{% url 'g_pigeon_race:add_code' csrf_token %}"> 
         {% csrf_token %}
         <input name="code" required placeholder="code">
         <input name="hcode" required placeholder="sticker code">
         <input class="button" type="submit" value="Create Code">
-    </form>
-    <a style="text-decoration: none;" href="{% url 'g_pigeon_race:view_codes' %}">View All Codes</a><br>
+    </form> -->
+
+    <button class="button"><a style="text-decoration: none; color:white; font-size: x-large;"
+            href="{% url 'g_pigeon_race:view_codes' %}">Create Code</a></button>
 <hr>
 <!-- Viewing All Entries
         <p>
@@ -95,13 +104,13 @@
 <hr> -->
 <!-- Add A Place -->
     <h1>3. Add Point</h1>
-    <p>
-        <strong>Instructions:</strong>
-        <br>
-        <strong>Third:</strong>
-        Input the <strong>Address</strong>
-        where you want to release the pigeons
-    </p>
+        <p>
+            <strong>Instructions:</strong>
+            <br>
+            <strong>Third:</strong>
+            Input the <strong>Address</strong>
+            where you want to release the pigeons
+        </p>
 
         <form method="post" action="{% url 'g_pigeon_race:add_point' %}">
             {% csrf_token %}
@@ -111,145 +120,92 @@
 <hr>
 <!-- Add Lap -->
     <h1>4. Add Lap</h1>
-    <p>
-        <strong>Instructions:</strong>
-        <br>
-        <strong>Fourth:</strong>
-        <strong>Add Lap</strong>
-        on each race where pigeon will be released
-        <br>
-        <b style="font-size:small;">** You Can make More than One Lap on each Races **</b>
-    </p>
-    <form method="post" action="{% url 'g_pigeon_race:add_lap' %}">
-        {% csrf_token %}
-        <select required name="race">
-            {% for r in s_races %}
-            <option value="{{r.id}}">{{r.racename}}</option>
-            {% endfor %}
-        </select>
+        <p>
+            <strong>Instructions:</strong>
+            <br>
+            <strong>Fourth:</strong>
+            <strong>Add Lap</strong>
+            on each race where pigeon will be released
+            <br>
+            <b style="font-size:small;">** You Can make More than One Lap on each Races **</b>
+        </p>
+        <button class="button"><a style="text-decoration: none; color:white; font-size: x-large;" href="{% url 'g_pigeon_race:add_lap' %}">Add Lap</a></button>
 
-        <select name="point">
-            {% for p in point%}
-            <option value="{{p.id}}">{{p.place}}</option>
-            {% endfor %}
-        </select>
-        <input required placeholder="loading cost" name="loading_cost">
-        <input class="button" type="submit">
-    </form>
-
-<hr>
-<p>
-    after you put all the Laps you want, <br>
-    Ask the Players to Load their Pigeon<br>
-    and go to <strong>5. Start Race</strong>
-    <br>
-<hr>
+        <p>
+            after you put all the Laps you want, <br>
+            Ask the Players to Load their Pigeon<br>
+            and go to <strong>5. Start Race</strong>
+        </p>
 <hr>
 <!-- to start race -->
-<h1>5. Start Race</h1>
-<p>
-    <strong>Instructions:</strong>
-    <br>
-    Wait for the Players to Join in a Race then 
-    <br>
-    Start the race and then go to step 6: <strong>Release the Lap</strong>
-    <br>
-</p>
-
+    <h1>5. Start Race</h1>
+        <p>
+            <strong>Instructions:</strong>
+            <br>
+            Wait for each Players to Join in a Race then 
+            <br>
+            Start the race and then go to step 6: <strong>Release the Lap</strong>
+            <br>
+        </p>
 <hr>
+    {% for rcs in races %}
+        {% if rcs.finished %}
 
+        {% else %}
+            {% if rcs.started %}
+                        <!-- To Release Laps -->
+                        {% if laps %}
+                                <h1>6. Release Lap</h1>
+                                <strong>Instructions:</strong>
+                                <p>
+                                <strong>Release</strong> the pigeon on the Lap address 
+                                and wait for each player's pigeon to come back and players to <strong>Clock</strong>
+                                their pigeons
+                                </p>
+                                <div>
+                                    <h2><strong class="pink">Unreleased Laps</strong> </h2>
+                            </div>
+                        {% endif %}
+    <hr>
+            {% for l in laps %}           
+                <h2 class="pink">{{l.race}}</h2>
+                        <div>
+                            <h3 class="lap-name">{{l.release}}</h3>
+                            {% if l.released != True %}
+                            <form action="{% url 'g_pigeon_race:release' id=l.id %}" method="post">
+                                {%csrf_token%}
+                                <input hidden readonly value="{{now}}" name="release_time">
+                                <input class="button" type="submit" value="Release"></button>
+                            </form>  
+                        <b style="color: yellow;">{{l.num_loaded}} Pigeon</b><br>
+                        <b style="color: yellowgreen;">₱     {{l.loading_cost}}</b>  <br>
+                            Lat : {{l.release_lat}}<br>
+                            Long : {{l.release_long}} <br>
+                            <br>
+                            {% endif %}
+                        </div>
 
-<hr>
-{% for rcs in races %}
-    {% if rcs.finished %}
-    {{rcs.racename}} race is finished 
-    {% else %}
-   
-        <!--     -->
-        <!--     -->
- 
+            {% empty %}
+                <form method="POST" action="{% url 'g_pigeon_race:ended_race' rid=rcs.id %}">
+                    {% csrf_token %}
+                    <h2 style="color: greenyellow;">{{rcs.racename}}</h2>
+                    <button  class="button">
+                        End Race</button>
+                </form>
+            {% endfor %}
 
         <!--  -->
-        {% if rcs.started %}
-
-                       <!-- To Release Laps -->
-                       {% if laps %}
-                       <h1>6. Release Lap</h1>
-                       <strong>Instructions:</strong>
-                       <br>
-                           <p>
-                               <strong>Release</strong> the pigeon on the Lap address 
-                               and wait for player's pigeon to come back and players to <strong>Clock</strong>
-                               their pigeons
-                           </p>
-                           <div>
-                               <h2><strong>Unreleased Laps</strong> </h2>
-                               <hr>
-                           </div>
-                       {% endif %}
-                   <hr>
-                   <!--  -->
-       <!--  -->
-
-        {% for l in laps %}           
-            <h2>{{l.race}}</h2>
-                    <div>
-                        <h3 class="lap-name">{{l.release}}</h3>
-                        {% if l.released != True %}
-                        <form action="{% url 'g_pigeon_race:release' id=l.id %}" method="post">
-                            {%csrf_token%}
-                            <input hidden readonly value="{{now}}" name="release_time">
-                            <input class="button" type="submit" value="Release"></button>
-                        </form>  
-                     <b style="color: yellow;">{{l.num_loaded}} Pigeon</b><br>
-                    <b style="color: yellowgreen;">₱     {{l.loading_cost}}</b>  <br>
-                        Lat : {{l.release_lat}}<br>
-                        Long : {{l.release_long}} <br>
-                        <br>
-                        {% endif %}
-                    </div>
-                    <hr>
-        {% empty %}
-            <form method="POST" action="{% url 'g_pigeon_race:ended_race' rid=rcs.id %}">
-                {% csrf_token %}
-                <h2 style="color: greenyellow;">{{rcs.racename}}</h2>
-                <button  class="button">
-                    End Race</button>
-            </form>
-        {% endfor %}
-    <hr>
-    <!--  -->
-                   
-   
-        {% else %}
-        {{rcs.racename}} not started
-            <form method="POST" action="{% url 'g_pigeon_race:started_race' rid=rcs.id %}">
-                {% csrf_token %}
-                <button  class="button">start Race</button>
-            </form>
+                    
+    
+            {% else %}
+            <h1 style="color: lightblue;">{{rcs.racename}}</h1>
+                <form method="POST" action="{% url 'g_pigeon_race:started_race' rid=rcs.id %}">
+                    {% csrf_token %}
+                    <button  class="button">start Race</button>
+                </form>
+            {% endif %}
         {% endif %}
-    {% endif %}
-    <hr>
-{% endfor %}
 
-<hr>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    {% endfor %}
 
 {% endblock %}
