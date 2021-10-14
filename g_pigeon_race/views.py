@@ -175,17 +175,22 @@ def add_lap(request):
             )
             nn.save()
         return HttpResponseRedirect(reverse("g_pigeon_race:add_lap"))
+    try:
 
-    return render(request, "race/lap_add.html", {
-        'x': 'failed',
-        'races': Race.objects.filter(finished=False),
-        'point': Point.objects.all().order_by('id').reverse(),
+        return render(request, "race/lap_add.html", {
+            'x': 'failed',
+            'races': Race.objects.filter(finished=False),
+            'point': Point.objects.all().order_by('id').reverse(),
 
-        "laps": Lap.objects.filter(released=False).all().order_by('id'),
-        'races': Race.objects.all().order_by('id').reverse(),
-        's_races': Race.objects.filter(started=False).order_by('id').reverse(),
+            "laps": Lap.objects.filter(released=False).all().order_by('id'),
+            'races': Race.objects.all().order_by('id').reverse(),
+            's_races': Race.objects.filter(started=False).order_by('id').reverse(),
 
-    })
+        })
+    except:
+        return render(request, "race/lap_add.html", {
+            'races': Race.objects.all().order_by('id').reverse(),
+        })
 
 
 def release_it(request, id):
