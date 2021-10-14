@@ -68,23 +68,6 @@ def index(request):
     geolocator = Nominatim(user_agent='race')
     now = time.time()
     measured = False
-
-# #   in seconds
-#     t_time = 60
-#     t_distance = 100
-#     #in sec
-#     t_speed = t_distance/t_time
-#     # in min
-#     time1=13.2
-#     time2=15.1
-#     d = 200
-#     t1 = 1632645662.55295
-#     t2 = time.time()
-#     t3 = (float(t2)-float(t1)) /60
-#     s = d / t3
-#     # t_speed = (float(time2)-float(int(time1)))
-#     t_speed = time2 - int(time1)
-
     if not request.user.is_authenticated:
         return redirect('user:login')
     try:
@@ -96,15 +79,7 @@ def index(request):
     return render(request, "race/index.html", {
         "races": Race.objects.all().order_by('id').reverse(),
         "now": now,
-        # "test":t_speed,
-        # "test2":str(time.strftime(" %b %d %Y, %I:%m %p ", time.localtime(time.time())))
-        # "test2": time.ctime(int(time.time()))
         "test2": strftime("%I:%M:%S %p  ,  %a %b %d  %Y  ", localtime())
-
-        #######
-        #######
-
-        # save all lap with the same id
     })
 
 
@@ -128,7 +103,6 @@ def start_race(request, csrf_token):
         context = {
             'races': Race.objects.filter(finished=False).order_by('id').reverse()
         }
-        # return render(request, 'race/index.html', context)
         return redirect('g_pigeon_race:manager_page')
 
 
@@ -139,13 +113,10 @@ def add_code(request, csrf_token):
 
         try:
             Code.objects.get(hcode=hcode)
-            # Code.objects.get(code=code)
             return render(request, 'race/codes.html', {
                 "message": "code already registered"
             })
         except:
-            # x = Code.objects.get(hcode=hcode)
-            # Code.objects.get(code=code)
             c = Code(
                 code=request.POST.get("code"),
                 hcode=request.POST.get("hcode")
@@ -155,7 +126,6 @@ def add_code(request, csrf_token):
                 'cc': Code.objects.order_by('id').reverse()
             }
             return render(request, 'race/codes.html', context)
-        # return redirect('g_pigeon_race:view_codes')
 
 
 def add_point(request):
@@ -164,7 +134,6 @@ def add_point(request):
             ll = request.POST["place"]
             lat = Nominatim(user_agent='race').geocode(ll).latitude
             long = Nominatim(user_agent='race').geocode(ll).longitude
-
             new_point = set()
             new_point.add(ll)
             for new in new_point:
@@ -177,17 +146,6 @@ def add_point(request):
         except:
             return redirect('g_pigeon_race:manager_page')
         return redirect('g_pigeon_race:manager_page')
-
-        # 'long':long
-
-    # return render(request, "race/manager.html", {
-    #     'lat':lat,
-    #     'long':long,
-    #     'new':new,
-    #     'message':"New Point Saved"
-
-    #     # 'long':long
-    # })
 
 
 def add_lap(request):
@@ -230,19 +188,10 @@ def release_it(request, id):
         x.released = True
         char_time = request.POST["release_time"]
         initial_time = time.time()
-#        o = request.POST['release_timee']
-        #initial_time = datetime.strptime(p, '%Y-%m-%dT%H:%M')
-#        final_time = datetime.strptime(p, '%Y-%m-%dT%H:%M')
-#        time_difference = initial_time - final_time
-        # record.clock = str(time.strftime(" %b %d %Y, %I:%m %p ", time.localtime(time2)))
-        # x.char_time = str(time.strftime(" %b %d %Y, %I:%m %p ", time.localtime(initial_time)))
         x.char_time = strftime("%I:%M:%S %p  ,  %a %b %d  %Y  ", localtime())
-        # x.char_time = char_time
         x.release_time = initial_time
         x.save()
 
-        # long = x.release_long
-        # lat = x.release_lat
         Loaded.objects.filter(lap=id).update(release_time=initial_time)
         Loaded.objects.filter(lap=id).update(release_lat=x.release_lat)
         Loaded.objects.filter(lap=id).update(release_long=x.release_long)
@@ -252,12 +201,6 @@ def release_it(request, id):
             l.release_time = initial_time
             l.save()
         return redirect('g_pigeon_race:release', id)
-        # return render(request, "race/index.html", {
-        #     "message": "released!",
-        #     # "x": x,
-        #     "loaded": len(load),
-        #     'measured': True
-        # })
     return render(request, "race/index.html", {
         "message": "released!",
         'measured': True
@@ -271,43 +214,23 @@ def clock_it(request):
             loaded = Loaded.objects.get(pigeon_hcode=hcode, isLoaded=True)
             idd = loaded.pigeon_id
             loaded.clock_time = time.time()
-            # remove from the loaded ##DO
             loaded.isLoaded = False
             loaded.save()
-            # here get the distance
             pigeon = Mypigeons.objects.get(pk=idd)
             pigeon_id = pigeon.id
-            # pigeon_name = pigeon.name
-            # pigeon_ring = pigeon.ring
-            # loaded_lap_id = loaded.lap
-            # loaded_lap_name = loaded.lap_name
-            # loaded_race = loaded.race_id
-            # loaded_race_name = loaded.race_name
-            # loaded_release = loaded.release_time
             loaded_clock_time = loaded.clock_time
-
-            # loaded_speed = 321  I dont know this
-            # time_get GET :
-            # now = time.time()
-
             time1 = loaded.release_time
             time2 = time.time()
             s_time = ((time2-time1)/60)
-            # minutes_time = (float(time2)-float(time1))/60
-            ##              distance_get ;
             lat1 = loaded.release_lat
             long1 = loaded.release_long
-
             lat2 = loaded.pigeon_lat
             long2 = loaded.pigeon_long
             s_distance = geodesic((lat1, long1), (lat2, long2)).meters
-            # speed_get
             s_speed = s_distance/s_time
 
             record = Record()
             record.pigeon_id = pigeon.id
-            #  record.entry = idd
-            # record.time = str(time.strftime(" %b %d %Y, %I:%m %p ", time.localtime(time.time())))
             record.time = s_time
 
             record.distance = s_distance
@@ -316,25 +239,16 @@ def clock_it(request):
             record.lap_name = loaded.lap_name
             record.lap_id = loaded.lap
             record.race = loaded.race_id
-            # record.release =  time.ctime(int(loaded_release))
-            # record.clock = time.ctime(int(time2))
 
-            # record.release = str(time.strftime(" %b %d %Y, %I:%m %p ", time.localtime(loaded.release_time)))
             record.release = strftime(
                 "%I:%M:%S %p  ,  %a %b %d  %Y  ", localtime(loaded.release_time))
-            # record.clock = str(time.strftime(" %b %d %Y, %I:%m %p ", time.localtime(time2)))
             record.clock = strftime(
                 "%I:%M:%S %p  ,  %a %b %d  %Y  ", localtime())
-            # str(datetime.datetime.fromtimestamp(loaded_release))
-            # record.release2 = int(loaded_release)
-            # record.release = str(time.strftime(" %b %d %Y, %I:%m %p ", time.localtime(loaded_release)))
-            # record.release2 = str(stry)
             record.speed = s_speed
             record.race_name = loaded.race_name
             record.save()
             record.entry.add(idd)
 
-            # put the Mypigeons Loaded to False
             mp = Mypigeons.objects.get(id=idd)
             mp.loaded = False
             mp.save()
@@ -360,13 +274,13 @@ def clock_it(request):
         except:
             return render(request, "race/index.html", {
                 "message": "You Entered Wrong Code",
-
+                "races": Race.objects.all().order_by('id').reverse(),
             })
     else:
-        return render(request, "race/index.html", {"message": "Please Enter Code"})
-        # except:
-        #     return render(request, "race/index.html", {"message": "Please Enter Right Code"})
-
+        return render(request, "race/index.html", {
+            "message": "Please Enter Code",
+            "races": Race.objects.all().order_by('id').reverse(),
+        })
     return render(request, "race/index.html", {"message": "hi you're clocked"})
 
 
@@ -402,8 +316,6 @@ def entry(request, race_id):
     if request.method == "POST":
         race = Race.objects.get(pk=race_id)
         pigeon_id = int(request.POST["pigeon"])
-# mypigeon is to race
-# record is to pigeon_id
         pigeon = Mypigeons.objects.get(pk=pigeon_id)
         pigeon.races.add(race)
         return HttpResponseRedirect(reverse("g_pigeon_race:race", args=(race.id,)))
@@ -452,19 +364,6 @@ def record(request, put_code_here):
             )
             ex.save()
     return render(request, template_name)
-#       clock_id = int(request.POST["clock"])
-#       clock_speed = (request.POST["speed"])
-#       clock_lap   = (request.POST["lap"])
-#       clock_ring   = (request.POST["ring"])
-#        clock_model = Clock()
-
-#        clock = Clock.objects.get(pk=clock_id)
-#        clock.entry.add(entry)
-
- #       clock_model.speed = clock_speed
- #       clock_model.lap   = clock_lap
-  #      clock_model.ring   = clock_ring
-   #     clock_model.save()
 
 
 def entry2(request):
@@ -478,7 +377,6 @@ def entry2(request):
     code = data.get("code", "")
     link = data.get("link", "")
     owner = data.get("owner", "")
-    ##time = data.get("time", "")
     x = set()
     x.add(request.user)
     for y in x:
@@ -488,7 +386,6 @@ def entry2(request):
             ring=ring,
             code=code,
             linkimage=link,
-            ##time = time,
         )
         xy.save()
 
@@ -650,11 +547,6 @@ def get_race_record(request):
     pigeon_id = data.get("pigeon_id")
     records = Record.objects.filter(
         race=race_id, pigeon_id=pigeon_id).all().order_by('id')
-    # records = Record.objects.filter(pigeon_id=pigeon_id).all().order_by('-speed')
-    # records = Record.objects.filter(pigeon_id=pigeon_id).all()
-    # get The TOTAL SPEED
-    # for r in records:
-    # r.speed
     return JsonResponse([record.serialize() for record in records], safe=False)
 
 

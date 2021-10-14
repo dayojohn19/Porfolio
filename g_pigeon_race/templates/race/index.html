@@ -165,7 +165,7 @@
 {% else %}
     <h2><a class="view-players" href="{% url 'user:upload' %}">Register pigeon</a></h2>
     Please Measure Your Loft Place Before Joining the race 
-    <div class="add_point" style="border: 3px rgba(255, 0, 0, 0.349) solid; margin-bottom: 2%; padding: 2%; border-radius:10px; background-color:rgba(255, 0, 0, 0.253)">
+    <div class="add_point" style="border: 3px rgba(255, 0, 0, 0.349) solid; margin-bottom: 2%; padding: 2%; border-radius:10px; background-color:rgba(255, 0, 0, 0.253); width: 50%;">
         Your Loft Place
         <form method="post" action="{% url 'g_pigeon_race:measure' %}">
             {% csrf_token %}

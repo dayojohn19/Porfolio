@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-rmxq3lkq@nhlwgg)deu@q5e_nfmz8((qqe)v9s0vt*o5&i(ez%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['webpagedj19.herokuapp.com', 'localhost','127.0.0.1']
+ALLOWED_HOSTS = ['webpagedj19.herokuapp.com', 'localhost', '127.0.0.1']
 
 # Application definition
 
@@ -93,7 +94,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 WSGI_APPLICATION = 'webpage.wsgi.application'
 
-import os
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -103,26 +103,25 @@ import os
 #         'NAME': 'djdb',
 #     }
 # }
-# #if secured 
-
-# DATABASES = {
-#     'default':{
-#     'ENGINE': 'djongo',
-#     'NAME': 's25',
-#     'ENFORCE_SCHEMA':False,
-#     'CLIENT': {
-#         'host': 'mongodb+srv://dj19:aa09094553940@cluster0.hpgnf.mongodb.net/test'
-#     }
-#     }
-# }
+# #if secured
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'djongo',
+        'NAME': 's28',
+        'ENFORCE_SCHEMA': False,
+        'CLIENT': {
+            'host': 'mongodb+srv://dj19:aa09094553940@cluster0.hpgnf.mongodb.net/test'
+        }
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 
 # Password validation
@@ -160,7 +159,6 @@ USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
-import os
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'images')
 
@@ -173,7 +171,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'images/')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-###### authenticate user from
+# authenticate user from
 AUTH_USER_MODEL = 'app_mail.User'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'application/static/'),
