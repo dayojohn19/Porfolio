@@ -84,13 +84,19 @@ def index(request):
 
 
 def manager(request):
-    return render(request, "race/manager.html", {
-        "laps": Lap.objects.filter(released=False).all().order_by('id'),
-        'races': Race.objects.all().order_by('id').reverse(),
-        's_races': Race.objects.filter(started=False).order_by('id').reverse(),
-        'point': Point.objects.all(),
-        "now": datetime.datetime.now()
-    })
+    try:
+        return render(request, "race/manager.html", {
+            "laps": Lap.objects.filter(released=False).all().order_by('id'),
+            'races': Race.objects.all().order_by('id').reverse(),
+            's_races': Race.objects.filter(started=False).order_by('id').reverse(),
+            'point': Point.objects.all(),
+            "now": datetime.datetime.now()
+        })
+
+    except:
+        return render(request, "race/manager.html", {
+            "now": datetime.datetime.now()
+        })
 
 
 def start_race(request, csrf_token):
