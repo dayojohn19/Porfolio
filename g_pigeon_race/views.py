@@ -189,11 +189,10 @@ def add_lap(request):
         })
     except:
         return render(request, "race/lap_add.html", {
-            'races': Race.objects.filter(finished=False),
+
             'point': Point.objects.all().order_by('id').reverse(),
 
             "laps": Lap.objects.filter(released=False).all().order_by('id'),
-            'races': Race.objects.all().order_by('id').reverse(),
             's_races': Race.objects.filter(started=False).order_by('id').reverse(),
         })
 
