@@ -105,23 +105,23 @@ WSGI_APPLICATION = 'webpage.wsgi.application'
 # }
 # #if secured
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'djongo',
-        'NAME': 's28',
-        'ENFORCE_SCHEMA': False,
-        'CLIENT': {
-            'host': 'mongodb+srv://dj19:aa09094553940@cluster0.hpgnf.mongodb.net/test'
-        }
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#         'ENGINE': 'djongo',
+#         'NAME': 's28',
+#         'ENFORCE_SCHEMA': False,
+#         'CLIENT': {
+#             'host': 'mongodb+srv://dj19:aa09094553940@cluster0.hpgnf.mongodb.net/test'
+#         }
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
 
 # Password validation
