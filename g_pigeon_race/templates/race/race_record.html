@@ -5,41 +5,75 @@
     .tspeed {
         color: rgb(71, 255, 163);
     }
+    li {
+        list-style-type: none;
+    }
+
+    #mm {
+        overflow: auto;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        padding-top: 15.5%;
+        z-index: 1;
+        position: fixed;
+        background-color: rgba(245, 222, 179, 0.26);
+        display: none;
+        backdrop-filter: saturate(50%) blur(1px);    
+        -webkit-backdrop-filter: blur(10px);
+    }
+    .mc {
+        width: 75.2%;
+        border: 2.4px solid wheat;
+        border-radius: 6.5px;
+        padding: 20px;
+        margin: auto;
+        background-color: rgba(255, 255, 255, 0.897);
+    }
+    .name {
+        color: rgb(255, 119, 232);
+    }
+    .style_button {
+        background-color: rgb(142, 142, 214);
+        border:none;
+        border-radius: 4.5px;
+        padding: 0.45rem;
+        font-size: larger;
+    }
 </style>
 
+<div style="border:2px lightblue solid; padding: 0.4rem; border-radius: 10px;">
+    <h2>Sort</h2>
+    <button class="style_button" onclick="view_ranking(pigeons,'fast')">View Ranking</button>
+</div>
 
-<h1>Race Record</h1>
+
+<div id="mm">
+    <div class="mc"></div>
+</div>
+<div style="text-align: center;"><h1>Race Record</h1></div>
 <div hidden id="race_id">{{id}}</div>
-<!-- <h2><a style="text-decoration: none; color: lightblue;" href="{% url 'g_pigeon_race:standing' id %}">View Standing</a></h2> -->
+<script>
 
+    pigeons = [];
+    console.log(pigeons);
+
+</script>
 {% for r in standing %}
     <b  id="id-{{r.pigeon_id}}">{{r.pigeon_id}}</b>
-    <b id="n-{{r.pigeon_id}}"></b>
-    <h1><div id="n-{{r.pigeon_id}}"></div></h1>
+    <b class="name" id="n-{{r.pigeon_id}}"></b>
+    <h1><div  id="n-{{r.pigeon_id}}"></div></h1>
     <h3><div class="tspeed" id="s-{{r.pigeon_id}}"></div></h3>
-
     <div id="put-{{r.pigeon_id}}"></div>
     <div id="{{r.pigeon_id}}-record"></div>
     <div id="record{{r.pigeon_id}}"></div>
 
-    <script defer>
-        function get_name(x) {
-            nameit = document.querySelector(`#id-{{r.pigeon_id}}`).innerHTML;
-            fetch("{% url 'g_pigeon_race:get_name' %}" ,{
-                method: 'POST',
-                body: JSON.stringify({
-                    x:x
-                })
-            }).then(response => console.log(response));
-            // .then(name=> {
-            //     n = name;
-            //     nameit.innerHTML = `<div>${element.name}</div> `
-            // })
+    <script async>
 
-            // .then(console.log())
+        mm = document.querySelector("#mm");
+        mc = document.querySelector(".mc");
 
-        }
- 
         function get_record(x) {
             race = document.querySelector("#race_id").innerHTML;
             pigeon = x;
@@ -52,71 +86,192 @@
             })
             .then(response => response.json())
             .then(record => {
-                // Print result
-                // console.log(record);
                 r = record;
-                console.log(record);
-                // for (r in record)   {
-                //     console.log(`${r.speed}`);
-                // }
-                ss = 0;
+                total_speed = 0;
                 r.forEach(element => {
                     e = element;
-                    // getting the TOTAL SPEED of pigeons
-                    xs = e.speed;
+                    speed = e.speed;
                     if (e.speed <= 1) {
-                        xs = 0;
+                        speed = 0;
                         }
-                        // adding all the sped
-                    ss += +xs;
-                    // ss = e.distance.toFixed(2);
+                    total_speed += +speed;
                     aa = e.distance;
-                    // bb = e.distance;
-                    bb = +(Math.round(e.distance + "e+2") + "e-2");;
-                    // ss = ss.toLocaleString()
+                    bb = +(Math.round(e.distance + "e+2") + "e-2");
                     container = document.createElement('div');
                     container.innerHTML = `
                             <ul>
                                 <li><b style="color:yellow;">${e.lap_name}</b></li>
                                 <ul>
-                                    <li><b style="color:lightblue;">speed:  ${xs} mpm</b></li>
-                                    <li> Record: ${bb}</li>
+                                    <li><b style="color:lightblue;">
+                                        speed:  ${speed} mpm</b>
+                                        <button onclick="edit_record(${e.rid} , ${e.speed})">Edit</button> 
+                                        <button onclick="delete_record(${e.rid})">Delete</button>
+                                        </li>
+                                    <li hidden> Distance: ${bb}</li>
                                 </ul>
                                 
                             </ul>
                         `;
-                    // <h3><b style="color:lightblue">${e.pigeon_name}</b></h3>
-                    // <li><div class="pigeon_record" id="p-${e.speed}"></li>
-
-
-                    // container.innerHTML = context;
-                    // alert(`${x}`);
                     document.querySelector(`#n-${x}`).innerHTML = `<h1>${e.pigeon_name}</h1>`;
-                    // document.querySelector(`#s-${x}`).innerHTML = `<h1>${e.speed}</h1>`;
-
-                    document.querySelector(`#s-${x}`).innerHTML = `T speed: ${ss} mpm`;
-
-
-
-                    console.log(e.pigeon_name);
+                    document.querySelector(`#s-${x}`).innerHTML = `Total speed: ${total_speed} mpm`;
                     document.querySelector(`#record${x}`).append(container);
+                    pigeon = {};
+                    pigeon.name = `{{r.pigeon_name}}`;                     
+                    pigeon.speed = total_speed;
+                    pigeons.push(pigeon);
+
                 });
-
-                // container.innerHTML = context;
             });
-
-            // race.append(context);
-            //     pigeon.append(container);
-            document.querySelector(`#id-${x}`).style.display = 'none';
+            document.querySelector(`#id-${x}`).style.display = 'none';            
         }
-        // to get the record of of race
+
         get_record(`{{r.pigeon_id}}`);
-        // get_name(`{{r.pigeon_id}}`)
+
     </script>
     <hr>
 {% endfor %}
+<script defer>
+    function add_record() {
+        name = document.querySelector("#in-name").value;
+        speed = document.querySelector("#in-speed").value;
+        if (name == '' || speed == '') {
+            return alert('please input speed and name');
+        }
+        pigeon = {}
+        pigeon.name = name;
+        pigeon.speed = speed;
+        pigeons.push(pigeon);
+        console.log(pigeons);
+        view_ranking(pigeons, 'fast');
+        }
 
+    function removeDuplicates(value, index, self) {
+            return self.indexOf(value) === index;
+        }
+    window.onclick = function (event) {
+        if (event.target == mm) {
+            mm.style.display = 'none';
+        }
 
+    }
+
+    function edit_record(x, y) {
+                    new_div =
+                        `
+            <div>
+                <form method="POST" action="{% url 'g_pigeon_race:new_record' %}">
+                    {% csrf_token %}
+                    <input name="p_id" hidden value="${x}">
+                    New Speed:
+                    <input name="new_speed" id="new_speed" value="${y}">
+                    <input type="submit" value="save">
+                </form>
+            </div>
+            `;
+                    document.querySelector(".mc").innerHTML = new_div;
+                    mm.style.display = 'block';
+                    fetch("{% url 'g_pigeon_race:edit_race_record' %}", {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            id: x,
+                            new_speed: y
+                        })
+                    })
+                        .then(response => response.json())
+                }
+
+    function delete_record(x){
+        fetch("{% url 'g_pigeon_race:delete_record'%}",{
+            method: 'POST',
+            body: JSON.stringify({
+                id:x
+            })
+        })
+    }
+
+    function view_ranking(x,y) {
+        mc.innerHTML = '';
+        // let new_arr = [];
+        if (y == 'fast') {
+            y = 'Fastest';
+            x.sort(function (a,b) {
+            return b.speed-a.speed
+            })
+        }
+        else if (y == 'slow') {
+            y = 'Slowest';
+            x.sort(function (a,b) {
+                return a.speed-b.speed
+            })
+        }
+        else if (y == 'a') {
+            y = 'A-Z';
+            x.sort(function (a,b) {
+                n1 = a.name;
+                n2 = b.name;
+                if (n1 < n2) {
+                    return -1;
+                }
+                if (n1 > n2) {
+                    return 1;
+                }
+                return 0;
+            })
+        }
+        else if (y == 'z') {
+            y = 'Z-A';
+            x.sort(function (a, b) {
+                n1 = a.name;
+                n2 = b.name;
+                if (n1 < n2) {
+                    return 1;
+                }
+                if (n1 > n2) {
+                    return -1;
+                }
+                return 0;
+            })
+        }
+        header = document.createElement('div');
+        header.innerHTML = 
+            `<div style="text-align:center; color:black">
+                    <h2>${y}</h2>
+            </div>`
+        mc.append(header);
+
+        buttons = document.createElement('div');
+        buttons.innerHTML = `<button onclick="view_ranking(pigeons,'fast')">Fastest</button>
+            <button class="style_button" onclick="view_ranking(pigeons,'slow')">Slowest</button>
+            <button class="style_button" onclick="view_ranking(pigeons,'a')">Alphabetical A-Z</button>
+            <button class="style_button" onclick="view_ranking(pigeons,'z')">Alphabetical Z-A</button>
+            <br>
+            <button class="style_button" onclick="add_record()">Add</button>
+            <input class="style_input" id="in-name" placeholder="Name">
+            <input class="style_input" id="in-speed" placeholder="Speed">
+            <hr>`
+        mc.append(buttons);
+            filtered_array = [...new Map(x.map(item =>[item['name'], item])).values()];
+            console.log(filtered_array);
+            filtered_array.forEach(element => {
+            e = element;
+            list = document.createElement('div');
+            list.innerHTML =
+                `<div>
+                    <b style="color:blue">${e.name}</b>
+                    <ul>
+                        <li style="color:green">Speed <b>${e.speed}</b> mpm</li>
+                    </ul>
+                </div>`
+
+            mc.append(list);
+            mm.style.display = 'block';
+        });
+
+        console.log('aa',pigeons);
+        console.log('filtered',filtered_array);
+    }
+
+</script>
 
 
 

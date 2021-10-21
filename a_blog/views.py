@@ -1,31 +1,40 @@
+from markdown2 import Markdown
 from django.shortcuts import render
 
-##importing forms
+# importing forms
 from django import forms
-#get util.py
+# get util.py
 from . import util
 # Create your views here.
 
 
 def index(request):
     return render(request, 'a_blog/index.html', {
-        'form':Search(), "post":Post(),
-        "entries": util.list_entries()
+        'form': Search(), "post": Post(),
+        # "entries": util.list_entries()
     })
 
-from markdown2 import Markdown
+
 markdowner = Markdown()
+
+
 class Post(forms.Form):
-    title = forms.CharField(label= "Title")
-    pan = forms.CharField(label= "pan")
+    title = forms.CharField(label="Title")
+    pan = forms.CharField(label="pan")
     # img = forms.ImageField()
     textarea = forms.CharField(widget=forms.Textarea(), label='')
+
+
 class Search(forms.Form):
-    item = forms.CharField(widget=forms.TextInput(attrs={'class' : 'myfieldclass', 'placeholder': 'Search'}))
+    item = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'myfieldclass', 'placeholder': 'Search'}))
+
+
 def get_blog(request):
     blog = util.list_entries()
     return blog
-    
+
+
 def save_blog(request):
     if request.method == 'POST':
         form = Post(request.POST)
@@ -35,29 +44,29 @@ def save_blog(request):
             pan = form.cleaned_data["pan"]
             # img = form.cleaned_data["img"]
             # textarea = t1 +  ' by -' + pan + img
-            textarea = t1 +  ' by -' + pan 
+            textarea = t1 + ' by -' + pan
             entries = util.list_entries()
             if title in entries:
-                return render(request, 'a_blog/index.html',{
-                    'message':'Sorry already has the same Title'
+                return render(request, 'a_blog/index.html', {
+                    'message': 'Sorry already has the same Title'
                 })
             else:
-                #save the new
+                # save the new
                 util.save_entry(title, textarea, pan)
                 page = util.get_entry(title)
                 page_converted = markdowner.convert(page)
 
                 context = {
-                    'form':Search(),
-                    'page':page_converted,
-                    'title':title
+                    'form': Search(),
+                    'page': page_converted,
+                    'title': title
                 }
-                return render(request, 'a_blog/index.html', {'message':'success'})
+                return render(request, 'a_blog/index.html', {'message': 'success'})
         else:
             return render(request, 'a_blog/index.html', {
-            'message':'error sorry'
-        })
+                'message': 'error sorry'
+            })
     else:
         return render(request, 'a_blog/index.html', {
-            'message':'not Post'
+            'message': 'not Post'
         })

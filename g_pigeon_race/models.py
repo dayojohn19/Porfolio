@@ -140,29 +140,30 @@ class Entries(models.Model):
 
 
 class Record(models.Model):
-    pigeon_id = models.IntegerField(default=1)
+    pigeon_id = models.IntegerField(default=1, blank=True)
     entry = models.ManyToManyField(
         to='user.Mypigeons', blank=True, related_name="entry")
-    ring = models.CharField(max_length=50)
-    pigeon_name = models.CharField(max_length=64)
-    lap_id = models.CharField(max_length=50)
-    lap_name = models.CharField(max_length=64)
-    race = models.CharField(max_length=64)
-    race_name = models.CharField(max_length=64)
+    ring = models.CharField(max_length=50, blank=True)
+    pigeon_name = models.CharField(max_length=64, blank=True)
+    lap_id = models.CharField(max_length=50, blank=True)
+    lap_name = models.CharField(max_length=64, blank=True)
+    race = models.CharField(max_length=64, blank=True)
+    race_name = models.CharField(max_length=64, blank=True)
 
     # release = models.CharField(max_length=64)
-    release = models.CharField(max_length=64)
+    release = models.CharField(max_length=64, blank=True)
     # release2 = models.DateTimeField(auto_now_add=True)
-    time = models.CharField(max_length=64)
-    clock = models.CharField(max_length=64)
+    time = models.CharField(max_length=64, blank=True)
+    clock = models.CharField(max_length=64, blank=True)
     speed = models.DecimalField(max_digits=20, decimal_places=2)
-    distance = models.CharField(max_length=64)
+    distance = models.CharField(max_length=64, blank=True)
 
     class Meta:
         ordering = ["-speed"]
 
     def serialize(self):
         return {
+            "rid": self.id,
             "id": self.pigeon_id,
             "pigeon_name": self.pigeon_name,
             "lap_name": self.lap_name,

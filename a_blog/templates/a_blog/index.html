@@ -2,12 +2,19 @@
 
 {% load static %}
     {% block body %}
+<style>
+    textarea {
+        background-color: rgb(181, 232, 255);
+        width: 100%;
+        height: 50%;
+    }
+</style>
 
 <h1>This is Blog</h1>
 <div class="b-container-main">
     <div class="b-container-sub-1">
         <form>
-            <textarea class="b-textarea" maxlength="400" placeholder="What is your Content ??"></textarea>
+            <textarea class="b-textarea"  placeholder="What is your Content ??"></textarea>
             <input type="submit" value="Post">
         </form>
     </div>

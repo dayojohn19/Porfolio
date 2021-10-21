@@ -4,6 +4,13 @@ from . import views
 app_name = "g_pigeon_race"
 urlpatterns = [
     path('', views.index, name="index"),
+
+    path('sorting', views.sort_page, name="sort"),
+    path('edit', views.edit_race_record, name="edit_race_record"),
+    path('new_record', views.new_record, name="new_record"),
+    path('delete_record', views.delete_record, name="delete_record"),
+
+
     path("<int:race_id>", views.race, name="race"),
     path("<int:race_id>/entry", views.entry, name="entry"),
     path("entry", views.entry2, name="entry2"),

@@ -23,6 +23,44 @@ import time
 from time import strftime, localtime
 
 
+@csrf_exempt
+def delete_record(request):
+    data = json.loads(request.body)
+    id = data.get("id")
+    delete = Record.objects.get(id=id)
+    delete.delete()
+
+
+def new_record(request):
+    if request.method == 'POST':
+        pid = request.POST['p_id']
+        new = Record.objects.get(pk=pid)
+        new.speed = request.POST['new_speed']
+        new.save()
+    return redirect('g_pigeon_race:view_race_record', id=49)
+    # return HttpResponseRedirect(reverse("g_pigeon_race:view_race_record", id=49))
+
+
+def sort_page(request):
+    return render(request, "race/sort.html", {
+        "records": Record.objects.all()
+    })
+
+
+def sort(request, mode):
+    if request.method == "POST":
+        records = Record.objects.all()
+
+    if (sort == 'sort'):
+        records = Record.objects.all().reverse()
+    else:
+        records = Record.objects.all()
+
+    return render(request, "race/sort.html", {
+        "records": records
+    })
+
+
 def started_race(request, rid):
     if request.method == "POST":
         update = Race.objects.get(id=rid)
@@ -546,12 +584,14 @@ def view_race_record(request, id):
         race=id).order_by().values('pigeon_id').distinct()
 
     standings = Standing.objects.filter(race_id=id)
+    # standings = Standing.objects.all()
     # records = Record.objects.all().order_by().values('pigeon_id').distinct()
 
     return render(request, "race/race_record.html", {
         "records": records,
         "id": id,
-        "standing": standings
+        "standing": standings,
+
     })
 
 
@@ -563,6 +603,17 @@ def get_race_record(request):
     records = Record.objects.filter(
         race=race_id, pigeon_id=pigeon_id).all().order_by('id')
     return JsonResponse([record.serialize() for record in records], safe=False)
+
+
+@csrf_exempt
+def edit_race_record(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        race_id = data.get("race_id")
+        pigeon_id = data.get("pigeon_id")
+        records = Record.objects.filter(
+            race=race_id, pigeon_id=pigeon_id).all().order_by('id')
+        return JsonResponse([record.serialize() for record in records], safe=False)
 
 
 @csrf_exempt

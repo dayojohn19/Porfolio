@@ -1,0 +1,19 @@
+{% extends "race/layout.html" %}
+
+{% block body %}
+<h1>
+    Sorting
+</h1>
+
+
+{% for r in records %}
+     <h3 style="color: lightblue;"><b>{{r.pigeon_name}}</b></h3>
+    <ul>
+        <li style="color: yellow;">Speed: {{r.speed}} mps</li>
+    </ul>
+    <button>Edit</button>
+    <hr>
+{% endfor %}
+<div style="height: 1000px;"></div>
+
+{% endblock %}
