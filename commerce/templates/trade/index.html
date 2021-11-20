@@ -1,0 +1,22 @@
+{% extends "commerce/sale/layout.html" %}
+{% load humanize %}
+{% load static %}
+{% block body %}
+<script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+<script src="{% static 'commerce/trade/chart.js' %}"></script>
+<script src="{% static 'commerce/trade/chart_volume.js' %}"></script>
+
+
+<h1 id="message">Welcome</h1>
+<script src="{% static 'commerce/trade/Series.js' %}"></script>
+<script src="{% static 'commerce/trade/functions.js' %}"></script>
+
+
+
+<button onclick="get_rsi()"> Get RSI</button>
+
+<button onclick="get_data()">Get Data</button>
+<button onclick="put_candles()">Put Candles</button>
+<button onclick="put_volume()">Put Volume / Trade </button>
+<button onclick="Over_Trade()">Put Price / Trade</button>
+{% endblock %}

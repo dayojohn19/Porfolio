@@ -3,6 +3,7 @@ from django import forms
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 
+
 def list_entries():
     """
 
@@ -13,8 +14,6 @@ def list_entries():
 
 
 def save_entry(title, content, pan):
-    
- 
     """
 
     """

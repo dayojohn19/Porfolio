@@ -13,6 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls.static import static
+from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
 
@@ -35,11 +37,10 @@ urlpatterns = [
     path('com_sale/', include('com_sale.urls')),
     path('com_bank/', include('com_bank.urls')),
     path('app_hiring/', include('app_hiring.urls')),
+    path('com_trade/', include('com_trade.urls')),
 ]
 
-### Pigeon Config
-from django.conf import settings
-from django.conf.urls.static import static
+# Pigeon Config
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

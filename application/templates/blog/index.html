@@ -1,0 +1,67 @@
+{% extends "blog/layout.html" %}
+
+{% load static %}
+    {% block body %}
+<style>
+    * input {
+        text-align: center;
+    }
+    textarea {
+        background-color: rgb(181, 232, 255);
+        width: 100%;
+        height: 50%;
+    }
+    .form_title {
+        background-color: rgb(75, 75, 0);
+        color: rgb(46, 255, 4);
+        height: 2.3rem;
+        font-size: xx-large;
+        padding:0.92rem;
+        width: 60%;
+    }
+    .form_pan {
+        background-color: turquoise;
+        height: 1.8rem;
+        font-size: x-large;
+        color:rgb(25, 0, 255);
+        padding: 0.45;
+        width: 85%;
+        
+    }
+    .container_center {
+        text-align: center;
+    }
+</style>
+
+<script>
+    blogs = "{{entries}}";
+    console.log(blogs);
+    </script>
+    {% if title %}
+        <h1 style="color: rgb(255, 0, 0); text-align: center;">{{title}}</h1>
+    {% endif %}
+    {% if message %}
+        <h1 style="color: rgb(255, 0, 0); text-align: center;">{{message}}</h1>
+    {% endif %}
+
+
+        <div>
+            <form action="{% url 'blog:new_blog' %}" method="post" enctype="multipart/form-data" >
+                {%csrf_token%}
+
+                <div class="container_center">{{post.as_p}}</div>
+                <input required name="link" placeholder="Picture Link">
+                <button type="submit">Upload</button>
+                </form>
+        </div>
+
+
+    
+
+    {% for e in entries %}
+    {{e}}
+    {{e.textarea}}
+    {%endfor%}
+</div>
+
+    {% endblock %}

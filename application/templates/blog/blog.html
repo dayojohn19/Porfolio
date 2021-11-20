@@ -1,16 +1,33 @@
-{% extends "a_index/layout.html" %}
+{% extends "blog/layout.html" %}
 
 {% load static %}
     {% block body %}
     <link rel="stylesheet" href="{% static 'a_blog/blog.css' %}">
-
-
     <link href="{% static 'a_index/blog.css' %}" rel="stylesheet">
     <h1>Blog </h1>
-    <h2><a href="{% url 'blog:index' %}">Post a blog</a></h2>
+    <h2><a href="{% url 'blog:post_blog' %}">Post a blog</a></h2>
 
 
-
+{% for b in blogs %}
+    <div class="b-opa">        
+        <!-- <div class="para_add" style="background-image: '{{b.link}}' "> -->
+        <div class="para_add" style="background-image: url('{{b.picture_link}}') ">
+            
+            <h2 class="mar-l b-mid">
+                {{b.title}}
+            </h2>
+        </div>
+        <strong class="mar-l b-par">
+            "{{b.sub_title}}"<br>
+            <i style="font-size:small">{{b.time}}</i>
+        </strong>
+        
+        <p class="mar-l b-par">{{b.paragraph}}
+        </p>
+        <hr>
+    </div>
+    <br><br>
+{% endfor %}
  
 
 

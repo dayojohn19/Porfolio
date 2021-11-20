@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['webpagedj19.herokuapp.com', 'localhost', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'com_trade',
     'app_hiring',
     'com_bank',
     'com_sale',

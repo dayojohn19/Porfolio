@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        .client {
+            border: none;
+            border-radius: 10px;
+            background-color: burlywood;
+            padding: 0.2em;
+            font-weight: bolder;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: larger;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My WebPage</title>
+
+
+    <!---<<<-->
+    <!--disable right_Click-->
+    <!-- <script src="{% static 'a_index/dis.js' %}"></script> -->
+
+
+    <link rel="stylesheet" href="{% static 'a_index/1000.css' %}">
+    <link rel="stylesheet" href="{% static 'a_index/500.css' %}">
+    <div>
+        <span><a href="{% url 'blog:index' %}">Blogs</a></span>
+        <span><a href="{% url 'blog:post_blog' %}">Post</a></span>
+    </div>
+
+</head>
+<!---end-->
+
+<body style="background-color: rgba(233, 233, 233, 0.823) !important;">
+    <div class="" style="height: fit-content; height: fit-content;">
+        {% block body %}
+
+
+
+
+
+
+
+
+        {% endblock %}
+    </div>
+</body>
+
+</div>
+<div class="container-main-6 footer ">
+    <div class="container-sub-6 red">+639 5685 43802</div>
+    <div class="container-sub-6 ">dayo_john16@yahoo.com</div>
+    <div class="container-sub-6 ">dayojohn16@gmail.com</div>
+</div>
+<!-- <script>
+    function load(month){
+    u_name = prompt('To continue Please tell me your First Name:', 'Jane Doe');
+fetch(month, {
+    method: 'POST',
+    body: JSON.stringify({
+        name: u_name
+    })
+})
+.then(function(response){
+    return response.text()
+})
+.then(function(html){
+    document.querySelector(".log").innerHTML = html;
+    document.querySelector(".input-log").innerHTML = "If you want to see the codes please Contact Me";
+});
+
+}
+    document.addEventListener("DOMContentLoaded", ()=>{
+        load(12);
+    })
+</script> -->
+
+
+
+
+</html>
