@@ -34,6 +34,72 @@ function put_candles(){
     "28.46694368",      // Taker buy quote asset volume 10
     "17928899.62484339" // Ignore. 11
 
+    // value_Trade = (array_Trade.reduce((a,aa) => {return a+aa})) / 14;
+function Accelaration_Volume() {
+    Velocity_VolumeTotal = 0;
+    Volume_Marks = [];
+    VolumeQuote_Marks = [];
+    for (let i = 0; i < respond.length; i++) { 
+        Velocity_Volume = respond[i][5];
+        Velocity_VolumeQuote = respond[i][7];
+        var timestamps = parseInt(respond[i][0])/1000;
+        if (Volume_Marks.length >= 3){
+            // val_Velocity_Volume = (Volume_Marks.reduce((a,aa) =>{return (aa-a)/aa}))
+            
+            v1 = (Volume_Marks[0]-Volume_Marks[1])/Volume_Marks[0];
+            v2 = (Volume_Marks[1]-Volume_Marks[2])/Volume_Marks[1];
+            val_Velocity_Volume = ((v1+v2)/2);
+
+            vv1 = (VolumeQuote_Marks[0]-VolumeQuote_Marks[1])/VolumeQuote_Marks[0];
+            vv2 = (VolumeQuote_Marks[1]-VolumeQuote_Marks[2])/VolumeQuote_Marks[1];
+            // val_Velocity_VolumeQuote = ((vv1+vv2)/2);
+            val_Velocity_VolumeQuote = vv2;
+            // val_Velocity_VolumeQuote = (VolumeQuote_Marks.reduce((a,aa) =>{return (aa-a)/aa}))
+
+            Volume_Marks.push(Velocity_Volume);
+            VolumeQuote_Marks.push(Velocity_VolumeQuote);
+
+            Volume_Marks.shift();
+            VolumeQuote_Marks.shift();
+        }
+        else {
+            Volume_Marks.push(Velocity_Volume);
+            VolumeQuote_Marks.push(Velocity_VolumeQuote);
+            val_Velocity_Volume = 0;
+            val_Velocity_VolumeQuote = 0;
+        }
+        if (Velocity_VolumeTotal >= 2 ){
+            Velocity_VolumeTotal = 2;
+            Velocity_VolumeTotal += val_Velocity_Volume;
+            Velocity_VolumeTotal += val_Velocity_VolumeQuote;
+        }else if (Velocity_VolumeTotal <= -2){
+            Velocity_VolumeTotal = -2;
+            Velocity_VolumeTotal += val_Velocity_Volume;
+            Velocity_VolumeTotal += val_Velocity_VolumeQuote;
+        }else {
+            Velocity_VolumeTotal += val_Velocity_Volume;
+            Velocity_VolumeTotal += val_Velocity_VolumeQuote;
+        }
+
+
+
+        AccelarationTotal_Volume.update({
+            time:timestamps,
+            value:Velocity_VolumeTotal
+        })
+        Accelaration_Volume_Value.update({
+            time:timestamps,
+            value: val_Velocity_Volume
+        });
+        Accelarations_VolumeQuote_Value.update({
+            time:timestamps,
+            value: val_Velocity_VolumeQuote
+        });
+
+
+
+    }
+}
 function Over_Trade(){
     isBuy = false;
 

@@ -159,7 +159,41 @@ const TradePriceClose = chart_volume.addLineSeries({
     lastPriceAnimation: LightweightCharts.LastPriceAnimationMode.Continuous,
 });
 
+const Accelaration_Volume_Value = chart_volume.addLineSeries({
+ color: 'red', 
+    topColor: 'red',
+    bottomColor: 'rgba(21, 146, 230, 0)',
+    lineColor: 'red',
+    lineStyle: 0,
+    lineWidth: 1,
+    crosshairMarkerVisible: false,
+    crosshairMarkerRadius: 3,
+    lastPriceAnimation: LightweightCharts.LastPriceAnimationMode.Continuous,
+});
 
+const Accelarations_VolumeQuote_Value = chart_volume.addLineSeries({
+ color: 'blue', 
+    topColor: 'blue',
+    bottomColor: 'rgba(21, 146, 230, 0)',
+    lineColor: 'blue',
+    lineStyle: 0,
+    lineWidth: 1,
+    crosshairMarkerVisible: false,
+    crosshairMarkerRadius: 3,
+    lastPriceAnimation: LightweightCharts.LastPriceAnimationMode.Continuous,
+});
+
+const AccelarationTotal_Volume= chart_volume.addLineSeries({
+ color: 'yellow', 
+    topColor: 'yellow',
+    bottomColor: 'rgba(21, 146, 230, 0)',
+    lineColor: 'yellow',
+    lineStyle: 0,
+    lineWidth: 1,
+    crosshairMarkerVisible: false,
+    crosshairMarkerRadius: 3,
+    lastPriceAnimation: LightweightCharts.LastPriceAnimationMode.Continuous,
+});
 // ************************************
 // ************ End Series ************
 // ************************************

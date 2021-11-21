@@ -21,7 +21,7 @@ client = Client(x, y)
 # importing data from csv
 
 
-def fetch_data(request):
+def fetch_datas(request):
     filename = 'BNBUSDT-15m-Nov 1, 2021.csv'
     from django.http import JsonResponse
     import csv
@@ -33,7 +33,7 @@ def fetch_data(request):
     return JsonResponse(klines, safe=False)
 
 
-def fetch_datas(request):
+def fetch_data(request):
     from django.http import JsonResponse
     start_date = "14 Nov, 2021"
     klines = client.get_historical_klines("BTCUSDT",
