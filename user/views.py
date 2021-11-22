@@ -169,7 +169,7 @@ def register_sec(request):
                 "message": "Username already taken. "
             })
         login(request, user)
-        return HttpResponseRedirect(reverse("g_pigeon_race:index"))
+        return HttpResponseRedirect(reverse("user:index"))
     else:
         form = UserImageForm()
         return render(request, "user/register.html",
@@ -197,7 +197,7 @@ def register(request):
             return render(request, "user/register.html", {"message": "Username already taken."})
 
         login(request, user)
-        return HttpResponseRedirect(reverse("g_pigeon_race:index"))
+        return HttpResponseRedirect(reverse("user:index"))
     else:
         form = UserImageForm()
 

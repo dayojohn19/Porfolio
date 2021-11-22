@@ -1,4 +1,4 @@
-from . import acs
+# from . import acs
 from binance.client import Client
 from django.shortcuts import render
 
@@ -11,8 +11,8 @@ def index(request):
 
 # ------------------------
 
-x, y = acs.key('john')
-client = Client(x, y)
+# x, y = acs.key('john')
+# client = Client(x, y)
 # ---------------------------
 # ----- FETCHING ---------
 # ---------------------------
@@ -33,24 +33,24 @@ def fetch_datas(request):
     return JsonResponse(klines, safe=False)
 
 
-def fetch_data(request):
-    from django.http import JsonResponse
-    start_date = "14 Nov, 2021"
-    klines = client.get_historical_klines("BTCUSDT",
-                                          Client.KLINE_INTERVAL_15MINUTE,
-                                          start_date)
-    # processed_klines = []
-    # for data in klines:
-    #     kline = {
-    #         "time": data[0],
-    #         "open": data[1],
-    #         "high": data[2],
-    #         "low": data[3],
-    #         "close": data[4]
-    #     }
-    #     processed_klines.append(kline)
-    return JsonResponse(klines, safe=False)
-# from CSV File
+# def fetch_data(request):
+#     from django.http import JsonResponse
+#     start_date = "14 Nov, 2021"
+#     klines = client.get_historical_klines("BTCUSDT",
+#                                           Client.KLINE_INTERVAL_15MINUTE,
+#                                           start_date)
+#     # processed_klines = []
+#     # for data in klines:
+#     #     kline = {
+#     #         "time": data[0],
+#     #         "open": data[1],
+#     #         "high": data[2],
+#     #         "low": data[3],
+#     #         "close": data[4]
+#     #     }
+#     #     processed_klines.append(kline)
+#     return JsonResponse(klines, safe=False)
+
 
 # historical trade
 
