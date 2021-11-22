@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade</title>
+</head>
+<body>
+    <h1 id="title">This is trade</h1>
+    <link rel="stylesheet" href="{% static 'commerce/trade/layout.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <style>
+        button {
+            border-radius: 10px;
+            margin: 0.4rem;
+        }
+        div {
+            border-radius: 13px;
+        }
+    </style>
+    <!-- Nav -->
+    <div style=" background-color: rgba(190, 255, 255, 0.438);">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'trade:index' %}"
+                    style="background-color: rgba(25, 0, 255, 0.205); border-radius: 10px;">Recorded Chart</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'trade:live' %}"
+                    style="background-color: rgba(25, 0, 255, 0.205); border-radius: 10px;">Live Chart</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'auction:categories' %}">Categories</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'auction:watchlistpage' user %}">Watchlist <span
+                        class="badge badge-danger">{{wcount}}</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'auction:create' %}"
+                    style="background-color: rgba(128, 255, 0, 0.363); border-radius: 10px;">Create Auction</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'auction:mywinnings' %}">Your Winnings <span
+                        class="badge badge-danger">{{closed}}</span></a>
+            </li>
+            <li class="nav-item">
+                {% if user.is_authenticated %}
+                <a class="nav-link">
+                    <h10><strong>{{ user }}</strong>. $ {{request.user.last_name}}</h10>
+                </a>
+                {% else %}
+                Not signed in.
+                {% endif %}
+            </li>
+            {% else %}
+    
+            {% endif %}
+        </ul>
+        <hr>
+    </div>
+
+</body>
+</html>
+
+
+
+
+<div style="margin: 2rem;">
+        {% block body %}
+
+
+        {% endblock %}
+</div>
+

@@ -159,7 +159,7 @@ const TradePriceClose = chart_volume.addLineSeries({
     lastPriceAnimation: LightweightCharts.LastPriceAnimationMode.Continuous,
 });
 
-const Accelaration_Volume_Value = chart_volume.addLineSeries({
+const Accelaration_Volume_Value = third_chart.addLineSeries({
  color: 'red', 
     topColor: 'red',
     bottomColor: 'rgba(21, 146, 230, 0)',
@@ -171,7 +171,7 @@ const Accelaration_Volume_Value = chart_volume.addLineSeries({
     lastPriceAnimation: LightweightCharts.LastPriceAnimationMode.Continuous,
 });
 
-const Accelarations_VolumeQuote_Value = chart_volume.addLineSeries({
+const Accelarations_VolumeQuote_Value = third_chart.addLineSeries({
  color: 'blue', 
     topColor: 'blue',
     bottomColor: 'rgba(21, 146, 230, 0)',
@@ -183,7 +183,7 @@ const Accelarations_VolumeQuote_Value = chart_volume.addLineSeries({
     lastPriceAnimation: LightweightCharts.LastPriceAnimationMode.Continuous,
 });
 
-const AccelarationTotal_Volume= chart_volume.addLineSeries({
+const AccelarationTotal_Volume= third_chart.addLineSeries({
  color: 'yellow', 
     topColor: 'yellow',
     bottomColor: 'rgba(21, 146, 230, 0)',

@@ -1,0 +1,43 @@
+{% extends 'commerce/trade/layout.html' %}
+{% load humanize %}
+{% load static %}
+{% include 'commerce/sale/tabs.html' %}
+
+
+
+{% block body %}
+<h1 id="title">Recorded Chart</h1>
+    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js" defer></script>
+    <script src="{% static 'commerce/trade/chart.js' %}" defer></script>
+    
+
+
+    <h1 id="message">Trading</h1>
+    
+
+    
+
+
+    <button onclick="new_data()">New Data</button>
+    <input id="new_date" placeholder="ex. Nov 20, 2021">
+    <button onclick="get_data()">Old Data</button>
+
+    <div id="main_chart"></div>
+
+
+    <button onclick="put_volume()">Put Volume / Trade </button>
+    <button onclick="Over_Trade()">Put Mark Price / Trade</button>
+    <script src="{% static 'commerce/trade/chart_volume.js' %}" defer></script>
+    <div id="secondary_chart"></div>
+
+    <button onclick="Accelaration_Volume()">Accelaration Volume</button>
+    <script src="{% static 'commerce/trade/chart_third.js' %}" defer></script>
+    <div id="third_chart"></div>
+    
+    <script src="{% static 'commerce/trade/Series.js' %}" defer></script>
+    <script src="{% static 'commerce/trade/functions.js' %}" defer></script>
+
+        <div style="padding: 1rem;">
+            <button onclick="get_rsi()"> Get RSI</button>
+        </div>
+{% endblock %}

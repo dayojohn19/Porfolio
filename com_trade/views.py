@@ -1,4 +1,5 @@
 # from . import acs
+from django.views.decorators.csrf import csrf_exempt
 from binance.client import Client
 from django.shortcuts import render
 
@@ -6,19 +7,65 @@ from django.shortcuts import render
 
 
 def index(request):
-    return render(request, 'trade/index.html')
+    return render(request, 'commerce/trade/index.html')
+
+
+def live_chart(request):
+    return render(request, 'commerce/trade/live.html')
 
 
 # ------------------------
 
-# x, y = acs.key('john')
-# client = Client(x, y)
-# ---------------------------
-# ----- FETCHING ---------
-# ---------------------------
-# from internet
 
-# importing data from csv
+@csrf_exempt
+def new_data(request):
+    if request.method == "POST":
+        import json
+        data = json.loads(request.body)
+        new_data = data.get("new_date")
+    # from binance.client import Client
+
+        import csv
+        import time
+        client = Client()
+        crypto = 'BTCUSDT'
+        # starting = 'Nov 18, 2021'
+        starting = new_data
+
+        klines = client.get_historical_klines(
+            crypto, Client.KLINE_INTERVAL_15MINUTE, starting)
+        # ---------- SAVING -------- save the fetched data t0 csv
+        filed = f"{crypto}-{starting}"
+
+        csvfile = open(f"{filed}.csv", 'w', newline='')
+        candlestick_writer = csv.writer(csvfile, delimiter=',')
+        ii = 0  # =counting data
+        for candle in klines:
+            # candle[0] = candle[0] / 1000
+            candlestick_writer.writerow(candle)
+            ii += 1
+        # print(ii)
+        # ---------- READING -------
+        filename = f'{filed}.csv'
+        from django.http import JsonResponse
+        import csv
+        klines = []
+        with open(filename, newline='') as csvfile:
+            kline = csv.reader(csvfile, delimiter=',')
+            for k in kline:
+                klines.append(k)
+        return JsonResponse(klines, safe=False)
+
+    # return filed  # = return to filename
+
+    # x, y = acs.key('john')
+    # client = Client(x, y)
+    # ---------------------------
+    # ----- FETCHING ---------
+    # ---------------------------
+    # from internet
+
+    # importing data from csv
 
 
 def fetch_datas(request):

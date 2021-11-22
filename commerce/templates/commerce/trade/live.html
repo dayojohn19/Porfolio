@@ -1,0 +1,14 @@
+{% extends 'commerce/trade/layout.html' %}
+{% load humanize %}
+{% load static %}
+{% include 'commerce/sale/tabs.html' %}
+
+
+
+{% block body %}
+<h1 id="title">Live Chart</h1>
+<script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js" defer></script>
+<script src="{% static 'commerce/trade/live_chart.js' %}" defer></script>
+<h1 id="message">Trading</h1>
+
+{% endblock %}

@@ -1,4 +1,4 @@
-var chart = LightweightCharts.createChart(document.body, {
+var chart = LightweightCharts.createChart(document.querySelector("#main_chart"), {
 	width: 1200,
   height: 300,
 	layout: {
@@ -37,3 +37,6 @@ var chart = LightweightCharts.createChart(document.body, {
 
 
 console.log('Fully Loaded');
+
+
+

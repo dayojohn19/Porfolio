@@ -1,11 +1,35 @@
 function get_data(){
-        message.innerHTML = 'Fetching New Data';
-    fetch("http://127.0.0.1:8000/com_trade/fetch_data").then((r) => r.json()).then((response) => {
-        respond = response;
-        console.log(response);
-        message.innerHTML = 'Data Refreshed';
-});
+    message.innerHTML = 'Fetching New Data';
+    fetch("fetch_data").then((r) => r.json()).then((response) => {
+    respond = response;
+    console.log(response);
+    message.innerHTML = 'Data Refreshed';
+    put_candles();
+    });
+
 }
+
+function new_data(){
+    new_new = document.querySelector("#new_date").value;
+    console.log(new_new);
+    message.innerHTML = 'Fetching New Data';
+    // let djurl = {% url 'trade:new_data' %};
+    // let url = "{% url 'trade:new_data' %}";
+    // x = new_new
+    fetch(`new_data`,{
+        method: 'POST',
+        body: JSON.stringify({
+            new_date:new_new
+        })
+    }).then((r) => r.json()).then((response) => {
+    respond = response;
+    console.log(response);
+    message.innerHTML = 'Data Refreshed';
+    put_candles();
+    });
+
+}
+
 
 function put_candles(){
     for (let i = 0; i < respond.length; i++) { 
