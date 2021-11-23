@@ -70,6 +70,14 @@ position: sticky;
   border:none;
   color: white !important;
 }
+.trade {
+  background: rgb(0, 98, 209);
+  padding: 5px;
+  border-radius: 5.5px;
+  margin-bottom: 10px;
+  border:none;
+  color: white !important;
+}
 </style>
 <div class="container-sub-2-1 a-right sticky">
     <span><a class=""  href="{% url 'index:commerce' %}"><img class="h-icon th hg" src="{% static 'a_index/images/commerce.png' %}" alt=""></a></span>
@@ -83,6 +91,13 @@ position: sticky;
                   <div class="drop-list"><a href="{% url 'sale:category' category=1%}">Service</a></div>
                   <div class="drop-list"><a href="{% url 'sale:category' category=2%}">Goods</a></div>
           </div>
+      </li>
+      <li class="tab-list dropdown">
+        <span><a class="trade" href="{% url 'trade:index' %}">Trade</a></span>
+        <div class="dropdown-content">
+          <div class="drop-list"><a href="{% url 'trade:live' %}">Live</a></div>
+          <div class="drop-list"><a href="{% url 'trade:index' %}">Recorded</a></div>
+        </div>
       </li>
       
 
