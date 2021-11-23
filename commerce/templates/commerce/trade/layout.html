@@ -1,4 +1,6 @@
 {% load static %}
+{% include 'commerce/tabs.html' %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,7 +35,7 @@
                 <a class="nav-link" href="{% url 'trade:live' %}"
                     style="background-color: rgba(25, 0, 255, 0.205); border-radius: 10px;">Live Chart</a>
             </li>
-            {% if user.is_authenticated %}
+            <!-- {% if user.is_authenticated %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'auction:categories' %}">Categories</a>
             </li>
@@ -60,7 +62,7 @@
             </li>
             {% else %}
     
-            {% endif %}
+            {% endif %} -->
         </ul>
         <hr>
     </div>

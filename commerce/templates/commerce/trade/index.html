@@ -6,6 +6,9 @@
 
 
 {% block body %}
+
+
+
 <h1 id="title">Recorded Chart</h1>
     <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js" defer></script>
     <script src="{% static 'commerce/trade/chart.js' %}" defer></script>
@@ -13,16 +16,14 @@
 
 
     <h1 id="message">Trading</h1>
-    
-
-    
 
 
-    <button onclick="new_data()">New Data</button>
-    <input id="new_date" placeholder="ex. Nov 20, 2021">
-    <button onclick="get_data()">Old Data</button>
-
-    <div id="main_chart"></div>
+    <div>
+        <span id="main_chart"></span>
+        <button onclick="new_data()">New Data</button>
+        <input id="new_date" placeholder="ex. Nov 20, 2021">
+        <button onclick="get_data()">Old Data</button>
+    </div>
 
 
     <button onclick="put_volume()">Put Volume / Trade </button>

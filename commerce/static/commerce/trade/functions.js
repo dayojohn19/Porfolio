@@ -125,11 +125,9 @@ function Accelaration_Volume() {
     }
 }
 function Over_Trade(){
-    isBuy = false;
-
+        isBuy = false;
     for (let i = 0; i < respond.length; i++) {
         var timestamps = parseInt(respond[i][0])/1000;
-
         trades = parseFloat(respond[i][8]);
         VolumeTraded = respond[i][5];
         VolumeQuoteTraded = respond[i][7];
@@ -137,20 +135,20 @@ function Over_Trade(){
         PriceClose =  respond[i][4];
         TradeVolumeQuoteValue = VolumeQuoteTraded / VolumeTraded
 // Violet
-        TradeVolumeQuote.update({
-            time:timestamps,
-            value: TradeVolumeQuoteValue
-        });
+        // TradeVolumeQuote.update({
+        //     time:timestamps,
+        //     value: TradeVolumeQuoteValue
+        // });
 
-        TradePriceOpen.update({
-            time:timestamps,
-            value: PriceOpen
-        });
+        // TradePriceOpen.update({
+        //     time:timestamps,
+        //     value: PriceOpen
+        // });
         
-        TradePriceClose.update({
-            time:timestamps,
-            value: PriceClose
-        });
+        // TradePriceClose.update({
+        //     time:timestamps,
+        //     value: PriceClose
+        // });
         if (PriceOpen >= PriceClose &&  PriceClose >= TradeVolumeQuoteValue){
             markers.push({
                 time:parseInt(respond[i][0])/1000,
@@ -207,7 +205,7 @@ function Over_Trade(){
         //     value: VolumeTraded * 100
         // })
     };
-    TradeVolumeQuote.setMarkers(markers);
+    // TradeVolumeQuote.setMarkers(markers);
     CandleSeries.setMarkers(markers);
 }
 
