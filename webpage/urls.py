@@ -38,6 +38,7 @@ urlpatterns = [
     path('com_bank/', include('com_bank.urls')),
     path('app_hiring/', include('app_hiring.urls')),
     path('com_trade/', include('com_trade.urls')),
+    path('ubx/', include('ubx.urls')),
 ]
 
 # Pigeon Config
