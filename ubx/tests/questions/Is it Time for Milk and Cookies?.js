@@ -3,10 +3,10 @@
 
 function triangle(n) {
 	x = 0
-for (i=0; i<=n; i++){
-    x+=i;
-}
-return x
+    for (i=0; i<=n; i++){
+        x+=i;
+    }
+    return x
 }
 
 console.log(triangle(215))

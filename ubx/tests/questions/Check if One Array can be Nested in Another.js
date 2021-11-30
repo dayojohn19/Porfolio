@@ -7,6 +7,7 @@ arr2 = [4,5,6]
 function same(arr1,arr2){
 
 for (i in arr2){
+    console.log(i);
         if (
             arr1.find(element=> element ==arr2[i])
         ) {
@@ -15,8 +16,6 @@ for (i in arr2){
         }
     }
     return true
-
-   
 }
 
 console.log(same(arr1,arr2));

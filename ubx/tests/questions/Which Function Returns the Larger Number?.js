@@ -6,7 +6,7 @@
 
 
 function whichIsLarger(f,g) {
-    return f()>g()?'f':g()>f()?'g':'neither'
+    return f()>g()  ?'f' : g()>f() ? 'g' : 'neither'
 }
 
 console.log(whichIsLarger(24,33))
