@@ -94,6 +94,7 @@ background: linear-gradient(315deg, rgba(245,154,236,0) 0%, rgba(255,144,205,0.7
 
 
     <form method='POST' action="{% url 'commerce:load' %}">
+        <h1>Send Money</h1>
         {% csrf_token %}
         <input type="number" name="load" placeholder="load">
         <select name="target">
@@ -101,7 +102,7 @@ background: linear-gradient(315deg, rgba(245,154,236,0) 0%, rgba(255,144,205,0.7
             <option value="{{u.username}}">{{u.username}} {{u.last_name}}</option>
             {% endfor %}
         </select>
-
+        <button type="submit">Send</button>
     </form>
     
 <div class="games_container absolute">
