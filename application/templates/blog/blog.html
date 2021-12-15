@@ -3,28 +3,26 @@
 {% load static %}
     {% block body %}
     <link rel="stylesheet" href="{% static 'a_blog/blog.css' %}">
-    <link href="{% static 'a_index/blog.css' %}" rel="stylesheet">
-    <h1>Blog </h1>
-    <h2><a href="{% url 'blog:post_blog' %}">Post a blog</a></h2>
-
+    
 
 {% for b in blogs %}
     <div class="b-opa">        
         <!-- <div class="para_add" style="background-image: '{{b.link}}' "> -->
         <div class="para_add" style="background-image: url('{{b.picture_link}}') ">
             
-            <h2 class="mar-l b-mid">
+            <h2 class="font-one mar-l b-mid">
                 {{b.title}}
             </h2>
         </div>
-        <strong class="mar-l b-par">
-            "{{b.sub_title}}"<br>
-            <i style="font-size:small">{{b.time}}</i>
-        </strong>
-        
-        <p class="mar-l b-par">{{b.paragraph}}
-        </p>
-        <hr>
+        <div class="container">
+                <strong class="mar-l b-par">
+                    <a class="font-two">"{{b.sub_title}}"</a><br>
+                    <i style="font-size:small">{{b.time}}</i>
+                </strong>
+                <p class="font-three mar-l b-par">{{b.paragraph}}
+                </p>
+        </div>       
+    <hr>
     </div>
     <br><br>
 {% endfor %}
@@ -182,7 +180,7 @@
             smiled and said … “i did and we are just coming from the hospital, my son was blind from birth, he
             
             just got his eyes today…”
-            Every single person on the planet has story.</p><script src="index/dis.js"></script>
+            Every single person on the planet has story.</p>
     </div>
 <hr>
 

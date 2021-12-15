@@ -11,7 +11,7 @@
         <div>{{ message }}</div>
     {% endif %}
 
-    <form action="{% url 'mail:login' %}" method="post">
+    <form action="{% url 'user:login' %}" method="post">
         {% csrf_token %}
         <div class="form-group">
             <input autofocus class="form-control" type="email" name="email" placeholder="Email">
@@ -22,6 +22,6 @@
         <input class="btn btn-primary" type="submit" value="Login">
     </form>
 
-    Don't have an account? <a href="{% url 'mail:register' %}">Register here.</a>
+    Don't have an account? <a href="{% url 'user:register' %}">Register here.</a>
 
 {% endblock %}

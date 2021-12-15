@@ -1,8 +1,11 @@
 from django.contrib import admin
-from .models import Chain, Mypigeons, Image, Userimage
+from .models import Chain, Mypigeons, Image, Userimage, Transaction_History, Order, User_Coins
 
 # Register your models here.
 admin.site.register(Chain)
 admin.site.register(Mypigeons)
 admin.site.register(Image)
 admin.site.register(Userimage)
+admin.site.register(Transaction_History)
+admin.site.register(Order)
+admin.site.register(User_Coins)

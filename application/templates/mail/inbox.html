@@ -13,7 +13,7 @@
     <button class="btn btn-sm btn-outline-primary" id="compose">Compose</button>
     <button class="btn btn-sm btn-outline-primary" id="sent">Sent</button>
     <button class="btn btn-sm btn-outline-primary" id="archived">Archived</button>
-    <a class="btn btn-sm btn-outline-primary" href="{% url 'mail:logout' %}">Log Out</a>
+    <a class="btn btn-sm btn-outline-primary" href="{% url 'user:logout' %}">Log Out</a>
     <hr>
     
     <div id="side"></div>
@@ -29,6 +29,7 @@
         <div id="compose-form">
             <div class="form-group">
                 From: <input disabled class="form-control" value="{{ request.user.email }}">
+                {{request.user.username}}
             </div>
             <div class="form-group">
                 
@@ -49,5 +50,5 @@
 {% endblock %}
 
 {% block script %}
-    <script src="{% static 'application/mail/inbox.js' %}">s</script>
+    <script src="{% static 'application/mail/inbox.js' %}"></script>
 {% endblock %}

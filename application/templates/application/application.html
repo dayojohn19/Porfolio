@@ -6,6 +6,11 @@
     <link rel="stylesheet" href="{% static 'games/games.css' %}">
 
 <div class="games_container">
+    <div class="game" >
+        <img src="{% static 'application/images/freedive.png' %}" style="background-color: blanchedalmond;">
+        <a href="{% url 'freedive:index' %}">freedive</a>
+    </div>
+
     <div class="game">
         <img src="{% static 'application/images/ubx.png' %}">
         <a href="{% url 'ubx:index' %}">UBX</a>

@@ -12,6 +12,42 @@ from django.contrib.auth.models import AbstractUser
 from django.core.files import storage
 
 
+class User_Coins(models.Model):
+    user_id = models.IntegerField()
+    hashed = models.CharField(max_length=64, blank=True)
+    quantity = models.IntegerField(default=0)
+    coin = models.CharField(max_length=64)
+
+    # def __str__(self):
+    #     return f"{self.coin} QTY: {self.quantity} {self.user_id}"
+
+
+class Order(models.Model):
+    coin_id = models.IntegerField(blank=True)
+    sell_coin = models.CharField(max_length=64)
+    buy_coin = models.CharField(max_length=64)
+    buy = models.BooleanField(default=False)
+    sell = models.BooleanField(default=False)
+    quantity = models.IntegerField(default=0)
+    price = models.IntegerField()
+
+    def __str__(self):
+        return f"Coin:{self.coin_id} Quantity:{self.quantity}  Price:{self.price} by:{self.coin_id}"
+
+
+class Transaction_History(models.Model):
+    # transac_id = models.IntegerField()
+
+    sender_id = models.IntegerField()
+    receiver_id = models.IntegerField()
+    amount = models.IntegerField()
+    hashit = models.IntegerField()
+    time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f" {self.time} ---- {self.amount} ... {self.sender_id}"
+
+
 class Chain(models.Model):
     chain = models.CharField(max_length=64, default=1231)
     value = models.CharField(max_length=64, blank=True)

@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pigeon Racing</title>
 </head>
+
+
+
 <body>
 
     <style>
@@ -14,39 +17,57 @@
             background: rgb(10,11,9);
             background: linear-gradient(90deg, rgba(10,11,9,1) 0%, rgba(66,66,66,1) 71%, rgba(66,66,66,1) 73%, rgba(67,67,67,1) 76%, rgba(70,70,70,1) 79%, rgba(72,72,72,1) 80%, rgba(75,75,75,1) 83%, rgba(78,78,78,1) 88%, rgba(83,83,83,1) 92%, rgba(86,86,86,1) 97%, rgba(92,92,92,1) 100%, rgba(98,98,98,1) 100%, rgba(108,108,108,1) 100%, rgba(114,114,114,1) 100%, rgba(176,176,176,1) 100%, rgba(212,212,212,1) 100%, rgba(255,255,255,1) 100%);
             padding-top: 10%;
-            padding-left: 5%;
-            padding-right: 5%;
+            padding-left: 0;
+            padding-right: 0;
+            margin: 0;
             height: fit-content;
             color: whitesmoke;
             font-family: Arial, Helvetica, sans-serif;
         }
         .tabs {
-            position: fixed;
-            top: 1%;
+            position: sticky;
+            top: 0.5%;
             z-index: 5;
-            background-color: turquoise;
+            background-color: rgb(42, 49, 48);
             padding: 0.5rem;
-            border-radius: 10px;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
 
         }
         .tabs a {
             text-decoration: none;
             font-weight: 900;
-            color:rgb(55, 0, 255) !important;
+            color:rgb(247, 245, 255) !important;
         }
 
+        .view-players {
+            color: yellow;
+            text-decoration: none;
+            background: rgba(255, 255, 162, 0.151);
+            padding: 0.5rem;
+            border-radius: 5.5px;
+        }
+        .green {
+            color: greenyellow;
+        }
     </style>
     <div class="tabs">
-
         {% if request.user.is_superuser %}
-            <span>
-                <a class="race" href="{% url 'g_pigeon_race:manager_page' %}">Manager</a>
-            </span>
+        <span>
+            <a class="view-players" href="{% url 'g_pigeon_race:manager_page' %}">Manager</a>
+        </span>
+        <span>
+            <a class="view-players" href="{% url 'g_pigeon_race:index' %}">Race</a>
+        </span>
         {% else %}
-            <span>
-                <a class="race" href="{% url 'g_pigeon_race:index' %}">Race</a>
-            </span>
+        <span>
+            <a class="view-players" href="{% url 'g_pigeon_race:index' %}">Race</a>
+        </span>
         {% endif %}
+        <span>
+            <a class="view-players" href="{% url 'user:index' %}" style="text-align: right;">View Players</a>
+        </span>
+        <b class="good-day">Good Day, <strong class="green">{{request.user.username}}</strong></b>
     </div>
     {% block body %}
 

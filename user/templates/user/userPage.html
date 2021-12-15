@@ -1,0 +1,419 @@
+{% extends "a_index/layout.html" %}
+{% load static %}
+
+
+{% block body %}
+<!-- TABLE -->
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td,
+    th {
+        border: 1px solid #372e2e;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #525252;
+    }
+
+    thead {
+        text-align: center;
+        background-color: chartreuse;
+    }
+
+    .input_n {
+        width: 3rem;
+    }
+</style>
+<!-- END TABLE -->
+<!-- ITEMS -->
+<style>
+
+    #form1 input {
+        border-radius: 10px;
+        padding: 0.2rem;
+
+    }
+
+    button {
+        border-radius: 4px;
+        margin: 0.5rem;
+    }
+
+    #transparent {
+        background-color: rgba(0, 0, 0, 0);
+        color: white;
+        border: none;
+        outline: none;
+        height: 30px;
+        transition: height 1s;
+        -webkit-transition: height 1s;
+    }
+    @media (max-width: 599px) {
+            .grid-container {
+            grid-template-areas:
+                'spans1'
+                'spans2';
+    }
+    }
+    @media (min-width:600px) {
+            .grid-container {
+            display: grid;
+            grid-template-areas:
+                'spans1 spans2';
+            }
+    }
+    /* grid container */
+            .grid-container {
+        display: grid;
+        grid-gap: 1rem;
+        padding: 1rem;
+        background-color: rgb(31, 31, 31);
+        border-radius: 25px;
+         box-shadow: 0 0 5px 5px #ffffff15;
+         grid-gap: 50px;
+         position: relative;
+    }
+        .grid-container span {
+            padding: 0.5rem;
+        }
+        .inside_container {
+            padding-left: 2rem;
+            padding-right: 2rem;
+
+        }
+    .center_it {
+        text-align: center;
+        margin: 0.5rem;
+    }
+
+    .span1 {
+        grid-area: spans1;
+        border-radius: 15px 0 0 15px;
+        background-color: rgb(49, 47, 28);
+        text-align: center;
+    }
+
+    .span2 {
+        grid-area: spans2;
+        border-radius: 0 15px 15px 0;
+        background-color: rgb(40, 14, 14);
+        text-align: center;
+        
+    }
+</style>
+<!-- END ITEMS -->
+
+<!-- BODY -->
+<style>
+    .main_body {
+        font-family: 'Courier New', monospace;
+    }
+</style>
+<!-- END BODY -->
+
+
+<!-- -----START View Balances------------------- -->
+
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td,
+    th {
+        border: 1px solid #555555;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #4b4a4a;
+    }
+
+    .modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Sit on top */
+        padding-top: 100px;
+        /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4);
+        /* Black w/ opacity */
+        color: black;
+            /* max-height: calc(120vh - 210px);
+            max-height: 100%; */
+    overflow-y: auto;
+    z-index: 101;
+    }
+
+    /* Modal Content */
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    .modal-content p {
+        text-align: center;
+    }
+
+    /* The Close Button */
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .spaces {
+        margin-top: 3rem;
+        padding-top: 5rem;
+    }
+</style>
+
+<div class="spaces"></div>
+<!--  Modal -->
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        {{request.user.id}}
+        <span class="close">&times;</span>
+        <h1>Balances: </h1>
+        <table>
+            <tr>
+                <th>Coin</th>
+                <th>Amount</th>
+            </tr>
+            {% for y in your_coins %}
+            <tr>
+                <td>{{y.coin}}</td>
+                <td>{{y.quantity}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</div>
+<!-- END MODAL -->
+
+<!-- --------END View Balances---------------- -->
+
+<div class="main_body">
+<h1>{{request.user.username}} Page</h1>
+
+
+<div class="grid-container">
+
+    <span class="span1">
+        <form id="form1" method='POST' action="{% url 'commerce:load' %}">
+            <h5 style="text-align: center;">Send Load</h5>
+            {% csrf_token %}
+
+            <div class="inside_container">
+                To:
+                <select name="target">
+                    {% for u in users %}
+                    <option selected='none' value="{{u.username}}">{{u.username}} {{u.last_name}}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <input required type="number" name="load" placeholder="load">
+                <input hidden name="hashed" value="{{request.user.first_name}}">
+                <br>
+                <div class="center_it">
+                    <button type="submit">Send</button>
+                </div>
+            </div>
+            
+            <br>
+            Remaining Balance:
+            {{request.user.last_name}}
+        </form>
+    </span>
+
+
+
+
+        <span class="span2">
+            <div style="position:absolute; right: 5%; bottom: 5%">
+                            <a>{{sell_coin}} {{sell_remaining}}</a>
+                            <br>
+                            {{buy_coin}} {{buy_remaining}}
+                            <br>
+            </div>
+
+            <form method="POST" action="{% url 'user:order_it' %}" id="form1">
+                <h5 style="text-align: center;">Trade {{sell_coin}} </h5>
+
+                {% csrf_token %}
+                <div class="inside_container">
+                    To: <input id="transparent" value="jcoin" type="text" name="buy_coin" placeholder="Buy Coin">
+                    <br>
+                    
+                    <input hidden value="{{sell_coin}}" id="sell_coin" name="sell_coin" placeholder="Sell Coint" type="text">
+                    Price: <input value='4' type="number" name="price" id="" placeholder="Price">
+                    <br>
+                    Quantity: <input value='2' type="number" name="quantity" placeholder="quantity" style="width: 3rem;">
+                    <br>
+                    <div class="center_it">
+                        <input type="submit" name="side" value="sell">
+                        <input type="submit" name="side" value="buy">
+                    </div>
+                </div>
+                Remaining: <br>
+            </form>
+        </span>
+
+</div>
+<div class="spaces">
+
+</div>
+<!-- ------------ -->
+<!-- TABLE -->
+
+<br>
+<table>
+    <thead>
+        <h2>{{sell_coin}} ORDERS</h2>
+        <button id="myBtn">View Balances</button>
+
+    </thead>
+    <tr>
+        <th>Coin</th>
+        <th>Price</th>
+        <th id="aa">Volume</th>
+    </tr>
+
+    {% for o in orders %}
+    <tr>
+        <td id="{{o.id}}-coin">{{o.buy_coin}}</td>
+        <td id="{{o.id}}-price">{{o.price}}</td>
+        <td>
+            <input type="number" class="input_n" id="{{o.id}}-quantity" value="{{o.quantity}}">
+        </td>
+
+        {% if o.coin_id == request.user.id %}
+        <!-- <td><button onclick="Get_Data(id, 'cancel')" id={{o.id}}>CANCEL</button></td> -->
+        <td>TO CANCEL</td>
+        {% else %}
+        {% if o.sell %}
+        <td><button onclick="Get_Data(id,'buy')" id={{o.id}} style="background-color: lightcoral;">BUY</button></td>
+        {% elif o.buy %}
+        <td><button onclick="Get_Data(id,'sell')" id={{o.id}} style="background-color: lightcyan;">SELL</button></td>
+        {% endif %}
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
+
+<script>
+    function Get_Data(id, side) {
+        sell_coin = document.querySelector("#sell_coin").value;
+        buy_coin = document.getElementById(`${id}-coin`).innerHTML;
+        price = document.getElementById(`${id}-price`).innerHTML;
+        quantity = document.getElementById(`${id}-quantity`).value;
+        Send_Data(sell_coin, buy_coin, parseFloat(price), parseFloat(quantity), side);
+    }
+
+    function Send_Data(sell_coin, buy_coin, price, quantity, side) {
+        hash = '111';
+        fetch("{% url 'user:js_order_it' %}", {
+            method: 'POST',
+            body: JSON.stringify({
+                quantity: quantity,
+                sell_coin: sell_coin,
+                buy_coin: buy_coin,
+                price: price,
+                side: side,
+                hash: hash
+            })
+        }).then(response => response.json())
+            .then(result => {
+                alert(result);
+                location.reload();
+            })
+    }
+</script>
+
+<!-- END TABLE -->
+<!-- MODAL SCRIPT -->
+<!-- Trigger/Open The Modal -->
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal 
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+<!-- END MODAL SCRIPT-->
+
+</div>
+
+
+<form style="width: 1000px;" action="https://www.paypal.com/donate" method="post" target="_top">
+    <input type="hidden" name="hosted_button_id" value="VF67UU5D7QWUW" />
+    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit"
+        title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+    <img alt="" border="0" src="https://www.paypal.com/en_PH/i/scr/pixel.gif" width="1" height="1" />
+</form>
+
+
+<form action="https://www.paypal.com/donate" method="post" target="_top">
+    <input type="hidden" name="hosted_button_id" value="T4D87WHFPE8KQ" />
+    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit"
+        title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+    <img alt="" border="0" src="https://www.paypal.com/en_PH/i/scr/pixel.gif" width="1" height="1" />
+</form>
+{% endblock %}
+

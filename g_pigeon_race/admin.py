@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Race, Point, Lap, Loaded, Code, Record, Measurement, Standing
+from .models import Race, Point, Lap, Loaded, Code, Record, Measurement, Standing, LoadingStation
 
 # Register your models here.
 admin.site.register(Race)
@@ -10,3 +10,4 @@ admin.site.register(Code)
 admin.site.register(Record)
 admin.site.register(Measurement)
 admin.site.register(Standing)
+admin.site.register(LoadingStation)

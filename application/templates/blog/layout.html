@@ -13,6 +13,30 @@
             font-family: 'Times New Roman', Times, serif;
             font-size: larger;
         }
+
+        .image-header img {
+            max-height: 170px;
+            width: 100%;
+        }
+        .tabs-container {
+              position: -webkit-sticky; /* Safari */
+                position: sticky;
+                top: 0;
+                z-index: 3;
+        }
+        .tabs {
+            background-color: greenyellow;
+            padding: 0.9rem;
+            display: flex;
+            justify-content: space-evenly;
+        }
+        .tabs a {
+            text-decoration: none;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+        }
     </style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,15 +47,23 @@
     <!---<<<-->
     <!--disable right_Click-->
     <!-- <script src="{% static 'a_index/dis.js' %}"></script> -->
-
+<!-- <script src="index/dis.js"></script> -->
 
     <link rel="stylesheet" href="{% static 'a_index/1000.css' %}">
     <link rel="stylesheet" href="{% static 'a_index/500.css' %}">
-    <div>
-        <span><a href="{% url 'blog:index' %}">Blogs</a></span>
-        <span><a href="{% url 'blog:post_blog' %}">Post</a></span>
-    </div>
 
+    <div class="header-container">
+        <div class="image-header">
+            <img src="https://res.cloudinary.com/twenty20/private_images/t_watermark-criss-cross-10/v1607023893000/photosp/d0a8b366-4ef8-40ca-8bf6-a1cc5a0a81a4/stock-photo-sun-sky-sea-sunset-beach-seascape-greece-sunrise-vacation-d0a8b366-4ef8-40ca-8bf6-a1cc5a0a81a4.jpg" height="600"  style="height: 600px;">
+        </div>
+ 
+    </div>
+        <div class="tabs-container">
+            <div class="tabs">
+                <a href="{% url 'blog:index' %}">Blogs</a>
+                <a href="{% url 'blog:post_blog' %}">Post</a>
+            </div>
+        </div>
 </head>
 <!---end-->
 

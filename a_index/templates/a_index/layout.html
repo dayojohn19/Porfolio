@@ -2,6 +2,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <style>
         .client {
             border:none;
@@ -26,7 +28,7 @@
     <link href="{% static 'a_street_race/street_race.css' %}" rel="stylesheet">
 <!---<<<-->
 <!--disable right_Click-->
-<script src="{% static 'a_index/dis.js' %}"></script>
+<!-- <script src="{% static 'a_index/dis.js' %}"></script> -->
 
 
     <link rel="stylesheet" href="{% static 'a_index/1000.css' %}">
@@ -40,6 +42,7 @@
         </div>
 
         <div class="container-sub-2-1 a-right" style="z-index: 100;">
+            <span><a class="" href="{% url 'user:userpage' %}">{{request.user.username}} Page</a></span>
             {% if request.user.is_anonymous %}
             <span><a class=""  href="{% url 'user:login' %}">Login</a></span>
             {% else %}
@@ -56,7 +59,10 @@
 </head>
 <!---end-->
 <body>
-    <div class="container-main-main" style="height: auto;">
+
+
+
+    <div class="container-main-main" style="height: auto; padding-bottom: 10rem;">
         {% block body %}
 
 

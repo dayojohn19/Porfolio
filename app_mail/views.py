@@ -41,7 +41,7 @@ def compose(request):
     recipients = []
     for email in emails:
         try:
-            
+
             user = User.objects.get(email=email)
             recipients.append(user)
         except User.DoesNotExist:
@@ -72,6 +72,7 @@ def compose(request):
 
     return JsonResponse({"message": "Email sent successfully."}, status=201)
 
+
 @csrf_exempt
 def contact(request):
 
@@ -91,7 +92,7 @@ def contact(request):
     recipients = []
     for email in emails:
         try:
-            
+
             user = User.objects.get(email=email)
             recipients.append(user)
         except User.DoesNotExist:
@@ -123,7 +124,7 @@ def contact(request):
 
     return JsonResponse({"message": "Email sent successfully."}, status=201)
 
- 
+
 @login_required
 def mailbox(request, mailbox):
 
@@ -147,7 +148,7 @@ def mailbox(request, mailbox):
     emails = emails.order_by("-timestamp").all()
     return JsonResponse([email.serialize() for email in emails], safe=False)
 
- 
+
 @csrf_exempt
 @login_required
 def email(request, email_id):

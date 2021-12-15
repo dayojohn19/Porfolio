@@ -8,8 +8,15 @@
     }
     textarea {
         background-color: rgb(181, 232, 255);
-        width: 100%;
-        height: 50%;
+ 
+  resize: vertical;
+  padding:15px;
+  border-radius:15px;
+  border:0;
+  box-shadow:4px 4px 10px rgba(0,0,0,0.06);
+  height:auto;
+  width: auto;
+
     }
     .form_title {
         background-color: rgb(75, 75, 0);
@@ -18,6 +25,10 @@
         font-size: xx-large;
         padding:0.92rem;
         width: 60%;
+        font-family: 'Lobster', cursive;
+        border-radius:5px;
+        border:0;
+        box-shadow:4px 4px 10px rgba(0,0,0,0.06); 
     }
     .form_pan {
         background-color: turquoise;
@@ -26,11 +37,66 @@
         color:rgb(25, 0, 255);
         padding: 0.45;
         width: 85%;
-        
+        font-family: 'Open Sans Condensed', sans-serif;
+        border-radius:5px;
+        border:0;
+        box-shadow:4px 4px 10px rgba(0,0,0,0.06);
     }
     .container_center {
         text-align: center;
     }
+    .form-container {
+        text-align: center;
+    }
+
+
+
+/* CSS */
+.button-5 {
+  align-items: center;
+  background-clip: padding-box;
+  background-color: #fa6400;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0;
+  min-height: 3rem;
+  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
+  margin-bottom: 5px;
+}
+
+.button-5:hover,
+.button-5:focus {
+  background-color: #fb8332;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.button-5:hover {
+  transform: translateY(-1px);
+}
+
+.button-5:active {
+  background-color: #c85000;
+  box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+  transform: translateY(0);
+}
 </style>
 
 <script>
@@ -46,12 +112,13 @@
 
 
         <div>
-            <form action="{% url 'blog:new_blog' %}" method="post" enctype="multipart/form-data" >
+            <form class="form-container" action="{% url 'blog:new_blog' %}" method="post" enctype="multipart/form-data" >
                 {%csrf_token%}
-
+                
                 <div class="container_center">{{post.as_p}}</div>
-                <input required name="link" placeholder="Picture Link">
-                <button type="submit">Upload</button>
+                <button class="button-5" type="submit">Upload</button>
+                <input class="form_pan" required name="link" placeholder="Picture Link">
+                
                 </form>
         </div>
 

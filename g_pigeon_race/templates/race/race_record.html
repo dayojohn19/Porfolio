@@ -52,7 +52,8 @@
 <div id="mm">
     <div class="mc"></div>
 </div>
-<div style="text-align: center;"><h1>Race Record</h1></div>
+<div style="text-align: center;"><h1>{{race}} Record</h1></div>
+
 <div hidden id="race_id">{{id}}</div>
 <script>
 
@@ -60,6 +61,7 @@
     console.log(pigeons);
 
 </script>
+
 {% for r in standing %}
     <b  id="id-{{r.pigeon_id}}">{{r.pigeon_id}}</b>
     <b class="name" id="n-{{r.pigeon_id}}"></b>
@@ -68,6 +70,7 @@
     <div id="put-{{r.pigeon_id}}"></div>
     <div id="{{r.pigeon_id}}-record"></div>
     <div id="record{{r.pigeon_id}}"></div>
+
 
     <script async>
 
@@ -80,54 +83,58 @@
             fetch("{% url 'g_pigeon_race:get_race_record2' %}", {
                 method: 'POST',
                 body: JSON.stringify({
-                    race_id:race,
-                    pigeon_id:pigeon
+                    race_id: race,
+                    pigeon_id: pigeon
                 })
             })
-            .then(response => response.json())
-            .then(record => {
-                r = record;
-                total_speed = 0;
-                r.forEach(element => {
-                    e = element;
-                    speed = e.speed;
-                    if (e.speed <= 1) {
-                        speed = 0;
+                .then(response => response.json())
+                .then(record => {
+                    r = record;
+                    total_speed = 0;
+                    r.forEach(element => {
+                        e = element;
+                        speed = e.speed;
+                        if (e.speed <= 1) {
+                            speed = 0;
                         }
-                    total_speed += +speed;
-                    aa = e.distance;
-                    bb = +(Math.round(e.distance + "e+2") + "e-2");
-                    container = document.createElement('div');
-                    container.innerHTML = `
-                            <ul>
-                                <li><b style="color:yellow;">${e.lap_name}</b></li>
+                        total_speed += +speed;
+                        aa = e.distance;
+                        bb = +(Math.round(e.distance + "e+2") + "e-2");
+                        container = document.createElement('div');
+                        container.innerHTML = `
                                 <ul>
-                                    <li><b style="color:lightblue;">
-                                        speed:  ${speed} mpm</b>
-                                        <button onclick="edit_record(${e.rid} , ${e.speed})">Edit</button> 
-                                        <button onclick="delete_record(${e.rid})">Delete</button>
-                                        </li>
-                                    <li hidden> Distance: ${bb}</li>
+                                    <li><b style="color:yellow;">${e.lap_name}</b></li>
+                                    <ul>
+                                        <li><b style="color:lightblue;">
+                                            speed:  ${speed} mpm</b>
+                                            <br>
+                                            <button onclick="edit_record(${e.rid} , ${e.speed})">Edit</button> 
+                                            <button onclick="delete_record(${e.rid})">Delete</button>
+                                            </li>
+                                        <li hidden> Distance: ${bb}</li>
+                                    </ul>
+                                    
                                 </ul>
-                                
-                            </ul>
-                        `;
-                    document.querySelector(`#n-${x}`).innerHTML = `<h1>${e.pigeon_name}</h1>`;
-                    document.querySelector(`#s-${x}`).innerHTML = `Total speed: ${total_speed} mpm`;
-                    document.querySelector(`#record${x}`).append(container);
-                    pigeon = {};
-                    pigeon.name = `{{r.pigeon_name}}`;                     
-                    pigeon.speed = total_speed;
-                    pigeons.push(pigeon);
+                            `;
+                        document.querySelector(`#n-${x}`).innerHTML = `<h1>${e.pigeon_name}</h1>`;
+                        document.querySelector(`#s-${x}`).innerHTML = `Total speed: ${total_speed} mpm`;
+                        document.querySelector(`#record${x}`).append(container);
+                        pigeon = {};
+                        pigeon.name = `{{r.pigeon_name}}`;
+                        pigeon.speed = total_speed;
+                        pigeons.push(pigeon);
 
+                    });
                 });
-            });
-            document.querySelector(`#id-${x}`).style.display = 'none';            
+            document.querySelector(`#id-${x}`).style.display = 'none';
         }
 
         get_record(`{{r.pigeon_id}}`);
 
     </script>
+
+
+
     <hr>
 {% endfor %}
 <script defer>
@@ -240,15 +247,19 @@
         mc.append(header);
 
         buttons = document.createElement('div');
-        buttons.innerHTML = `<button onclick="view_ranking(pigeons,'fast')">Fastest</button>
-            <button class="style_button" onclick="view_ranking(pigeons,'slow')">Slowest</button>
-            <button class="style_button" onclick="view_ranking(pigeons,'a')">Alphabetical A-Z</button>
-            <button class="style_button" onclick="view_ranking(pigeons,'z')">Alphabetical Z-A</button>
-            <br>
-            <button class="style_button" onclick="add_record()">Add</button>
-            <input class="style_input" id="in-name" placeholder="Name">
-            <input class="style_input" id="in-speed" placeholder="Speed">
-            <hr>`
+        buttons.innerHTML = `
+            <div>
+                <button class="style_button" onclick="view_ranking(pigeons,'fast')">Fastest</button>
+                <button class="style_button" onclick="view_ranking(pigeons,'slow')">Slowest</button>
+                <button class="style_button" onclick="view_ranking(pigeons,'a')">Alphabetical A-Z</button>
+                <button class="style_button" onclick="view_ranking(pigeons,'z')">Alphabetical Z-A</button>
+                <br>
+                <button class="style_button" onclick="add_record()">Add</button>
+                <input class="style_input" id="in-name" placeholder="Name">
+                <input class="style_input" id="in-speed" placeholder="Speed">
+                <hr>      
+            </div>
+`
         mc.append(buttons);
             filtered_array = [...new Map(x.map(item =>[item['name'], item])).values()];
             console.log(filtered_array);

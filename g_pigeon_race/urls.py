@@ -42,5 +42,8 @@ urlpatterns = [
          views.view_race_record, name="view_race_record"),
     path("get_race_record", views.get_race_record, name="get_race_record2"),
     path("get_name/", views.get_name, name="get_name"),
-    path("standing/<str:id>", views.view_standing, name="standing")
+    path("standing/<str:id>", views.view_standing, name="standing"),
+    path("add_loading_station/<int:lap_id>",
+         views.add_loading_station, name="add_loading_station"),
+    #     add loading station
 ]

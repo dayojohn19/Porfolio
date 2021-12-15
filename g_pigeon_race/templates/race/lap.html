@@ -12,12 +12,12 @@
     * input {
         border: none;
         padding: 0.5rem;
-        font-size: large;
+        font-size: small;
         margin-bottom: 0.5rem;
     }
     form input {
         border: none;
-        background-color: rgba(239, 255, 96, 0.966);
+        background-color: rgb(0, 195, 255);
     }
     #valued {
         color: rgb(0, 195, 255);
@@ -54,26 +54,81 @@
         <div id="race_id2">{{rn.id}}</div>
     </div>
     
-<h4>Lap:</h4>
+
 <div style="text-align:center;">
     <div style="text-align: left;color: yellow;padding: 1% ;">
         <div>
-            <h3 style="margin-bottom: 0; padding-bottom: 0;">Next Lap: </h3>
+            <h3 style="margin-bottom: 0; padding-bottom: 0; color: rgb(255, 87, 87);">Next Lap: </h3>
             <h1 style="margin-top: 0; padding-top: 0;">
-                <div id="lap_name">
+                <div id="lap_name" style="text-align: center;">
                 </div>
             </h1>
+        </div>  
+
+        <hr>
+
+        <div class="loading_station_form">
+            Add Loading Station
+            {{current_lap.id}}
+            <form method="POST" action="{% url 'g_pigeon_race:add_loading_station' lap_id=current_lap.id %}">
+                {% csrf_token %}
+
+                <input required name="place" type="text" placeholder="Place">
+                <input required name="price" type="number" placeholder="Price">
+                <input required name="time" type="time">
+            
+                <button type="submit">+</button>
+                <!-- <input type="submit" value="+"> -->
+            </form>
+        </div>
+        
+
+
+
+        <script>
+            function loading_schedule() {
+                container = document.querySelector("#loading_list");
+                if (container.style.display == 'none') {
+                    container.style.display = 'block'
+                } else {
+                    container.style.display = 'none'
+                }
+            }
+        </script>
+        <style>
+            #loading_list {
+                width: 100%;
+
+
+        top: 10%;
+        left: 0;
+        padding: 5.5%;
+        z-index: 1;
+        position: fixed;
+        background-color: rgba(245, 222, 179, 0.26);
+        display: none;
+        backdrop-filter: saturate(50%) blur(1px);    
+        -webkit-backdrop-filter: blur(10px);
+        max-height: calc(100vh - 210px);
+        overflow-y: auto;
+            }
+        </style>
+        <div id="loading_list_container"><button onclick="loading_schedule()">Loading Schedule</button>
+            <ul style="display: none; text-shadow: 0 0 10px #1b1b1b;" id="loading_list">
+                <strong><h2>Loading Schedule <button onclick="loading_schedule()">Close</button></h2></strong>
+            </ul>
         </div>
     </div>
+    <h2>Laps:</h2>
     {% for l in lap  %}
         <div style="padding-top: 0px;background-color: rgba(255, 140, 0, 0.11);border:3px solid rgba(255, 255, 33, 0.192);margin: 5px; padding: 5%;">
-
             <p id="lapid" hidden>{{l.id}}</p>
             <h1 style="margin-top: 0;"><p id="valued" >{{l.release}}</p>{{l.num_loaded}} Birds</h1>
             <form action="{% url 'g_pigeon_race:view_loaded' l.id %}">
                 <input type="submit" value="View Loaded Pigeons">
             </form>
             <button  id="{{l.id}}" onclick="truck(id)" >Truck</button>
+
         </div>
         {% empty %}
         <h1>No more lap</h1>
@@ -81,9 +136,10 @@
     {% endfor %}
 </div>
 <hr>
-<h4 style="color: yellow;">Released Lap:</h4>
+<h1 style="color: rgb(31, 255, 61);">Released Lap:</h1>
 {% for r in rlap %}
-    <div class="rlap">{{r.release}}
+
+    <div class="rlap"><strong>{{r.release}}</strong>
         <div>{{r.char_time}}</div>
         <form action="{% url 'g_pigeon_race:view_clocked' lid=r.id %}">
             <input type="submit" value="View Clocked Pigeons">
@@ -190,5 +246,44 @@ function loadit(id, state, lapid, lap_num) {
 
 
 </script>
+<!-- getting each lap loading_station -->
+        <script>
+
+            function fetch_stations() {
+                current_lap_id = document.querySelector("#lapid").innerHTML;
+                loading_list = document.querySelector("#loading_list")
+
+                fetch("{% url 'g_pigeon_race:add_loading_station' lap_id=current_lap.id %}" )
+                    .then(response => response.json())
+                    .then(result => {
+
+                        for (r in result)
+                        {
+                            
+
+                            x = document.createElement('li');
+                            x.innerHTML = 
+                            `
+                            
+                            <strong> ${result[r].place} </strong>
+                            <br>
+                            <a>Price: ${result[r].price} </a>
+                            <br>
+                            <a>Time: ${result[r].time} </a>
+                            <br><br>
+                            
+                            `;
+
+                            loading_list.append(x);
+                            console.log(result[r]);
+                        }
+
+                    })
+            }
+            fetch_stations()
+        </script>
+
+
+
 <div style="height: 1000px;"></div>
 {%endblock%}

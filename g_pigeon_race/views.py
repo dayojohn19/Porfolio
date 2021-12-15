@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.http import JsonResponse
-from .models import Race, Entries, Lap, Mypigeons, Loaded, Record, Code, Point, Measurement, Standing
+from .models import Race, Entries, Lap, Mypigeons, Loaded, Record, Code, Point, Measurement, Standing, LoadingStation
 # from user.models import User
 from app_mail.models import User
 
@@ -21,6 +21,29 @@ from geopy.geocoders import Nominatim
 from geopy.distance import geodesic
 import time
 from time import strftime, localtime
+
+
+def add_loading_station(request, lap_id):
+    if request.method == 'POST':
+        place = request.POST['place']
+        price = request.POST['price']
+        time = request.POST['time']
+
+        new_lap = LoadingStation()
+        new_lap.lap = lap_id
+        new_lap.place = place
+        new_lap.price = price
+        new_lap.time = time
+        new_lap.save()
+
+    elif request.method == 'GET':
+        # lap = request.GET('lap')
+        stations = LoadingStation.objects.filter(lap=lap_id)
+        results = []
+        for s in stations:
+            new = {'place': s.place, 'price': s.price, 'time': s.time}
+            results.append(new)
+        return JsonResponse(results, safe=False)
 
 
 @csrf_exempt
@@ -467,11 +490,13 @@ def lap(request, race_id):
         race=race, released=False).order_by('id')
     rlap = Lap.objects.filter(
         race=race, released=True).order_by('id')
+    current_lap = Lap.objects.filter(race=race, released=False).earliest('id')
     return render(request, "race/lap.html", {
         "lap": lap,
         "rlap": rlap,
         "rn": race,
         "pigeons": pigeons,
+        "current_lap": current_lap
     })
 
 
@@ -582,6 +607,7 @@ def view_clocked(request, lid):
 def view_race_record(request, id):
     records = Record.objects.filter(
         race=id).order_by().values('pigeon_id').distinct()
+    race = Race.objects.get(id=id)
 
     standings = Standing.objects.filter(race_id=id)
     # standings = Standing.objects.all()
@@ -591,6 +617,7 @@ def view_race_record(request, id):
         "records": records,
         "id": id,
         "standing": standings,
+        "race": race
 
     })
 

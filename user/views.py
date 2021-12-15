@@ -11,7 +11,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 
-from .models import Mypigeons
+from .models import Mypigeons, Order, User_Coins
 from g_pigeon_race.models import Record
 from geopy.geocoders import Nominatim
 # xx = User.objects.get(username=request.user.username)
@@ -19,6 +19,130 @@ from geopy.geocoders import Nominatim
 # get user as mail.User
 from app_mail import models as mail
 ###
+from django.views.decorators.csrf import csrf_exempt
+
+
+def printit(request):
+    from . import transactions
+    transactions.Transfer()
+    return JsonResponse(transactions.Transfer(), safe=False)
+
+
+def Order_it(request):
+    if request.method == 'POST':
+        sell_coin = request.POST.get("sell_coin")
+        buy_coin = request.POST.get("buy_coin")
+        quantity = request.POST.get("quantity")
+        price = request.POST.get("price")
+        side = request.POST.get("side")
+        user_id = request.user.id
+    from . import transactions
+    transactions.fill_order(sell_coin, buy_coin,
+                            quantity, price, user_id, side)
+    print(sell_coin, buy_coin, quantity, price, side)
+    return redirect('user:userpage')
+
+
+@csrf_exempt
+def Js_Order_it(request):
+    if request.method != "POST":
+        return JsonResponse('error', status=400)
+    data = json.loads(request.body)
+    quantity = data.get("quantity")
+    price = data.get("price")
+    side = data.get("side")
+    sell_coin = data.get("sell_coin")
+    buy_coin = data.get("buy_coin")
+    user_id = request.user.id
+    # try:
+    if side == 'cancel':
+        from . import transactions
+        transactions.cancel_order(
+            user_id, sell_coin, buy_coin, quantity, price, side)
+    # return JsonResponse('CANCEL', safe=False)
+
+    #     elif side == 'buy':
+    #         return JsonResponse('BUY', safe=False)
+
+    #     elif side == 'sell':
+    #         return JsonResponse('SELL', safe=False)
+
+    #     return JsonResponse('Success', safe=False)
+    # except:
+    #     return JsonResponse('Failed', safe=False)
+    from . import transactions
+    val = transactions.fill_order(sell_coin, buy_coin,
+                                  quantity, price, user_id, side)
+    print(sell_coin, buy_coin, quantity, price, side)
+    print(val)
+    return JsonResponse('SUCCESS,  page reloading....', safe=False)
+
+
+def Cancel_it(request):
+    if request.method == 'POST':
+        sell_coin = request.POST.get("sell_coin")
+        buy_coin = request.POST.get("buy_coin")
+        quantity = request.POST.get("quantity")
+        price = request.POST.get("price")
+        side = request.POST.get("side")
+        user_id = request.user.id
+    from . import transactions
+    transactions.cancel_order(
+        user_id, sell_coin, buy_coin, quantity, price, side)
+    print('order has been canceled')
+    return redirect('user:userpage')
+
+
+# @csrf_exempt
+# def tradeIt(request):
+#     if request.method != "POST":
+#         return JsonResponse('error', status=400)
+#     data = json.loads(request.body)
+#     quantity = data.get("quantity")
+#     coin = data.get("coin")
+#     price = data.get("price")
+
+#     user_id = data.get("user_id")
+#     balance = data.get("balance")
+#     hashed = data.get("hash")
+#     try:
+#         user = mail.User.objects.get(
+#             id=user_id, last_name=balance, first_name=hashed)
+#         from . import transactions
+#         result = transactions.Trade_it(
+#             user_id, balance, hashed, quantity, coin, price)
+#         return JsonResponse(result, safe=False)
+#     except:
+#         return JsonResponse('failed', safe=False)
+
+#     # from . import transactions
+#     # transactions.Trade_it()
+#     # return JsonResponse(transactions.Trade_it(), safe=False)
+
+
+def user_page(request):
+    sell_coin = 'dcoin'
+    buy_coin = 'jcoin'
+    coins = User_Coins.objects.all()
+    sell_remaining = coins.filter(coin=sell_coin)
+    buy_remaining = coins.filter(coin=buy_coin)
+
+    sell_quantity = 0
+    buy_quantity = 0
+    for s in sell_remaining:
+        sell_quantity += s.quantity
+    for b in buy_remaining:
+        buy_quantity += b.quantity
+
+    return render(request, "user/userPage.html",
+                  {
+                      'orders': Order.objects.all(),
+                      'coins': coins,
+                      'sell_remaining': sell_quantity,
+                      'sell_coin': sell_coin,
+                      'buy_coin': buy_coin,
+                      'buy_remaining': buy_quantity
+                  })
 
 
 def player(request, username):

@@ -5,6 +5,13 @@ from django.db import models
 # Create your models here.
 
 
+class LoadingStation(models.Model):
+    lap = models.IntegerField()
+    place = models.CharField(max_length=64)
+    price = models.IntegerField()
+    time = models.CharField(max_length=64)
+
+
 class Standing(models.Model):
     race_id = models.IntegerField()
     pigeon_id = models.IntegerField()
