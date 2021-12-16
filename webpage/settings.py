@@ -53,7 +53,6 @@ INSTALLED_APPS = [
     'a_blog',
     'games',
     'application',
-    'django_user_agents',
     'django.contrib.humanize',
     'django.contrib.admin',
     'django.contrib.auth',
