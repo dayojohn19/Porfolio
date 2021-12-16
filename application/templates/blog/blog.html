@@ -7,13 +7,14 @@
 
 {% for b in blogs %}
     <div class="b-opa">        
+
         <!-- <div class="para_add" style="background-image: '{{b.link}}' "> -->
-        <div class="para_add" style="background-image: url('{{b.picture_link}}') ">
-            
+        <div class="para_add add_margin" style="background-image: url('{{b.picture_link}}') ">
             <h2 class="font-one mar-l b-mid">
                 {{b.title}}
             </h2>
         </div>
+
         <div class="container">
                 <strong class="mar-l b-par">
                     <a class="font-two">"{{b.sub_title}}"</a><br>

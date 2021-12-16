@@ -1,0 +1,81 @@
+strong {
+  color: greenyellow;
+}
+
+h2 {
+  background-color: greenyellow;
+}
+
+#texts {
+  background-color: rgb(176, 92, 255);
+  width: 60%;
+  height: 5rem;
+}
+
+* {
+  font-family: "Avenir";
+}
+.bubbleWrapper {
+  padding: 10px 10px;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  align-self: flex-end;
+  color: #fff;
+  background-color: rgba(183, 248, 186, 0.348);
+  margin-left: 10vw;
+  margin-right: 10vw;
+  box-shadow: 0 0 10px 4px rgba(32, 36, 255, 0.219);
+  border-radius: 13px;
+}
+.inlineContainer {
+  display: inline-flex;
+}
+.inlineContainer.own {
+  flex-direction: row-reverse;
+}
+.inlineIcon {
+  width: 20px;
+  object-fit: contain;
+}
+.ownBubble {
+  min-width: 60px;
+  max-width: 700px;
+  padding: 14px 18px;
+  margin: 6px 8px;
+  background-color: #5b5377;
+  border-radius: 16px 16px 0 16px;
+  border: 1px solid #443f56;
+}
+.otherBubble {
+  min-width: 60px;
+  max-width: 700px;
+  padding: 14px 18px;
+  margin: 6px 8px;
+  background-color: #6c8ea4;
+  border-radius: 16px 16px 16px 0;
+  border: 1px solid #54788e;
+}
+.own {
+  align-self: flex-end;
+}
+.other {
+  align-self: flex-start;
+}
+span.own,
+span.other {
+  font-size: 14px;
+  color: grey;
+}
+.timestamp {
+  color: aqua !important;
+}
+.room-name {
+  text-align: center;
+  background-color: blue;
+}
+.django-text {
+  background-color: rgb(229, 229, 234);
+  width: auto;
+  margin: 15px;
+}

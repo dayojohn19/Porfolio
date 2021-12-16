@@ -158,18 +158,34 @@
     {% endif %} 
     
 {% else %}
+<!-- not measured -->
+<style>
+    .not_measured {
+        text-align: center;
+        position: relative;
+    }
+    .not_measured_input {
+        padding: 2vh;
+        width: 70%;
+        max-width: inherit;
+    }
+</style>
+<div class="not_measured">
     <h2><a class="view-players" href="{% url 'user:upload' %}">Register pigeon</a></h2>
-    Please Measure Your Loft Place Before Joining the race 
-    <div class="add_point" style="border: 3px rgba(255, 0, 0, 0.349) solid; margin-bottom: 2%; padding: 2%; border-radius:10px; background-color:rgba(255, 0, 0, 0.253); width: 50%;">
+    <h2>Please Measure Your Loft Place Before Joining the race</h2>
+    <br>
+    <div class="add_point"
+        style="   display: inline-block;width: 70%;border: 3px rgba(255, 0, 0, 0.349) solid; margin-bottom: 2%; padding: 2%; border-radius:10px; background-color:rgba(255, 0, 0, 0.253); ">
         Your Loft Place
         <form method="post" action="{% url 'g_pigeon_race:measure' %}">
             {% csrf_token %}
-            <input name="place" placeholder="Your Complete Address" style="width: 100%;">
+            <input class="not_measured_input" name="place" placeholder="Your Complete Address ... type Philippines in the last">
             <br>
             <input class="measure" type="submit">
         </form>
     </div>
 
+</div>
 {% endif %}
 
 

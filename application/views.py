@@ -19,3 +19,4 @@ def news(request):
 
 def course_booking(request):
     return render(request, 'course_booking/index.html')
+

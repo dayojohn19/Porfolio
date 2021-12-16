@@ -7,36 +7,47 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Free Dive</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    
+
+
 </head>
 <style>
     h1 {
         text-align: center;
     }
     body {
-        font-family: 'Lato', sans-serif;
+        font-family: 'Lato', sans-serif !important;
+        font-family: "Quicksand", sans-serif !important; 
+  /* display: grid; */
+        place-items: center !important;
+        height: 100vh !important;
+        background: #7f7fd5 !important;
+        background: linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5) !important;
     }
     .header {
-        position: sticky;
-        background-color: rgba(56,56,56,1) !important;
-        top: 1%; 
+        position: sticky !important;
+        background-color: rgba(208, 253, 245, 0.265) !important;
+        top: 1% !important; 
         }
     .sub_header { 
-        display: flex;
-        justify-content: space-evenly;
-        padding-top: 1rem;
-        padding-bottom: 1rem;
+        display: flex !important;
+        justify-content: space-evenly !important;
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
 
-        color: white;
+        
         font: normal normal normal 14px/1 FontAwesome;
-        font-size: inherit;
+        font-size: large;
         text-rendering: auto;
         -webkit-font-smoothing: antialiased;
+
+        font-weight: 800;
     }
     a {
         text-decoration: none;
-        color: white;
+                color: rgb(45, 16, 16);
+        text-shadow: 0 0 15px rgb(255, 255, 255);
     }
     a:link {
   text-decoration: none;
@@ -56,13 +67,12 @@ a:active {
 </style>
 
 <body style="position: relative;">
-    <h1>Freedive</h1>
     <div class="header">
         <div class="sub_header">
-                    <span><a href="{% url 'freedive:home' %}">Home</a></span>
-                    <span><a href="{% url 'freedive:events' %}">Events</a></span>
-                    <span><a href="{% url 'freedive:socials' %}">Socials</a></span>
-                    <span><a href="{% url 'freedive:community' %}">Community</a></span>
+                    <b><a href="{% url 'freedive:home' %}">Home</a></b>
+                    <b><a href="{% url 'freedive:events' %}">Events</a></b>
+                    <!-- <b><a href="{% url 'freedive:participate_chat' side='check' room_id=33 %}">Socials</a></b> -->
+                    <b><a href="{% url 'freedive:community' %}">Community</a></b>
         </div>
     </div>
 

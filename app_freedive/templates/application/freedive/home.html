@@ -6,22 +6,8 @@
 <style>
     
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
 
-body {
-  font-family: "Quicksand", sans-serif;
-  /* display: grid; */
-  place-items: center;
-  height: 100vh;
-  background: #7f7fd5;
-  background: linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5);
-}
+
 
 .container {
   display: flex;
@@ -92,6 +78,7 @@ background: linear-gradient(to bottom, #ef473a, #cb2d3e);
 .card__body h4 {
   font-size: 1.5rem;
   text-transform: capitalize;
+  margin: 0;
 }
 
 .card__footer {
@@ -107,6 +94,9 @@ background: linear-gradient(to bottom, #ef473a, #cb2d3e);
 
 .user__image {
   border-radius: 50%;
+  max-width: 60px;
+  max-height: 60px;
+
 }
 
 .user__info > small {
@@ -115,11 +105,63 @@ background: linear-gradient(to bottom, #ef473a, #cb2d3e);
 </style>
 
 
-
-
 <div class="container">
+  {% for e in events %}
+  <div class="card">
+    <div class="class__header">
+      <img src="{{e.event_image}}" alt="card__image" class="card__image" width="600">
+    </div>
+    <div class="card__body">
+      <span class="tag tag-blue">
+        {{e.event_type}}
+      </span>
+      <h4><a href="{% url 'freedive:participate_chat' side='check' room_id=e.id %}">{{e.event_name}}</a></h4>
+
+      <p>{{e.event_description}}
+        <br>
+
+        <br>
+
+        <span class="tag tag-red">
+                  {{e.event_cost}} Php
+        </span>
+        <br>
+        <small>
+          From: <br>&nbsp&nbsp {{e.start_time}}
+          <br>
+          To: <br>&nbsp&nbsp {{e.end_time}}
+        </small>
+
+        
+      </p>
+    </div>
+    <div class="card__footer">
+      <div class="user">
+        <img src="{{e.organizer_image}}" alt="user__image" class="user__image">
+        <div class="user__info">
+          <span class="tag tag-brown">
+            {% if request.user in e.event_participants %}
+            leave
+            {% else %}
+
+            <a href="{% url 'freedive:join' room_id=e.id%}">JOIN</a>
+            {% endif %}
+
+          </span>
+          <h5>{{e.organizer}}</h5>
+
+          <small>
+            Contact: {{e.organizer_contact}}<br>
+          </small>
+                    <small>
+                      Posted: {{e.timestamp}}<br>
+                    </small>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
     <div class="card">
-        ads
         <div class="card__header">
             <img src="https://source.unsplash.com/600x400/?computer" alt="card__image" class="card__image" width="600">
         </div>
@@ -139,6 +181,8 @@ background: linear-gradient(to bottom, #ef473a, #cb2d3e);
             </div>
         </div>
     </div>
+
+
     <div class="card">
         <div class="card__header">
             <img src="https://source.unsplash.com/600x400/?food" alt="card__image" class="card__image" width="600">

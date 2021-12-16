@@ -23,6 +23,9 @@ strong {
   text-indent: 20%;
 }
 
+.add_margin {
+  margin: 5vw;
+}
 .parallax {
   background-image: url("images/unwanted.jpg");
 }
@@ -70,7 +73,7 @@ strong {
   /* font-family: Brush Script MT, Brush Script Std, cursive; */
   color: #cef0d4;
   font-family: "Rouge Script", cursive;
-  font-size: 7vh;
+  font-size: 5vh;
   font-weight: normal;
   margin: 0 0 50px;
   text-align: center;
@@ -85,7 +88,7 @@ strong {
   line-height: 160px; */
   font-weight: 700;
   margin-bottom: 0px;
-  font-size: 7vh;
+  font-size: 5vh;
 
   text-align: center;
   text-shadow: 0 1px 1px #fff;

@@ -17,6 +17,8 @@
         .image-header img {
             max-height: 170px;
             width: 100%;
+            object-fit: none; /* Do not scale the image */
+            object-position: right; 
         }
         .tabs-container {
               position: -webkit-sticky; /* Safari */
@@ -25,8 +27,9 @@
                 z-index: 3;
         }
         .tabs {
-            background-color: greenyellow;
+            background-color: rgb(222, 217, 217);
             padding: 0.9rem;
+            margin: 0;
             display: flex;
             justify-content: space-evenly;
         }
@@ -36,6 +39,7 @@
         body {
             margin: 0;
             padding: 0;
+            background-color: rgb(255, 252, 252);
         }
     </style>
     <meta charset="UTF-8">
@@ -54,7 +58,7 @@
 
     <div class="header-container">
         <div class="image-header">
-            <img src="https://res.cloudinary.com/twenty20/private_images/t_watermark-criss-cross-10/v1607023893000/photosp/d0a8b366-4ef8-40ca-8bf6-a1cc5a0a81a4/stock-photo-sun-sky-sea-sunset-beach-seascape-greece-sunrise-vacation-d0a8b366-4ef8-40ca-8bf6-a1cc5a0a81a4.jpg" height="600"  style="height: 600px;">
+            <img src="https://i.pinimg.com/originals/5e/48/66/5e4866581560e628b43b0cae72e448a7.jpg">
         </div>
  
     </div>
@@ -67,7 +71,7 @@
 </head>
 <!---end-->
 
-<body style="background-color: rgba(233, 233, 233, 0.823) !important;">
+<body >
     <div class="" style="height: fit-content; height: fit-content;">
         {% block body %}
 

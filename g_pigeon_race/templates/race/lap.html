@@ -36,6 +36,45 @@
     * button {
         border-radius: none;
     }
+    .button-44 {
+background: #e62143;
+border-radius: 11px;
+box-sizing: border-box;
+color: #fff;
+cursor: pointer;
+display: flex;
+font-size: 1.15em;
+font-weight: 700;
+justify-content: center;
+line-height: 33.4929px;
+padding: .8em 1em;
+text-align: center;
+text-decoration: none;
+text-decoration-skip-ink: auto;
+text-shadow: rgba(0, 0, 0, .3) 1px 1px 1px;
+text-underline-offset: 1px;
+transition: all .2s ease-in-out;
+user-select: none;
+-webkit-user-select: none;
+touch-action: manipulation;
+width: 50%;
+word-break: break-word;
+border: 0;
+}
+
+.button-44:active,
+.button-44:focus {
+border-bottom-style: none;
+border-color: #dadada;
+box-shadow: rgba(0, 0, 0, .3) 0 3px 3px inset;
+outline: 0;
+}
+
+.button-44:hover {
+border-bottom-style: none;
+border-color: #dadada;
+}
+
 </style>
 <div style="background: #fd747831; border: 2px solid #e664646c; margin: 15px; line-height: 1.5; text-align: center;border-radius:5.5px">
     <h1 id="race_name">
@@ -63,6 +102,12 @@
                 <div id="lap_name" style="text-align: center;">
                 </div>
             </h1>
+                                        <form action="{% url 'g_pigeon_race:release' id=current_lap.id %}" method="post">
+                                            {%csrf_token%}
+                                            <input hidden readonly value="{{now}}" name="release_time">
+                                            <input required placeholder="Release it?">
+                                            <input class="button-44" type="submit" value="Release"></button>
+                                        </form>
         </div>  
 
         <hr>

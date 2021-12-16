@@ -1,12 +1,48 @@
 {% extends "application/freedive/layout.html" %}
+{% load static %}
 
 {% block body %}
-<h1>Events</h1>
+<link href="{% static 'freedive/events.css' %}" rel="stylesheet">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js" defer></script>
+<script src="{% static 'freedive/events.js' %}" defer></script>
+
+<h2>Create Event</h2>
+<div class="add-form-container box">
+    <form method="POST" action="{% url 'freedive:add_event' %}">
+        {% csrf_token %}
+        
+        From: <input class="date-input" required name="start-time" type="datetime-local">
+        
+        To: <input class="date-input" required name="end-time" type="datetime-local">
+        <br>
+        Cost: <input class="date-input" required name="event-cost" type="number" value="0" placeholder="How much">
+        <br>
+        Event-Type:
+        <br>
+        <select required name="event-type">
+            <option value="Others">Others</option>
+            <option value="Freedive" >Freedive</option>
+            <option value="Camping" >Camping</option>
+            <option value="Hiking" >Hiking</option>
+            <option value="Party" >Party</option>
+        </select>
+        <br>
+        <br>
+        Event Image (optional):
+        <input class="date-input" name="event-image" placeholder="Insert Image Link ">
 
 
-<input type="datetime-local">
-<br>
-<label for="organizer">Organizer</label>
-<input type="text" id="organizer">
-<br>
+
+        <input type="text" name="event-name" class="question" id="nme" required autocomplete="off" />
+        <label for="nme"><span>What's the <strong>EVENT</strong> name?</span></label>
+
+        <textarea name="event-description" rows="2" class="question" id="msg" required autocomplete="off"></textarea>
+        <label for="msg"><span>What is the event <strong>ABOUT</strong>?</span></label>
+
+        <textarea name="contact" rows="2" class="question" id="msg2" required autocomplete="off"></textarea>
+        <label for="msg2"><span>Give your  <strong>Email or Number</strong></span></label>
+
+        <input type="submit" value="Submit!" />
+    </form>
+</div>
 {% endblock %}
