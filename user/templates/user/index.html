@@ -50,18 +50,32 @@
     margin-bottom: 30px;
 
 }
+.join {
+    text-decoration: none; color: rgb(241, 255, 44); background-color: rgba(243, 250, 151, 0.267);padding: 1%; border-radius: 5px;
+    margin: 1rem; padding:0.3rem;
+    }
+.join-2 {
+    text-decoration: none; color: rgb(44, 255, 65); background-color: rgba(243, 250, 151, 0.267);padding: 1%; border-radius: 5px;
+    margin: 1rem; padding:0.3rem;
+    }
+.join-container {
+    margin-bottom: 1.4rem;
+    margin-top: 1.4rem;
+}
 </style>
 
     {% if user.is_authenticated %}
     <img class="user-i" src="{{request.user.email}}">    
         <h2>
             Good Day <strong>{{user.username}}</strong>
-            <h2><a href="{% url 'g_pigeon_race:index' %}" style="text-decoration: none; color: rgb(241, 255, 44); background-color: rgba(243, 250, 151, 0.267);padding: 1%; border-radius: 10px;">Join Race</a></h2>
+            <h2 class="join-container"><a class="join" href="{% url 'g_pigeon_race:index' %}" >Join Race</a></h2>
+
+            <h2 class="join-container"><a class="join-2" href="{% url 'freedive:home' %}">Join Events</a></h2>
         </h2>
 
         
         <div class="i-heading">
-            <h1>User List </h1>
+
             <p>Total Player:{{user_count}}</p>
         </div>
         {% for users in au %}

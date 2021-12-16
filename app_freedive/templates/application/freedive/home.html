@@ -1,7 +1,7 @@
 {% extends "application/freedive/layout.html" %}
 
 {% block body %}
-<h1>Home</h1>
+
 <!-- @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"); -->
 <style>
     
@@ -103,7 +103,7 @@ background: linear-gradient(to bottom, #ef473a, #cb2d3e);
   color: #666;
 }
 </style>
-
+<h1>List of Gigs</h1>
 
 <div class="container">
   {% for e in events %}
@@ -111,11 +111,14 @@ background: linear-gradient(to bottom, #ef473a, #cb2d3e);
     <div class="class__header">
       <img src="{{e.event_image}}" alt="card__image" class="card__image" width="600">
     </div>
+    <small>
+      &nbsp&nbsp {{e.start_time}}
+    </small>
     <div class="card__body">
       <span class="tag tag-blue">
         {{e.event_type}}
       </span>
-      <h4><a href="{% url 'freedive:participate_chat' side='check' room_id=e.id %}">{{e.event_name}}</a></h4>
+      <h4 style="margin:auto auto;"><a href="{% url 'freedive:participate_chat' side='check' room_id=e.id %}">{{e.event_name}}</a></h4>
 
       <details>
               <p>{{e.event_description}}
@@ -123,18 +126,17 @@ background: linear-gradient(to bottom, #ef473a, #cb2d3e);
                 <span class="tag tag-red">
                   {{e.event_cost}} Php
                 </span>
-                <span class="tag tag-brown">
-                  <a href="{% url 'freedive:join' room_id=e.id%}">JOIN</a>
-                </span>
+
                 <br>
   
               </p>
-      </details>
                     <small>
                       From: <br>&nbsp&nbsp {{e.start_time}}
                       <br>
                       To: <br>&nbsp&nbsp {{e.end_time}}
                     </small>
+      </details>
+
     </div>
     <div class="card__footer">
       <div class="user">

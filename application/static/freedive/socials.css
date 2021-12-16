@@ -84,6 +84,7 @@ span.other {
   max-width: 80%;
   margin: 15px;
   font-size: large;
+  height: 100px;
 }
 .button-12 {
   display: block;
@@ -96,4 +97,21 @@ span.other {
   margin-bottom: 1.5rem;
   background-color: coral;
   text-shadow: rgb(255, 255, 255) 0 0 10px;
+}
+
+.tag {
+  align-self: flex-start;
+  padding: 0.25em 0.75em;
+  border-radius: 1em;
+  font-size: 0.75rem;
+}
+
+.tag + .tag {
+  margin-left: 0.5em;
+}
+
+.tag-brown {
+  background: #d1913c;
+  background: linear-gradient(to bottom, #ffd194, #d1913c);
+  color: #fafafa;
 }

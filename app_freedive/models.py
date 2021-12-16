@@ -20,6 +20,12 @@ class Events(models.Model):
 
     timestamp = models.DateTimeField(auto_now_add=True)
 
+    # class Meta:
+    #     ordering = ['start_time']
+
+    def __unicode__(self):
+        return self.start_time
+
 
 class Participants(models.Model):
     participant = models.CharField(max_length=64)
@@ -35,3 +41,7 @@ class Event_Chat(models.Model):
     sender = models.CharField(max_length=64)
     sender_image = models.URLField()
     timestamp = models.DateTimeField(auto_now_add=True)
+
+
+class Event_Picture(models.Model):
+    image = models.ImageField(upload_to='event_images')

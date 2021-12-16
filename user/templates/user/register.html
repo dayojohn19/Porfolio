@@ -4,13 +4,34 @@
 {%if message %}
 <div>{{message}}</div>
 {%endif%}
+<style>
+  input {
+    background-color: greenyellow;
+    font-size: large;
+    padding: 0.5rem;
+    border-radius: 8px;
+    margin: auto auto;
+    max-width: 95%;
+    margin-bottom: 0.54rem;
+  }
+  button {
+    border: none;
+    text-shadow: greenyellow 0 0 wheat;
+    border-radius: 8px;
+    font-size: larger;
+    border-radius: 8.1px;
+    padding: 0.6rem;
+    margin: 1rem;
 
+  }
+</style>
 <div class="wrapper fadeInDown">
     <div id="" style="text-align: center;">
         <form onsubmit="show()" action="{% url 'user:uploaduser' %}" method="POST" enctype="multipart/form-data">
+
             {%csrf_token%}
             {{form.as_p}}
-            <button class="before_upload" type="submit"  style="width: 50%; height: 50px; font-size: larger; border-radius: 25px;">Upload</button>
+            <button class="before_upload" type="submit">Upload</button>
     </form>
     {% if img_obj %}
     <div class="after_upload" style="display: block;">

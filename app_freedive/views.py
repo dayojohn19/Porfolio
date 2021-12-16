@@ -1,12 +1,17 @@
 from django.shortcuts import render, redirect
 from .models import Events, Event_Chat, Participants
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 
-from .forms import Send_Message
-form = Send_Message
+from .forms import Send_Message, Event_Image
 
 
 def participate_chat(request, side, room_id):
+    form = Send_Message
+    if request.user.is_anonymous:
+        return redirect('user:login')
     room = Events.objects.get(id=room_id)
     if side != 'check':
         chat_room = Event_Chat()
@@ -36,6 +41,8 @@ def participate_chat(request, side, room_id):
 
 
 def join(request, room_id):
+    if request.user.is_anonymous:
+        return redirect('user:login')
     try:
         old_participant = Participants.objects.get(
             participant=request.user.username)
@@ -63,6 +70,8 @@ def join(request, room_id):
 
 
 def send(request, room_id):
+    if request.user.is_anonymous:
+        return redirect('user:login')
     if request.method == 'POST':
 
         form = Send_Message(request.POST)
@@ -122,21 +131,35 @@ def home(request):
     print('\n-----------------\n')
 
     return render(request, 'application/freedive/home.html', {
-        'events': Events.objects.order_by('id').reverse()
+        'events': Events.objects.order_by('-start_time').reverse()
     })
 
 
 def events(request):
-    return render(request, 'application/freedive/events.html')
+    if request.user.is_anonymous:
+        return redirect('user:login')
+    if request.method == 'POST':
+        form = Event_Image(request.POST, request.FILES)
+
+        print('check if valid', form.is_valid())
+        if form.is_valid():
+            print('valid')
+            form.save()
+            img_obj = form.instance
+            return render(request, 'application/freedive/events.html', {'img_obj': img_obj})
+    print('goes')
+    form = Event_Image()
+    return render(request, 'application/freedive/events.html', {'form': form})
 
 
 def add_event(request):
     import datetime
     if request.method == 'POST':
+
         start_time = request.POST.get(
             'start-time')
         start_time = datetime.datetime.strptime(
-            start_time, '%Y-%m-%dT%H:%M').strftime("%A, %B %d at %I:%M %p -- %Y")
+            start_time, '%Y-%m-%dT%H:%M').strftime("%d %B %A, at %I:%M %p -- %Y")
 
         end_time = request.POST.get(
             'end-time')
@@ -191,9 +214,7 @@ def add_event(request):
         print(event_type)
         print(event_name)
         print(event_description)
-        return render(request, 'application/freedive/home.html', {
-            'events': Events.objects.order_by('id').reverse()
-        })
+        return redirect('freedive:home')
 
     return redirect('freedive:events')
     # return render(request, 'application/freedive/events.html')

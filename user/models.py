@@ -65,6 +65,7 @@ class Userimage(models.Model):
     name = models.CharField(max_length=100)
     image = models.ImageField(upload_to='fancier_profiles')
 
+
     def __str__(self):
         return self.name
 
