@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'a_blog',
     'games',
     'application',
+    'django_user_agents',
     'django.contrib.humanize',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -65,6 +66,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'django_user_agents.middleware.UserAgentMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -183,3 +185,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'application/static/'),
     os.path.join(BASE_DIR, 'commerce/static/'),
 ]
+
+
+# ====

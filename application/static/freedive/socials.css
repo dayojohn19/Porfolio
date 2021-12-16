@@ -72,10 +72,28 @@ span.other {
 }
 .room-name {
   text-align: center;
-  background-color: blue;
+  background-color: rgba(201, 201, 255, 0.183);
+  border-radius: 10px;
+  padding: 1rem;
+  font-family: Apple Chancery;
 }
 .django-text {
   background-color: rgb(229, 229, 234);
-  width: auto;
+  padding: 1.2rem;
+  border-radius: 10px;
+  max-width: 80%;
   margin: 15px;
+  font-size: large;
+}
+.button-12 {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.5rem;
+  border-radius: 8px;
+  font-size: large;
+  border: 0;
+  margin-bottom: 1.5rem;
+  background-color: coral;
+  text-shadow: rgb(255, 255, 255) 0 0 10px;
 }

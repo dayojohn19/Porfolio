@@ -12,7 +12,7 @@
 <form method="post" action="{% url 'freedive:send' room_id=event.id %}">
     {% csrf_token %}
     {{form.message}}
-    <input type="submit" value="Send">
+    <button class="button-12" type="submit"> Send </button>
 </form>
 
 

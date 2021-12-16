@@ -8,24 +8,23 @@ form = Send_Message
 
 def participate_chat(request, side, room_id):
     room = Events.objects.get(id=room_id)
-    chat_room = Event_Chat()
-    chat_room.chat_room = room
-    chat_room.sender = request.user.username
-    chat_room.sender_image = request.user.email
+    if side != 'check':
+        chat_room = Event_Chat()
+        chat_room.chat_room = room
+        chat_room.sender = request.user.username
+        chat_room.sender_image = request.user.email
 
-    if side == 'join':
-        chat_room.message = request.user.username + ' has joined the room'
-        chat_room.save()
-        return redirect('freedive:participate_chat', side='check', room_id=room_id)
+        if side == 'join':
+            chat_room.message = request.user.username + ' has joined the room'
+            chat_room.save()
+            return redirect('freedive:participate_chat', side='check', room_id=room_id)
 
-    elif side == 'leave':
-        chat_room.message = request.user.username + ' has left the room'
-        chat_room.save()
-        return redirect('freedive:participate_chat', side='check', room_id=room_id)
+        elif side == 'leave':
+            chat_room.message = request.user.username + ' has left the room'
+            chat_room.save()
+            return redirect('freedive:participate_chat', side='check', room_id=room_id)
 
     elif side == 'check':
-        chat_room.message = request.user.username + ' has check the room'
-        chat_room.save()
         chats = Event_Chat.objects.filter(
             chat_room=room_id).order_by('timestamp').reverse()
 
@@ -104,20 +103,23 @@ def index(request):
 
 
 def home(request):
+    from datetime import datetime
+    from django_user_agents.utils import get_user_agent
 
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
         ip = x_forwarded_for.split(',')[0]
     else:
         ip = request.META.get('REMOTE_ADDR')
-
-    x = request.user_agent.os
-    print(x)
-    print(x)
-
+    now = datetime.now()
+    x = request.user_agent.device
+    y = request.META['HTTP_USER_AGENT']
+    print('-------------------\n')
+    print(now)
+    print(x.brand)
+    print(y)
     print(ip)
-    print(ip)
-    print(ip)
+    print('\n-----------------\n')
 
     return render(request, 'application/freedive/home.html', {
         'events': Events.objects.order_by('id').reverse()
