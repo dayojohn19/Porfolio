@@ -1,9 +1,10 @@
-from django.db import models
-
+# from django.db import models
+from djongo import models
 # Create your models here.
 
 
 class Events(models.Model):
+    _id = models.ObjectIdField()
     start_time = models.CharField(max_length=64)
     end_time = models.CharField(max_length=64)
 
@@ -28,6 +29,7 @@ class Events(models.Model):
 
 
 class Participants(models.Model):
+    _id = models.ObjectIdField()
     participant = models.CharField(max_length=64)
     participant_image = models.URLField()
 
@@ -36,6 +38,7 @@ class Participants(models.Model):
 
 
 class Event_Chat(models.Model):
+    _id = models.ObjectIdField()
     chat_room = models.ForeignKey(Events, on_delete=models.CASCADE)
     message = models.TextField(blank=True)
     sender = models.CharField(max_length=64)

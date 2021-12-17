@@ -197,15 +197,15 @@ def add_event(request):
         participant = Participants()
         participant.participant = organizer
         participant.save()
-        new_event.event_participants.add()
+        # new_event.event_participants.add(participant.id)
         # ------
         # create chat room
-        chat_room = Event_Chat()
-        chat_room.chat_room = new_event
-        chat_room.message = request.user.username + ' has created the room'
-        chat_room.sender = request.user.username
-        chat_room.sender_image = request.user.email
-        chat_room.save()
+        # chat_room = Event_Chat()
+        # chat_room.chat_room = new_event
+        # chat_room.message = request.user.username + ' has created the room'
+        # chat_room.sender = request.user.username
+        # chat_room.sender_image = request.user.email
+        # chat_room.save()
 
         print('NEW EVENT SAVED !!!')
         print(start_time)
