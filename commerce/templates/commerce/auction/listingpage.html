@@ -37,21 +37,21 @@
     </p>
     <br>
     {% endif %}
-    <h3>Highest Bid: Php {{i.price}}</h3>
+    <h3 style="color: red;">Highest Bid: Php {{i.price}}</h3>
     {% if user.username %}
-    {% if owner %}
-    <br>
-    <a href="{% url 'auction:closebid' i.id %}"><button class="btn btn-warning">Close Bid</button></a>
-    <br>
-    {% endif %}
+      {% if owner %}
+        <br>
+        <a href="{% url 'auction:closebid' i.id %}"><button class="btn btn-warning">Close Bid</button></a>
+        <br>
+      {% endif %}
     {% endif %}
     <br>
     
-   
-        <b>Owner:</b>{{i.owner}}<br>
-        <b>Category:</b>{{i.category}}<br>
-        <b>Listed on:</b>{{i.time}}<br>
-   
+    <small>
+        <b>Owner: </b>{{i.owner}}<br>
+        <b>Category: </b>{{i.category}}<br>
+        <b>Listed on: </b>{{i.time}}<br>
+    </small>
     </p>
 
     {% if errorgreen %}
@@ -59,56 +59,57 @@
         {{errorgreen}}
       </div>
     {% endif %}
-    {% if user.username %}
-    <div class="containers">
-        <h4>Place your bid:</h4>
-        <form action="{% url 'auction:bidsubmit' i.id %}" method="POST">
-            {% csrf_token %}
-              <span class="form-row align-items-center">
-                <span class="col-auto">
-                  <input required type="number" class="form-control mb-2" id="inlineFormInput" name="bid" placeholder="your bid...">
-                </span>
-                <span class="col-auto">
-                  <button type="submit" class="btn btn-primary mb-2">Place Bid</button>
-                </span>
-              </span>
-        </form>
 
-    </div>
-    <div class="container">
-      <form action="{% url 'auction:cmntsubmit' i.id %}" method="POST">
-        {% csrf_token %}
-        <div class="form-group">
-          <label for="exampleFormControlTextarea1"><b>Write a comment:</b></label>
-          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="comment" placeholder="Write your comment here..." required></textarea>
-        </div>
-        <button class="btn btn-secondary" type="submit">Submit</button>
-      </form>
-    </div>
-    <br>    {% if comments %}
-    <h3>Comments:</h3>
-    <div class="container">
-          
-          {% for c in comments %}
-          <div class="card mb-3" style="max-width: 540px;">
-            <div class="row no-gutters">
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">{{c.user}}:</h5>
-                  <p class="card-text">{{c.comment}}</p>
-                  <p class="card-text"><small class="text-muted">{{c.time}}</small></p>
+
+      <div class="containers">
+          <h4 style="text-align: left;">Place your bid:</h4>
+          <form action="{% url 'auction:bidsubmit' i.id %}" method="POST">
+              {% csrf_token %}
+                <span class="form-row align-items-center">
+                  <span class="col-auto">
+                    <input required type="number" class="form-control mb-2" id="inlineFormInput" name="bid" placeholder="your bid...">
+                  </span>
+                  <span class="col-auto">
+                    <button type="submit" class="btn btn-primary mb-2">Place Bid</button>
+                  </span>
+                </span>
+          </form>
+
+      </div>
+      <div class="container">
+        <form action="{% url 'auction:cmntsubmit' i.id %}" method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1"><b>Write a comment:</b></label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="comment" placeholder="Write your comment here... add Contact Number" required></textarea>
+          </div>
+          <button class="btn btn-secondary" type="submit">Submit</button>
+        </form>
+      </div>
+      <br>    {% if comments %}
+      <h3>Comments:</h3>
+      <div class="container">
+            
+            {% for c in comments %}
+            <div class="card mb-3" style="max-width: 540px;">
+              <div class="row no-gutters">
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">{{c.user}}:</h5>
+                    <p class="card-text">{{c.comment}}</p>
+                    <p class="card-text"><small class="text-muted">{{c.time}}</small></p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-           {% endfor %}
-           
-    </div>
-    {% endif %}
-    
+            {% endfor %}
+            
+      </div>
+      {% endif %}
+      
 
-    <br>
-    {% endif %}
+      <br>
+
 
 </div>
 

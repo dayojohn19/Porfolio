@@ -15,25 +15,25 @@ def participate_chat(request, side, room_id):
     room = Events.objects.get(id=room_id)
     if side != 'check':
         chat_room = Event_Chat()
-        chat_room.chat_rooms = room
+        chat_room.chat_rooms = room.id
         chat_room.sender = request.user.username
         chat_room.sender_image = request.user.email
 
         if side == 'join':
             chat_room.message = request.user.username + ' has joined the room'
             chat_room.save()
-            return redirect('freedive:participate_chat', side='check', room_id=room_id)
+            return redirect('event:participate_chat', side='check', room_id=room_id)
 
         elif side == 'leave':
             chat_room.message = request.user.username + ' has left the room'
             chat_room.save()
-            return redirect('freedive:participate_chat', side='check', room_id=room_id)
+            return redirect('event:participate_chat', side='check', room_id=room_id)
 
     elif side == 'check':
         chats = Event_Chat.objects.filter(
-            chat_room=room_id).order_by('timestamp').reverse()
+            chat_rooms=room_id).order_by('timestamp').reverse()
 
-        return render(request, 'application/freedive/socials.html', {
+        return render(request, 'application/event/socials.html', {
             'chats': chats,
             'form': form,
             'event': room
@@ -51,7 +51,7 @@ def join(request, room_id):
             old_participant)
         old_participant.delete()
         participate_chat(request, 'leave', room_id)
-        return redirect('freedive:home')
+        return redirect('event:home')
         # return home(request)
     except:
 
@@ -79,22 +79,22 @@ def send(request, room_id):
         if form.is_valid():
             message = form.cleaned_data['message']
             new_chat = Event_Chat()
-            new_chat.chat_rooms = event
+            new_chat.chat_rooms = event.id
             new_chat.sender = request.user.username
             new_chat.sender_image = request.user.email
 
             new_chat.message = message
             new_chat.save()
-            return redirect('freedive:participate_chat', side='check', room_id=room_id)
+            return redirect('event:participate_chat', side='check', room_id=room_id)
             # return participate_chat(request, 'check', room_id)
             # return room(request, room_id)
         else:
-            return redirect('freedive:participate_chat')
+            return redirect('event:participate_chat')
 
-            # return redirect('freedive:send', side='check', room_id=room_id)
+            # return redirect('event:send', side='check', room_id=room_id)
 
             # return participate_chat(request, 'check', room_id)
-            # return render(request, 'applications/freedive/socials.html', {
+            # return render(request, 'applications/event/socials.html', {
             #     'chats': Event_Chat.objects.filter(room_id=room_id).order_by('id').all(),
             #     'form': form
             # })
@@ -102,13 +102,13 @@ def send(request, room_id):
 
 def room(request, room_id):
     chats = Event_Chat.objects.get(chat_room=room_id).order_by('id').all()
-    return render(request, 'application/freedive/socials.html', {
+    return render(request, 'application/event/socials.html', {
         'chats': chats
     })
 
 
 def index(request):
-    return render(request, 'application/freedive/index.html')
+    return render(request, 'application/event/index.html')
 
 
 def home(request):
@@ -130,7 +130,7 @@ def home(request):
     # print(ip)
     # print('\n-----------------\n')
 
-    return render(request, 'application/freedive/home.html', {
+    return render(request, 'application/event/home.html', {
         'events': Events.objects.order_by('-start_time').reverse()
     })
 
@@ -146,10 +146,10 @@ def events(request):
             print('valid')
             form.save()
             img_obj = form.instance
-            return render(request, 'application/freedive/events.html', {'img_obj': img_obj})
+            return render(request, 'application/event/events.html', {'img_obj': img_obj})
     print('goes')
     form = Event_Image()
-    return render(request, 'application/freedive/events.html', {'form': form})
+    return render(request, 'application/event/events.html', {'form': form})
 
 
 def add_event(request):
@@ -214,17 +214,17 @@ def add_event(request):
         print(event_type)
         print(event_name)
         print(event_description)
-        return redirect('freedive:home')
+        return redirect('event:home')
 
-    return redirect('freedive:events')
-    # return render(request, 'application/freedive/events.html')
+    return redirect('event:events')
+    # return render(request, 'application/event/events.html')
 
 
 def socials(request):
-    return render(request, 'application/freedive/socials.html', {
+    return render(request, 'application/event/socials.html', {
         'form': form
     })
 
 
 def community(request):
-    return render(request, 'application/freedive/community.html')
+    return render(request, 'application/event/community.html')

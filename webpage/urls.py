@@ -39,7 +39,9 @@ urlpatterns = [
     path('app_hiring/', include('app_hiring.urls')),
     path('com_trade/', include('com_trade.urls')),
     path('ubx/', include('ubx.urls')),
-    path('app_freedive/', include('app_freedive.urls')),
+    # path('app_freedive/', include('app_freedive.urls')),
+    path('app_event/', include('app_event.urls')),
+
 ]
 
 # Pigeon Config

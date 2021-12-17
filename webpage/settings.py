@@ -34,7 +34,8 @@ ALLOWED_HOSTS = ['webpagedj19.herokuapp.com',
 # Application definition
 
 INSTALLED_APPS = [
-    'app_freedive',
+    'app_event',
+    # 'app_freedive',
     'ubx',
     'com_trade',
     'app_hiring',
@@ -111,25 +112,47 @@ WSGI_APPLICATION = 'webpage.wsgi.application'
 #     }
 # }
 # # if secured
-
+# AMERICA----
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'djongo',
-#         'NAME': 'websites',
-#         'ENFORCE_SCHEMA': False,
+#         'NAME': 'website1',
+#         # 'ENFORCE_SCHEMA': False,
 #         'CLIENT': {
 #             'host': 'mongodb+srv://dj19:aa09094553940@cluster0.hpgnf.mongodb.net/website?ssl=true&ssl_cert_reqs=CERT_NONE'
 #         }
 #     }
 # }
-# mongodb+srv: // dj19: < password > @cluster0.hpgnf.mongodb.net/myFirstDatabase?retryWrites = true & w = majority
+# ASIA-----
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'djongo',
+        'NAME': '21',
+        # 'ENFORCE_SCHEMA': False,
+        'CLIENT': {
+            'host': 'mongodb+srv://jc:jc@cluster2.wk77x.mongodb.net/21?retryWrites=true&w=majority&ssl_cert_reqs=CERT_NONE'
+
+        }
     }
 }
+
+
+# mongodb+srv: // dj19: < password > @cluster0.hpgnf.mongodb.net/myFirstDatabase?retryWrites = true & w = majority
+# ------------------------------------
+# ------------------------------------
+
+
+# set this to False if you want to turn off pyodbc's connection pooling
+DATABASE_CONNECTION_POOLING = False
+# ------------------------------------
+# ------------------------------------
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 
 # Password validation

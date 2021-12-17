@@ -1,23 +1,26 @@
+import pytz
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.urls.conf import path
-from .models import Bid,Listing,Comment,Watchlist,Closedbid,Alllisting
+from .models import Bid, Listing, Comment, Watchlist, Closedbid, Alllisting
 from datetime import datetime
 
 from django.shortcuts import render
 from .forms import ImageForm
 from app_mail.models import User
 
-    ######## end update value
+# end update value
+
+
 def sub_check(user, hashed, i_price):
-    ####### update value
+    # update value
     if hashed != user.first_name:
         return ('hacker')
-    if int(user.last_name) <= 0 :
+    if int(user.last_name) <= 0:
         return ('poor')
     else:
         new_hash = hash(str(hashed))
@@ -28,14 +31,17 @@ def sub_check(user, hashed, i_price):
         user.last_name = value
         user.save()
         return value
-    ######## end update value
-    
+    # end update value
+
+
 def math(request):
     return render(request, "commerce/auction/math.html")
+
+
 def create(request):
     try:
         w = Watchlist.objects.filter(user=request.user.username)
-        wcount=len(w)
+        wcount = len(w)
         form = ImageForm(request.POST, request.FILES)
         form2 = ImageForm(use_required_attribute=False)
         if form.is_valid():
@@ -43,53 +49,55 @@ def create(request):
             img_obj = form.instance
             return render(request, 'commerce/auction/create.html', {'form': form, 'img_obj': img_obj})
     except:
-        wcount=None
-    return render(request,"commerce/auction/create.html",{
-        "wcount":wcount,
+        wcount = None
+    return render(request, "commerce/auction/create.html", {
+        "wcount": wcount,
         'form': form2
     })
 
 
 def index(request):
-    
-    items=Listing.objects.all()
+
+    items = Listing.objects.all()
     try:
         w = Watchlist.objects.filter(user=request.user.username)
-        wcount=len(w)
+        wcount = len(w)
     except:
-        wcount=None
-    return render(request, "commerce/auction/index.html",{
-        "items":items,
-        "wcount":wcount
+        wcount = None
+    return render(request, "commerce/auction/index.html", {
+        "items": items,
+        "wcount": wcount
     })
+
 
 def categories(request):
     # items=Listing.objects.raw("SELECT * FROM auction_listing GROUP BY category")
-    items=Listing.objects.all()
+    items = Listing.objects.all()
     try:
         w = Watchlist.objects.filter(user=request.user.username)
-        wcount=len(w)
+        wcount = len(w)
     except:
-        wcount=None
-    return render(request,"commerce/auction/categpage.html",{
+        wcount = None
+    return render(request, "commerce/auction/categpage.html", {
         "items": items,
-        "wcount":wcount
+        "wcount": wcount
     })
 
-def category(request,category):
+
+def category(request, category):
     catitems = Listing.objects.filter(category=category)
     try:
         w = Watchlist.objects.filter(user=request.user.username)
-        wcount=len(w)
+        wcount = len(w)
     except:
-        wcount=None
-    return render(request,"commerce/auction/category.html",{
-        "items":catitems,
-        "cat":category,
-        "wcount":wcount
+        wcount = None
+    return render(request, "commerce/auction/category.html", {
+        "items": catitems,
+        "cat": category,
+        "wcount": wcount
     })
 
-import pytz
+
 def submit(request):
     if request.method == "POST":
         listtable = Listing()
@@ -104,20 +112,19 @@ def submit(request):
         listtable.category = request.POST.get('category')
         if request.POST.get('link'):
             listtable.link = request.POST.get('link')
-        else :
+        else:
             listtable.link = "https://nas-national-prod.s3.amazonaws.com/styles/hero_image/s3/_web_apa_2016_rock-pigeon_laura_perrotta_kk.jpg?itok=JbOQMi8b"
         listtable.time = dt
         listtable.save()
         all = Alllisting()
         items = Listing.objects.all()
 
-
         for i in items:
             try:
                 if Alllisting.objects.get(listingid=i.id):
                     pass
             except:
-                all.listingid=i.id
+                all.listingid = i.id
                 all.title = i.title
                 all.description = i.description
                 all.link = i.link
@@ -126,6 +133,7 @@ def submit(request):
         return redirect('auction:index')
     else:
         return redirect('auction:index')
+
 
 def image_upload_view(request):
     """Process images uploaded by users"""
@@ -142,62 +150,65 @@ def image_upload_view(request):
     ##############
 
 
-
-def listingpage(request,id):
+def listingpage(request, id):
     try:
         item = Listing.objects.get(id=id)
     except:
         return redirect('auction:index')
     try:
-        comments = Comment.objects.filter(listingid=id).order_by('id').reverse()
+        comments = Comment.objects.filter(
+            listingid=id).order_by('id').reverse()
     except:
         comments = None
     if request.user.username:
         try:
-            if Watchlist.objects.get(user=request.user.username,listingid=id):
-                added=True
+            if Watchlist.objects.get(user=request.user.username, listingid=id):
+                added = True
         except:
             added = False
         try:
             l = Listing.objects.get(id=id)
-            if l.owner == request.user.username :
-                owner=True
+            if l.owner == request.user.username:
+                owner = True
             else:
-                owner=False
+                owner = False
         except:
             return redirect('auction:index')
     else:
-        added=False
-        owner=False
+        added = False
+        owner = False
     try:
         w = Watchlist.objects.filter(user=request.user.username)
-        wcount=len(w)
+        wcount = len(w)
     except:
-        wcount=None
-    return render(request,"commerce/auction/listingpage.html",{
-        "i":item,
-        "error":request.COOKIES.get('error'),
-        "errorgreen":request.COOKIES.get('errorgreen'),
-        "comments":comments,
-        "added":added,
-        "owner":owner,
-        "wcount":wcount,
-        "bid":Bid.objects.filter(listingid=id).order_by('id').reverse()
+        wcount = None
+    return render(request, "commerce/auction/listingpage.html", {
+        "i": item,
+        "error": request.COOKIES.get('error'),
+        "errorgreen": request.COOKIES.get('errorgreen'),
+        "comments": comments,
+        "added": added,
+        "owner": owner,
+        "wcount": wcount,
+        "bid": Bid.objects.filter(listingid=id).order_by('id').reverse()
     })
 
-def bidsubmit(request,listingid):
+
+def bidsubmit(request, listingid):
+    if not request.user.is_authenticated:
+        return redirect('user:login')
     current_item = Listing.objects.get(id=listingid)
-    current_bid=current_item.price
+    current_bid = current_item.price
     if request.method == "POST":
         user_bid = int(request.POST.get("bid"))
         user = request.user
-        highest = current_bid+(current_bid*0.50)
+        highest = current_bid+(current_bid*0.10)
 
         if user_bid > highest:
-            if (int(user.last_name) - int(user_bid)) <=  0:
+            if (int(user.last_name) - int(user_bid)) <= 0:
                 return HttpResponse('no money')
-            #### to hash
-            hashed=request.user.first_name
+            # to hash
+            hashed = request.user.first_name
             i_price = user_bid
             user = request.user
             sub_check(user, hashed, i_price)
@@ -210,71 +221,78 @@ def bidsubmit(request,listingid):
                 if Bid.objects.filter(id=listingid):
                     bidrow = Bid.objects.filter(id=listingid)
                     bidrow.delete()
-                    ## PUT add the value to the user bidder
-                    
+                    # PUT add the value to the user bidder
+
                 bidtable = Bid()
-                bidtable.user=request.user.username
+                bidtable.user = request.user.username
                 bidtable.title = listing_items.title
                 bidtable.listingid = listingid
                 bidtable.bid = user_bid
                 bidtable.save()
-                
+
             except:
                 bidtable = Bid()
-                bidtable.user=request.user.username
+                bidtable.user = request.user.username
                 bidtable.title = listing_items.title
                 bidtable.listingid = listingid
                 bidtable.bid = user_bid
                 bidtable.save()
-            response = redirect('auction:listingpage',id=listingid)
-            response.set_cookie('errorgreen','bid successful!!!',max_age=3)
+            response = redirect('auction:listingpage', id=listingid)
+            response.set_cookie('errorgreen', 'bid successful!!!', max_age=3)
             return response
-        else :
-            response = redirect('auction:listingpage',id=listingid)
-            response.set_cookie('error','Bid should be greater than'+str(highest),max_age=3)
+        else:
+            response = redirect('auction:listingpage', id=listingid)
+            response.set_cookie(
+                'error', 'Bid should be greater than'+str(highest), max_age=3)
             return response
     else:
         return redirect('auction:index')
 
 
-def cmntsubmit(request,listingid):
+def cmntsubmit(request, listingid):
     if request.method == "POST":
         ltz = pytz.timezone('Asia/Manila')
         now = datetime.now(ltz)
         dt = now.strftime("%A %d %B %Y %X ")
         c = Comment()
         c.comment = request.POST.get('comment')
-        c.user = request.user.username
+        if not request.user.is_authenticated:
+            c.user = 'Not Registered User'
+        else:
+            c.user = request.user.username
         c.time = dt
         c.listingid = listingid
         c.save()
-        return redirect('auction:listingpage',id=listingid)
-    else :
+        return redirect('auction:listingpage', id=listingid)
+    else:
         return redirect('auction:index')
 
-def addwatchlist(request,listingid):
+
+def addwatchlist(request, listingid):
     if request.user.username:
         w = Watchlist()
         w.user = request.user.username
         w.listingid = listingid
         w.save()
-        return redirect('auction:listingpage',id=listingid)
+        return redirect('auction:listingpage', id=listingid)
     else:
         return redirect('auction:index')
 
 
-def removewatchlist(request,listingid):
+def removewatchlist(request, listingid):
     if request.user.username:
         try:
-            w = Watchlist.objects.get(user=request.user.username,listingid=listingid)
+            w = Watchlist.objects.get(
+                user=request.user.username, listingid=listingid)
             w.delete()
-            return redirect('auction:listingpage',id=listingid)
+            return redirect('auction:listingpage', id=listingid)
         except:
-            return redirect('auction:listingpage',id=listingid)
+            return redirect('auction:listingpage', id=listingid)
     else:
         return redirect('auction:index')
 
-def watchlistpage(request,username):
+
+def watchlistpage(request, username):
     if request.user.username:
         try:
             w = Watchlist.objects.filter(user=username)
@@ -283,27 +301,28 @@ def watchlistpage(request,username):
                 items.append(Listing.objects.filter(id=i.listingid))
             try:
                 w = Watchlist.objects.filter(user=request.user.username)
-                wcount=len(w)
+                wcount = len(w)
             except:
-                wcount=None
-            return render(request,"commerce/auction/watchlistpage.html",{
-                "items":items,
-                "wcount":wcount
+                wcount = None
+            return render(request, "commerce/auction/watchlistpage.html", {
+                "items": items,
+                "wcount": wcount
             })
         except:
             try:
                 w = Watchlist.objects.filter(user=request.user.username)
-                wcount=len(w)
+                wcount = len(w)
             except:
-                wcount=None
-            return render(request,"commerce/auction/watchlistpage.html",{
-                "items":None,
-                "wcount":wcount
+                wcount = None
+            return render(request, "commerce/auction/watchlistpage.html", {
+                "items": None,
+                "wcount": wcount
             })
     else:
         return redirect('auction:index')
 
-def closebid(request,listingid):
+
+def closebid(request, listingid):
     if request.user.username:
         try:
             listingrow = Listing.objects.get(id=listingid)
@@ -314,7 +333,7 @@ def closebid(request,listingid):
         cb.owner = listingrow.owner
         cb.listingid = listingid
         try:
-            bidrow = Bid.objects.get(listingid=listingid,bid=listingrow.price)
+            bidrow = Bid.objects.get(listingid=listingid, bid=listingrow.price)
             cb.winner = bidrow.user
             cb.winprice = bidrow.bid
             cb.save()
@@ -342,32 +361,33 @@ def closebid(request,listingid):
         except:
             pass
         try:
-            cblist=Closedbid.objects.get(listingid=listingid)
+            cblist = Closedbid.objects.get(listingid=listingid)
         except:
             cb.owner = listingrow.owner
             cb.winner = listingrow.owner
             cb.listingid = listingid
             cb.winprice = listingrow.price
             cb.save()
-            cblist=Closedbid.objects.get(listingid=listingid)
+            cblist = Closedbid.objects.get(listingid=listingid)
         listingrow.delete()
         try:
             w = Watchlist.objects.filter(user=request.user.username)
-            wcount=len(w)
+            wcount = len(w)
         except:
-            wcount=None
-        return render(request,"commerce/auction/winningpage.html",{
-            "cb":cblist,
-            "title":title,
-            "wcount":wcount
-        })   
+            wcount = None
+        return render(request, "commerce/auction/winningpage.html", {
+            "cb": cblist,
+            "title": title,
+            "wcount": wcount
+        })
 
     else:
-        return redirect('auction:index')     
+        return redirect('auction:index')
+
 
 def mywinnings(request):
     if request.user.username:
-        items=[]
+        items = []
         try:
             wonitems = Closedbid.objects.filter(winner=request.user.username)
             for w in wonitems:
@@ -377,13 +397,13 @@ def mywinnings(request):
             items = None
         try:
             w = Watchlist.objects.filter(user=request.user.username)
-            wcount=len(w)
+            wcount = len(w)
         except:
-            wcount=None
-        return render(request,'commerce/auction/mywinnings.html',{
-            "items":items,
-            "wcount":wcount,
-            "wonitems":wonitems
+            wcount = None
+        return render(request, 'commerce/auction/mywinnings.html', {
+            "items": items,
+            "wcount": wcount,
+            "wonitems": wonitems
         })
     else:
         return redirect('auction:index')

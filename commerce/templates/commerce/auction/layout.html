@@ -89,7 +89,7 @@
                 </li>
                 <li class="nav-item">
                     {% if user.is_authenticated %}
-                    <a class="nav-link"><h10><strong>{{ user }}</strong>. $ {{request.user.last_name}}</h10></a>
+                    <a class="nav-link"><h10><strong>{{ user }}</strong>. Php {{request.user.last_name}}</h10></a>
                 {% else %}
                     Not signed in.
                 {% endif %}

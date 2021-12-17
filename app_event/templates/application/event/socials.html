@@ -1,0 +1,44 @@
+{% extends "application/event/layout.html" %}
+{% load static %}
+{% block body %}
+<link href="{% static 'event/socials.css' %}" rel="stylesheet">
+<style>
+
+</style>
+<small>Made for <strong>PEOPLE</strong> who has all the <strong>TIME</strong> in the <strong>WORLD</strong></small>
+
+<h1 class="room-name"> {{event.event_name}}</h1>
+
+<form method="post" action="{% url 'event:send' room_id=event.id %}">
+    {% csrf_token %}
+    {{form.message}}
+    <button class="button-12" type="submit"> Send </button>
+</form>
+<span class="tag tag-brown">
+    <a href="{% url 'event:join' room_id=event.id%}">JOIN</a>
+</span>
+
+
+<div class="bubbleWrapper">
+    {% for c in chats %}
+    {% if c.sender == request.user.username %}
+    <div class="inlineContainer own">
+        {% else %}
+        <div class="inlineContainer">
+            {% endif %}
+            <img class="inlineIcon" src="{{c.sender_image}}">
+            <small>{{c.sender}}: </small>
+            <div class="own otherBubble other">
+                {{c.message}}
+                <br>
+                <span class="other timestamp"><small>{{c.timestamp}}</small></span>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+
+
+
+
+    {% endblock %}
