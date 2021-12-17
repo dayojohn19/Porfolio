@@ -112,23 +112,23 @@ def index(request):
 
 
 def home(request):
-    from datetime import datetime
-    from django_user_agents.utils import get_user_agent
+    # from datetime import datetime
+    # from django_user_agents.utils import get_user_agent
 
-    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-    if x_forwarded_for:
-        ip = x_forwarded_for.split(',')[0]
-    else:
-        ip = request.META.get('REMOTE_ADDR')
-    now = datetime.now()
-    x = request.user_agent.device
-    y = request.META['HTTP_USER_AGENT']
-    print('-------------------\n')
-    print(now)
-    print(x.brand)
-    print(y)
-    print(ip)
-    print('\n-----------------\n')
+    # x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    # if x_forwarded_for:
+    #     ip = x_forwarded_for.split(',')[0]
+    # else:
+    #     ip = request.META.get('REMOTE_ADDR')
+    # now = datetime.now()
+    # x = request.user_agent.device
+    # y = request.META['HTTP_USER_AGENT']
+    # print('-------------------\n')
+    # print(now)
+    # print(x.brand)
+    # print(y)
+    # print(ip)
+    # print('\n-----------------\n')
 
     return render(request, 'application/freedive/home.html', {
         'events': Events.objects.order_by('-start_time').reverse()
