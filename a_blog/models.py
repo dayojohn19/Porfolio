@@ -9,8 +9,7 @@ class Blog_item(models.Model):
     paragraph = models.TextField()
     picture_link = models.CharField(max_length=1000)
     time = models.DateTimeField(auto_now_add=True)
-    # def __unicode__(self):
-    #     return self.title[:4]
+    publisher = models.CharField(max_length=64, default='user')
 
     def __str__(self):
         return self.title

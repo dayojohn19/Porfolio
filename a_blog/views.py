@@ -96,10 +96,11 @@ def save_blog(request):
                 # )
                 # blog.save
                 blog = Blog_item()
-                blog.title = title
+                blog.title = title.title()
                 blog.sub_title = pan
                 blog.paragraph = t1
                 blog.picture_link = request.POST["link"]
+                blog.publisher = request.user.username
                 blog.save()
 
                 util.save_entry(title, textarea, pan)

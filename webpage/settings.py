@@ -124,7 +124,8 @@ WSGI_APPLICATION = 'webpage.wsgi.application'
 #     }
 # }
 # ASIA-----
-
+# *********************
+# *********************
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
@@ -136,6 +137,8 @@ DATABASES = {
         }
     }
 }
+# *********************
+# *********************
 
 
 # mongodb+srv: // dj19: < password > @cluster0.hpgnf.mongodb.net/myFirstDatabase?retryWrites = true & w = majority
@@ -146,13 +149,14 @@ DATABASES = {
 # set this to False if you want to turn off pyodbc's connection pooling
 DATABASE_CONNECTION_POOLING = False
 # ------------------------------------
-# ------------------------------------
+# --------------DEFAULT----------------------
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
+# *********************
 
 
 # Password validation
