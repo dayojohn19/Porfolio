@@ -23,8 +23,8 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link href="{% static 'a_index/moving.css' %}" rel="stylesheet">
-    <link href="{% static 'colregs/colregs.css' %}" rel="stylesheet">
-    <link href="{% static 'blog/blog.css' %}" rel="stylesheet">
+    
+    
     <link href="{% static 'a_street_race/street_race.css' %}" rel="stylesheet">
 <!---<<<-->
 <!--disable right_Click-->
@@ -44,7 +44,7 @@
         <div class="container-sub-2-1 a-right" style="z-index: 100;">
             <span><a class="" href="{% url 'user:userpage' %}">{{request.user.username}} Page</a></span>
             {% if request.user.is_anonymous %}
-            <span><a class=""  href="{% url 'user:login' %}">Login</a></span>
+            <span><a class=""  href="{% url 'user:login'  %}">Login</a></span>
             {% else %}
             <span><a class=""  href="{% url 'user:logout' %}">Logout</a></span>
             {% endif %}

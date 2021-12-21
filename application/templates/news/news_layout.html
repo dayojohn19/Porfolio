@@ -5,11 +5,17 @@
         background-color: none;
         background: none;
         right:1px;
+        z-index: 101;
     }
     .lef{
         background-color: none;
         background: none;
         right:1px;
+    }
+    .links {
+        padding: 0.5rem;
+        border-radius: 8px;
+
     }
 </style>
         <div class="container-sub-2-1 a-right aa">
@@ -22,6 +28,11 @@
             <span><a class=""  href="{% url 'news:section' x=7 %}"><img class="h-icon th hg left" src="{% static 'app_images/biography.png' %}" alt=""></a></span>
             <span><a class=""  href="{% url 'news:section' x=8 %}"><img class="h-icon th hg left" src="{% static 'app_images/maritime.png' %}" alt=""></a></span>
             <span><a class=""  href="{% url 'news:section' x=9 %}"><img class="h-icon th hg left" src="{% static 'app_images/personal.png' %}" alt=""></a></span>
+<br>
+<span><a class="links" href="{% url 'news:publish' %}">Publish</a></span>
+|
+<span><a class="links" href="{% url 'news:index' %} ">Articles</a></span>
+
         </div>
 
 

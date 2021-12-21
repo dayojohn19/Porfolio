@@ -157,7 +157,8 @@ def player(request, username):
         c = len(lists)
 
         if request.user.is_anonymous:
-            return redirect('user:login')
+            return render(request, "user/login.html")
+            # return redirect('user:login')
         else:
             return render(request, "user/player.html", {
                 'list': lists,
@@ -236,7 +237,11 @@ def userpictures(request):
 
 def index(request):
     if request.user.is_anonymous:
-        return redirect('user:login')
+        next = request.path
+        return render(request, "user/login.html", {'next': next})
+
+        # return redirect('user:login')
+        # return render(request, "user/login.html")
     user = request.user
     bb = mail.User
     users = bb.objects.all().order_by('id').reverse()
@@ -252,16 +257,18 @@ def login_view(request):
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
-
+        next = request.POST.get('next', '/')
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse("user:index"))
+            return HttpResponseRedirect(next)
+            # return HttpResponseRedirect(reverse("user:index"))
         else:
             return render((request), "user/login.html", {"message": "invalid username and/or password."})
     else:
-        return render(request, "user/login.html")
+        next = request.path
+        return render(request, "user/login.html", {'next': next})
 
 
 def logout_view(request):

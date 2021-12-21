@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 
@@ -6,7 +6,11 @@ from django.shortcuts import render
 def app_mail(request):
     if request.user.is_authenticated:
         return render(request, 'mail/inbox.html')
-    return render(request, 'mail/login.html')
+    return render(request, "user/login.html")
+
+    # return redirect('user:index')
+
+    # return render(request, 'mail/login.html')
 
 
 def application(request):
@@ -18,5 +22,6 @@ def news(request):
 
 
 def course_booking(request):
-    return render(request, 'course_booking/index.html')
+    return redirect('news:index')
 
+    # return render(request, 'course_booking/index.html')

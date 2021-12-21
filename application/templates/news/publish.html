@@ -2,29 +2,59 @@
 {% load static %}
 
 {% block body %}
-{% include 'news_layout.html' %}
+{% include 'news/news_layout.html' %}
 
 <style>
-    .special{
-        background-color: aqua;
-        width: 100%;
-        display: block;
-        height: 40%;
+    input , textarea{
+        background-color: rgb(255, 255, 255);
+        
+        border-radius: 8px;
+        border:none;
+        padding: 12px;
+        margin: 1.2vw;
     }
-</style>
-<a href="{% url 'news:index' %}">Got to Publish</a>
+    .form_section {
+        /* background-color: red; */
+        list-style-type: none;
+        padding: 5px;
+        margin: 5px;
+    }
+    li{
+        padding: 2px;
+        margin: 1.3px;
+        font-size: large;
+    }
+    form {
+        text-align: center;
+    }
+    .form_title {
+        width: 35%;
+    }
+    .form_content{
+        font-family:"Lucida Console", "Courier New", monospace;
+        /* font-weight: 500;
+        height: 40vw; */
+        width: 50%;
+    }
 
+</style>
 
 
 Articles: {{articles}}
 
 <form method="POST" action="{% url 'news:publish' %}">
     {% csrf_token %}
-    {{form.as_p}}
+    {{form.title}}
+    <br>
+    {{form.content}}
+    <br>
+    {{form.link}}
+    <br>
+    {{form.section}}
+
+    
        <input type="submit" value="Publish">
 </form>
-
-
 
 
 

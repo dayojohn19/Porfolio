@@ -102,8 +102,8 @@ position: sticky;
       
 
       {% if request.user.is_anonymous %}
-      <div class="tab-list"><span><a href="{% url 'sale:login' %}">Log in</a></span></div>
-      <div class="tab-list"><span><a href="{% url 'sale:register' %}">Register</a></span></div>
+      <div class="tab-list"><span><a href="{% url 'user:login' %}">Log in</a></span></div>
+      <div class="tab-list"><span><a href="{% url 'user:register' %}">Register</a></span></div>
       {% else %}
    
       <li class="tab-list dropdown"><div class=""><span><a href="{% url 'auction:watchlistpage' request.user %}"><div class="tabs-cart">Watchlist <span class="badge badge-danger"><a class="tabs-count">{{wcount}}</span></div></a></a></span></div>

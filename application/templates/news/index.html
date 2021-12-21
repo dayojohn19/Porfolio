@@ -2,25 +2,29 @@
 {% load static %}
 
 {% block body %}
-{% include 'news_layout.html' %}
-
-<a href="{% url 'news:publish' %}">Got to publish</a>
-
-Articles: 
+{% include 'news/news_layout.html' %}
 
 <div class="main-container-article">
     {% for a in articles %}
         <span class="container-article">
             <style>
-                .title{
-                    color: black;        
-                    
+
+            </style>
+            <div class="title"
+            style="
+            border-radius: 10px 10px 0 0;
+            text-shadow:black 0 0 5px;
             {% if a.section == '1' %}
             background-color: yellow;
+            color:black;
+            text-shadow:white 0 0 5px;
             {% elif a.section == '2' %}
             background-color: rgb(119, 119, 255);
+            color:white;
             {% elif a.section == '3' %}
             background-color: rgb(255, 122, 122);
+            text-shadow:white 0 0 5px;
+            color:black;
             {% elif a.section == '4' %}
             background-color: lightcyan;
             {% elif a.section == '5' %}
@@ -32,15 +36,17 @@ Articles:
             color:white
             {% else %}
             not 
-            {% endif %}
-        }
-            </style>
-            <div class="title">{{a.title}}<br>{{a.section}}</div>
+            {% endif %} ">
+            
+            {{a.title}}<br>{{a.section}}</div>
             <img src="{{a.link}}" alt="image">
             
-            <p>{{a.id}}<br>
+            <p>
+                <i>{{a.author}}</i>
+                <br>
                 {{a.date}}<br>
                 {{a.content}}</p>
+                
         </span>
     {% endfor %}
 </div>
@@ -58,9 +64,12 @@ Articles:
         flex-wrap: wrap;
         background: rgba(240, 230, 140, 0.301);
         justify-content: center;
+        padding: 3vh;
     }
     .container-article{
         /* background: chartreuse; */
+        padding: 2vh;
+        border-radius: 10px;
         max-height: 25%;
         height: 500px;
         overflow: scroll;
@@ -77,7 +86,11 @@ Articles:
         display: grid;
         background: rgba(32, 178, 171, 0.322);
         text-align: justify;
-        padding: 1%;
+        padding: 2vh;
+        border-radius: 0 0 10px 10px;
+    }
+    i {
+        text-align: right;
     }
 </style>
 

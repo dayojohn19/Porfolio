@@ -26,10 +26,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-rmxq3lkq@nhlwgg)deu@q5e_nfmz8((qqe)v9s0vt*o5&i(ez%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['webpagedj19.herokuapp.com',
-                 'localhost', '127.0.0.1', '.ngrok.io']
+                 'localhost', '127.0.0.1', '.ngrok.io', '*', 'localhost']
 
 # Application definition
 
@@ -126,17 +127,17 @@ WSGI_APPLICATION = 'webpage.wsgi.application'
 # ASIA-----
 # *********************
 # *********************
-DATABASES = {
-    'default': {
-        'ENGINE': 'djongo',
-        'NAME': '21',
-        # 'ENFORCE_SCHEMA': False,
-        'CLIENT': {
-            'host': 'mongodb+srv://jc:jc@cluster2.wk77x.mongodb.net/21?retryWrites=true&w=majority&ssl_cert_reqs=CERT_NONE'
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': '21',
+#         # 'ENFORCE_SCHEMA': False,
+#         'CLIENT': {
+#             'host': 'mongodb+srv://jc:jc@cluster2.wk77x.mongodb.net/21?retryWrites=true&w=majority&ssl_cert_reqs=CERT_NONE'
 
-        }
-    }
-}
+#         }
+#     }
+# }
 # *********************
 # *********************
 
@@ -150,12 +151,12 @@ DATABASES = {
 DATABASE_CONNECTION_POOLING = False
 # ------------------------------------
 # --------------DEFAULT----------------------
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 # *********************
 
 

@@ -130,7 +130,8 @@ def index(request):
     now = time.time()
     measured = False
     if not request.user.is_authenticated:
-        return redirect('user:login')
+        return render(request, "user/login.html")
+        # return redirect('user:login')
     try:
         xx = User.objects.get(username=request.user.username)
         x = Measurement.objects.get(uid=xx.id)
@@ -362,7 +363,8 @@ def clock_it(request):
 
 def race(request, race_id):
     if not request.user.is_authenticated:
-        return redirect('user:login')
+        return render(request, "user/login.html")
+        # return redirect('user:login')
     cu = request.user.username
     race = Race.objects.get(id=race_id)
     pigeons = race.registered.all().order_by('id').reverse()
@@ -388,7 +390,8 @@ def race_registered(request, race_id):
 
 def entry(request, race_id):
     if not request.user.is_authenticated:
-        return redirect('user:login')
+        return render(request, "user/login.html")
+        # return redirect('user:login')
     if request.method == "POST":
         race = Race.objects.get(pk=race_id)
         pigeon_id = int(request.POST["pigeon"])
@@ -481,7 +484,8 @@ def remove(request, race_id):
 
 def lap(request, race_id):
     if not request.user.is_authenticated:
-        return redirect('user:login')
+        return render(request, "user/login.html")
+        # return redirect('user:login')
     race = Race.objects.get(pk=race_id)
     x = request.user.username
     race = Race.objects.get(id=race_id)

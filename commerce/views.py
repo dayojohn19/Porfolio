@@ -10,6 +10,7 @@ from django.http import JsonResponse
 
 
 def commerce(request):
+
     return render(request, 'commerce/commerce.html')
 
 

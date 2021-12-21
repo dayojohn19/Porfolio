@@ -12,8 +12,6 @@ def index(request):
 
 def live_chart(request):
     return render(request, 'commerce/trade/live.html')
-
-
 # ------------------------
 
 

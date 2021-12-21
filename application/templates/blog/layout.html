@@ -4,6 +4,7 @@
 
 <head>
     <style>
+
         .client {
             border: none;
             border-radius: 10px;
@@ -14,9 +15,15 @@
             font-size: larger;
         }
 
+        .image-header {
+            width: 100%;
+            height: fit-content;
+            height: 164px;
+        }
         .image-header img {
             max-height: 170px;
             width: 100%;
+
             object-fit: none; /* Do not scale the image */
             object-position: right; 
         }
@@ -53,15 +60,11 @@
     <!-- <script src="{% static 'a_index/dis.js' %}"></script> -->
 <!-- <script src="index/dis.js"></script> -->
 
-    <link rel="stylesheet" href="{% static 'a_index/1000.css' %}">
-    <link rel="stylesheet" href="{% static 'a_index/500.css' %}">
 
-    <div class="header-container">
+
         <div class="image-header">
             <img src="https://i.pinimg.com/originals/5e/48/66/5e4866581560e628b43b0cae72e448a7.jpg">
         </div>
- 
-    </div>
         <div class="tabs-container">
             <div class="tabs">
                 <a href="{% url 'blog:index' %}">Blogs</a>

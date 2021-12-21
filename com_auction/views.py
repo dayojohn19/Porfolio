@@ -196,7 +196,8 @@ def listingpage(request, id):
 
 def bidsubmit(request, listingid):
     if not request.user.is_authenticated:
-        return redirect('user:login')
+        return render(request, "user/login.html")
+        # return redirect('user:login')
     current_item = Listing.objects.get(id=listingid)
     current_bid = current_item.price
     if request.method == "POST":
@@ -426,7 +427,8 @@ def login_view(request):
                 "message": "Invalid username and/or password."
             })
     else:
-        return render(request, "commerce/auction/login.html")
+        return render(request, "user/login.html")
+        # return render(request, "/login.html")
 
 
 def logout_view(request):
