@@ -73,6 +73,8 @@ function sell(amount, price){
     
     return sell_total
 }
+
+
     function calculate_fees(amount, mode){
         console.log('\n........ CALCULATING FEES ....... \n');
         fee = 0
@@ -192,13 +194,16 @@ function calculate_profit(mode){
     console.log('COSTCOST: ',price_cost)
     sell(amount, price_cost)
 
-    // get_profit(increment_value);
-    function get_profit(incremented_credit){
-        credit = document.querySelector("#sell_get").value
-        console.log('Credit: ',credit);
-        console.log('Incremented Credit: ',incremented_credit);
-        profit =  parseFloat(credit) - parseFloat(incremented_credit) ;
 
-        document.querySelector("#profit").value = profit.toFixed(0);
-    }
+}
+
+function calculate_sell(value){
+    quantity = document.querySelector("#sell_amount").value;
+    price = value;
+    cost = document.querySelector("#result_for").value;
+    amount = parseFloat(quantity) //* parseFloat(price);
+    price_cost = [parseFloat(price), parseFloat(cost)]
+    console.log(price_cost);
+    console.log(amount);
+    sell(amount, price_cost);
 }

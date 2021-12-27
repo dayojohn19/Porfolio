@@ -76,6 +76,14 @@ h2 {
   width: 3rem;
   font-size: larger;
 }
+#sell_amount {
+  background-color: rgba(226, 43, 43, 0.272);
+  color: greenyellow;
+  border: none;
+  text-shadow: grey 0 0 6px;
+  width: 3rem;
+  font-size: larger;
+}
 .side {
   /* background-color: rgba(255, 99, 71, 0.505); */
   padding: 0.4rem;

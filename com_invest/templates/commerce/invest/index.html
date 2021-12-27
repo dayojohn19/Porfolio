@@ -14,12 +14,12 @@
     <input id="price" placeholder="price" type="number" onchange="calculate('buy')">
     <br>
     <!-- <button id="calculate_buy" onclick="calculate('buy')">Calculate Buy</button> -->
-    <button id="calculate_selll" onclick="calculate('sell')">Calculate Sell</button>
+    <!-- <button id="calculate_selll" onclick="calculate('sell')">Calculate Sell</button> -->
     <br>
     <label for="result">You can buy</label>
     <input disabled id="result">
     <br>
-    <label for="result_for">For</label>
+    <label for="result_for">For: ₱</label>
     <input readonly id="result_for">
     <br>
     <label for="remaining">Remaining</label>
@@ -30,22 +30,24 @@
     <input readonly id="sell_amount">
     <br>
     <label class="side" for="sell_price">sell Price</label>
-    <input id="sell_price" type="number" value="0">
+    <input id="sell_price" type="number" value="0" onchange="calculate_sell(value)">
+        <button onclick="calculate_profit('add')">+</button>
+        <button onclick="calculate_profit('subtract')">-</button>
     <br>
-    <label for="sell_get">and Get: ₱</label>
+    <label for="sell_get">For: ₱</label>
     <input readonly id="sell_get">
     <br>
+    <hr>
     <label for="profit">Profit: ₱</label>
     <input readonly id="profit">
-    <hr>
+    <br>
     increment
     <input readonly id="increment" value="0" >%
     <br>
     Incremented: ₱
     <input disabled id="incremented_price">
     <br>
-    <button onclick="calculate_profit('add')">Add</button>
-    <button onclick="calculate_profit('subtract')">Subtract</button>
+
 
 
     <hr>
