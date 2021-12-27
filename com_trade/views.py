@@ -9,12 +9,19 @@ from django.shortcuts import render
 def index(request):
     if not request.user.is_authenticated:
         return render(request, "user/login.html")
-    # return render(request, 'commerce/trade/index.html')
+    return render(request, 'commerce/trade/index.html')
 
 
 def live_chart(request):
     return render(request, 'commerce/trade/live.html')
+
+
+def primary_chart(request):
+    return render(request, 'commerce/trade/primary_chart.html')
 # ------------------------
+
+# def open_csv(request):
+#     BTCUSDT-Jan. 1, 2021
 
 
 @csrf_exempt
@@ -31,9 +38,13 @@ def new_data(request):
         crypto = 'BTCUSDT'
         # starting = 'Nov 18, 2021'
         starting = new_data
-
+        # intervals
+        # KLINE_INTERVAL_12HOUR
+        # KLINE_INTERVAL_15MINUTE
+        # KLINE_INTERVAL_3DAY
+        # KLINE_INTERVAL_1DAY
         klines = client.get_historical_klines(
-            crypto, Client.KLINE_INTERVAL_15MINUTE, starting)
+            crypto, Client.KLINE_INTERVAL_1DAY, starting)
         # ---------- SAVING -------- save the fetched data t0 csv
         filed = f"{crypto}-{starting}"
 
@@ -69,7 +80,7 @@ def new_data(request):
 
 
 def fetch_datas(request):
-    filename = 'BNBUSDT-15m-Nov 1, 2021.csv'
+    filename = 'BTCUSDT-Jan. 1, 2021.csv'
     from django.http import JsonResponse
     import csv
     klines = []

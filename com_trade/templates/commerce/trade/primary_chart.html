@@ -1,0 +1,25 @@
+{% extends 'commerce/trade/layout.html' %}
+{% load humanize %}
+{% load static %}
+{% include 'commerce/sale/tabs.html' %}
+
+
+
+{% block body %}
+
+<script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js" defer></script>
+<script src="{% static 'commerce/primary_chart/main.js' %}" defer></script>
+<link rel="stylesheet" href="{% static 'commerce/primary_chart/primary_chart.css' %}">
+<div>
+    <h1>Main</h1>
+    <div id="main_position"></div>
+
+
+
+    <button onclick="put_main_series()">Add Main Series</button>
+
+</div>
+
+
+
+{% endblock %}

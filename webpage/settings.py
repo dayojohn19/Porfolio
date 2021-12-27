@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'app_event',
     # 'app_freedive',
     'ubx',
-    'com_trade',
+    # 'com_trade',
+    'com_trade.apps.ComTradeConfig',
     'app_hiring',
     'com_bank',
     'com_sale',
@@ -66,6 +67,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'embed_video',
+
 
 ]
 
@@ -129,17 +131,17 @@ WSGI_APPLICATION = 'webpage.wsgi.application'
 # ASIA-----
 # *********************
 # *********************
-DATABASES = {
-    'default': {
-        'ENGINE': 'djongo',
-        'NAME': '21',
-        # 'ENFORCE_SCHEMA': False,
-        'CLIENT': {
-            'host': 'mongodb+srv://jc:jc@cluster2.wk77x.mongodb.net/21?retryWrites=true&w=majority&ssl_cert_reqs=CERT_NONE'
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': '21',
+#         # 'ENFORCE_SCHEMA': False,
+#         'CLIENT': {
+#             'host': 'mongodb+srv://jc:jc@cluster2.wk77x.mongodb.net/21?retryWrites=true&w=majority&ssl_cert_reqs=CERT_NONE'
 
-        }
-    }
-}
+#         }
+#     }
+# }
 # *********************
 # *********************
 # END ASIA--------
@@ -155,12 +157,12 @@ DATABASES = {
 DATABASE_CONNECTION_POOLING = False
 # ------------------------------------
 # --------------DEFAULT----------------------
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 # *********************
 
 
@@ -217,6 +219,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'application/static/'),
     os.path.join(BASE_DIR, 'commerce/static/'),
     os.path.join(BASE_DIR, 'com_invest/static/'),
+    os.path.join(BASE_DIR, 'com_trade/static/'),
 ]
 
 
