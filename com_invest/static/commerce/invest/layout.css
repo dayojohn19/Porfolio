@@ -1,0 +1,26 @@
+#tabs {
+  /* background-color: yellow; */
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+#tabs_links {
+  display: flex;
+  justify-content: space-between;
+  /* background-color: yellowgreen; */
+  /* width: 25%; */
+}
+
+#tabs a {
+  /* background-color: tomato; */
+  text-decoration: none;
+  padding: 0.4rem;
+  text-shadow: white 0 0 5px;
+  color: black;
+  font-size: large;
+}
+
+#tab_container {
+  position: fixed;
+}

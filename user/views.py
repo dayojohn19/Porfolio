@@ -267,8 +267,9 @@ def login_view(request):
         else:
             return render((request), "user/login.html", {"message": "invalid username and/or password."})
     else:
-        next = request.path
-        return render(request, "user/login.html", {'next': next})
+
+        # return render(request, "user/login.html", {'next': next})
+        return render(request, "user/login.html")
 
 
 def logout_view(request):

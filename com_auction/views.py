@@ -270,6 +270,7 @@ def cmntsubmit(request, listingid):
 
 
 def addwatchlist(request, listingid):
+
     if request.user.username:
         w = Watchlist()
         w.user = request.user.username
@@ -277,6 +278,7 @@ def addwatchlist(request, listingid):
         w.save()
         return redirect('auction:listingpage', id=listingid)
     else:
+
         return redirect('auction:index')
 
 

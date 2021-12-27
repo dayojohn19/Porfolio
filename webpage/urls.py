@@ -41,6 +41,8 @@ urlpatterns = [
     path('ubx/', include('ubx.urls')),
     # path('app_freedive/', include('app_freedive.urls')),
     path('app_event/', include('app_event.urls')),
+    path('app_pipa/', include('app_pipa.urls')),
+    path('com_invest/', include('com_invest.urls')),
 
 ]
 

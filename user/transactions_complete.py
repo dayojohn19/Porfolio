@@ -361,12 +361,15 @@ def make_order(sell_coin, buy_coin, quantity, price, user_id, side):
 
 def load(request):
     if request.method == 'POST':
+        target = request.POST.get("target")
+        if request.user.username == target:
+            return HttpResponse('error')
         user = request.user
         hashed = user.first_name
         load = request.POST.get("load")
 
         from app_mail import models
-        target = models.User.objects.get(username=request.POST.get("target"))
+        target = models.User.objects.get(username=target)
         value = reload(user, hashed, load, target)
         if value == 'hacker':
             return HttpResponse('error')

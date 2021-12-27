@@ -1,0 +1,79 @@
+{% extends "commerce/invest/layout.html" %}
+{% load humanize %}
+{% load static %}
+{% block body %}
+<link rel="stylesheet" href="{% static 'commerce/invest/table.css' %}">
+<br><br>
+
+<table>
+    <tr>
+        <th colspan="2">Investments</th>
+    </tr>
+    <tr>
+        <th>Total Amount of Pesos</th>
+        <th>Total Amount of Stocks</th>
+    </tr>
+    <tr>
+        <td>{{investments.amount | intcomma}}</td>
+        <td>{{investments.stock}}</td>
+    </tr>
+</table>
+
+
+
+<hr>
+<table>
+    <tr>
+        <th>Share Holder</th>
+        <th>Contact</th>
+        <th>Share Percentage</th>
+        <th>Share Amount</th>
+        <th>Date Invested</th>
+        <th>Date ReInvested</th>
+    </tr>
+    {% for investor in investors %}
+        <tr>
+            <td>{{investor.investor_name}}</td>
+            <td>{{investor.investor_contact}}</td>
+            <td>{{investor.invested_percentage}} %</td>
+            <td>{{investor.invested_amount | intcomma}}</td>
+            <td>{{investor.timestamp}}</td>
+            <td>{{investor.reinvested}}</td>
+        </tr>
+    {% endfor %}
+
+</table>
+
+
+
+
+
+<!-- FORM OF ADDING INVESTOR -->
+{% if request.user.is_superuser %}
+<form id="form" method="POST" action="{% url 'invest:add_investor' csrf_token %}">
+    {% csrf_token %}
+    <h2> Add Investor </h2>
+    <input readonly name="investor_name" value="{{request.user.username}}">
+    <!-- <select name="investor_name">
+        <option value="a">a</option>
+        <option value="b">b</option>
+        <option value="c">c</option>
+        <option value="d">d</option>
+    </select> -->
+    <input name="investment_amount" type="number" placeholder="Amount">
+    <input name="contact" placeholder="Contact">
+    <br>
+    <button type="submit">Submit</button>
+</form>
+
+<button onclick="form_submit()">Submit</button>
+<script>
+    function form_submit() {
+        form = document.querySelector("#form")
+        form.submit()
+    }
+</script>
+
+{% endif %}
+
+{% endblock %}

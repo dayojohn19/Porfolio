@@ -24,7 +24,11 @@ def sale(request):
 
 def load(request):
     if request.method == 'POST':
-
+        target = request.POST.get("hashed")
+        if target == request.user.username:
+            print('huli')
+        else:
+            print('takas')
         hashed = request.POST.get("hashed")
 
         transactions.load(request)

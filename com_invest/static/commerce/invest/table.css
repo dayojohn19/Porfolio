@@ -1,0 +1,38 @@
+body {
+  background-color: rgb(134, 174, 238);
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  max-width: 95% !important;
+  /* width: 100px !important; */
+  display: block;
+  /* font-size: x-small; */
+  overflow: auto;
+  background-color: rgba(231, 220, 201, 0.731);
+  margin: auto auto;
+  width: fit-content;
+  border-radius: 8.5px;
+}
+
+td,
+th {
+  border: 2px solid rgb(249, 223, 178);
+  text-align: left;
+  padding: 13px;
+  text-align: center;
+}
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+#form {
+  background-color: rgb(170, 170, 170);
+  width: fit-content;
+  padding: 0.45rem;
+  margin: 0.4rem;
+  border-radius: 8px;
+  margin: auto auto;
+  text-shadow: rgb(255, 255, 255) 0 0 10px;
+}

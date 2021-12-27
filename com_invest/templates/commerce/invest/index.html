@@ -1,0 +1,66 @@
+{% extends "commerce/invest/layout.html" %}
+{% load static %}
+{% block body %}
+<link rel="stylesheet" href="{% static 'commerce/invest/index.css' %}">
+<script src="{% static 'commerce/invest/index.js' %}"></script>
+
+
+<div id="calculator">
+    <h2>Calculator</h2>
+    <input class="stock_header" id="stock" placeholder="Stock" type="text">
+    
+    <input class="stock_header" id="amount" placeholder="Amount" type="number">
+    <label class="side" for="price">buy Price</label>
+    <input id="price" placeholder="price" type="number" onchange="calculate('buy')">
+    <br>
+    <!-- <button id="calculate_buy" onclick="calculate('buy')">Calculate Buy</button> -->
+    <button id="calculate_selll" onclick="calculate('sell')">Calculate Sell</button>
+    <br>
+    <label for="result">You can buy</label>
+    <input disabled id="result">
+    <br>
+    <label for="result_for">For</label>
+    <input readonly id="result_for">
+    <br>
+    <label for="remaining">Remaining</label>
+    <input readonly id="remaining">
+    <br>
+    <hr>
+    <label for="sell_amount">You can Sell</label>
+    <input readonly id="sell_amount">
+    <br>
+    <label class="side" for="sell_price">sell Price</label>
+    <input id="sell_price" type="number" value="0">
+    <br>
+    <label for="sell_get">and Get: ₱</label>
+    <input readonly id="sell_get">
+    <br>
+    <label for="profit">Profit: ₱</label>
+    <input readonly id="profit">
+    <hr>
+    increment
+    <input readonly id="increment" value="0" >%
+    <br>
+    Incremented: ₱
+    <input disabled id="incremented_price">
+    <br>
+    <button onclick="calculate_profit('add')">Add</button>
+    <button onclick="calculate_profit('subtract')">Subtract</button>
+
+
+    <hr>
+    <p id="stock_buy">
+        If you <strong>bought</strong>
+        <strong id="stock"><i></i></strong>
+        at Price of
+        <strong id="stock_price">
+            <h2></h2>
+        </strong>
+        it will total
+        <strong id="stock_cost"><i></i></strong>
+        including all trading fees
+    </p>
+
+</div>
+
+{% endblock %}

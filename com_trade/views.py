@@ -7,7 +7,9 @@ from django.shortcuts import render
 
 
 def index(request):
-    return render(request, 'commerce/trade/index.html')
+    if not request.user.is_authenticated:
+        return render(request, "user/login.html")
+    # return render(request, 'commerce/trade/index.html')
 
 
 def live_chart(request):
