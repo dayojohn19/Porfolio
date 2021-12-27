@@ -9,7 +9,6 @@ function calculate(mode){
     amount = document.querySelector("#amount").value;
     price = document.querySelector("#price").value;
     mode == 'buy'? buy() : mode == 'sell' ? sell () : alert("ERROR");
-
     function buy(){
         console.log('buying..',price,' at ',amount)
     }
@@ -19,10 +18,6 @@ function calculate(mode){
     }
     result = fees_bdo(amount, mode, price);
     console.log('Result: ', result);
-    
-    // stock = 0;
-    // amount = 0;
-    // price = 0;
 }
 
 
@@ -74,11 +69,10 @@ function sell(amount, price){
     return sell_total
 }
 
-
+// configure fees here
     function calculate_fees(amount, mode){
         console.log('\n........ CALCULATING FEES ....... \n');
         fee = 0
-
         security = parseFloat(amount) * 0.0001;
         fee += parseFloat(security);
         console.log('fees security: ', security);
@@ -105,7 +99,6 @@ function fees_bdo(amount, mode, price){
     if (mode == 'buy'){
         fee = calculate_fees(amount, mode)
         buy_total = parseFloat(amount) + parseFloat(fee);
-        // buy_total = parseFloat(amount) * parseFloat(fee_percentage);
         buy_stock(amount, price, fee);  
         console.log('fee Bought',buy_total);
         return buy_total
@@ -143,7 +136,7 @@ function buy_stock(amount, price, fee){
 }
 
 function sell_stock(sell_total, price, amount){
-    // sell_total = parseFloat(amount_value) - parseFloat(fee)
+
     console.log('You will get: ', sell_total);
 
     document.querySelector("#sell_amount").value = amount;
