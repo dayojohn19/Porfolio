@@ -8,18 +8,34 @@
 {% block body %}
 
 <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js" defer></script>
-<script src="{% static 'commerce/primary_chart/main.js' %}" defer></script>
+
+
+
+
 <link rel="stylesheet" href="{% static 'commerce/primary_chart/primary_chart.css' %}">
+
+
+<script src="{% static 'commerce/primary_chart/main.js' %}" defer></script>
 <div>
-    <h1>Main</h1>
+    <h1>Main JS</h1>
     <div id="main_position"></div>
-
-
-
-    <button onclick="put_main_series()">Add Main Series</button>
-
 </div>
 
 
 
+<script src="{% static 'commerce/primary_chart/volume_trade.js' %}" defer></script>
+
+<div>
+    <h1>Volume / Trade </h1>
+    <div id="volume_trade_position"></div>
+</div>
+
+
+<!-- series -->
+<script src="{% static 'commerce/primary_chart/series.js' %}" defer></script>
+<style>
+    body {
+        background-color: rgba(201, 255, 5, 0.829);
+    }
+</style>
 {% endblock %}
