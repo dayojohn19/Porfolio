@@ -26,7 +26,7 @@
   border-radius: 50%; */
   /* box-shadow: 0 0 10px 0px rgba(251, 248, 95, 0.233) inset; */
   padding: 1rem;
-  margin: 1vw;
+  /* margin: 1vw; */
 }
 /* .bank-pic {
 } */
@@ -44,10 +44,15 @@
     transform: scale(1.5, 1.5);
     opacity: 1;
     z-index: 2;
-    margin: 2rem;
+    /* margin: 2rem; */
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 2rem;
+    margin-right: 2rem;
     /* background-color: rgb(41, 41, 41);
     box-shadow: 0px 0px 20px rgb(243, 243, 243);
     border-radius: 50%; */
+    pointer-events: none;
   }
   20% {
     pointer-events: none;
@@ -72,6 +77,12 @@
     opacity: 0.5;
     /* box-shadow: 0px 0px 20px rgba(0, 0, 0, 0);
     border-radius: 10%; */
+    /* margin: 2rem; */
+    margin-top: 0;
+    margin-bottom: 0;
+    /* background-color: lightblue; */
+    pointer-events: none;
+    /* z-index: 0; */
   }
 }
 
@@ -96,6 +107,11 @@
     /* box-shadow: 0px 0px 20px rgb(243, 243, 243);
     border-radius: 50%; */
     /* padding: 0.5rem; */
-    margin: 2rem;
+    /* margin: 2rem; */
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    /* pointer-events: none; */
   }
 }
