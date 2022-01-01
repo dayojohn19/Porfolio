@@ -1,96 +1,99 @@
-
-
-
 .footer {
   opacity: 0.35;
 }
-.footer:hover{
+.footer:hover {
   opacity: 1;
 }
 
-
-
 .m-icon {
   opacity: 0.4;
-  animation:  1s mm-icon2 backwards;
-
+  animation: 1s mm-icon2 backwards;
 }
 
 @keyframes mm-icon {
-  0%{}
-  20%{}
-  30%{}
-  40%{}
-  50%{}
-  60%{}
-  100%{
+  0% {
+  }
+  20% {
+  }
+  30% {
+  }
+  40% {
+  }
+  50% {
+  }
+  60% {
+  }
+  100% {
     transform: scale(1.5, 1.5);
     opacity: 1;
     z-index: 2;
     background-color: rgb(41, 41, 41);
-    box-shadow: 0px 0px 20px rgb(243, 243, 243) ;
+    box-shadow: 0px 0px 20px rgb(243, 243, 243);
     border-radius: 50%;
   }
 }
 @keyframes mm-icon2 {
-  0%{
+  0% {
     transform: scale(1.5, 1.5);
     opacity: 1;
     z-index: 2;
     background-color: rgb(41, 41, 41);
-    box-shadow: 0px 0px 20px rgb(243, 243, 243) ;
+    box-shadow: 0px 0px 20px rgb(243, 243, 243);
     border-radius: 50%;
   }
-  20%{pointer-events: none;}
-  30%{pointer-events: none;}
-  40%{pointer-events: none;}
-  50%{
-
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.445) ;
-
+  20% {
+    pointer-events: none;
   }
-  60%{pointer-events: none;}
-  70%{pointer-events: none;}
-  100%{
-    transform: scale(1.0, 1.0);
+  30% {
+    pointer-events: none;
+  }
+  40% {
+    pointer-events: none;
+  }
+  50% {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.445);
+  }
+  60% {
+    pointer-events: none;
+  }
+  70% {
+    pointer-events: none;
+  }
+  100% {
+    transform: scale(1, 1);
     opacity: 0.5;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0) ;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0);
     border-radius: 10%;
   }
 }
-
-
 
 @keyframes lsha {
   0% {
   }
   25% {
-
   }
   50% {
     letter-spacing: 45px;
   }
-  75%{
-
+  75% {
   }
   100% {
     letter-spacing: 50px;
-  
   }
 }
-.hg:hover{
+.hg:hover {
   animation: hgh 1s backwards;
   box-shadow: 0px 0px 10px gold;
 }
 @keyframes hgh {
-  0%{
-    opacity: 0; 
-  box-shadow: 0px 0px 10px gold;
+  0% {
+    opacity: 0;
+    box-shadow: 0px 0px 10px gold;
   }
-  100%{box-shadow: 0px 0px 10px gold;}
+  100% {
+    box-shadow: 0px 0px 10px gold;
+  }
 }
-
-
 
 .th:hover {
   animation: thk 1.5s forwards;
@@ -103,49 +106,50 @@
 }
 .zz:hover {
   opacity: 1;
-  animation: zoomit .4s forwards;
+  animation: zoomit 0.4s forwards;
 }
 
 .zz {
-  opacity: .5;
+  opacity: 0.5;
   border-radius: 50%;
-  animation: zoomout .4s backwards;
+  animation: zoomout 0.4s backwards;
   z-index: 2;
-  
 }
-.card{
+.card {
   background-color: transparent;
   border: 0;
 }
 
 .m-types {
-    font-family: monospace;
-    animation: typing 1.2s steps(1000) forwards;
-  }
-  .m-types-2 {
-    font-family: monospace;
-    animation: typing-2 2s steps(1000) forwards;
-  }
+  font-family: monospace;
+  animation: typing 1.2s steps(1000) forwards;
+}
+.m-types-2 {
+  font-family: monospace;
+  animation: typing-2 2s steps(1000) forwards;
+}
 .m-fadeIn {
-    animation: fade-in 3s both;
+  animation: fade-in 3s both;
 }
 @keyframes thk {
-  0%{
+  0% {
   }
-  100%{
+  100% {
     transform: scale(1.05, 1.05);
   }
 }
 @keyframes thkk {
-  0%{pointer-events: none;
+  0% {
+    pointer-events: none;
     transform: scale(1.05, 1.05);
   }
-  100% {pointer-events: none;
+  100% {
+    pointer-events: none;
     transform: scale(1, 1);
   }
 }
 @keyframes thi {
-  100%{
+  100% {
     box-shadow: 0px 0px 10px rgba(255, 217, 0, 0);
     box-shadow: 0 0 50px 25px black inset;
   }
@@ -160,163 +164,193 @@
   }
 }
 @keyframes zoomit {
-  
   0% {
     box-shadow: 0px 0px 30px rgb(0, 238, 255);
-}
-50% {
-  transform: scale(1.3, 1.3);
+  }
+  50% {
+    transform: scale(1.3, 1.3);
 
-  box-shadow: 0px 0px 30px rgb(255, 0, 0);
-}
-  100% {opacity: 1.5;
-height:150%;
-transform: scale(1.1, 1.1);
-border-radius: 5px;
-box-shadow: 0px 0px 30px gold;
-}
-}
-@keyframes zoomout {
-  0% {opacity: 1.5;
-    height:150%;
+    box-shadow: 0px 0px 30px rgb(255, 0, 0);
+  }
+  100% {
+    opacity: 1.5;
+    height: 150%;
     transform: scale(1.1, 1.1);
     border-radius: 5px;
-    box-shadow: 0px 0px 30px gold;}
-    50% {transform: scale(1.3, 1.3);
-      box-shadow: 0px 0px 30px rgb(255, 0, 0);}
-  100%{box-shadow: 0px 0px 30px rgb(0, 238, 255);}
+    box-shadow: 0px 0px 30px gold;
+  }
 }
-  @keyframes typing {
-    from {
-      width: 0;
-    }
-    to {
-      width: 100%;
-    }
+@keyframes zoomout {
+  0% {
+    opacity: 1.5;
+    height: 150%;
+    transform: scale(1.1, 1.1);
+    border-radius: 5px;
+    box-shadow: 0px 0px 30px gold;
   }
-  @keyframes typing-2 {
-    0% {width: 0;}
-    10%{width: 10%;}
-    20%{width: 15%;}
-    30%{width: 20%;}
-    40%{width: 25%;}
-    50%{width: 30%;}
-    60%{width: 35%;}
-    70%{width: 40%;}
-    80%{width: 60;}
-    90%{width: 80;}
-    100% {width: 100%;}
+  50% {
+    transform: scale(1.3, 1.3);
+    box-shadow: 0px 0px 30px rgb(255, 0, 0);
   }
-  @keyframes fade-in {
-      from {
-          opacity: 0;
-      }
-      to {
-          opacity: 1;
-      }
+  100% {
+    box-shadow: 0px 0px 30px rgb(0, 238, 255);
   }
-  .m-icon:hover {
-    animation: forwards 1s mm-icon;
+}
+@keyframes typing {
+  from {
+    width: 0;
   }
+  to {
+    width: 100%;
+  }
+}
+@keyframes typing-2 {
+  0% {
+    width: 0;
+  }
+  10% {
+    width: 10%;
+  }
+  20% {
+    width: 15%;
+  }
+  30% {
+    width: 20%;
+  }
+  40% {
+    width: 25%;
+  }
+  50% {
+    width: 30%;
+  }
+  60% {
+    width: 35%;
+  }
+  70% {
+    width: 40%;
+  }
+  80% {
+    width: 60;
+  }
+  90% {
+    width: 80;
+  }
+  100% {
+    width: 100%;
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.m-icon:hover {
+  animation: forwards 1s mm-icon;
+}
 
+@keyframes i {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes o {
+  0% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+    background-color: rgba(137, 43, 226, 0.151);
+  }
+}
 
- 
-  @keyframes i {
-    0%{
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-  @keyframes o {
-    0% {opacity: 0.75;}
-    100% {opacity: 0;display: none;background-color: rgba(137, 43, 226, 0.151);}
-  }
-
-  .a-sass:hover + .i-sass {
-    display: block;
-    animation: i 0.5s  forwards ;
-  }
-  .a-postgress:hover + .i-postgress {
-    display: block;
-    animation: i 0.5s  forwards ;
-
-  }
-  .a-photoshop:hover + .i-photoshop {
-    display: block;
-    animation: i 0.5s  forwards ;
-  }
-  .a-vsc:hover + .i-vsc {
-    display: block;
-    animation: i 0.5s  forwards ;   
-
-  }
-  .a-github:hover + .i-github {
-    display: block;
-    animation: i 0.5s  forwards ;
-  }
-  .a-django:hover + .i-django {
-    display: block;
-    animation: i 0.5s  forwards ; 
-  }
-  .a-docker:hover + .i-docker {
-    display: block;
-    animation: i 0.5s  forwards ; 
-  }
-  .a-python:hover + .i-python{
-    display: block;
-    animation: i 0.5s  forwards ;   
-  }
-  .a-javascript:hover + .i-javascript{
-    display: block;
-    animation: i 0.5s  forwards ;    
-  }
-  .a-bootstrap:hover + .i-bootstrap{
-    display: block;
-    animation: i 0.5s  forwards ;      
-  }
-  .a-css3:hover + .i-css3 {
-    display: block;
-    animation: i 0.5s  forwards ; 
-  }
-  .a-expressjs:hover + .i-expressjs {
-    display: block;
-    animation: i 0.5s  forwards ; 
-  }
-  .a-git:hover + .i-git {
-    display: block;
-    animation: i 0.5s  forwards ; 
-  }
-  .a-gitlab:hover + .i-gitlab {
-    display: block;
-    animation: i 0.5s  forwards ; 
-  }
-  .a-heroku:hover + .i-heroku {
-    display: block;
-    animation: i 0.5s  forwards ; 
-  }
-  .a-html5:hover + .i-html5 {
-    display: block;
-    animation: i 0.5s  forwards ; 
-  }
-  .a-mongodb:hover + .i-mongodb {
-    display: block;
-    animation: i 0.5s  forwards ; 
-  }
-  .a-nodejs:hover + .i-nodejs {
-    display: block;
-    animation: i 0.5s  forwards ; 
-  }
-  .a-react:hover + .i-react {
-    display: block;
-    animation: i 0.5s  forwards ; 
-  }
-  .a-rest:hover + .i-rest {
-    display: block;
-    animation: i 0.5s  forwards ; 
-  }
-  .a-sublime:hover + .i-sublime {
-    display: block;
-    animation: i 0.5s  forwards ; 
-  }
+.a-sass:hover + .i-sass {
+  display: block;
+  animation: i 0.5s forwards;
+}
+.a-postgress:hover + .i-postgress {
+  display: block;
+  animation: i 0.5s forwards;
+}
+.a-photoshop:hover + .i-photoshop {
+  display: block;
+  animation: i 0.5s forwards;
+}
+.a-vsc:hover + .i-vsc {
+  display: block;
+  animation: i 0.5s forwards;
+}
+.a-github:hover + .i-github {
+  display: block;
+  animation: i 0.5s forwards;
+}
+.a-django:hover + .i-django {
+  display: block;
+  animation: i 0.5s forwards;
+}
+.a-docker:hover + .i-docker {
+  display: block;
+  animation: i 0.5s forwards;
+}
+.a-python:hover + .i-python {
+  display: block;
+  animation: i 0.5s forwards;
+}
+.a-javascript:hover + .i-javascript {
+  display: block;
+  animation: i 0.5s forwards;
+}
+.a-bootstrap:hover + .i-bootstrap {
+  display: block;
+  animation: i 0.5s forwards;
+}
+.a-css3:hover + .i-css3 {
+  display: block;
+  animation: i 0.5s forwards;
+}
+.a-expressjs:hover + .i-expressjs {
+  display: block;
+  animation: i 0.5s forwards;
+}
+.a-git:hover + .i-git {
+  display: block;
+  animation: i 0.5s forwards;
+}
+.a-gitlab:hover + .i-gitlab {
+  display: block;
+  animation: i 0.5s forwards;
+}
+.a-heroku:hover + .i-heroku {
+  display: block;
+  animation: i 0.5s forwards;
+}
+.a-html5:hover + .i-html5 {
+  display: block;
+  animation: i 0.5s forwards;
+}
+.a-mongodb:hover + .i-mongodb {
+  display: block;
+  animation: i 0.5s forwards;
+}
+.a-nodejs:hover + .i-nodejs {
+  display: block;
+  animation: i 0.5s forwards;
+}
+.a-react:hover + .i-react {
+  display: block;
+  animation: i 0.5s forwards;
+}
+.a-rest:hover + .i-rest {
+  display: block;
+  animation: i 0.5s forwards;
+}
+.a-sublime:hover + .i-sublime {
+  display: block;
+  animation: i 0.5s forwards;
+}

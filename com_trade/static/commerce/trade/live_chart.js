@@ -1,3 +1,48 @@
+E: 1640741707038
+
+e: "kline"
+
+k: Object
+
+B: "0"
+
+L: 1204668322
+
+Q: "171827.34543820"
+
+T: 1640741759999
+
+V: "3.59531000"
+
+c: "47803.47000000"
+
+f: 1204668250
+
+h: "47803.48000000"
+
+i: "1m"
+
+l: "47790.27000000"
+
+n: 73
+
+o: "47790.27000000"
+
+q: "182081.16965080"
+
+s: "BTCUSDT"
+
+t: 1640741700000
+
+v: "3.80983000"
+
+x: false
+
+
+
+
+
+
 var chart = LightweightCharts.createChart(document.body, {
 	width: 1200,
   height: 300,
@@ -93,6 +138,7 @@ console.log('Chart Loaded');
             // console.log(event.data)
             // chart.removeSeries(PriceSeries);
             var message = JSON.parse(event.data);
+            console.log('message: ',message)
             // console.log(message.E);
             var candles = message.k;
             // console.log(candles);

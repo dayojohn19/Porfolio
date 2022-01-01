@@ -24,11 +24,14 @@
         height: 100vh !important;
         background: #7f7fd5 !important;
         background: linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5) !important;
+        margin: 0 !important;
+        padding: 0 !important;
     }
     .header {
         position: sticky !important;
         background-color: rgba(208, 253, 245, 0.265) !important;
         top: 1% !important; 
+        
         }
     .sub_header { 
         display: flex !important;
@@ -43,6 +46,7 @@
         -webkit-font-smoothing: antialiased;
 
         font-weight: 800;
+
     }
     a {
         text-decoration: none;
@@ -66,7 +70,7 @@ a:active {
 }
 </style>
 
-<body style="position: relative;">
+<body style="position: relative; ">
     <div class="header">
         <div class="sub_header">
                     <b><a href="{% url 'freedive:home' %}">Home</a></b>
@@ -76,7 +80,6 @@ a:active {
         </div>
     </div>
 
-    
 
     <div style="height: fit-content;">
 

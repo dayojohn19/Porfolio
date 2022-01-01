@@ -1,0 +1,101 @@
+.commerce_container {
+  /* background-color: royalblue; */
+  width: 100%;
+  position: relative;
+}
+
+.commerce-container2 {
+  /* background-color: salmon; */
+  height: fit-content;
+  padding-bottom: 40px;
+  margin: 1vw;
+  text-align: center;
+  /* display: grid; */
+}
+
+.commerce-container2 > span > a > img {
+  /* height: 200px; */
+  width: 175px;
+}
+
+.commerce-container2 > span {
+  height: 175px;
+  width: 34%;
+  /* height: 35%; */
+  /* background-color: rgba(60, 71, 67, 0.272);
+  border-radius: 50%; */
+  /* box-shadow: 0 0 10px 0px rgba(251, 248, 95, 0.233) inset; */
+  padding: 1rem;
+  margin: 1vw;
+}
+/* .bank-pic {
+} */
+
+.commerce-hover {
+  opacity: 0.4;
+  animation: backwards 1s commerce-animation2;
+}
+.commerce-hover:hover {
+  animation: forwards 1s commerce-animation;
+}
+
+@keyframes commerce-animation2 {
+  0% {
+    transform: scale(1.5, 1.5);
+    opacity: 1;
+    z-index: 2;
+    margin: 2rem;
+    /* background-color: rgb(41, 41, 41);
+    box-shadow: 0px 0px 20px rgb(243, 243, 243);
+    border-radius: 50%; */
+  }
+  20% {
+    pointer-events: none;
+  }
+  30% {
+    pointer-events: none;
+  }
+  40% {
+    pointer-events: none;
+  }
+  50% {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.445);
+  }
+  60% {
+    pointer-events: none;
+  }
+  70% {
+    pointer-events: none;
+  }
+  100% {
+    transform: scale(1, 1);
+    opacity: 0.5;
+    /* box-shadow: 0px 0px 20px rgba(0, 0, 0, 0);
+    border-radius: 10%; */
+  }
+}
+
+@keyframes commerce-animation {
+  0% {
+  }
+  20% {
+  }
+  30% {
+  }
+  40% {
+  }
+  50% {
+  }
+  60% {
+  }
+  100% {
+    transform: scale(1.5, 1.5);
+    opacity: 1;
+    z-index: 2;
+    /* background-color: rgb(41, 41, 41); */
+    /* box-shadow: 0px 0px 20px rgb(243, 243, 243);
+    border-radius: 50%; */
+    /* padding: 0.5rem; */
+    margin: 2rem;
+  }
+}

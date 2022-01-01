@@ -15,12 +15,17 @@ def table(request):
     #  /////// AUTHENTICATE USER ? //////
     # if request.user.is_authenticated:
     #     return redirect('invest:index')
-    investors = Investor.objects.all().order_by('-invested_percentage')
-    investments = Total_Investment.objects.get(stock='php')
-    return render(request, 'commerce/invest/table.html', {
-        'investors': investors,
-        'investments': investments
-    })
+    try:
+        investors = Investor.objects.all().order_by('-invested_percentage')
+        investments = Total_Investment.objects.get(stock='php')
+        return render(request, 'commerce/invest/table.html', {
+            'investors': investors,
+            'investments': investments
+        })
+    except:
+        return render(request, 'commerce/invest/table.html', {
+
+        })
 
 
 def add_investor(request, csrf_token):

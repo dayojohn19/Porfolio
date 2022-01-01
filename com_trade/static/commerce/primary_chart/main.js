@@ -8,7 +8,23 @@ main_option = { width: 1000, height: 300 ,
 	},
     autoScale: true,
     invertScale: false,
-
+    // ============= FOR Minutes Trading ============
+    timeScale:	{
+        rightOffset: 3,
+        barSpacing: 12,
+        // fixLeftEdge: true,
+        // lockVisibleTimeRangeOnResize: true,
+        // rightBarStaysOnScroll: true,
+        // borderVisible: false,
+        // borderColor: '#fff000',
+        // visible: true,
+        timeVisible: true,
+        secondsVisible: false,
+    },
+    priceScale: {
+        position: 'left'
+    }
+    // ============ END ====================
     // priceScale: {indexedDB}
 };
 const Main_chart = LightweightCharts.createChart(main_position, main_option);

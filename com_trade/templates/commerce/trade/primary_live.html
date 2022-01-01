@@ -6,11 +6,8 @@
 
 
 {% block body %}
-
+<h1>Primary Live</h1>
 <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js" defer></script>
-
-
-
 
 <link rel="stylesheet" href="{% static 'commerce/primary_chart/primary_chart.css' %}">
 
@@ -23,19 +20,7 @@
 
 
 
-<script src="{% static 'commerce/primary_chart/volume_trade.js' %}" defer></script>
-
-<div>
-    <!-- <h1>Volume / Trade </h1> -->
-    <div id="volume_trade_position"></div>
-</div>
+<script src="{% static 'commerce/primary_chart/series_live.js' %}" defer></script>
 
 
-<!-- series -->
-<script src="{% static 'commerce/primary_chart/series.js' %}" defer></script>
-<style>
-    body {
-        background-color: rgba(255, 235, 198, 0.76);
-    }
-</style>
 {% endblock %}

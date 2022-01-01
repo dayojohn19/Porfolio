@@ -18,13 +18,31 @@ Volume_Trade_chart.applyOptions({
         },
         textColor: 'white',
     },
+    // ============= FOR Minutes Trading ============
+    timeScale:	{
+        rightOffset: 3,
+        barSpacing: 12,
+        // fixLeftEdge: true,
+        // lockVisibleTimeRangeOnResize: true,
+        // rightBarStaysOnScroll: true,
+        // borderVisible: false,
+        // borderColor: '#fff000',
+        // visible: true,
+        timeVisible: true,
+        secondsVisible: false,
+    },
+    priceScale: {
+        position: 'left'
+    }
+    // ============ END ====================
+
         // priceScale: {
         //     mode:3
         // }
     //     priceScale: {
-    //     position: 'right',
+    //     position: 'left',
     //     mode: 2,
-    //     autoScale: false,
+    //     autoScale: true,
     //     invertScale: false,
     //     alignLabels: false,
     //     borderVisible: false,
@@ -52,7 +70,7 @@ volume_trade_series_option = {
 volume_trade_series = Volume_Trade_chart.addAreaSeries(volume_trade_series_option);
 // 
 volume_price_series_option = {
-        topColor: 'rgba(253, 201, 103, 0.76)',
+    topColor: 'rgba(253, 201, 103, 0.76)',
     bottomColor: 'rgba(21, 146, 230, 0)',
     lineColor: 'rgba(253, 200, 103, 0.919)',
     lineStyle: 0,
@@ -65,6 +83,20 @@ volume_price_series_option = {
 }
 volume_price_series = Volume_Trade_chart.addAreaSeries(volume_price_series_option)
 // 
+
+volume_price_open_series_option = {
+    topColor: 'rgba(255, 235, 198, 0.76)',
+    bottomColor: 'rgba(21, 146, 230, 0)',
+    lineColor: 'rgba(255, 235, 198, 0.76)',
+    lineStyle: 0,
+    lineWidth: 1,
+    crosshairMarkerVisible: false,
+    crosshairMarkerRadius: 3,
+    crosshairMarkerBorderColor: 'rgba(255, 235, 198, 0.76)',
+    crosshairMarkerBackgroundColor: 'rgba(255, 235, 198, 0.76)',
+    lastPriceAnimation: LightweightCharts.LastPriceAnimationMode.Continuous,
+}
+volume_price_open_series = Volume_Trade_chart.addAreaSeries(volume_price_open_series_option)
 
 
 volume_base_series_option = {

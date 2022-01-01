@@ -18,6 +18,10 @@ def live_chart(request):
 
 def primary_chart(request):
     return render(request, 'commerce/trade/primary_chart.html')
+
+
+def primary_live(request):
+    return render(request, 'commerce/trade/primary_live.html')
 # ------------------------
 
 # def open_csv(request):
@@ -41,10 +45,13 @@ def new_data(request):
         # intervals
         # KLINE_INTERVAL_12HOUR
         # KLINE_INTERVAL_15MINUTE
+        # KLINE_INTERVAL_15MINUTE
         # KLINE_INTERVAL_3DAY
         # KLINE_INTERVAL_1DAY
+        # KLINE_INTERVAL_1MINUTE
+        # KLINE_INTERVAL_1MINUTE
         klines = client.get_historical_klines(
-            crypto, Client.KLINE_INTERVAL_1DAY, starting)
+            crypto, Client.KLINE_INTERVAL_3DAY, starting)
         # ---------- SAVING -------- save the fetched data t0 csv
         filed = f"{crypto}-{starting}"
 
@@ -80,7 +87,8 @@ def new_data(request):
 
 
 def fetch_datas(request):
-    filename = 'BTCUSDT-Jan. 1, 2021.csv'
+
+    filename = 'BTCUSDT-Dec. 31, 2021.csv'
     from django.http import JsonResponse
     import csv
     klines = []
