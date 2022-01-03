@@ -1,8 +1,7 @@
 from django.urls import path
-from . import views
+from . import views, sendMail
 
-
-app_name="index"
+app_name = "index"
 urlpatterns = [
     # path("<path:path>", views.path, name="path"),
     path("", views.index, name="index"),
@@ -13,4 +12,5 @@ urlpatterns = [
     path("s/", views.s, name="s"),
     path("fish/", views.fish, name="fish"),
     path("commerce/", views.commerce, name="commerce"),
+    path("sendMail/", sendMail.sendmail, name="sendmail")
 ]

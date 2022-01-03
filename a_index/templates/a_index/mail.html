@@ -1,0 +1,22 @@
+{% extends "a_index/layout.html" %}
+
+{% block body %}
+{% load static %}
+<h1>Mail</h1>
+{% if visited %}
+    <h1>Visited</h1>
+    {{visited}}
+{% endif %}
+
+
+
+<!-- <script>
+    window.addEventListener('beforeunload', function (e) {
+            // Cancel the event
+            e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+            console.log('LEFT:')
+            e.returnValue = '';
+        });
+</script> -->
+
+{% endblock %}

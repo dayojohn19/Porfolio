@@ -316,7 +316,7 @@ function interval_per_minute_test_case(respond, i) {
 
 
     // TEST CASES TEST CASES TEST CASES
-function    Constraint_series(time, side, value) {
+function Constraint_series(time, side, value) {
     if (side == 'buy'){
         markers.push({
             time    :time,
@@ -338,8 +338,9 @@ function    Constraint_series(time, side, value) {
         sell_value += value;
     }
     black_position +=1;
-
 }
+
+
 function get_Average_Ratio(test_cases){
     if (test_cases.length >=450){ //algo_adjust test_case
         test_cases.shift()

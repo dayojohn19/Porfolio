@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{% static 'commerce/commerce.css' %}">
 
 
-    <form method='POST' action="{% url 'commerce:load' %}">
+    <!-- <form method='POST' action="{% url 'commerce:load' %}">
         <h1>Send Money</h1>
         {% csrf_token %}
         <input type="number" name="load" placeholder="load">
@@ -18,8 +18,9 @@
             {% endfor %}
         </select>
         <button type="submit">Send</button>
-    </form>
+    </form> -->
     
+
 <div class="games_container absolute">
     <!--  -->
     <div class="section invest">
@@ -28,9 +29,9 @@
                 <h2>Invest</h2>
             </a>
             <!-- <a href="{% url 'bank:index' %}"><h2>Bank</h2></a> -->
-            <b>Instruction</b>
-            <p>&#160&#160 &nbsp;
-                You can calculate the actual Credit with fee inclusionive using BDO Securities
+            <b style="text-align: left;">Instruction: </b>
+            <p class="m-types">&#160&#160 &nbsp;
+                You can calculate the actual Credit including fee, convenient especially for active/day trader
             </p>
             <span><button><a href="{% url 'invest:index' %}">Go Invest</a></button></span></p>
         </div>
@@ -46,8 +47,8 @@
                 <h2>Trade</h2>
             </a>
             <!-- <a href="{% url 'bank:index' %}"><h2>Bank</h2></a> -->
-            <b>Instruction</b>
-            <p>&#160&#160 &nbsp;
+            <b style="text-align: left;">Instruction: </b>
+            <p class="m-types">&#160&#160 &nbsp;
                 This is a Trading App that acknowledge what position you should buy and sell asset
             </p>
             <span><button><a href="{% url 'trade:index' %}">Go Inside</a></button></span></p>
@@ -63,15 +64,15 @@
                     and <strong>Auciton</strong>
                     your items here, first you need to have credits, 
                     
-                    <span><button><a href="{% url 'auction:index' %}">Go Inside</a></button></span></p>
+                    <span><button><a href="{% url 'auction:index' %}">Go Inside</a></button></span>
+                </p>
                     <hr>
-                    <b>Instruction for Auctioner</b>
-                    <p>Create Auction add title to your item and image file then red Upload 
+                    <b style="text-align: left;">Instruction:  for Auctioner</b>
+                    <p class="m-types"> &#160&#160 &nbsp; Create Auction add title to your item and image file then red Upload 
                         describe your item and category, put initial Bid, make your lowest bid is below 50% of the item's market price  </p>
                         <hr>
-                    <b>Instruction for Bidder</b>
-                    <p>
-                        <strong>Bid Now!</strong>
+                    <b style="text-align: left;">Instruction:  for Bidder</b>
+                    <p class="m-types">    <strong> &#160&#160 &nbsp; Bid Now!</strong>
                         to see more details of the picture , you can put comment , add it to watchlist to make sure that you can check the item you wanted to win, the Bid should always be higher than 25% of the highest Bid
                     </p>
                     
@@ -89,14 +90,14 @@
                 <span><button><a href="{% url 'sale:index' %}">Go Inside</a></button></span></p>
             </p>
             <hr>
-            <b>Instruction for Seller</b>
-            <p>&#160&#160  &nbsp;
+            <b style="text-align: left;">Instruction:  for Seller</b>
+            <p class="m-types"> &#160&#160  &nbsp;
                 You must have credits the same as the price you wanted to sell, and you need to update your product timely as it has expiration date on the store , you can check your buyers on <strong>Upper right</strong> Cart inside Customers,
                 <strong>Customers</strong> will order and able to cancel order until you deliver .
             </p>
             <hr>
-            <b>Instruction for Buyer</b>
-            <p>&#160&#160  &nbsp;
+            <b style="text-align: left;">Instruction:  for Buyer</b>
+            <p class="m-types"> &#160&#160  &nbsp;
                 You must have credits the same as the price you wanted to buy, order item and the price will subtract to your credit, you can still stop the order to regain the credit until the seller deliver your order
             </p>
             
@@ -108,8 +109,8 @@
         <div class="game">
             <a href="#"><h2>Bank</h2></a>
             <!-- <a href="{% url 'bank:index' %}"><h2>Bank</h2></a> -->
-            <b>Instruction</b>
-            <p>&#160&#160  &nbsp;
+            <b style="text-align: left;">Instruction: </b>
+            <p class="m-types">&#160&#160  &nbsp;
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt itaque laborum nobis blanditiis hic, sequi asperiores quasi illo voluptas a praesentium in expedita dolorum officiis deleniti necessitatibus quaerat? Distinctio, Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam vero neque, numquam asperiores nam facere corrupti totam sequi unde in consequatur architecto repudiandae animi praesentium. Eveniet tenetur saepe dolor quasi.
             </p>
         </div>

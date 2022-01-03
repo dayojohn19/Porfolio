@@ -12,6 +12,17 @@ from django.contrib.auth.models import AbstractUser
 from django.core.files import storage
 
 
+class User_visitor(models.Model):
+    ip = models.CharField(max_length=64)
+    location = models.CharField(max_length=264)
+    address = models.CharField(max_length=164)
+    contact = models.CharField(max_length=164, blank=True)
+    visit_count = models.IntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.address}"
+
+
 class User_Coins(models.Model):
     user_id = models.IntegerField()
     hashed = models.CharField(max_length=64, blank=True)
@@ -64,7 +75,6 @@ class Image(models.Model):
 class Userimage(models.Model):
     name = models.CharField(max_length=100)
     image = models.ImageField(upload_to='fancier_profiles')
-
 
     def __str__(self):
         return self.name

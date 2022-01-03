@@ -51,7 +51,7 @@ def new_data(request):
         # KLINE_INTERVAL_1MINUTE
         # KLINE_INTERVAL_1MINUTE
         klines = client.get_historical_klines(
-            crypto, Client.KLINE_INTERVAL_3DAY, starting)
+            crypto, Client.KLINE_INTERVAL_1MINUTE, starting)
         # ---------- SAVING -------- save the fetched data t0 csv
         filed = f"{crypto}-{starting}"
 
@@ -88,7 +88,7 @@ def new_data(request):
 
 def fetch_datas(request):
 
-    filename = 'BTCUSDT-Dec. 31, 2021.csv'
+    filename = 'BTCUSDT-Jan. 1, 2022.csv'
     from django.http import JsonResponse
     import csv
     klines = []

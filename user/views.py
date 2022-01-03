@@ -11,7 +11,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 
-from .models import Mypigeons, Order, User_Coins
+from .models import Mypigeons, Order, User_Coins, User_visitor
 from g_pigeon_race.models import Record
 from geopy.geocoders import Nominatim
 # xx = User.objects.get(username=request.user.username)
@@ -20,6 +20,71 @@ from geopy.geocoders import Nominatim
 from app_mail import models as mail
 ###
 from django.views.decorators.csrf import csrf_exempt
+
+
+@csrf_exempt
+def get_user_ip(request):
+    # add option updating USER LOCATION and CONTACT and DURATION
+    print('Getting User Ip....')
+    try:
+        import ssl  # adding certificate
+        import urllib.request
+        import requests
+        ssl._create_default_https_context = ssl._create_unverified_context  # adding certificate
+        external_ip = urllib.request.urlopen(
+            'https://ident.me').read().decode('utf8')
+        your_ip = external_ip
+        try:
+            print('Visiting...')
+            visitor = User_visitor.objects.get(ip=your_ip)
+            visitor.visit_count += 1
+            visitor.save()
+            try:
+                if not visitor.contact:
+                    if request.method == 'POST':
+                        data = json.loads(request.body)
+                        print(data['contact'])
+                        contact = data['contact']
+                        visitor.contact = contact
+                        visitor.save()
+                    # ADD SEND EMAIL at Python FOLDER send_email
+                    return JsonResponse(visitor.contact, safe=False)
+            except:
+                return JsonResponse('get_contact', safe=False)
+
+            print('Visited')
+            return JsonResponse(your_ip, safe=False)
+        except:
+            print('First Time Visiting...')
+            your_location = requests.get(
+                f"https://geolocation-db.com/json/{your_ip}&position=true").json()
+    #   ADDRESS
+            geoLoc = Nominatim(user_agent="GetLoc")
+            user_long = your_location['longitude']
+            user_lat = your_location['latitude']
+            your_address = geoLoc.reverse(f"{user_lat}, {user_long}")
+            #
+            new_vistor = User_visitor()
+            new_vistor.location = your_location
+            new_vistor.ip = your_ip
+            new_vistor.address = your_address
+            new_vistor.visit_count = 1
+            new_vistor.save()
+            print('Visited ')
+            print(your_address)
+            print(your_location['country_name'])
+            print(your_ip)
+
+            # visitor = User_visitor.objects.get(ip=1)
+
+            return JsonResponse('first_time', safe=False)
+    except:
+        print('FAIL')
+        # new_visitor = User_visitor()
+        # new_visitor.address =
+        # new_visitor.location =
+        return JsonResponse('no_ip', safe=False)
+        # return print('False')
 
 
 def printit(request):

@@ -1,14 +1,23 @@
-
 #calculator {
   background-color: rgb(202, 202, 202);
   width: 350px;
-  height: 650px;
+  height: fit-content;
   border: none;
   border-radius: 8px;
   box-shadow: 0 0 10px rgb(183, 183, 183);
   padding: 0.5rem;
   margin: auto auto;
   overflow: auto;
+}
+
+#about {
+  margin-top: 2rem;
+}
+#about h1 {
+  text-align: center;
+}
+a {
+  text-decoration: none;
 }
 .stock_header {
   margin: 0.5rem;

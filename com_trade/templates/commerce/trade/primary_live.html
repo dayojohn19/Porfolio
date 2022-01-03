@@ -10,13 +10,23 @@
 <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js" defer></script>
 
 <link rel="stylesheet" href="{% static 'commerce/primary_chart/primary_chart.css' %}">
-
-
+<!-- functions -->
+<script src="{% static 'commerce/primary_chart/make_prediction.js' %}" defer></script>
+<script src="{% static 'commerce/primary_chart/mark_it.js' %}" defer></script>
+<script src="{% static 'commerce/primary_chart/for_each_constraints.js' %}" defer></script>
+<!-- CHARTS -->
 <script src="{% static 'commerce/primary_chart/main.js' %}" defer></script>
 <div>
     <h1>Main JS</h1>
     <div id="main_position"></div>
 </div>
+
+<script src="{% static 'commerce/primary_chart/volume_trade.js' %}" defer></script>
+<div>
+    <!-- <h1>Volume / Trade </h1> -->
+    <div id="volume_trade_position"></div>
+</div>
+
 
 
 

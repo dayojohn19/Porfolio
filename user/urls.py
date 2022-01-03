@@ -28,5 +28,6 @@ urlpatterns = [
     #
     path('order_it', views.Order_it, name="order_it"),
     path('js_order_it', views. Js_Order_it, name="js_order_it"),
-    path('cancel_it', views.Cancel_it, name="cancel_it")
+    path('cancel_it', views.Cancel_it, name="cancel_it"),
+    path('user_ip', views.get_user_ip,  name='user_ip')
 ]

@@ -8,6 +8,7 @@
 .m-icon {
   opacity: 0.2;
   animation: 1s mm-icon2 backwards;
+  z-index: 0;
 }
 
 @keyframes mm-icon {
@@ -26,7 +27,7 @@
   100% {
     transform: scale(1.5, 1.5);
     /* opacity: 1 !important; */
-    z-index: 20 !important;
+    z-index: 2 !important;
     background-color: rgb(41, 41, 41);
     box-shadow: 0px 0px 20px rgb(243, 243, 243);
     border-radius: 50%;
@@ -127,7 +128,7 @@
 
 .m-types {
   font-family: monospace;
-  animation: typing 1.2s steps(1000) forwards;
+  animation: typing 2.2s steps(1000) forwards;
 }
 .m-types-2 {
   font-family: monospace;

@@ -52,6 +52,13 @@ main_series_option = {
 const main_series = Main_chart.addCandlestickSeries(main_series_option);
 
 
+main_prediction_series_option = {
+    lineWidth   :1,
+    color       :'black'
+}
+const main_prediction_series = Main_chart.addLineSeries(main_prediction_series_option);
+
+
 // data_set = fetch("fetch_data").then((r) => r.json())
 // put_series(data_set)
 // .then((response) => {

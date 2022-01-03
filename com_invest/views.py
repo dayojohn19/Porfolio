@@ -11,6 +11,10 @@ def index(request):
     return render(request, 'commerce/invest/index.html')
 
 
+def about(request):
+    return render(request, 'commerce/invest/about.html')
+
+
 def table(request):
     #  /////// AUTHENTICATE USER ? //////
     # if request.user.is_authenticated:

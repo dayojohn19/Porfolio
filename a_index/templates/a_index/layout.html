@@ -41,7 +41,9 @@
             <h1 class="o-green">John Foreign</h1>
         </div>
 
-        <div class="container-sub-2-1 a-right" style="z-index: 100;">
+        <div class="container-sub-2-1 a-right" style="z-index: 100 !important;">
+            <a href="{% url 'index:sendmail' %}">Send mail</a>
+
             <span><a class="" href="{% url 'user:userpage' %}">{{request.user.username}} Page</a></span>
             {% if request.user.is_anonymous %}
             <span><a class=""  href="{% url 'user:login'  %}">Login</a></span>
@@ -106,6 +108,40 @@ fetch(month, {
 </script> -->
 
 
+<script defer>
+    function user_acticvity() {
+        // ===== GETTING IP ====
+        fetch('/user/user_ip').then(response => response.json()).then(result => {
+            console.log(result);
+            if (result == '') {
+                contact = prompt('Your: \n  | Moblie Number |  or  | Email Address | ', '');
+                if (contact) {
+                     fetch('/user/user_ip', {
+                         method: 'POST',
+                         body: JSON.stringify({
+                             contact: contact
+                         })
+                     })
+                    alert('Thank you')
+                    //insert fetch to save
+                }   
+            }
+            if (result == 'first_time'){
+                alert('We are accepting Cookies.')
+            }
+            return result
+        });
+        // ===== GETTING IP ====
+    }
+    x = user_acticvity()
+
+
+
+
+</script>
+<script>
+
+</script>
 
 
 </html>

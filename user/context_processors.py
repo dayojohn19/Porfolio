@@ -15,7 +15,10 @@ def add_variable_to_context(request):
         closed = Closedbid.objects.filter(winner=request.user.username)
         watchlist = Watchlist.objects.filter(user=request.user.username)
         you_coins = User_Coins.objects.filter(user_id=request.user.id)
+        
+        visited = 1
         return {
+            'visited': visited,
             'orders': len(orders),
             'buyers': len(buyers),
             'users': User.objects.all(),

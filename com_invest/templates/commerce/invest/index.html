@@ -38,19 +38,21 @@
     <input readonly id="sell_get">
     <br>
     <hr>
+        
+    Selling Price: ₱
+    <input disabled id="incremented_price">
+    <br>
     <label for="profit">Profit: ₱</label>
     <input readonly id="profit">
     <br>
     increment
     <input readonly id="increment" value="0" >%
-    <br>
-    Incremented: ₱
-    <input disabled id="incremented_price">
+
     <br>
 
+    
 
-
-    <hr>
+    <!-- <hr>
     <p id="stock_buy">
         If you <strong>bought</strong>
         <strong id="stock"><i></i></strong>
@@ -61,8 +63,13 @@
         it will total
         <strong id="stock_cost"><i></i></strong>
         including all trading fees
-    </p>
+    </p> -->
 
+</div>
+<div id="about">
+    
+    <h1><a href="{% url 'invest:about' %}">About</a></h1>
+    <small>Understand?</small>
 </div>
 
 {% endblock %}
