@@ -1,3 +1,5 @@
+
+from django.core.mail import send_mail
 from django.http import JsonResponse
 from .forms import ImageForm, UserImageForm
 from user.models import Chain
@@ -85,6 +87,54 @@ def get_user_ip(request):
         # new_visitor.location =
         return JsonResponse('no_ip', safe=False)
         # return print('False')
+
+
+def send_email(request):
+    from django.core.mail import send_mail
+    from webpage import settings
+    subject = "Greetings"
+    msg = "Congratulations for your success"
+    to = "dayo_john16@yahoo.com"
+    res = send_mail(subject, msg, settings.EMAIL_HOST_USER, [to])
+    if(res == 1):
+        msg = "Mail Sent Successfuly"
+    else:
+        msg = "Mail could not sent"
+    return HttpResponse(msg)
+
+
+def get_pdf(request):
+    from reportlab.pdfgen import canvas
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="file.pdf"'
+    p = canvas.Canvas(response)
+    p.setFont("Times-Roman", 55)
+    p.drawString(100, 700, "Hello, Javatpoint.")
+    p.showPage()
+    p.save()
+    return response
+
+
+def get_csv(request):
+    import csv
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="file.csv"'
+    employees = Mypigeons.objects.all()
+    writer = csv.writer(response)
+    for employee in employees:
+        writer.writerow([employee.owner, employee.name, employee.ring])
+    return response
+
+
+def send_sms(request):
+    from sms import send_sms
+
+    send_sms(
+        'Here is the message',
+        '+639568543802',
+        ['+639568543802'],
+        fail_silently=False
+    )
 
 
 def printit(request):

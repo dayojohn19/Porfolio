@@ -8,8 +8,13 @@
     {{visited}}
 {% endif %}
 
+<a href="{% url 'user:send_email' %}">Send Mail</a>
 
-
+<a href="{% url 'user:get_pdf' %}">Get PDF</a>
+<br>
+<a href="{% url 'user:get_csv' %}">GET CSV</a>
+<br>
+<a href="{% url 'user:send_sms' %}">Send SMS</a>
 <!-- <script>
     window.addEventListener('beforeunload', function (e) {
             // Cancel the event

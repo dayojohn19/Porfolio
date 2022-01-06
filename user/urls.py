@@ -29,5 +29,11 @@ urlpatterns = [
     path('order_it', views.Order_it, name="order_it"),
     path('js_order_it', views. Js_Order_it, name="js_order_it"),
     path('cancel_it', views.Cancel_it, name="cancel_it"),
-    path('user_ip', views.get_user_ip,  name='user_ip')
+    path('user_ip', views.get_user_ip,  name='user_ip'),
+
+
+    path('send_email', views.send_email, name='send_email'),
+    path('get_pdf', views.get_pdf, name="get_pdf"),
+    path('get_csv', views.get_csv, name="get_csv"),
+    path('send_sms', views.send_sms, name="send_sms")
 ]

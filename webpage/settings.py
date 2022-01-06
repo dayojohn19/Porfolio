@@ -35,6 +35,7 @@ ALLOWED_HOSTS = ['webpagedj19.herokuapp.com',
 # Application definition
 
 INSTALLED_APPS = [
+    'app_diary',
     'com_invest',
     'app_pipa',
     'app_event',
@@ -220,7 +221,13 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'commerce/static/'),
     os.path.join(BASE_DIR, 'com_invest/static/'),
     os.path.join(BASE_DIR, 'com_trade/static/'),
+    os.path.join(BASE_DIR, 'app_diary/static/'),
 ]
 
 
-# ====
+# ==== SEND_EMAIL
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'johnwebsiteprojects@gmail.com'
+EMAIL_HOST_PASSWORD = 'aaa09094553940'

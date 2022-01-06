@@ -43,7 +43,7 @@
     {% endfor %}
 
 </table>
-
+<h2>Make Voting SYstem</h2>
 
 
 
@@ -53,7 +53,9 @@
 <form id="form" method="POST" action="{% url 'invest:add_investor' csrf_token %}">
     {% csrf_token %}
     <h2> Add Investor </h2>
-    <input readonly name="investor_name" value="{{request.user.username}}">
+    <!-- <input readonly name="investor_name" value="{{request.user.username}}"> -->
+    <input name="investor_name" value="{{request.user.username}}">
+
     <!-- <select name="investor_name">
         <option value="a">a</option>
         <option value="b">b</option>

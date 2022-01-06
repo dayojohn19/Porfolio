@@ -6,9 +6,14 @@
     <link rel="stylesheet" href="{% static 'games/games.css' %}">
 
 <div class="games_container">
+    <div class="game">
+        <img src="{% static 'application/images/diary.png' %}">
+        <a href="{% url 'diary:index' %}">Diary</a>
+    </div>
+
     <div class="game" >
         <img src="{% static 'application/images/event.png' %}">
-        <a href="{% url 'event:home' %}">freedive</a>
+        <a href="{% url 'event:home' %}">Event</a>
     </div>
 
     <div class="game">
