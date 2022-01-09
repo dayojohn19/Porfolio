@@ -9,7 +9,8 @@ urlpatterns = [
     path('questions/<str:department>/<str:level>/<str:user_function>/getit',
          views.new_question, name="new_question"),
     # path('new_question', views.new_question, name="new_question"),
-    path('add_score/<str:side>/<int:tries>/<str:score>/<str:user_ip>',
+    path('add_score/<str:side>/<str:tries>/<str:score>/<str:user_ip>',
          views.add_score, name="add_score"),
-    path('get_score/<str:ip>', views.get_score, name="get_score")
+    path('get_score/<str:ip>', views.get_score, name="get_score"),
+    path('ip/register/<str:user_ip>',   views.register_ip, name="register_ip")
 ]

@@ -52,10 +52,12 @@
             }
             // console.log('Result: ', result);
             document.querySelector("#user_ip").value = result
-            side = 'correct';
-            tries   =   0;  
-            score   =   0;
-            fetch(`/reviewer/add_score/${side}/${tries}/${score}/${result}`).then(response => response.json()).then(result => {
+            // side = 'correct';
+            // tries   =   0;  
+            // score   =   0;
+            fetch(`ip/register/${result}`).then(response => response.json()).then(result => {
+                console.log('RESULT: ', result)
+                console.log('RESULT: ', result)
                 console.log('RESULT: ', result)
             })
             // fetch(`/reviewer/get_score/${result}`).then(response => response.json()).then(data => {
@@ -94,12 +96,11 @@
                     tries = 0;
                     result = 0;
                 // }
-                console.log("ADD SCORE: ")
-                console.log("ADD SCORE: ")
-                console.log("ADD SCORE: ")
-                console.log("ADD SCORE: ")
-            console.log("ADD SCORE: ")
+
                 fetch(`/reviewer/add_score/${side}/${tries}/${score}/${user_ip}`).then(response => response.json()).then(result => {
+                    console.log('RESULT: ', result)
+                    console.log('RESULT: ', result)
+                    console.log('RESULT: ', result)
                     console.log('RESULT: ', result)
                 })
                 // }

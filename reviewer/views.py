@@ -70,6 +70,20 @@ def get_score(request, ip):
         return JsonResponse(0, safe=False)
 
 
+def register_ip(request, user_ip):
+    from .models import User_score
+    from django.http import JsonResponse
+
+    try:
+        current_user = User_score.objects.get(ip=user_ip)
+        return JsonResponse('Already Registered', safe=False)
+
+    except:
+        current_user = User_score(ip=user_ip)
+        current_user.save()
+        return JsonResponse('Registered', safe=False)
+
+
 def updateScore(side, score, ip, tries):
     from .models import User_score
     try:
