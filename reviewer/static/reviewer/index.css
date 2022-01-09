@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
+* {
+  font-family: "Nunito Sans", sans-serif;
+}
+
+body {
+  background-color: rgb(255, 255, 255);
+}
+
+#choose {
+  position: absolute;
+  top: 10vh;
+}
+#index {
+  position: relative;
+  height: fit-content;
+}
+#index h1 {
+  text-align: center;
+}
+#index #choose {
+  text-align: center;
+  height: 50vh;
+  vertical-align: middle;
+  position: relative;
+}
+
+#engine {
+  background-color: rgb(205, 177, 253);
+}
+#deck {
+  background-color: rgb(152, 231, 251);
+}
+#management {
+  background-color: rgb(255, 165, 165);
+}
+#operational {
+  background-color: rgb(255, 214, 200);
+}
+#user_department {
+  background-color: rgb(215, 229, 255);
+
+  border-radius: 8px;
+}
+.choose_button {
+  border: none;
+  border-radius: 8px;
+  padding: 1.9rem;
+  margin: 0.42rem;
+  width: 60%;
+
+  margin-bottom: 20vw;
+  font-size: x-large;
+}
+.choose_button:hover {
+  /* transform: scale(1, 1.4); */
+  /* background-color: green */
+  background-color: greenyellow;
+  animation: zoom 1.5s forwards;
+}
+@keyframes zoom {
+  0% {
+  }
+  50% {
+    color: rgb(255, 255, 255);
+  }
+  100% {
+    background-color: rgb(255, 57, 47);
+    color: rgb(255, 255, 255);
+    transform: scale(1.05, 1.25);
+  }
+}
+
+#user_department {
+  text-transform: uppercase;
+}
+#had_chosen {
+  display: none;
+}
+#management,
+#operational {
+  display: block;
+  margin: auto auto;
+  margin-top: 1rem;
+}

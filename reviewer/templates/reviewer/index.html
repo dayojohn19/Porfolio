@@ -1,0 +1,27 @@
+{% extends "reviewer/layout.html" %}
+{% load static %}
+{% block body %}
+<link href="{% static 'reviewer/index.css' %}" rel="stylesheet">
+<div id="index">
+    <h1>Reviewer</h1>
+    
+    <div id="choose">
+        <button  class="choose_button" id="deck" onclick="chooseLevel(id)" >OIC DECK</button>
+        <button  class="choose_button" id="engine" onclick="chooseLevel(id)" >OIC Engine</button>
+    </div>
+
+
+<script src="{% static 'reviewer/index.js' %}" defer></script>
+
+
+
+    <div id="had_chosen">
+        <small><button onclick="changeDepartment()">Change Department</button></small>
+        <h1><strong id="user_department"></strong> Competency</h1>
+        <button class="choose_button" id="management" onclick="get_Questions(id)">Management Level</button>
+        <button class="choose_button" id="operational" onclick="get_Questions(id)">Operational Level</button>
+    </div>
+
+<!-- <h2>Note: REMOVE spaces from csv file</h2> -->
+</div>
+{% endblock %}

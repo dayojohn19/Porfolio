@@ -1,0 +1,129 @@
+{% extends "reviewer/layout.html" %}
+{% load static %}
+{% block body %}
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
+* {
+  font-family: "Nunito Sans", sans-serif;
+}
+input {
+    background-color: rgba(198, 255, 114, 0.301);
+    font-size: x-large;
+    width: 40%;
+    border: none;
+}
+#userScore  {
+    width: 15%;
+    padding: 0.3rem;
+    
+}
+
+</style>
+<div id="question">
+    <h1> <input id="userFunction" readonly></h1>
+    
+    <br>
+    <input id="tries"   type="number" readonly hidden value="0">
+    <input readonly hidden id="user_ip">
+</div>
+
+
+<!-- <div class="main-container" id="container-1"> -->
+<div class="" id="container-1">
+    <p class="question-paragraph" id="container-1-question"></p>
+    <!-- ANSWER --><!-- ANSWER --><!-- ANSWER --><!-- ANSWER --><!-- ANSWER -->
+    <p hidden id="container-1-answer"></p>
+    <!-- ANSWER --><!-- ANSWER --><!-- ANSWER --><!-- ANSWER -->
+    <button id="a1" class="question-button" value="" onclick="isRight(value, id)"></button>
+    <button id="b1" class="question-button" value="" onclick="isRight(value, id)"></button>
+</div>
+
+<div class="main-container" id="container-2">
+    <p class="question-paragraph" id="container-2-question"></p>
+    <p id="container-2-answer"></p>
+    <button id="a2" class="question-button" value="" onclick="isRight(value, id)"></button>
+    <button id="b2" class="question-button" value="" onclick="isRight(value, id)"></button>
+</div>
+
+
+
+<small>Score: <input id="userScore" readonly value=0></small>
+<label id="minutes">00</label>:<label id="seconds">00</label>
+<style>
+
+    .main-container{
+        display: none;
+    }
+    .question-paragraph {
+        background-color: rgba(164, 241, 255, 0.664);
+        padding: 1rem;
+        font-size: larger;
+        letter-spacing: 0.11rem;
+        word-spacing: 0.5rem;
+        text-align: justify;
+        text-indent: 50px;
+        margin-left: 2.5vw;
+        margin-right: 2.5vw;
+    }
+    #question h1 {
+        text-align: center;
+    }
+    .question-button {
+        display: block;
+        width: 50%;
+        font-size: larger;
+        padding: 0.5rem;
+        margin: 1rem;
+        border-radius: 8px;
+        border:none;
+    }
+    .question-button:hover  {
+        background-color: greenyellow;
+    }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+<script defer>
+    // COUNT UP
+        var minutesLabel = document.getElementById("minutes");
+        var secondsLabel = document.getElementById("seconds");
+        var totalSeconds = 0;
+        setInterval(setTime, 1000);
+
+        function setTime() {
+            ++totalSeconds;
+            secondsLabel.innerHTML = pad(totalSeconds % 60);
+            minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+
+            if (secondsLabel.innerHTML == 30) { // change algo-adjust
+                totalSeconds = 0;
+                document.querySelector(".question-button").click();
+                // alert('greter than 10s')
+                
+            }
+        }
+
+        function pad(val) {
+            var valString = val + "";
+            if (valString.length < 2) {
+                return "0" + valString;
+            } else {
+                return valString;
+            }
+        }
+        // COUNT UP
+</script>
+<script src="{% static 'reviewer/question.js' %}"></script>
+
+
+{% endblock %}

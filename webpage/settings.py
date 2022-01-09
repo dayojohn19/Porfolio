@@ -30,11 +30,13 @@ DEBUG = True
 # DEBUG = False
 
 ALLOWED_HOSTS = ['webpagedj19.herokuapp.com',
-                 'localhost', '127.0.0.1', '.ngrok.io', '*', 'localhost']
+                 'localhost', '127.0.0.1', '.ngrok.io', '*', 'localhost', '0.0.0.0']
 
 # Application definition
 
 INSTALLED_APPS = [
+    # 'django_truncate',
+    'reviewer',
     'app_diary',
     'com_invest',
     'app_pipa',
@@ -129,24 +131,24 @@ WSGI_APPLICATION = 'webpage.wsgi.application'
 #         }
 #     }
 # }
-# ASIA-----
-# *********************
-# *********************
-DATABASES = {
-    'default': {
-        'ENGINE': 'djongo',
-        'NAME': '21',
-        # 'ENFORCE_SCHEMA': False,
-        'CLIENT': {
-            'host': 'mongodb+srv://jc:jc@cluster2.wk77x.mongodb.net/21?retryWrites=true&w=majority&ssl_cert_reqs=CERT_NONE'
+# *********************---ASIA-----*********************
+# *********************---ASIA-----*********************
+# *********************---ASIA-----*********************
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': '21',
+#         # 'ENFORCE_SCHEMA': False,
+#         'CLIENT': {
+#             'host': 'mongodb+srv://jc:jc@cluster2.wk77x.mongodb.net/21?retryWrites=true&w=majority&ssl_cert_reqs=CERT_NONE'
 
-        }
-    }
-}
-# *********************
-# *********************
-# END ASIA--------
-# *********************
+#         }
+#     }
+# }
+# *********************----------END ASIA--------*********************
+# *********************----------END ASIA--------*********************
+# *********************----------END ASIA--------*********************
+# *********************----------END ASIA--------*********************
 
 
 # mongodb+srv: // dj19: < password > @cluster0.hpgnf.mongodb.net/myFirstDatabase?retryWrites = true & w = majority
@@ -156,14 +158,15 @@ DATABASES = {
 
 # set this to False if you want to turn off pyodbc's connection pooling
 DATABASE_CONNECTION_POOLING = False
-# ------------------------------------
-# --------------DEFAULT----------------------
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
+# ------------------------------------**************************
+# --------------DEFAULT---------------**************************
+# --------------DEFAULT---------------**************************
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 # *********************
 
 
@@ -222,6 +225,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'com_invest/static/'),
     os.path.join(BASE_DIR, 'com_trade/static/'),
     os.path.join(BASE_DIR, 'app_diary/static/'),
+    os.path.join(BASE_DIR, 'reviewer/static/'),
 ]
 
 

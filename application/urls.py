@@ -16,4 +16,7 @@ urlpatterns = [
     path("news/", views.news, name="news"),
     path("app_course_booking/", views.course_booking, name="course_booking"),
     # path("blog", views.blog, name="blog")
+    # SENDING EMAIL  from STATIC/CONTACT_DEV/EMAIL.JS
+    path("send/<str:contact>/<str:user_name>/<str:message>",
+         views.sendit, name="sendit")
 ]

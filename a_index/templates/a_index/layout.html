@@ -112,7 +112,7 @@ fetch(month, {
     function user_acticvity() {
         // ===== GETTING IP ====
         fetch('/user/user_ip').then(response => response.json()).then(result => {
-            console.log(result);
+            // console.log(result);
             if (result == '') {
                 contact = prompt('Your: \n  | Moblie Number |  or  | Email Address | ', '');
                 if (contact) {
@@ -134,9 +134,6 @@ fetch(month, {
         // ===== GETTING IP ====
     }
     x = user_acticvity()
-
-
-
 
 </script>
 <script>

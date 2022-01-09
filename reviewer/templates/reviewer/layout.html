@@ -1,0 +1,57 @@
+<!-- {% load static %} -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviewer</title>
+    <script>
+        // PREVENT RIGHT CLICK
+        document.addEventListener('contextmenu', event => event.preventDefault());
+    </script>
+</head>
+<body>
+    <div>
+        <a href="/reviewer" style="text-decoration: none;">Reviewer</a>
+    </div>
+    {% block body %}
+
+    {% endblock %}
+    <div id="layout-footer">
+        {% if request.user.is_anonymous %}
+            <a href="{% url 'user:register' %}">Register</a>
+            <a href="{% url 'user:login' %}">Log In</a>
+        {% else %}
+        <!-- Score: {{user_score}} -->
+            {{ request.user.username }} 
+            <a href="{% url 'user:logout' %}">Log out</a>
+
+        {% endif %}
+
+        <button onclick="contact_dev()">Contact Us</button>
+    </div>
+
+    <style>
+
+        body {
+            position: relative;
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            color: #cc0000;
+        }
+        #layout-footer {
+            position: fixed;
+            bottom: 0%;
+        }
+    </style>
+<!-- CONTACT -->
+
+    <div id="contact-form"></div>
+    <script src="{% static 'contact_dev/contact.js' %}" defer></script>
+    <link href="{% static 'contact_dev/contact.css' %}" rel="stylesheet">
+</body>
+</html>
