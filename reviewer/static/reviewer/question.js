@@ -45,13 +45,16 @@ console.log('Static Reviewr Question Loaded\n\n')
             score= document.querySelector("#userScore").value;
             tries=  document.querySelector("#tries").value;
             user_ip = document.querySelector("#user_ip").value;
+            if (score == undefined)  {
+                score   =   0;
+                tries   =   0;
+                result  =   0;
+            }
             fetch(`/reviewer/add_score/${side}/${tries}/${score}/${user_ip}`).then(response => response.json()).then(result => {
                 console.log('RESULT: ',result)  
             })
         // }
         // catch(err){}
-        
-
     }
                         // console.log(result);
 
@@ -211,8 +214,8 @@ function getRandomString() {
 
 
 
-// USER ACTIVITY
-user_acticvity()
+// 
+    user_acticvity()
     function user_acticvity() {
 
         // ===== GETTING IP ====
@@ -221,32 +224,42 @@ user_acticvity()
                 contact = prompt('Your: \n  | Moblie Number |  or  | Email Address | ', '');
                 if (contact) {
                     // console.log('Score: ',score)
-                     fetch('/user/user_ip', {
-                         method: 'POST',
-                         body: JSON.stringify({
-                             contact: contact,
-                         })
-                     })
+                    fetch('/user/user_ip', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            contact: contact,
+                        })
+                    })
                     alert('Thank you')
                     //insert fetch to save
-                }   
+                }
             }
-            if (result == 'first_time'){
+            if (result == 'first_time') {
                 alert('We are accepting Cookies.')
             }
-            console.log('Result: ',result);
+            console.log('Result: ', result);
             document.querySelector("#user_ip").value = result
             fetch(`/reviewer/get_score/${result}`).then(response => response.json()).then(data => {
-                document.querySelector("#userScore").value  =   data[0];
+                // if (data[0] = null) {
+                //     document.querySelector("#userScore").value = 0;
+                // } else {
+                    document.querySelector("#userScore").value = data[0];
+                // }
+
                 // document.querySelector("#tries").value      =   data[1];
                 MakenewQuestion(1);
                 MakenewQuestion(2);
-                
+
             });
-            
+
             return result //MAKE A GET OR CREATE HERE
             // console.log(result);
         });
         // ===== GETTING IP ====
     }
+
+// 
+
+
+
     // x = user_acticvity()
