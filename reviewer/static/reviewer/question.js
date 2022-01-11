@@ -18,8 +18,6 @@ console.log('Static Reviewr Question Loaded\n\n')
         }
         totalSeconds = 0;
         checkAnswer(value, answer, container, question)
-        
-        // checkAnswer(value, answer)
     }
 
     function checkAnswer(value, answer, container, question){
@@ -36,12 +34,7 @@ console.log('Static Reviewr Question Loaded\n\n')
         }
         prompt(question,answer);
     }
-    // BECAUSE NEGATIVE IT FAILS
     function AddScoretoDatabase(side){
-        // score=0;
-        // tries=0;
-        // result=0;
-        // try {
             score= document.querySelector("#userScore").value;
             tries=  document.querySelector("#tries").value;
             user_ip = document.querySelector("#user_ip").value;
@@ -53,10 +46,7 @@ console.log('Static Reviewr Question Loaded\n\n')
             fetch(`/reviewer/add_score/${side}/${tries}/${score}/${user_ip}`).then(response => response.json()).then(result => {
                 console.log('RESULT: ',result)  
             })
-        // }
-        // catch(err){}
     }
-                        // console.log(result);
 
 
 
@@ -74,10 +64,7 @@ console.log('Static Reviewr Question Loaded\n\n')
         trials = parseInt(tries.value);
         trials +=1;
         tries.value = trials;
-        // console.log('NumScore',numScore)
         document.querySelector("#userFunction").value = your_function;
-        // console.log("second Function ",your_function)
-        // fetch add to database
     }
     function changeContainer(container) {
         // add correct value
@@ -91,21 +78,12 @@ console.log('Static Reviewr Question Loaded\n\n')
         }
         containerHide.style.display = 'none';
         containerShow.style.display = 'block';
-        // newQuestion(container)
         MakenewQuestion(container)
     }
 
     // function newQuestion(container) {
     function newQuestion(container, FinalAnswer, FinalQuestion, WrongAnswer) {
 
-        // console.log('container',container);
-        // newSet = new MakenewQuestion()
-        // console.log(newSet)
-        // console.log('NewSet: ',newSet.FinalAnswer)
-        // console.log(newSet)
-        // test_question   =FinalQuestion
-        // test_answer =FinalAnswer
-        // test_wrong  =WrongAnswer
         if (container == 1) {
             container = document.querySelector("#container-1");
             container_question = document.querySelector("#container-1-question");
@@ -152,12 +130,6 @@ console.log('Static Reviewr Question Loaded\n\n')
         }
     }
 
-    // function SaveData(fq, fa, wa){
-    //     // console.log(fq, fa, wa)
-    //     this.answer = fa
-    //     var fq = fq
-    //     return [fq, fa, wa]
-    // }
     function MakenewQuestion(container){
         // ---------- algo_adjusts score_function ---------
         console.log('Making New')
@@ -176,10 +148,7 @@ console.log('Static Reviewr Question Loaded\n\n')
                 your_function = 'function3'//algo_adjusts score_function
             }
             console.log("YOUR FUNCTION", your_function)
-        // fetch('/reviewer/new_question').then((r) => r.json()).then(data=>{
         fetch(window.location.pathname+'/'+your_function+'/getit').then((r) => r.json()).then(data=>{
-        // fetch('questions/deck/management/getit').then((r) => r.json()).then(data=>{
-
             FinalQuestion = data[1]
             if (data[6].toLowerCase() == 'd'){ //question adjust answer
                 FinalAnswer = data[5]
@@ -213,9 +182,10 @@ function getRandomString() {
 }
 
 
-
-// 
     user_acticvity()
+
+
+// VERSION 2
     function user_acticvity() {
 
         // ===== GETTING IP ====
@@ -229,27 +199,34 @@ function getRandomString() {
                         body: JSON.stringify({
                             contact: contact,
                         })
-                    })
-                    alert('Thank you')
+                    });
+                    alert('Thank you');
                     //insert fetch to save
                 }
+                fetch('/user/user_ip').then(response => response.json()).then(result => {
+                    fetch(`/reviewer/get_score/${result}`).then(response => response.json()).then(data => {
+                        // if (data[0] = null) {
+                        //     document.querySelector("#userScore").value = 0;
+                        // } else {
+                            document.querySelector("#userScore").value = data[0];
+                            document.querySelector("#user_ip").value    =   data[2]
+                        // }
+
+                        // document.querySelector("#tries").value      =   data[1];
+                        MakenewQuestion(1);
+                        MakenewQuestion(2);
+                        // location.reload();
+                    });
+                });
             }
             if (result == 'first_time') {
                 alert('We are accepting Cookies.')
             }
-            console.log('Result: ', result);
             document.querySelector("#user_ip").value = result
             fetch(`/reviewer/get_score/${result}`).then(response => response.json()).then(data => {
-                // if (data[0] = null) {
-                //     document.querySelector("#userScore").value = 0;
-                // } else {
-                    document.querySelector("#userScore").value = data[0];
-                // }
-
-                // document.querySelector("#tries").value      =   data[1];
+                document.querySelector("#userScore").value = data[0];
                 MakenewQuestion(1);
                 MakenewQuestion(2);
-
             });
 
             return result //MAKE A GET OR CREATE HERE
@@ -258,8 +235,5 @@ function getRandomString() {
         // ===== GETTING IP ====
     }
 
-// 
+    // Version 2
 
-
-
-    // x = user_acticvity()

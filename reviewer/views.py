@@ -57,17 +57,22 @@ def add_score(request, side, tries, score, user_ip):
 
 
 def get_score(request, ip):
+    print("GETTING SCORE")
     from .models import User_score
     from django.http import JsonResponse
 
     try:
+
         current_score = User_score.objects.get(ip=ip)
+        print(current_score)
         # current_score = current_score.score
-        data = [current_score.score,    current_score.tries]
+        data = [current_score.score,    current_score.tries, ip]
+        print('data: ', data)
         return JsonResponse(data, safe=False)
 
     except:
-        return JsonResponse(0, safe=False)
+        print('Oh men')
+        return JsonResponse([0, 0], safe=False)
 
 
 def register_ip(request, user_ip):

@@ -14,3 +14,4 @@ urlpatterns = [
     path('get_score/<str:ip>', views.get_score, name="get_score"),
     path('ip/register/<str:user_ip>',   views.register_ip, name="register_ip")
 ]
+     

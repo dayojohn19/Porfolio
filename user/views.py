@@ -73,13 +73,13 @@ def get_user_ip(request):
             new_vistor.visit_count = 1
             new_vistor.save()
             print('Visited ')
-            print(your_address)
+            print('your Address: ', your_address)
             print(your_location['country_name'])
             print(your_ip)
 
             # visitor = User_visitor.objects.get(ip=1)
 
-            return JsonResponse('first_time', safe=False)
+            return JsonResponse(your_ip, safe=False)
     except:
         print('FAIL')
         # new_visitor = User_visitor()
