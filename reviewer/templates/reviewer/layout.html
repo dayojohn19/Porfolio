@@ -14,6 +14,8 @@
 <body>
     <div>
         <a href="/reviewer" style="text-decoration: none;">Reviewer</a>
+        <button id="information" onclick="about_score()">information</button>
+        <button onclick="contact_dev()">Contact Us</button>
     </div>
     {% block body %}
 
@@ -29,7 +31,7 @@
 
         {% endif %}
 
-        <button onclick="contact_dev()">Contact Us</button>
+        
     </div>
 
     <style>
@@ -52,6 +54,7 @@
 
     <div id="contact-form"></div>
     <script src="{% static 'contact_dev/contact.js' %}" defer></script>
+    <script src="{% static 'reviewer/about.js' %}" defer></script>
     <link href="{% static 'contact_dev/contact.css' %}" rel="stylesheet">
 </body>
 </html>

@@ -6,34 +6,27 @@ console.log('Static Reviewr Question Loaded\n\n')
         if (id == 'a1' || id == 'b1')   {
             answer = document.querySelector("#container-1-answer").innerHTML;
             question    =document.querySelector("#container-1-question").innerHTML;
-            console.log('ans',answer)
             container = 1
         }
         if (id == 'a2' || id == 'b2') {
             answer = document.querySelector("#container-2-answer").innerHTML;
             question    =   document.querySelector("#container-2-question").innerHTML;
             container = 2
-            console.log('ans',answer)
-
         }
         totalSeconds = 0;
         checkAnswer(value, answer, container, question)
     }
 
     function checkAnswer(value, answer, container, question){
-
         if (answer == value) {
             addScore('correct');
             changeContainer(container);
-            // alert('Correct: '+answer);
-            // newQuestion(container);
         } else if (answer != value) {
             addScore('wrong');
-            // alert(answer);
-            // prompt('Your: \n  | Moblie Number |  or  | Email Address | ', '');
         }
         prompt(question,answer);
     }
+
     function AddScoretoDatabase(side){
             score= document.querySelector("#userScore").value;
             tries=  document.querySelector("#tries").value;
@@ -66,6 +59,7 @@ console.log('Static Reviewr Question Loaded\n\n')
         tries.value = trials;
         document.querySelector("#userFunction").value = your_function;
     }
+
     function changeContainer(container) {
         // add correct value
         if (container == 1) {
@@ -81,9 +75,7 @@ console.log('Static Reviewr Question Loaded\n\n')
         MakenewQuestion(container)
     }
 
-    // function newQuestion(container) {
     function newQuestion(container, FinalAnswer, FinalQuestion, WrongAnswer) {
-
         if (container == 1) {
             container = document.querySelector("#container-1");
             container_question = document.querySelector("#container-1-question");
@@ -99,14 +91,12 @@ console.log('Static Reviewr Question Loaded\n\n')
             buttonB =document.querySelector("#b1");
             buttonB.value   =WrongAnswer;
             buttonB.innerHTML   =WrongAnswer;
-            console.log('done container1')
             // correct answer
             buttonCorrect = document.querySelector(`#${getRandomString()+1}`)
             buttonCorrect.value = FinalAnswer;
             buttonCorrect.innerHTML = FinalAnswer;
-
-
         }
+
         if (container == 2) {
             container   =document.querySelector("#container-2");
             container_question  =document.querySelector("#container-2-question");
@@ -122,7 +112,7 @@ console.log('Static Reviewr Question Loaded\n\n')
             buttonB = document.querySelector("#b2");
             buttonB.value = WrongAnswer;
             buttonB.innerHTML = WrongAnswer;
-            console.log('done container2')
+            // console.log('done container2')
             // correct answer
             buttonCorrect = document.querySelector(`#${getRandomString()+2}`)
             buttonCorrect.value = FinalAnswer;
@@ -132,9 +122,7 @@ console.log('Static Reviewr Question Loaded\n\n')
 
     function MakenewQuestion(container){
         // ---------- algo_adjusts score_function ---------
-        console.log('Making New')
-        // var FinalAnswer = [];
-        // fetch("{% url 'reviewer:new_question'%}").then((r) => r.json()).then(data=>{
+
             current_user_score = document.querySelector("#userScore").value;
             current_user_score = parseInt(current_user_score)
             your_function = 'function1';//algo_adjusts score_function
@@ -147,7 +135,7 @@ console.log('Static Reviewr Question Loaded\n\n')
             if (current_user_score > 30){ //algo_adjusts score_function
                 your_function = 'function3'//algo_adjusts score_function
             }
-            console.log("YOUR FUNCTION", your_function)
+
         fetch(window.location.pathname+'/'+your_function+'/getit').then((r) => r.json()).then(data=>{
             FinalQuestion = data[1]
             if (data[6].toLowerCase() == 'd'){ //question adjust answer
@@ -166,11 +154,11 @@ console.log('Static Reviewr Question Loaded\n\n')
                 FinalAnswer = data[2]
                 WrongAnswer = data[3]
             }
-            console.log('Makenew: ', data)
+
             newQuestion(container, FinalAnswer, FinalQuestion, WrongAnswer)
         });
     }
-    console.log('Make: ',MakenewQuestion())
+    // console.log('Make no container: ',MakenewQuestion())
 
 function getRandomString() {
     var randomChars = 'ab';

@@ -3,13 +3,18 @@
 function contact_dev()  {
     contact_form_position.style.display = 'block';
 }
-
+// ************************************
+// ------------------------------------
+// ---------- INSTRUCTIONS ------------
+// ------------------------------------
+// ************************************
 
     // <div id="contact-form"></div>
     // <script src="{% static 'contact_dev/contact.js' %}" defer></script>
     // <link href="{% static 'contact_dev/contact.css' %}" rel="stylesheet">
     // <button onclick="contact_dev()">Contact Us</button>
 // Note!create DIV #contact-form in line 8
+
 // *********************************************
 // *********************************************
 // ----------- CONTACT FORM FORM ---------------
@@ -66,7 +71,6 @@ contact_form.appendChild(user_contact);
 contact_form.appendChild(user_name);
 contact_form.appendChild(user_message);
 contact_form.appendChild(contact_form_button)
-// contact_form.appendChild(contact_form_submit);
 contact_form_position.appendChild(contact_form);
 
 

@@ -34,7 +34,9 @@
     <link rel="stylesheet" href="{% static 'a_index/1000.css' %}">
     <link rel="stylesheet" href="{% static 'a_index/500.css' %}">
     <link href="{% static 'a_index/styles.css' %}" rel="stylesheet">
-
+<div id="contact-form"></div>
+<script src="{% static 'contact_dev/contact.js' %}" defer></script>
+<link href="{% static 'contact_dev/contact.css' %}" rel="stylesheet">
     <div class="container-main">
         <div class="container-main-1">
             <a class="red a-left">!! This Web requires high computing power !!</a>
@@ -42,6 +44,12 @@
         </div>
 
         <div class="container-sub-2-1 a-right" style="z-index: 100 !important;">
+            
+            
+            
+            
+            
+            
             <a href="{% url 'index:sendmail' %}">Send mail</a>
 
             <span><a class="" href="{% url 'user:userpage' %}">{{request.user.username}} Page</a></span>
@@ -80,6 +88,7 @@
 
 </div>
 <div class="container-main-6 footer ">
+    <button onclick="contact_dev()">Contact Us</button>
     <div class="container-sub-6 red">+639 5685 43802</div>
     <div class="container-sub-6 ">dayo_john16@yahoo.com</div>
     <div class="container-sub-6 ">dayojohn16@gmail.com</div>

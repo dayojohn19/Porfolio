@@ -159,12 +159,12 @@ def add_event(request):
         start_time = request.POST.get(
             'start-time')
         start_time = datetime.datetime.strptime(
-            start_time, '%Y-%m-%dT%H:%M').strftime("%d %B %A, at %I:%M %p -- %Y")
+            start_time, '%Y-%m-%dT%H:%M').strftime("%d %B %A, at %I:%M %p")
 
         end_time = request.POST.get(
             'end-time')
         end_time = datetime.datetime.strptime(
-            end_time, '%Y-%m-%dT%H:%M').strftime("%A, %B %d at %I:%M %p -- %Y")
+            end_time, '%Y-%m-%dT%H:%M').strftime("%d %B %A, at %I:%M %p")
 
         organizer = request.user.username
         organizer_image = request.user.email

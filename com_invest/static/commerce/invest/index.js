@@ -140,7 +140,7 @@ function sell_stock(sell_total, price, amount){
     console.log('You will get: ', sell_total);
 
     document.querySelector("#sell_amount").value = amount;
-    document.querySelector("#sell_price").value = price;
+    document.querySelector("#sell_price").value = price.toFixed(3);
     document.querySelector("#sell_get").value = sell_total.toFixed(0);
 // ----getting the profit
     cost = document.querySelector("#result_for").value;

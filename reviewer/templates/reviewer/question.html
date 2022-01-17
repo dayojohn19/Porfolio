@@ -105,12 +105,10 @@ input {
             ++totalSeconds;
             secondsLabel.innerHTML = pad(totalSeconds % 60);
             minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
-
-            if (secondsLabel.innerHTML == 30) { // change algo-adjust
+            if (secondsLabel.innerHTML == 30) { // change algo-adjust TIMER
                 totalSeconds = 0;
                 document.querySelector(".question-button").click();
                 // alert('greter than 10s')
-                
             }
         }
 
