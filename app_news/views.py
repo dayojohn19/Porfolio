@@ -1,3 +1,4 @@
+import requests
 from django.shortcuts import render
 from .models import Article
 from django.http import HttpResponse, HttpResponseRedirect
@@ -22,6 +23,13 @@ class ArticleForm(forms.Form):
 
 ######
 # Create your views here.
+
+# !NOTE !NOTE IMPORTANT
+# To get LATEST NEWS
+LATEST_NEWS = requests.get(
+    'https://newsapi.org/v2/top-headlines?country=ph&apiKey=b3f57b413e2942cc94bd6609ed38a52f').json()
+
+# ****************** https://newsapi.org/docs/get-started
 
 
 def index(request):

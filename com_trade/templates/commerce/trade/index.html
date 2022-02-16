@@ -8,57 +8,104 @@
 {% block body %}
 <style>
     .container {
-  grid-template-columns: 100px 50px 100px;
-  grid-template-rows: 80px auto 80px; 
-  column-gap: 10px;
-  row-gap: 15px;
-  background-color: blanchedalmond;
-  width: fit-content;
+        grid-template-columns: 100px 50px 100px;
+        grid-template-rows: 80px auto 80px;
+        column-gap: 10px;
+        row-gap: 15px;
+        background-color: blanchedalmond;
+        width: fit-content;
 
-}
+    }
 
-.item-a {
-  align-self: flex-end;
-  padding: 2rem;
+    .item-a {
+        align-self: flex-end;
+        padding: 2rem;
 
-}
+    }
 </style>
+{% for l in latest_news %}
+{% for ll in l %}
+{{ll}}<br>
+{% endfor %}
+<br>
+{{l.title}}<br>
+{{l.author}}<br>
+{{l.description}}<br>
+{{l.publishedAt}}
+<br>
+<hr>
+{% endfor %}
 
 <div class="container">
-    <span id="main_chart" class="item-a"><h1 id="title">Recorded Chart</h1></span>
-    <span class="item-a">
-        <input id="new_date" placeholder="ex. Nov 20, 2021">
-        <button onclick="new_data()">New Data</button>
+    <span id="main_chart" class="item-a">
+        <h1 id="title">Recorded Chart</h1>
     </span>
     <span class="item-a">
-        <button onclick="get_data()">Old Data</button>
+
+        <input id="history_date" type="date" onchange="active_coin()">
+        <select disabled id="coin_name" onchange="active_interval()">
+            <option value="BTCUSDT">BTC USDT</option>
+            <option value="DOGEUSDT">DOGE USDT</option>
+            <option selected="selected">Coin</option>
+        </select>
+        <select disabled id="history_intervals" onchange="new_data()">
+            <optgroup>
+                <option value="KLINE_INTERVAL_1MINUTE">1 MINUTE</option>
+                <option value="KLINE_INTERVAL_3MINUTE">3 MINUTE</option>
+                <option value="KLINE_INTERVAL_15MINUTE">15 MINUTE</option>
+            </optgroup>
+            <option value="KLINE_INTERVAL_12HOUR">12 HOUR</option>
+            <option value="KLINE_INTERVAL_1HOUR">1 HOUR</option>
+            <option value="KLINE_INTERVAL_1DAY">1 DAY</option>
+            <option value="" selected="selected">Interval</option>
+        </select>
+
+    </span>
+    <span class="item-a">
+
+        <select onchange="get_data()" name="old_files" id="old_files_name">
+            {% for f in files %}
+            <option value="{{f}}">{{f}}</option>
+            {% endfor %}
+        </select>
+        <!-- <button onclick="get_data()">Old Data</button> -->
     </span>
 </div>
-        <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js" defer></script>
-        <script src="{% static 'commerce/trade/chart.js' %}" defer></script>
+<script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js" defer></script>
+<script src="{% static 'commerce/trade/chart.js' %}" defer></script>
 
 
 
 
-    
 
 
-    <h1 id="message">Trading</h1>
+
+<h1 id="message">Trading</h1>
 
 
-    <button onclick="put_volume()">Put Volume / Trade </button>
-    <button onclick="Over_Trade()">Put Mark Price / Trade</button>
-    <script src="{% static 'commerce/trade/chart_volume.js' %}" defer></script>
-    <div id="secondary_chart"></div>
+<button onclick="put_volume()">Put Volume / Trade </button>
+<button onclick="Over_Trade()">Put Mark Price / Trade</button>
+<script src="{% static 'commerce/trade/chart_volume.js' %}" defer></script>
+<script src="{% static 'commerce/trade/chart_volumeSeries.js' %}" defer></script>
+<script src="{% static 'commerce/trade/chart_volumeAnalytics.js' %}" defer></script>
 
-    <button onclick="Accelaration_Volume()">Accelaration Volume</button>
-    <script src="{% static 'commerce/trade/chart_third.js' %}" defer></script>
-    <div id="third_chart"></div>
-    
-    <script src="{% static 'commerce/trade/Series.js' %}" defer></script>
-    <script src="{% static 'commerce/trade/functions.js' %}" defer></script>
 
-        <div style="padding: 1rem;">
-            <button onclick="get_rsi()"> Get RSI</button>
-        </div>
+
+<div id="secondary_chart"></div>
+
+<button onclick="Accelaration_Volume()">Accelaration Volume</button>
+<script src="{% static 'commerce/trade/chart_third.js' %}" defer></script>
+<script src="{% static 'commerce/trade/chart_thirdSeries.js' %}" defer></script>
+
+
+<div id="third_chart"></div>
+
+<script src="{% static 'commerce/trade/Series.js' %}" defer></script>
+<script src="{% static 'commerce/trade/functions.js' %}" defer></script>
+<script src="{% static 'commerce/trade/functions_Analytical.js' %}" defer></script>
+
+<div style="padding: 1rem;">
+    <button onclick="get_rsi()"> Get RSI</button>
+</div>
+
 {% endblock %}
