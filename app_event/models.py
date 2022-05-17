@@ -48,3 +48,4 @@ class Event_Chat(models.Model):
 
 class Event_Picture(models.Model):
     image = models.ImageField(upload_to='event_images')
+ 

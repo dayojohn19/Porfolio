@@ -2,6 +2,7 @@
 {% load humanize %}
 {% load static %}
 {% block body %}
+
 <link rel="stylesheet" href="{% static 'commerce/invest/table.css' %}">
 <br><br>
 
@@ -24,6 +25,7 @@
 <hr>
 <table>
     <tr>
+        <th>ID</th>
         <th>Share Holder</th>
         <th>Contact</th>
         <th>Share Percentage</th>
@@ -32,17 +34,40 @@
         <th>Date ReInvested</th>
     </tr>
     {% for investor in investors %}
-        <tr>
-            <td>{{investor.investor_name}}</td>
-            <td>{{investor.investor_contact}}</td>
-            <td>{{investor.invested_percentage}} %</td>
-            <td>{{investor.invested_amount | intcomma}}</td>
-            <td>{{investor.timestamp}}</td>
-            <td>{{investor.reinvested}}</td>
-        </tr>
+    <tr>
+        <td>{{investor.id}}</td>
+        <td>{{investor.investor_name}}</td>
+        <td>{{investor.investor_contact}}</td>
+        <td>{{investor.invested_percentage}} %</td>
+        <td class="amount-table">{{investor.invested_amount | intcomma}}
+            {% if request.user.is_superuser %}
+            <button id="{{investor.id}}" onclick="getForm(id)">Change</button>
+            <form method="post" action="{% url 'invest:reinvest' csrf_token %}" style="display: none;"
+                class="form-{{investor.id}}">
+                {% csrf_token %}
+                <input type="number" placeholder="Amount to Change" name="amount" required>
+                <input hidden readonly value="{{investor.id}}" name="investor_id" required>
+                <input type="submit">
+            </form>
+            {% endif %}
+
+        </td>
+        <td>{{investor.timestamp}}</td>
+        <td>{{investor.reinvested}}</td>
+    </tr>
+
     {% endfor %}
 
 </table>
+<h2>Investment Reocrd</h2>
+{% for records in invest_records %}
+{{records.timestamp}}<br>
+{{records.timestamp2}}<br>
+{{records.investor_name}}<br>
+{{records.invest_amount}}<br>
+<hr>
+{% endfor %}
+
 <h2>Make Voting SYstem</h2>
 
 
@@ -68,13 +93,24 @@
     <button type="submit">Submit</button>
 </form>
 
-<button onclick="form_submit()">Submit</button>
 <script>
-    function form_submit() {
-        form = document.querySelector("#form")
-        form.submit()
+    function getForm(id) {
+        console.log(id)
+        form = document.querySelector(`.form-${id}`)
+        if (form.style.display == 'block') {
+            form.style.display = 'none'
+        } else {
+            form.style.display = 'block';
+
+        }
+        console.log('FORM: ', form)
     }
 </script>
+<style>
+    .amount-table {
+        width: 300px;
+    }
+</style>
 
 {% endif %}
 

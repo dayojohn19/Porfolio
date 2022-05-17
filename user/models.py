@@ -78,7 +78,7 @@ class Userimage(models.Model):
 
     def __str__(self):
         return self.name
-
+ 
 
 fs = FileSystemStorage(location='/user/pigeons/')
 

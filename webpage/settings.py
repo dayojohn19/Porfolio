@@ -28,6 +28,7 @@ SECRET_KEY = 'django-insecure-rmxq3lkq@nhlwgg)deu@q5e_nfmz8((qqe)v9s0vt*o5&i(ez%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 # DEBUG = False
+# DEBUG_PROPAGATE_EXCEPTIONS = True
 
 ALLOWED_HOSTS = ['webpagedj19.herokuapp.com',
                  'localhost', '127.0.0.1', '.ngrok.io', '*', 'localhost', '0.0.0.0']
@@ -35,6 +36,11 @@ ALLOWED_HOSTS = ['webpagedj19.herokuapp.com',
 # Application definition
 
 INSTALLED_APPS = [
+    # 'bootstrapform',  # style
+    # 'materializecssform',  # MAterialize style
+    'app_Car',
+    'data_websites',
+    'app_ship_san_diego',
     # 'django_truncate',
     'reviewer',
     'app_diary',
@@ -43,8 +49,8 @@ INSTALLED_APPS = [
     'app_event',
     # 'app_freedive',
     'ubx',
-    # 'com_trade',
-    'com_trade.apps.ComTradeConfig',
+    'com_trade',
+    # 'com_trade.apps.ComTradeConfig',
     'app_hiring',
     'com_bank',
     'com_sale',
@@ -134,17 +140,17 @@ WSGI_APPLICATION = 'webpage.wsgi.application'
 # *********************---ASIA-----*********************
 # *********************---ASIA-----*********************
 # *********************---ASIA-----*********************
-DATABASES = {
-    'default': {
-        'ENGINE': 'djongo',
-        'NAME': '21',
-        # 'ENFORCE_SCHEMA': False,
-        'CLIENT': {
-            'host': 'mongodb+srv://jc:jc@cluster2.wk77x.mongodb.net/21?retryWrites=true&w=majority&ssl_cert_reqs=CERT_NONE'
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': '21',
+#         # 'ENFORCE_SCHEMA': False,
+#         'CLIENT': {
+#             'host': 'mongodb+srv://jc:jc@cluster2.wk77x.mongodb.net/21?retryWrites=true&w=majority&ssl_cert_reqs=CERT_NONE'
 
-        }
-    }
-}
+#         }
+#     }
+# }
 # *********************----------END ASIA--------*********************
 # *********************----------END ASIA--------*********************
 # *********************----------END ASIA--------*********************
@@ -161,12 +167,12 @@ DATABASE_CONNECTION_POOLING = False
 # ------------------------------------**************************
 # --------------DEFAULT---------------**************************
 # --------------DEFAULT---------------**************************
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 # *********************
 
 
@@ -194,7 +200,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Asia/Manila'
+# TIME_ZONE = 'Asia/Manila'
+TIME_ZONE = 'UTC'
 TIME_INPUT_FORMATS = ('%I:%M %p',)
 USE_I18N = True
 
@@ -223,7 +230,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'application/static/'),
     os.path.join(BASE_DIR, 'commerce/static/'),
     os.path.join(BASE_DIR, 'com_invest/static/'),
-    os.path.join(BASE_DIR, 'com_trade/static/'),
+    # os.path.join(BASE_DIR, 'com_trade/static/'),
     os.path.join(BASE_DIR, 'app_diary/static/'),
     os.path.join(BASE_DIR, 'reviewer/static/'),
 ]

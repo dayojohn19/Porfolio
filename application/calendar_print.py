@@ -24,6 +24,7 @@ def calendar_get(request,y):
     today = date.today()
     x=y
     st = hc.formatmonth(int(today.year), int(y))
+    
     months = []
     for i in range(1, 13):
         months.append(calendar.month_name[i])

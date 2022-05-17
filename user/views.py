@@ -123,6 +123,9 @@ def get_csv(request):
     writer = csv.writer(response)
     for employee in employees:
         writer.writerow([employee.owner, employee.name, employee.ring])
+    writer.writerow(['first', 'SECOND', '3333'])
+    writer.writerow(['first', 'SECOND', '3333'])
+
     return response
 
 
@@ -384,7 +387,9 @@ def login_view(request):
     else:
 
         # return render(request, "user/login.html", {'next': next})
-        return render(request, "user/login.html")
+        return HttpResponseRedirect(reverse("user:index"))
+
+        # return render(request, "a_index/index.html")
 
 
 def logout_view(request):

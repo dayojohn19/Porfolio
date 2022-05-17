@@ -1,0 +1,205 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        .client {
+            border: none;
+            border-radius: 10px;
+            background-color: burlywood;
+            padding: 0.2em;
+            font-weight: bolder;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: larger;
+        }
+
+        .image-header {
+            width: 100%;
+            height: fit-content;
+            height: 164px;
+            background-color: black;
+            display: relative;
+        }
+
+        .image-header img {
+            max-height: 170px;
+            width: 100%;
+            object-fit: none;
+            /* Do not scale the image */
+            object-position: center;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+        }
+
+        .tabs-container {
+            position: -webkit-sticky;
+            /* Safari */
+            position: sticky;
+            top: 0;
+            z-index: 3;
+        }
+
+        .tabs {
+            /* background-color: rgb(246, 245, 245); */
+
+
+
+            padding: 0.9rem;
+            margin: 0;
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .tabs a {
+            color: rgb(98, 184, 255);
+        }
+
+        .tabs p {
+            text-indent: 2rem;
+        }
+
+        .tabs a {
+            text-decoration: none;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            /* background-color: rgb(255, 252, 252); */
+
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAN DIEGO</title>
+    <div class="image-header">
+        <img src="{% static 'application/pipa/pigeon_header.png' %}">
+    </div>
+    <div class="tabs-container">
+        <div class="tabs">
+            <a href="{% url 'ship_san_diego:index' %}">Home</a>
+            <a href="{% url 'ship_san_diego:post' %}">NEW POST</a>
+            <a href="{% url 'ship_san_diego:read' %}">READ</a>
+            <a href="{% url 'ship_san_diego:gallery' %}">Gallery</a>
+        </div>
+    </div>
+</head>
+
+<body>
+    <div class="tabs">
+        <p>
+            <a style="font-size:xx-large">L</a>orem ipsum dolor sit amet consectetur adipisicing elit. Saepe a placeat
+            quo provident ullam
+            accusantium sit
+            qui
+            necessitatibus iste ducimus, culpa nulla, minima quas error animi tempore, distinctio est eius.
+
+            {% if request.user.is_authenticated %}
+            <img style="width: 13vh; border-radius: 50%;  position: absolute; right: 10px; display: block;"
+                src="{{request.user.email}}">
+            {% else %}
+            <img style="width: 13vh; border-radius: 50%;  position: absolute; right: 10px; display: block;"
+                src="/images/san_diego/1pic.jpg">
+            {% endif %}
+        </p>
+    </div>
+
+
+    <div class="body-container">
+        <div class="body-left">
+            <img style="max-width: 100%;" src="/images/san_diego/1adsample.png">
+        </div>
+
+        <div class="body-center" style="height:fit-content; padding-top: 13vh;">
+            {% block body %}
+
+            {% endblock %}
+        </div>
+        <div class="body-right"></div>
+    </div>
+
+</body>
+
+<style>
+    @media (min-width: 600px) {
+        body {
+            /* background-color: red; */
+        }
+
+        .body-container {
+            display: grid;
+            grid-column-gap: 10px;
+            grid-row-gap: 10px;
+            grid-template-columns: 30% auto 5%;
+        }
+    }
+
+    @media (max-width: 599.99px) {
+        body {
+            /* background-color: blue;` */
+
+        }
+
+        .body-items {
+            width: 100% !important;
+        }
+
+        .body-container {
+            /* display: flex;
+            flex-wrap: wrap; */
+            display: grid;
+            grid-column-gap: 10px;
+            grid-row-gap: 10px;
+            grid-template-columns: 40% auto;
+        }
+
+        .body-right {
+            padding: 100px;
+            display: none;
+
+        }
+
+
+    }
+
+    .choice {
+        font-size: 1em;
+        border-radius: 5px;
+        border: none;
+        background-color: white;
+        /* background-color: rgb(54, 37, 37);
+        color: rgb(98, 184, 255); */
+        /* text-shadow: 0 0 2px black; */
+        display: block;
+    }
+
+    .body-left {
+        /* background-color: blue; */
+        /* background-color: gainsboro; */
+    }
+
+    .body-center {
+        /* max-width: 100%; */
+        /* background-color: yellow; */
+        /* width: 60%; */
+
+    }
+
+    .body-right {
+        /* background-color: red; */
+    }
+
+    body {
+        padding: 0;
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        /* background-color: rgb(54, 37, 37); */
+        /* color: rgb(98, 184, 255); */
+        /* position: relative; DONT ADD !*/
+    }
+</style>
+
+</html>

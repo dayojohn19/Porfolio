@@ -18,7 +18,7 @@ def question(request, department, level):
 DeckManagement = 'decmanagementf1.csv'
 firstcsv = 'first.csv'
 
-
+ 
 def GetLine(department, level, user_function):
     # with open(f'reviewer/reviewer_question/'+str(DeckManagement), 'r', newline='') as csvfile:
     with open(f'reviewer/reviewer_question/'+str(department)+'/'+str(level)+'/'+str(user_function)+'.csv', 'r', newline='') as csvfile:

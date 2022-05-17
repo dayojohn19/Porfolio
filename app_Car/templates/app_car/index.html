@@ -1,0 +1,86 @@
+{% extends "app_car/layout.html" %}
+{% block body %}
+<style>
+    .index-p {
+        text-indent: 10px;
+        text-align: justify;
+    }
+
+    .why-use details {
+        background-color: rgb(253, 249, 242);
+        padding-bottom: 20px;
+    }
+
+    .why-use summary {
+        text-indent: 15px;
+    }
+</style>
+<div>
+    <div>
+        <h1>ADD Messenger CHAT PLUG-IN</h1>
+    </div>
+    <div>
+        <div style="padding: 1rem; margin: 1rem;">
+            <h2>About {{appName}}</h2>
+            <p class="index-p">
+                Pagong was inspired by a Turtle that travels the great waters with adventure of a lifetime.
+            </p>
+
+            <div class="why-use">
+                <div>
+                    <h3>Why Use {{appName}}</h3>
+
+                    <details>
+                        <summary>
+                            <strong>Car Pooling<br></strong>
+                            If you have a car and want to have others to share the gas cost
+                        </summary>
+                        <small>Be sure to know who will want to join your travel and always keep in mind that safety
+                            first</small>
+                    </details>
+
+                    <details>
+                        <summary>
+                            <strong>No to Hazzle Commute <br></strong>
+                            Tired of using public tranportation? try to have a more comfortable ride
+                        </summary>
+                        <small>Be sure to to know the person will travel with contact him and good to ask few questions.
+                            Always
+                            remember safety first</small>
+                    </details>
+                </div>
+            </div>
+            <hr>
+            <h3>Maybe ?</h3>
+            <ul>
+                <li>
+                    <p class="index-p">
+                        <strong>Y</strong>ou are looking for anyone to share the travel cost to go where you want to go?
+                        Share your
+                        Schedule with Us
+                        <a href="{% url 'app_car:destinations' %}">Here</a>
+                    </p>
+                </li>
+                <li>
+                    <p class="index-p">
+                        You can't plan anything? look for other's Travel Plan <a
+                            href="{% url 'app_car:departure' %}">Here</a> You
+                        don't know you might have the same interest
+                    </p>
+                </li>
+                <li>
+                    <p class="index-p">
+                        Planning to go somewhere alone ? Share your Travel Plan to us and have a chance to be engaged
+                        with the same Interests like yours
+                        <a href="{% url 'app_car:destinations' %}">Here</a>
+                    </p>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+
+
+{% endblock %}

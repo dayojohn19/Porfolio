@@ -7,92 +7,110 @@
         margin: 0;
         padding: 0;
     }
-.player_pigeon{
-    height: 15rem;
-    width: auto;
-    background: rgba(245, 245, 245, 0.116);
-  
-    box-shadow: 0px 0px 5px grey;
-    text-align: center;
-    margin-bottom: 5%;
-}
-.player_pigeon>a {
-    color: black;
-    padding-left: 3%;
-    padding-right: 3%;
-    background-color: rgb(159, 228, 255);
-    border-radius:10px;
-    font-size: larger;
-    text-decoration: none;
-}
-.player_pigeon_image {
-    max-width: 40%;
-    max-height: 100%;
-    border-radius: 10px;
-    border-radius: 0px;
-    float: left; 
-}
-.i-heading {
-    text-align: center;
-    font-family:Georgia, 'Times New Roman', Times, serif;
-}
-.i-heading>p {
-    text-align: left;
-}
 
-.user-i{
-    float: right;
-    border-radius: 50%;
-    width: 80px;
-    height: 80px;
-    margin-left: 30px;
-    margin-right: 30px;
-    margin-bottom: 30px;
+    .player_pigeon {
+        height: 15rem;
+        width: auto;
+        background: rgba(245, 245, 245, 0.116);
 
-}
-.join {
-    text-decoration: none; color: rgb(241, 255, 44); background-color: rgba(243, 250, 151, 0.267);padding: 1%; border-radius: 5px;
-    margin: 1rem; padding:0.3rem;
+        box-shadow: 0px 0px 5px grey;
+        text-align: center;
+        margin-bottom: 5%;
     }
-.join-2 {
-    text-decoration: none; color: rgb(44, 255, 65); background-color: rgba(243, 250, 151, 0.267);padding: 1%; border-radius: 5px;
-    margin: 1rem; padding:0.3rem;
+
+    .player_pigeon>a {
+        color: black;
+        padding-left: 3%;
+        padding-right: 3%;
+        background-color: rgb(159, 228, 255);
+        border-radius: 10px;
+        font-size: larger;
+        text-decoration: none;
     }
-.join-container {
-    margin-bottom: 1.4rem;
-    margin-top: 1.4rem;
-}
+
+    .player_pigeon_image {
+        max-width: 40%;
+        max-height: 100%;
+        border-radius: 10px;
+        border-radius: 0px;
+        float: left;
+    }
+
+    .i-heading {
+        text-align: center;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    .i-heading>p {
+        text-align: left;
+    }
+
+    .user-i {
+        float: right;
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        margin-left: 30px;
+        margin-right: 30px;
+        margin-bottom: 30px;
+
+    }
+
+    .join {
+        text-decoration: none;
+        color: rgb(241, 255, 44);
+        background-color: rgba(243, 250, 151, 0.267);
+        padding: 1%;
+        border-radius: 5px;
+        margin: 1rem;
+        padding: 0.3rem;
+    }
+
+    .join-2 {
+        text-decoration: none;
+        color: rgb(44, 255, 65);
+        background-color: rgba(243, 250, 151, 0.267);
+        padding: 1%;
+        border-radius: 5px;
+        margin: 1rem;
+        padding: 0.3rem;
+    }
+
+    .join-container {
+        margin-bottom: 1.4rem;
+        margin-top: 1.4rem;
+    }
 </style>
 
-    {% if user.is_authenticated %}
-    <img class="user-i" src="{{request.user.email}}">    
-        <h2>
-            Good Day <strong>{{user.username}}</strong>
-            <h2 class="join-container"><a class="join" href="{% url 'g_pigeon_race:index' %}" >Join Race</a></h2>
+{% if user.is_authenticated %}
+<img class="user-i" src="{{request.user.email}}">
+<h2>
+    Good Day <strong>{{user.username}}</strong>
+    <h2 class="join-container"><a class="join" href="{% url 'g_pigeon_race:index' %}">Join Race</a></h2>
 
-            <h2 class="join-container"><a class="join-2" href="{% url 'event:home' %}">Join Events</a></h2>
+    <!-- <h2 class="join-container"><a class="join-2" href="{% url 'event:home' %}">Join Events</a></h2> -->
 
-            <h2 class="join-container"><a class="join-2" href="{% url 'auction:index' %}">Bid PIGEONS</a></h2>
-        </h2>
+    <!-- <h2 class="join-container"><a class="join-2" href="{% url 'auction:index' %}">Bid PIGEONS</a></h2> -->
+</h2>
 
-        
-        <div class="i-heading">
 
-            <p>Total Player:{{user_count}}</p>
-        </div>
-        {% for users in au %}
-            <div class="player_pigeon">
-                  <img class="player_pigeon_image" src="{{users.email}}" >
-                    <a href="{% url 'user:player' username=users.username %}">
-                        <strong> {{users.username}}</strong>
-                </a>
-            </div>
-        {%endfor%}
-    {%else%}
-        <div>
-            <h1>Sign in To use</h1>
-        </div>
-    {%endif%}
+<div class="i-heading">
+
+    <p>Total Player:{{user_count}}</p>
+</div>
+{% for users in au %}
+<div class="player_pigeon">
+    <img class="player_pigeon_image" src="{{users.email}}">
+    <a href="{% url 'user:player' username=users.username %}">
+        <strong> {{users.username}}</strong>
+    </a>
+</div>
+{%endfor%}
+{%else%}
+<div>
+    <h1>Sign in To use</h1>
+</div>
+{%endif%}
 
 
 

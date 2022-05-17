@@ -1,78 +1,81 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-        <style>
-            .client {
-                border: none;
-                border-radius: 10px;
-                background-color: burlywood;
-                padding: 0.2em;
-                font-weight: bolder;
-                font-family: 'Times New Roman', Times, serif;
-                font-size: larger;
-            }
-        
-            .image-header {
-                width: 100%;
-                height: fit-content;
-                height: 164px;
-                background-color: black;
-                display:relative;
-            }
-        
-            .image-header img {
-                max-height: 170px;
-                width: 100%;
-                object-fit: none;
-                /* Do not scale the image */
-                object-position: center;
-                margin-left: auto;
-                margin-right: auto;
-                display: block;
-            }
-        
-            .tabs-container {
-                position: -webkit-sticky;
-                /* Safari */
-                position: sticky;
-                top: 0;
-                z-index: 3;
-            }
-        
-            .tabs {
-                background-color: rgb(222, 217, 217);
-                padding: 0.9rem;
-                margin: 0;
-                display: flex;
-                justify-content: space-evenly;
-            }
-        
-            .tabs a {
-                text-decoration: none;
-            }
-        
-            body {
-                margin: 0;
-                padding: 0;
-                background-color: rgb(255, 252, 252);
-            }
-        </style>
+    <style>
+        .client {
+            border: none;
+            border-radius: 10px;
+            background-color: burlywood;
+            padding: 0.2em;
+            font-weight: bolder;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: larger;
+        }
+
+        .image-header {
+            width: 100%;
+            height: fit-content;
+            height: 164px;
+            background-color: black;
+            display: relative;
+        }
+
+        .image-header img {
+            max-height: 170px;
+            width: 100%;
+            object-fit: none;
+            /* Do not scale the image */
+            object-position: center;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+        }
+
+        .tabs-container {
+            position: -webkit-sticky;
+            /* Safari */
+            position: sticky;
+            top: 0;
+            z-index: 3;
+        }
+
+        .tabs {
+            background-color: rgb(222, 217, 217);
+            padding: 0.9rem;
+            margin: 0;
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .tabs a {
+            text-decoration: none;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: rgb(255, 252, 252);
+
+        }
+    </style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pipa</title>
-        <div class="image-header">
-            <img src="{% static 'application/pipa/pigeon_header.png' %}">
+    <div class="image-header">
+        <img src="{% static 'application/pipa/pigeon_header.png' %}">
+    </div>
+    <div class="tabs-container">
+        <div class="tabs">
+            <a href="#">Register Pigeon</a>
+            <a href="#">Find Pigeon</a>
+            <a href="#">Report</a>
         </div>
-        <div class="tabs-container">
-            <div class="tabs">
-                <a href="#">Register Pigeon</a>
-                <a href="#">Find Pigeon</a>
-                <a href="#">Report</a>
-            </div>
-        </div>
+    </div>
 </head>
+
 <body>
     <div class="tabs">
 
@@ -80,10 +83,11 @@
 
 
     <h1>Pipa</h1>
-<div style="height:1000px">
-    {% block body %}
+    <div style="height:1000px">
+        {% block body %}
 
-    {% endblock %}
+        {% endblock %}
     </div>
 </body>
+
 </html>

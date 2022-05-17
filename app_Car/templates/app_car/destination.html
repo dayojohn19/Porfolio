@@ -1,0 +1,65 @@
+{% extends "app_car/layout.html" %}
+{% block body %}
+
+<div>
+    <div>
+
+
+
+
+        <div style="background-color: rgb(252, 252, 241); padding: 10px;">
+            <div>
+
+                <form method="post" action="{% url 'app_car:destinations' %}" style="text-align: center;">
+                    <h5 class="header">Where do you Plan to Go ?</h5>
+                    {% csrf_token %}
+                    <input placeholder="Province, Municipal" type="text" name="place" class="autocomplete"
+                        style="width: 300px;">
+                    <br>
+                    <input type="submit" value="I will Go">
+                </form>
+            </div>
+        </div>
+
+
+        <hr>
+
+
+
+        <ul class="collection with-header">
+            <li class="collection-header">
+                <h5>Check out Other Schedule :</h5>
+                <a href="{% url 'app_car:refreshSchedule' %}">
+                    <span data-badge-caption="Refresh Schedules" class="green new badge">
+                    </span></a>
+            </li>
+
+            {% for destination in allDestinations %}
+            {% if destination.SchedList.count != 0 %}
+            <li class="collection-item">
+                <div>
+                    <div style="width: fit-content;">{{destination.placename}} <a
+                            href="{% url 'app_car:place' id=destination.id  currentMonth=currentMonth %}"
+                            class="secondary-content"><span class="new badge red"
+                                data-badge-caption="Schedule">{{destination.SchedListCount}}</span></a>
+
+                        <a href="{% url 'app_car:place' id=destination.id  currentMonth=currentMonth %}"
+                            class="secondary-content"><span class="new badge blue"
+                                data-badge-caption="Schedule">{{destination.EventListCount}}</span></a>
+                    </div>
+                </div>
+            </li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+
+    </div>
+</div>
+
+
+
+
+<hr>
+
+
+{% endblock %}

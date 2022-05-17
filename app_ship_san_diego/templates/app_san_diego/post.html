@@ -1,0 +1,130 @@
+{% extends "app_san_diego/layout.html" %}
+
+{% load static %}
+
+
+
+{% block body %}
+<style>
+    * {
+        max-width: 100% !important;
+        overflow: scroll;
+    }
+
+    label {
+        display: block;
+        text-align: center;
+    }
+
+    input {
+        background-color: yellow;
+
+        border-radius: 8px;
+        border: none;
+        font-size: larger;
+        padding: 0.5rem;
+        max-width: 90% !important;
+    }
+
+    textarea {
+        background-color: yellow;
+        border-radius: 8px;
+        border: none;
+        font-size: larger;
+        padding: 0.5rem;
+        width: 90%;
+    }
+
+    #id_title {
+        padding: 0.5rem;
+
+    }
+
+    .new-post {
+        text-align: center;
+    }
+</style>
+
+<h1>How is Your Day?</h1>
+<div class="new-post">
+    <form method="post" action="{% url 'ship_san_diego:post' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{daysForm.as_p}}
+        <input type="submit">
+    </form>
+</div>
+<!-- QUESTION -->
+<div style="display: none;" class="container-questions">
+
+    <p class="question-paragrapth"></p>
+    <button onclick="checkAnswer(value)" value="A" class="choices-a choice">Lorem ipsum dolor sit amet
+        consectetur</button>
+    <button onclick="checkAnswer(value)" value="B" class="choices-b choice">Lorem ipsum dolor sit amet
+        consectetur</button>
+    <button onclick="checkAnswer(value)" value="C" class="choices-c choice">Lorem ipsum dolor sit amet
+        consectetur</button>
+    <button onclick="checkAnswer(value)" value="D" class="choices-d choice">Lorem ipsum dolor sit amet
+        consectetur</button>
+    <h2>3 Score To Continue</h2>
+</div>
+<script>
+    yourScore = 0;
+    function checkAnswer(toCheck) {
+        if (answer == toCheck) {
+            getNewQuestion(yourScore)
+            yourScore++;
+            prompt(question + '\n \n ' + yourScore + ' Correct! ', correct)
+        } else {
+            // yourScore--;
+            prompt(question + '\n \n ' + yourScore + ' Answer Is: \n', correct)
+        }
+        if (yourScore >= 3) {
+            document.querySelector('.body-center').innerHTML = originalElement
+        }
+    }
+
+    function getNewQuestion(userScore) {
+        userScore++;
+        if (userScore <= 0) {
+            userScore = 1
+        }
+        questionAndAnswer = fetch(`http://127.0.0.1:8000/reviewer/questions/deck/operational/function${userScore}/getit`).then((r) => r.json()).then(data => {
+            document.querySelector('.question-paragrapth').innerHTML = data[1]
+            document.querySelector('.choices-a').innerHTML = 'A. ' + data[2]
+            document.querySelector('.choices-b').innerHTML = 'B. ' + data[3]
+            document.querySelector('.choices-c').innerHTML = 'C. ' + data[4]
+            document.querySelector('.choices-d').innerHTML = 'D. ' + data[5]
+            question = data[1]
+            answer = data[6]
+            correct = 'none'
+            if (answer == 'A') {
+                correct = data[2]
+            }
+            if (answer == 'B') {
+                correct = data[3]
+            }
+            if (answer == 'C') {
+                correct = data[4]
+            }
+            if (answer == 'D') {
+                correct = data[5]
+            }
+        })
+    }
+
+    // FETCHING THE DATA
+    window.addEventListener('DOMContentLoaded', (event) => {
+        ToChange = '.new-post'; //To Change
+        originalElement = document.querySelector(ToChange)
+        originalElement.style.display = 'none';
+        originalElement = originalElement.innerHTML
+        questionElement = document.querySelector('.container-questions')
+        document.querySelector(ToChange).innerHTML = questionElement.innerHTML
+        document.querySelector(ToChange).style.display = 'block';
+        getNewQuestion(yourScore)
+    })
+</script>
+<!-- END Question -->
+<!-- <div style="height: 1000px;"></div> -->
+
+{% endblock %}

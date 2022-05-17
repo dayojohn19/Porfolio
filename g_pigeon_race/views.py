@@ -1,3 +1,4 @@
+from geopy.exc import GeocoderTimedOut
 from django.contrib.humanize.templatetags.humanize import naturalday
 from django.views.decorators.csrf import csrf_exempt
 import json
@@ -100,15 +101,42 @@ def ended_race(request, rid):
     return redirect('g_pigeon_race:manager_page')
 
 
+# #############
+
+
+def do_geocode(address, attempt=1, max_attempts=5):
+    try:
+        return geopy.geocode(address)
+    except GeocoderTimedOut:
+        if attempt <= max_attempts:
+            return do_geocode(address, attempt=attempt+1)
+        raise
+
+
 def measure(request):
     if request.method == "POST":
+        attempt = 1
+        max_attempts = 5
+
+        print('MEasurring \n\n\n\n')
         place = request.POST["place"]
         xx = User.objects.get(username=request.user.username)
-        mea = Nominatim(user_agent='race')
+        print('MEasurring 2 \n\n\n\n')
+        mea = Nominatim(user_agent='g_pigeon_race')
+        print('MEasurring 3 \n\n\n\n')
+
         lat = mea.geocode(place).latitude
+        print('MEasurring 4 \n\n\n\n')
+
         long = mea.geocode(place).longitude
+        print('MEasurring 5 \n\n\n\n')
+
         new_m = set()
+        print('MEasurring 6 \n\n\n\n')
+
         new_m.add(place)
+        print('MEasurring 7 \n\n\n\n')
+
         try:
             Measurement.objects.get(uid=xx.id)
         except:
@@ -122,6 +150,7 @@ def measure(request):
         return redirect('g_pigeon_race:index')
     else:
         return redirect('g_pigeon_race:index')
+#  ############
 
 
 def index(request):

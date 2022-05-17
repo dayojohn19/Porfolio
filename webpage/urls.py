@@ -44,7 +44,12 @@ urlpatterns = [
     path('app_pipa/', include('app_pipa.urls')),
     path('com_invest/', include('com_invest.urls')),
     path('app_diary/', include('app_diary.urls')),
-    path('reviewer/', include('reviewer.urls'))
+    path('reviewer/', include('reviewer.urls')),
+    path('app_ship_san_diego/', include('app_ship_san_diego.urls')),
+    path('data_websites/', include('data_websites.urls')),
+    path('app_car/', include('app_Car.urls'))
+
+
 ]
 
 # Pigeon Config

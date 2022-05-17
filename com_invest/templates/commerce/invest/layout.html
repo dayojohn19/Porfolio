@@ -1,37 +1,41 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'commerce/invest/layout.css' %}">
-        
+
     <title>Investing</title>
 </head>
+
 <body>
 
 
 
     <div id="tab_container">
-            <div id="tabs">
+        <div id="tabs">
 
-                <span id="tabs_links">
-                    <a href="{% url 'invest:table' %}">Table</a>
-                    <a href="{% url 'invest:index' %}">Index</a>
-                    <a href="{% url 'invest:about' %}">About</a>
-                    <a href="{% url 'invest:reports' %}">Reports</a>
-                </span>
+            <span id="tabs_links">
+                <a href="{% url 'invest:table' %}">Table</a>
+                <a href="{% url 'invest:index' %}">Index</a>
+                <a href="{% url 'invest:about' %}">About</a>
+                <a href="{% url 'invest:reports' %}">Reports</a>
+                <a href="{% url 'invest:portfolio' %}">Portfolio</a>
+            </span>
 
-            </div>
+        </div>
 
     </div>
 
 
-    <div style="height: 1000px;">
-        {% block body %}
+    <!-- <div style="height: 1000px;"> -->
+    {% block body %}
 
-        {% endblock %}
-    </div>
+    {% endblock %}
+    <!-- </div> -->
 </body>
+
 </html>

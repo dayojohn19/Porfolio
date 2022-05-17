@@ -1,0 +1,177 @@
+{% extends "app_san_diego/layout.html" %}
+
+{% load static %}
+
+
+
+
+{% block body %}
+<div class="tabs">
+    <p>
+        This is a Photo Gallery of everyday view from the ship's ___`WINDOW`___ that the seafarer took everyday within
+        his contract as a seamen! indicating the Ship's Geographical Position, Course, Speed, and Vicinity.
+    </p>
+</div>
+
+{% if solo %}
+<div class="item-solo">
+    <div style="text-align:center">
+
+        <h2>{{items.title}}</h2>
+        <small style="float: right; margin-right: 1em;">By:{{items.poster}}</a></small>
+        <br>
+        <img style="max-width: 90%; border-radius: 9px;" src="/images/{{items.image}}">
+        <p>{{items.feeling}}</p>
+
+
+        <small style="text-align: left;float: left; margin-left: 1em;">
+
+            <br> ∂ {{items.latitude}}
+            <br> ℷ {{items.longitude}}
+            <br>{{items.vicinity}}
+            <br>{{items.country}}
+            <br>🧭🛳 {{items.courseTrue}}°
+            <br> {{items.speed}} 𝒦𝓉𝓈
+
+        </small>
+        <small style="text-align: left;float: right; margin-right: 1em;">
+
+            <br> {{items.DutiesAndEvents}}
+            <br> {{items.activity}}
+
+            <br>{{items.date}}
+            <br>{{items.dateUpdated}}
+
+        </small>
+
+    </div>
+    <div class="container-comment">
+
+        <div>
+            {% if request.user.is_authenticated %}
+            <form method="post" action="{% url 'ship_san_diego:comment' items.id %}">
+                {% csrf_token %}
+                <!-- ADD CONTACT ON REGISTRATION -->
+                <input name="user_contact" value="" placeholder="Your Email/Number">
+                <textarea name="user_comment" value="My COmment"></textarea>
+                <input type="submit" value="comment">
+            </form>
+            <div class="comments">
+                {% for comments in items.comments.all.reverse %}
+                <div class="container-individualComment">
+                    <div class="container-profile">
+                        <img style=" width: 40px;border-radius: 50%;" src="{{comments.user_picture}}">
+                        <small>
+                            {{comments.user}}:
+                        </small>
+                    </div>
+                    <div>
+                        <p>{{comments.say}}. <small
+                                style="display: block; font-size: xx-small; right: 0; position: absolute;">{{comments.stamp}}
+                                <small style="display: block; font-size: xx-small;">{{comments.contact}}</small></small>
+                        </p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            {% else %}
+
+            <h2>Please <a href="{% url 'user:login' %}">Log in</a> to Comment</h2>
+
+            {% endif %}
+        </div>
+
+    </div>
+    <style>
+        .container-individualComment {
+            margin: 30px;
+        }
+
+        .container-profile {
+            display: flex;
+            flex-wrap: wrap;
+            flex-grow: initial;
+            -ms-flex-align: left;
+            align-items: left;
+            justify-content: left;
+        }
+
+        .container-comment {
+            background-color: violet;
+            overflow: scroll;
+            width: 90%;
+            text-align: center;
+            margin: auto auto;
+            padding: 4px;
+        }
+
+        .comments p {
+            margin-top: 1px;
+            text-indent: 2rem;
+            text-align: justify;
+
+        }
+
+        .comments {
+            text-align: left !important;
+            position: relative;
+        }
+    </style>
+</div>
+
+
+{% else %}
+
+
+<div>
+    <div class="container-image">
+        {% for i in items %}
+        <!-- ITEMS: {{i.time}}
+        {{i.poster_id}}
+        {{i.poster}}
+        {{i.title}}
+        {{i.feeling}}
+        {{i.vicinity}}
+        {{i.dutiesandevents}}
+        {{i.image}} -->
+        <a href="{% url 'ship_san_diego:view' i.id %} ">
+            <img id="{{i.id}}" src="/images/{{i.image}}">
+        </a>
+        <style>
+            .container-image img {
+                max-width: 100%;
+                width: 100px;
+                /* height: 200px; */
+                margin-left: 3px;
+                margin-top: 3px;
+                border-radius: 5px;
+
+            }
+
+            .container-image {
+                display: flex;
+                flex-wrap: wrap;
+                flex-grow: initial;
+                -ms-flex-align: center;
+                align-items: center;
+                justify-content: center;
+            }
+        </style>
+        <!-- <img style="max-width: 50%;" src="/images/{{i.image}}"> -->
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+
+
+
+<style>
+    * {
+        max-width: 100%;
+        overflow: scroll;
+    }
+</style>
+<div style="height: 1000px;"></div>
+{% endblock %}

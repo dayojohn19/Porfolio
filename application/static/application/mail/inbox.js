@@ -54,7 +54,7 @@ load_mailbox('sent');
 /////////   END OF DOM HERE /
 /////////   END OF DOM HERE /
 
-
+ 
 //send email in compose 
 function cc() {
 const body = document.querySelector('#compose-body').value;

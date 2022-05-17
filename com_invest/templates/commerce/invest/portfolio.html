@@ -1,0 +1,86 @@
+{% extends "commerce/invest/layout.html" %}
+{% load static %}
+{% block body %}
+
+<style>
+    .portfolio-container {
+        height: 1000px;
+        background-color: aqua;
+        text-align: center;
+    }
+
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        max-width: 95% !important;
+        /* width: 100px !important; */
+        display: block;
+        /* font-size: x-small; */
+        overflow: auto;
+        background-color: rgba(231, 220, 201, 0.731);
+        margin: auto auto;
+        width: fit-content;
+        border-radius: 8.5px;
+    }
+
+    td,
+    th {
+        border: 2px solid rgb(249, 223, 178);
+        text-align: left;
+        padding: 13px;
+        text-align: center;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+
+    #form {
+        background-color: rgb(170, 170, 170);
+        width: fit-content;
+        padding: 0.45rem;
+        margin: 0.4rem;
+        border-radius: 8px;
+        margin: auto auto;
+        text-shadow: rgb(255, 255, 255) 0 0 10px;
+    }
+</style>
+<br><br>
+<div class="portfolio-container">
+
+    <table>
+        <tr>
+            <th colspan="2">Investments</th>
+        </tr>
+        <tr>
+            <th>Stock</th>
+            <th>Quantity</th>
+        </tr>
+        <tr>
+            <td>SCC</td>
+            <td>300</td>
+        </tr>
+        <tr>
+            <td>MPI</td>
+            <td>200</td>
+        </tr>
+    </table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

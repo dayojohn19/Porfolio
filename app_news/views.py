@@ -26,8 +26,9 @@ class ArticleForm(forms.Form):
 
 # !NOTE !NOTE IMPORTANT
 # To get LATEST NEWS
-LATEST_NEWS = requests.get(
-    'https://newsapi.org/v2/top-headlines?country=ph&apiKey=b3f57b413e2942cc94bd6609ed38a52f').json()
+# removed the lates news
+# LATEST_NEWS = requests.get(
+#     'https://newsapi.org/v2/top-headlines?country=ph&apiKey=b3f57b413e2942cc94bd6609ed38a52f').json()
 
 # ****************** https://newsapi.org/docs/get-started
 

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Base Website</title>
+</head>
+
+<body>
+    <h1>This is a Data Base Posted by Websites</h1>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio sunt cupiditate quia tempore repellat harum eos?
+        Reprehenderit doloremque maxime nulla vitae explicabo asperiores totam excepturi? Assumenda maiores temporibus
+        quibusdam ratione.</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi voluptatem praesentium, tempora impedit voluptas
+        natus fugiat tenetur veritatis, hic explicabo consectetur ad non, ipsam dolore quod dolor quidem ea
+        exercitationem.</p>
+
+    <input placeholder="User" id="fromUser">
+    <input placeholder="message" id="messagetoSend">
+    <button onclick="SendtoDatabaseAMessage()">Send Message to Database</button>
+    <button onclick="GetMessagesFromDatabase()"></button>
+    <script>
+        function SendtoDatabaseAMessage() {
+            console.log('Sending Message.....');
+            theMessage = document.querySelector('#messagetoSend').value;
+            theUser = document.querySelector('#fromUser').value;
+
+            fetch('/data_websites/postMessage/', {
+                method: 'POST',
+                body: JSON.stringify({
+                    message: theMessage,
+                    from: theUser
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                })
+        }
+        function GetMessagesFromDatabase() {
+            console.log('Getting Messages...')
+            fetch('/data_websites/postMessage/', {
+                method: 'GET'
+            })
+                .then(response => response.json())
+                .then(message => {
+                    console.log(message)
+                })
+        }
+        // postMessage
+    </script>
+</body>
+
+</html>

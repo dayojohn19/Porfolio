@@ -135,7 +135,8 @@ console.log('Static Reviewr Question Loaded\n\n')
             if (current_user_score > 30){ //algo_adjusts score_function
                 your_function = 'function3'//algo_adjusts score_function
             }
-
+//  questions/<str:department>/<str:level>/<str:user_function>/getit
+// reviewer/deck/operational/function1/getit
         fetch(window.location.pathname+'/'+your_function+'/getit').then((r) => r.json()).then(data=>{
             FinalQuestion = data[1]
             if (data[6].toLowerCase() == 'd'){ //question adjust answer

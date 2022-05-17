@@ -1,82 +1,165 @@
 {% extends "a_index/layout.html" %}
 
 {% load static %}
-    {% block body %}
-    <link rel="stylesheet" href="{% static 'application/application.css' %}">
-    <link rel="stylesheet" href="{% static 'games/games.css' %}">
+{% block body %}
 
+<style>
+    .game>img {
+        width: 200px;
+        margin: 50px;
+        padding: 5px;
+    }
+
+
+    .games_container {
+
+        display: flex;
+        /* flex-direction: column; */
+
+        /* fit in wone line */
+        flex-wrap: nowrap;
+        /* go next line */
+        flex-wrap: wrap;
+    }
+
+    .game {
+        margin: 10px;
+        /* background: rgb(146, 241, 133); */
+        text-align: center;
+        align-items: center;
+        align-self: center;
+
+    }
+
+    .game>a {
+        text-align: center;
+    }
+
+    .game>a>img {
+        width: 200px;
+        margin: 50px;
+        padding: 5px;
+    }
+
+    .game>a {
+        text-decoration: none;
+        color: whitesmoke;
+    }
+</style>
+<h1 style="text-align:center">Applications</h1>
 <div class="games_container">
 
+
     <div class="game">
-        <img src="{% static 'application/images/reviewer.png' %}">
-        <a href="{% url 'reviewer:index' %}">Reviewer</a>
+        <a href="{% url 'app_car:index' %}">
+            Car Service
+            <img src="{% static 'application/images/car.png' %}"></a>
+    </div>
+
+    <div class="game">
+        <a href="{% url 'ship_san_diego:index' %}">
+            Zim San Diego
+            <img src="{% static 'application/images/ship.png' %}"></a>
+    </div>
+
+    <div class="game">
+
+        <a href="{% url 'reviewer:index' %}">Reviewer
+            <img src="{% static 'application/images/reviewer.png' %}">
+        </a>
     </div>
 
 
     <div class="game">
-        <img src="{% static 'application/images/diary.png' %}">
-        <a href="{% url 'diary:index' %}">Diary</a>
-    </div>
 
-    <div class="game" >
-        <img src="{% static 'application/images/event.png' %}">
-        <a href="{% url 'event:home' %}">Event</a>
+        <a href="{% url 'diary:index' %}">Diary
+            <img src="{% static 'application/images/diary.png' %}">
+        </a>
     </div>
 
     <div class="game">
-        <img src="{% static 'application/images/ubx.png' %}">
-        <a href="{% url 'ubx:index' %}">UBX</a>
-    </div>
-    
-    <div class="game">
-        <img src="{% static 'application/images/hiring.png' %}">
-        <a href="{% url 'hiring:index' %}">Hiring</a>
+
+        <a href="{% url 'event:home' %}">Event
+            <img src="{% static 'application/images/event.png' %}">
+        </a>
     </div>
 
     <div class="game">
-        <img src="{% static 'application/images/blog.png' %}">
-        <a href="{% url 'blog:index' %}">Blogs</a>
+
+        <a href="{% url 'ubx:index' %}">UBX
+            <img src="{% static 'application/images/ubx.png' %}">
+        </a>
     </div>
 
     <div class="game">
-        <img src="{% static 'application/images/course_booking.png' %}">
-        <a href="{% url 'course_booking:index' %}">Course Booking</a>
+
+        <a href="{% url 'hiring:index' %}">Hiring
+            <img src="{% static 'application/images/hiring.png' %}">
+        </a>
     </div>
 
     <div class="game">
-        <img src="{% static 'application/images/news.png' %}">
-        <a href="{% url 'news:index' %}">News</a>
+
+        <a href="{% url 'blog:index' %}">Blogs
+            <img src="{% static 'application/images/blog.png' %}">
+        </a>
     </div>
 
     <div class="game">
-        <img src="{% static 'application/images/mail.png' %}">
-        <a href="{% url 'application:mail' %}">E-Mail</a>
+
+        <a href="{% url 'course_booking:index' %}">Course Booking
+            <img src="{% static 'application/images/course_booking.png' %}">
+        </a>
     </div>
 
     <div class="game">
-        <img src="{% static 'application/images/earthquake.png' %}">
-        <a href="{% url 'application:earthquake' %}">World Earthquake Report</a>
+
+        <a href="{% url 'news:index' %}">News
+            <img src="{% static 'application/images/news.png' %}">
+        </a>
     </div>
 
     <div class="game">
-        <img src="{% static 'application/images/calendar.png' %}">
-        <a href="{% url 'application:calendar' %}">Calendar</a>
+
+        <a href="{% url 'application:mail' %}">E-Mail
+            <img src="{% static 'application/images/mail.png' %}">
+        </a>
     </div>
 
     <div class="game">
-        <img src="{% static 'application/images/social_network.png' %}">
-        <a href="{% url 'social_network:index' %}">Social Network</a>
+
+        <a href="{% url 'application:earthquake' %}">World Earthquake Report
+            <img src="{% static 'application/images/earthquake.png' %}">
+        </a>
     </div>
 
     <div class="game">
-        <img src="{% static 'application/images/qrcode.png' %}">
-        <a href="{% url 'application:qrcode' %}">qrcode</a>
+
+        <a href="{% url 'application:calendar' %}">Calendar
+            <img src="{% static 'application/images/calendar.png' %}">
+        </a>
     </div>
 
     <div class="game">
-        <img src="{% static 'application/images/food.png' %}">
-        <a href="{% url 'food:index' %}">Food</a>
+
+        <a href="{% url 'social_network:index' %}">Social Network
+            <img src="{% static 'application/images/social_network.png' %}">
+        </a>
+    </div>
+
+    <div class="game">
+
+        <a href="{% url 'application:qrcode' %}">qrcode
+            <img src="{% static 'application/images/qrcode.png' %}">
+        </a>
+    </div>
+
+    <div class="game">
+
+        <a href="{% url 'food:index' %}">Food
+            <img src="{% static 'application/images/food.png' %}">
+        </a>
     </div>
 
 </div>
-    {% endblock %}
+{% endblock %}

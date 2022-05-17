@@ -1,0 +1,171 @@
+{% extends "app_car/layout.html" %}
+{% block body %}
+
+<script>
+    departureLists = []
+</script>
+
+
+
+
+<div class="row">
+    <div id="placeList" class="col s3 collection"
+        style="padding:0 !important;border: none;overflow-y: scroll; max-height: 80vh !important;">
+        <!-- AUTOCOMPLETE START -->
+
+        <div class="row">
+            <div class="col s12">
+                <div class="row" style="padding-left: 10px;">
+                    <div class="input-field col s12">
+                        <input onchange="allDeparture(value)" list="destinationSearch" type="text"
+                            id="autocomplete-input" class="autocomplete">
+                        <label for="autocomplete-input">Seach Destination</label>
+
+                        <datalist id="destinationSearch">
+
+                        </datalist>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // var elems = document.querySelectorAll('.autocomplete');
+                // const options = {
+                //     data: { 'first': 222, 'Second': 2222 }
+                // }
+                // var instances = M.Autocomplete.init(elems, options);
+                // console.log('OPTIONS: ', options)
+                // 
+                // 
+                ListDestination = []
+                fetch(`{% url 'app_car:departureJSON' %}`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    }
+                }).then(response => response.json()).then(data => {
+                    docLists = document.querySelector("#departureList");
+                    data.map(item => {
+                        if (item.fields.arriveTo) {
+                            if (item.fields.monthN >= currentMonth) {
+                                if (item.fields.dateN >= currentDate) {
+                                    ListDestination.push(item.fields.arriveTo)
+                                }
+                            }
+                        }
+                    })
+                    const uniquePlaces = [...new Set(ListDestination)]
+                    placeList = document.querySelector("#placeList")
+                    for (i = 0; i < uniquePlaces.length; i++) {
+
+                        uniqueN = parseInt(uniquePlaces[i])
+                        departureLists.map(placeName => {
+                            if (placeName.placeID == uniqueN) {
+                                nameOfPlace = placeName.arriveTo
+                                return
+                            }
+                        })
+                        // options.data.nameOfPlace = 
+                        placeN = document.createElement('div')
+                        placeN.innerHTML = `<a class="collection-item" onclick="allDeparture(${uniquePlaces[i]})" style="padding-left:10px !important;">${nameOfPlace}</a> <br>`
+
+                        destinationSearch = document.createElement('div')
+
+                        destinationSearch.innerHTML = `<option  value="${nameOfPlace}"></option>`
+                        document.querySelector("#destinationSearch").append(destinationSearch)
+
+                        placeList.append(placeN)
+                    }
+                })
+                // 
+                // 
+            });
+
+        </script>
+
+
+
+
+
+        <!-- AUTOCOMPLETE END -->
+        {% for d in departures %}
+        {% if d.arriveTo.id %}
+        <script>
+            departureLists.push({ "placeID": parseInt('{{d.arriveTo.id}}'), "departFrom": '{{d.departFrom}}', 'monthN': '{{d.monthN}}', 'dateN': '{{d.dateN}}', 'timeDeparture': '{{d.timeDeparture}}', 'contactNumber': '{{d.contactNumber}}', 'otherDetails': '{{d.otherDetails}}', 'arriveTo': '{{d.arriveTo}}', 'yearN': '{{d.yearN}}' })
+        </script>
+        {% endif %}
+        {% endfor d %}
+
+        <script>
+            // BODY PAGEs
+            currentDate = parseInt(`{{currentDate}}`)
+            currentMonth = parseInt(`{{currentMonth}}`)
+            function allDeparture(pID) {
+                docLists = document.querySelector("#departureList");
+                docLists.innerHTML = '';
+                departureLists.filter(item => {
+                    console.log(typeof (pID))
+                    if (typeof (pID) == 'number') {
+                        valueCheck = item.placeID
+                    } else {
+                        valueCheck = item.arriveTo
+                    }
+                    // if (item.placeID == pID) {
+
+                    if (valueCheck == pID) {
+                        if (item.monthN >= currentMonth) {
+                            if (item.dateN >= currentDate) {
+                                newDoc = document.createElement('div')
+                                newDoc.innerHTML = `
+                                <li class="collection-item" >
+                                    <small>From:</small> <strong>${item.departFrom}</strong> 
+                                    <small>${item.monthN} /
+                                    ${item.dateN}  /
+                                     ${item.yearN}
+                                    Time: ${item.timeDeparture} </small>
+                                    <address>${item.contactNumber}</address>
+                                    <blockquote>" ${item.otherDetails} "</blockquote>
+                                    <hr>
+                                </li>
+                            `
+                                docLists.append(newDoc)
+                            }
+                        }
+                    }
+                });
+            }
+        </script>
+
+
+    </div>
+
+
+
+
+    <div class="col s9 collection" style=" padding: 0 !important;border: none;">
+        <ul class="collection" id="departureList" style="border: none;">
+            <h2>Place List on the Left Side
+
+                <br>
+                <- </h2>
+
+        </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+</div>
+
+{% endblock %}

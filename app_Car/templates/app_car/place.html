@@ -1,0 +1,245 @@
+{% extends "app_car/layout.html" %}
+{% block body %}
+<style>
+    .badge {
+        width: fit-content !important;
+        min-width: 0.1rem !important;
+
+    }
+</style>
+<div class="main-center-body">
+    <span>
+        {% now "m / j / y F j Y h:i a " %}
+    </span>
+
+    <h1>{{place.placename}} <span data-badge-caption="Schedule" class="green new badge">{{place.SchedListCount}}</span>
+        <span data-badge-caption="Event" class="blue new badge">{{place.EventListCount}}</span>
+    </h1>
+
+
+    <br>
+    <a href="{% url 'app_car:place' id=place.id currentMonth=previousMonth %}">Previous Month</a>
+    <a href="{% url 'app_car:place' id=place.id currentMonth=nextMonth %}">Next Month</a>
+
+    <hr>
+
+    <div class="row">
+        <div class="col s12 m6 l3" style="width: fit-content;">
+            {{calendar|safe}}
+        </div>
+
+        <div class="col s12 m6 l3" style="background-color: azure;">
+            <div id="schedForm" style="display: none;">
+                <form method="post" action="{% url 'app_car:place' id=place.id currentMonth=currentMonth %}">
+                    {% csrf_token %}
+                    <h3>Make a Schedule</h3>
+                    <h4>to {{place.placename}}</h4>
+                    <label for="departDate">Date</label>
+                    <input name="departDate" required type="date" style="width:fit-content">
+                    <label for="departTime">Time</label>
+                    <input name="departTime" required type="time" style="width:fit-content">
+                    <br>
+                    <label for="departFrom">Meet Up Location:</label>
+                    {{newSchedForm.departFrom}}
+                    {{newSchedForm.contactNumber}}
+                    {{newSchedForm.otherDetails}}
+                    <input type="submit" value="Create Schedule"
+                        style="background-color: rgb(242, 218, 218); padding: 6px; border-radius: 6px; border: none; text-shadow: white 0 0 8px;">
+                </form>
+            </div>
+        </div>
+
+        <div class="col s12 m6 l3" style="background-color: rgb(255, 254, 238);">
+            <div id="eventForm" style="display: none;">
+                <form method="post" action="{% url 'app_car:event' id=place.id currentMonth=currentMonth %}">
+                    {% csrf_token %}
+                    <h3>Make a Event to {{place.placename}}</h3>
+                    {{newEventForm}}
+                    <input type="submit">
+                </form>
+            </div>
+            <script>
+                document.querySelector("#eventForm").style.display = 'block';
+            </script>
+        </div>
+
+
+        <div class="col s12 m6 l3"
+            style="background-color: rgb(245, 245, 245); justify-content: space-evenly !important;">
+
+
+            <br>Tell Us brief about the travel,
+            <div class="form-group">
+                <input class="form-control" style="border:none" list="reasons" name="description"
+                    placeholder="Ibibigay Dahil (Optional)">
+
+                <datalist id="reasons">
+                    <option value="Want to have new Friends">
+                    <option value="Like to Help">
+                    <option value="Full of Items">
+                    <option value="I dont Need it">
+                </datalist>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        schedDates = []
+        allDates = document.querySelectorAll('td');
+    </script>
+
+    {% for event in place.EventList %}
+    {{event.yearN}}
+    <br>
+
+    <script>
+        itemYear = parseInt(`{{event.yearN}}`)
+        itemMonth = parseInt(`{{event.monthN}}`)
+        itemDate = parseInt(`{{event.dateN}}`) + 1
+        currentMonth = parseInt(`{{currentMonth}}`)
+        currentDate = parseInt(`{{currentDate}}`)
+        currentYear = parseInt(`{{currentYear}}`)
+
+        if (itemYear >= currentYear) {
+            console.log('yes year')
+            if (itemMonth >= currentMonth) {
+                console.log('yes month: ', itemMonth)
+                console.log('Date: ', itemDate)
+                console.log('yes date', currentDate)
+                if (itemDate >= currentDate) {
+
+                    console.log('DONE')
+                    try {
+                        console.log('DONE')
+                        ScheduleDateAlready = document.querySelector(`#eventCount-${itemDate}`);
+                        ScheduleDateAlready.innerHTML = parseInt(ScheduleDateAlready.innerHTML) + 1;
+                        console.log('DONE')
+                    }
+                    catch (err) {
+                        console.log('None Yet')
+                        dateSchedule = document.createElement('div');
+                        dateSchedule.innerHTML = `<span id="eventCount-${itemDate}" data-badge-caption="" class="blue new badge">1</span>`;
+                        // MAKE APPEND NEW OBJECT
+                        dateSchedule.onclick = () => {
+                            alert('{{event}}')
+                        }
+                        allDates[itemDate].appendChild(dateSchedule);
+                    }
+
+                    // FOR EVENT CALENDAR
+                    // dateEvent = document.createElement('div');
+                    // dateEvent.innerHTML = `<span data-badge-caption="" class="blue new badge"> 1</span>`
+                    // dateEvent.onclick = () => {
+                    //     alert(' {{sched.contactNumber}} \n {{sched.timeDeparture}} \n {{sched.departFrom}} \n {{sched.otherDetails}} \n')
+                    // }
+                    // allDates[itemDate].appendChild(dateEvent);
+                    // END FOR EVENT
+
+
+                }
+            }
+        }
+    </script>
+
+    {% endfor %}
+
+
+    {% for sched in place.SchedList %}
+    {% if sched.monthN == currentMonth %}
+    <script>
+        itemYear = parseInt(`{{sched.yearN}}`)
+        itemMonth = parseInt(`{{sched.monthN}}`)
+        itemDate = parseInt(`{{sched.dateN}}`) + 1
+        currentMonth = parseInt(`{{currentMonth}}`)
+        currentDate = parseInt(`{{currentDate}}`)
+        currentYear = parseInt(`{{currentYear}}`)
+
+        // if (itemDate == currentDate && itemMonth == currentMonth) {
+        //     allDates[itemDate + 1].style.backgroundColor = ' rgb(230, 230, 230)';
+        // }
+
+        if (itemYear >= currentYear) {
+            if (itemMonth >= currentMonth) {
+                if (itemDate >= currentDate) {
+                    try {
+                        ScheduleDateAlready = document.querySelector(`#scheduleCount-${itemDate}`);
+                        ScheduleDateAlready.innerHTML = parseInt(ScheduleDateAlready.innerHTML) + 1;
+                    }
+                    catch (err) {
+                        dateSchedule = document.createElement('div');
+                        dateSchedule.innerHTML = `<span id="scheduleCount-${itemDate}" data-badge-caption="" class="green new badge">1</span>`;
+                        // MAKE APPEND NEW OBJECT
+                        dateSchedule.onclick = () => {
+                            alert('{{sched}}')
+                        }
+                        allDates[itemDate].appendChild(dateSchedule);
+                    }
+
+                    // FOR EVENT CALENDAR
+                    // dateEvent = document.createElement('div');
+                    // dateEvent.innerHTML = `<span data-badge-caption="" class="blue new badge"> 1</span>`
+                    // dateEvent.onclick = () => {
+                    //     alert(' {{sched.contactNumber}} \n {{sched.timeDeparture}} \n {{sched.departFrom}} \n {{sched.otherDetails}} \n')
+                    // }
+                    // allDates[itemDate].appendChild(dateEvent);
+                    // END FOR EVENT
+
+
+                }
+            }
+        }
+
+
+    </script>
+    {% endif %}
+    {% endfor %}
+
+
+
+
+
+
+    <form method="post" action="">
+        {% csrf_token %}
+        <input type="text" name="place" class="autocomplete" style="width: 300px;">
+        <input type="submit" value="Add Event">
+    </form>
+
+
+
+
+    <style>
+        * {
+            max-width: 100%;
+        }
+
+
+        button {
+            display: block;
+            background-color: burlywood;
+        }
+
+        .calendar-heading {
+            padding: 0.4em;
+        }
+
+        .calendar-container {
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        table {
+            /* width: 50vw; */
+            margin: 0 auto;
+            width: 50px !important;
+        }
+
+        .main-center-body {
+            padding: 10px;
+        }
+    </style>
+
+</div>
+
+{% endblock %}

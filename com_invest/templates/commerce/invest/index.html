@@ -8,8 +8,8 @@
 <div id="calculator">
     <h2>Calculator</h2>
     <input class="stock_header" id="stock" placeholder="Stock" type="text">
-    
-    <input class="stock_header" id="amount" placeholder="Amount" type="number">
+
+    <input class="stock_header" id="amount" placeholder="Your Amount" type="number">
     <br>
     <label class="side" for="price">buy Price</label>
     <input id="price" placeholder="price" type="number" onchange="calculate('buy')">
@@ -18,7 +18,7 @@
     <!-- <button id="calculate_selll" onclick="calculate('sell')">Calculate Sell</button> -->
     <br>
     <label for="result">You can buy</label>
-    <input disabled id="result">
+    <input disabled id="result"> Stocks
     <br>
     <label for="result_for">For: ₱</label>
     <input readonly id="result_for">
@@ -32,14 +32,14 @@
     <br>
     <label class="side" for="sell_price">sell Price</label>
     <input id="sell_price" type="number" value="0" onchange="calculate_sell(value)">
-        <button onclick="calculate_profit('add')">+</button>
-        <button onclick="calculate_profit('subtract')">-</button>
+    <button onclick="calculate_profit('add')">+</button>
+    <button onclick="calculate_profit('subtract')">-</button>
     <br>
     <label for="sell_get">For: ₱</label>
     <input readonly id="sell_get">
     <br>
     <hr>
-        
+
     Selling Price: ₱
     <input disabled id="incremented_price">
     <br>
@@ -47,11 +47,11 @@
     <input readonly id="profit">
     <br>
     increment
-    <input readonly id="increment" value="0" >%
+    <input readonly id="increment" value="0">%
 
     <br>
 
-    
+
 
     <!-- <hr>
     <p id="stock_buy">
@@ -68,7 +68,7 @@
 
 </div>
 <div id="about">
-    
+
     <h1><a href="{% url 'invest:about' %}">About</a></h1>
     <small>Understand?</small>
 </div>

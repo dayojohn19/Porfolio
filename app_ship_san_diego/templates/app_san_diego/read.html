@@ -1,0 +1,141 @@
+{% extends "app_san_diego/layout.html" %}
+
+{% load static %}
+
+
+
+
+{% block body %}
+<h1>READ {{request.user.username}}</h1>
+<div class="item-container-main">
+    {% for i in items %}
+    <div class="item-container">
+        <div class="item-header {{i.title}}">
+            <h4>{{i.title}}</h4>
+            <!-- <small>{{i.date}}</small> -->
+            <small>{{i.dateNow}}</small>
+        </div>
+        <div class="item-body">
+            <a href="{% url 'ship_san_diego:view' i.id %} ">
+                <img id="{{i.id}}" src="/images/{{i.image}}">
+            </a>
+            <!-- <p>{{i.feeling}}</p> -->
+
+            {% if not i.poster %}
+            <div class="item-edit">
+                <form method="post" action="{% url 'ship_san_diego:edit' %}">
+                    {% csrf_token %}
+                    {% if not i.title %}
+                    <input type="text" name="title" placeholder="Title">
+                    {% endif %}
+                    {% if not i.feeling %}
+                    <input type="text" name="feeling" placeholder="Feeling">
+                    {% endif %}
+                    {% if not i.country %}
+                    <input type="text" name="country" placeholder="Country">
+                    {% endif %}
+                    <input type="number" name="poster_id" value="{{request.user.id}}" hidden readonly>
+                    <input type="number" name="id" value="{{i.id}}" hidden readonly>
+                    <!-- <input type="text" name="feeling" placeholder="feeling"> -->
+                    <input type="number" name="course" placeholder="course" id="">
+                    <input type="number" name="speed" placeholder="Speed">
+
+                    <textarea style="max-width:90%" name="acivity" placeholder="ACTIVITY"></textarea>
+                    <input name="latitude" placeholder="Latitude">
+                    <input name="longitude" placeholder="longitude">
+                    <input name="vicinity" placeholder="vicinity">
+                    <input name="dutiesandevents" placeholder="Duties and Events">
+
+                    <br>
+                    <input type="submit">
+                </form>
+            </div>
+
+            {% else %}
+            <small style="float: left; margin-right: 1rem;">By: <a
+                    href="{% url 'ship_san_diego:view' i.poster_id %}">{{i.poster}}</a></small>
+            {% endif %}
+
+
+
+        </div>
+        <!-- <div class="item-footer">
+            <small>{{i.date}}</small>
+            <br>
+            <small>{{i.dateUpdated}}</small>
+        </div> -->
+    </div>
+
+    {% endfor %}
+</div>
+<script>
+    function makeModal(id) {
+        alert(id)
+        // alert(id)
+        // make = document.querySelector(`${id}`)
+        // console.log(make)
+    }
+</script>
+<style>
+    img {
+        max-width: 100%;
+    }
+
+    * {
+        max-width: 100%;
+
+        scroll-behavior: smooth;
+    }
+
+    .item-container-main {
+        display: flex;
+        flex-wrap: wrap;
+        flex-grow: initial;
+
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .item-container {
+        font-size: 20px;
+        width: 10em;
+        max-height: 40vh;
+        overflow: scroll;
+        margin: 5px;
+        padding: 3px;
+        background-color: orange;
+        background-color: rgb(241, 241, 241);
+        border-radius: 12px;
+    }
+
+    @media (max-width: 599.99px) {
+        .item-container {
+            width: 50%;
+        }
+    }
+
+    .item-header {
+        text-align: center;
+        padding: 0;
+        margin: 0;
+        /* background-color: rgb(251, 154, 170); */
+    }
+
+    .item-header h4 {
+        padding: 0;
+        margin: 0;
+    }
+
+    .item-body {
+        /* background-color: pink; */
+        text-align: center;
+    }
+
+    .item-footer {
+        /* background-color: rgb(254, 220, 226); */
+        float: right;
+    }
+</style>
+
+{% endblock %}

@@ -18,3 +18,10 @@ class Total_Investment(models.Model):
     average = models.IntegerField(blank=True, default=0)
     quantity = models.IntegerField(blank=True, default=0)
     stock = models.CharField(max_length=64)
+
+class InvestmentRecord(models.Model):
+    timestamp = models.DateTimeField(auto_now=True)
+    timestamp2 = models.DateTimeField(auto_now_add=True)
+    investor_name = models.CharField(max_length=64)
+    invest_amount = models.FloatField()
+    invesotr_id = models.IntegerField()

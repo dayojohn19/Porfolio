@@ -27,4 +27,6 @@
 
 body {
   background-color: rgba(242, 236, 236, 0.405);
+  padding: 0;
+  margin: 0;
 }
