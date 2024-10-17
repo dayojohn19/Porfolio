@@ -2,7 +2,7 @@
 from django.urls import path
 from . import views
 
-from django.conf.urls import url
+# from django.conf.urls import url
 app_name = 'social_network'
 urlpatterns = [
     path("", views.index, name="index"),

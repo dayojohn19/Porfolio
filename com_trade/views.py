@@ -9,13 +9,13 @@ from django.shortcuts import render
 def index(request):
     import os
     import requests
+    # uncomment Below for News
     apis = requests.get(
         'https://newsapi.org/v2/everything?q=dogecoin&apiKey=b3f57b413e2942cc94bd6609ed38a52f').json()
-    # for ap in apis:
 
-    # print(apis.json())
     variables = {
         'files': os.listdir('./csvs/historicalDatas'),
+        # uncomment Below for News
         'latest_news': apis['articles']
     }
     if not request.user.is_authenticated:
@@ -71,7 +71,7 @@ def new_data(request, what_coin, what_interval):
             theInterval = Client.KLINE_INTERVAL_12HOUR
 
         klines = client.get_historical_klines(
-            crypto,theInterval , starting)
+            crypto, theInterval, starting)
         # ---------- SAVING -------- save the fetched data t0 csv
         itsInterval = what_interval[15:]
         filed = f"{crypto}-{starting}_{itsInterval}.csv"
@@ -95,8 +95,6 @@ def new_data(request, what_coin, what_interval):
         #         klines.append(k)
         # fetch_old_data(request, filed)
         return JsonResponse(filed, safe=False)
-
-
 
     # return filed  # = return to filename
 

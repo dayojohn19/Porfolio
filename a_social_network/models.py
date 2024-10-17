@@ -29,6 +29,7 @@ class Name(models.Model):
             "timestamp":self.timestamp,
             "likes":self.likes.count(),
         }
+        
 class Like(models.Model):
     user = models.ForeignKey('app_mail.User', on_delete=models.CASCADE)
     post = models.ForeignKey('Name', on_delete=models.CASCADE)

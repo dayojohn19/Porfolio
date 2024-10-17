@@ -13,9 +13,9 @@
 
     color: black;
     background-color: rgba(148, 148, 148, 0.5);
-    margin: 0 auto;
-    padding: 1%;
-    width: 100%;
+    /* margin: 0 auto; */
+    /* padding: 1%; */
+    /* width: 100%; */
     border-radius: 15px;
     box-shadow: 0px 0px 10px rgb(209, 209, 209);
     text-align: center;
@@ -123,13 +123,13 @@
     height: 30px;
 }
 .r-chatbox {
-    margin: 0 auto;
-    padding: 1%;
-    width: 100%;
+    /* margin: 0 auto; */
+    /* padding: 1%; */
+    width: 50%;
     border-radius: 15px;
     text-align: center;
-    padding-left: 5%;
-    padding-right: 5%;
+    /* padding-left: 5%;
+    padding-right: 5%; */
     height: 500px;
     overflow:scroll;
 }

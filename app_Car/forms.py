@@ -23,4 +23,4 @@ class PlaceScheduleForm(forms.ModelForm):
             'contactNumber': forms.TextInput({'placeholder': 'Your Contact Details'}),
             'otherDetails': forms.Textarea({'placeholder': 'Details of Schedule & FaceBook Account (optional) '})
 
-        }
+        }   

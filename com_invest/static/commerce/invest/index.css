@@ -10,9 +10,7 @@
   overflow: auto;
 }
 
-#about {
-  margin-top: 2rem;
-}
+
 #about h1 {
   text-align: center;
 }
@@ -39,7 +37,7 @@ button {
   background-color: rgba(255, 105, 180, 0.404);
 }
 #sell_price {
-  background-color: rgba(255, 105, 180, 0.404);
+  background-color: rgba(255, 158, 206, 0.404);
 }
 
 h2 {

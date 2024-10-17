@@ -12,15 +12,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 from datetime import datetime
 import pytz
-
-
 from django.http import JsonResponse
-
-
 #user is lap
 #profile is loaded
 #name is mypigeong
-
 from app_mail import models as mail
 
 
@@ -29,7 +24,6 @@ def following(request, username):
         w_u = get_object_or_404(mail.User, username=username)
         f = Profile.objects.filter(follower=w_u)
         f_p = Name.objects.all().order_by('id').reverse()
-
         p = []
         for ps in f_p:
             for fr in f:
@@ -41,7 +35,6 @@ def following(request, username):
         pn = request.GET.get('page')
         pgobj = pgntr.get_page(pn)
         following_context = {
-
             "p": pgobj,
             's': "ss",
             "pd": f_p,
@@ -102,7 +95,6 @@ def upost(request, username):
                 # "pagen":pagen,
                 "vd": vd_u,
                 "nf": nf,
-
                 "x1": totalfollower,
                 "x2": totalfollowing,
                 "f": f_e_o,
@@ -131,10 +123,8 @@ def upost(request, username):
                 "pc": pgobj,
                 "postuser": us,
                 "uv":   vng_u,
-                # "pagen": pagen,
                 "vd": vd_u,
                 "nf": nf,
-
                 "x1": totalfollower,
                 "x2": totalfollowing,
                 "f":    f_e_o,
@@ -142,7 +132,6 @@ def upost(request, username):
             return render(request, "a_social_network/users.html", inside)
         else:
             f_e_o.delete()
-
             ##
             follower = Profile.objects.filter(poster=vd_u)
             following = Profile.objects.filter(follower=vd_u)
@@ -178,7 +167,6 @@ def like_post(request):
             like = Like.objects.get_or_create(post=likedpost, user=user)
             likedpost.liked.add(user)
             likedpost.save()
-
         return HttpResponse('Success')
 
 ###################
