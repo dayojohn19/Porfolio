@@ -118,7 +118,7 @@ html {
 }
 /* 
 .bgimg {
-  background-image: url('head3.png');
+
   opacity: 1;
   background-attachment: fixed;
   background-position: top right;
@@ -150,7 +150,7 @@ html {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  background-image: url("img.png");
+
   /* you need to match the shadow color to your background or image border for the desired effect*/
   box-shadow: 0 0 50px 25px black inset;
 }

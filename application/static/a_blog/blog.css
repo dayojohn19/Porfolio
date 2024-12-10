@@ -37,20 +37,12 @@ strong {
 .parallax2 {
   background-image: url("images/takip.jpg");
 }
-.parallax3 {
-  background-image: url("images/desiderata3.png");
-}
-.parallax4 {
-  background-image: url("images/24.png");
-}
 
 .parallax5 {
   background-image: url("../a_blog/images/gr.jpg");
 }
 
-.parallax6 {
-  background-image: url("../a_blog/images/sea.png");
-}
+
 .para_add {
   border-radius: 10.2px;
   height: 500px;

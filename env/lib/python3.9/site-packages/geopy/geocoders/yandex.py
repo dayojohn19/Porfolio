@@ -27,7 +27,8 @@ class Yandex(Geocoder):
             user_agent=None,
             scheme=None,
             ssl_context=DEFAULT_SENTINEL,
-            adapter_factory=None
+            adapter_factory=None,
+            domain='geocode-maps.yandex.ru',
     ):
         """
 
@@ -54,6 +55,10 @@ class Yandex(Geocoder):
             See :attr:`geopy.geocoders.options.default_adapter_factory`.
 
             .. versionadded:: 2.0
+
+        :param str domain: base api domain
+
+            .. versionadded:: 2.4
         """
         super().__init__(
             scheme=scheme,
@@ -64,7 +69,6 @@ class Yandex(Geocoder):
             adapter_factory=adapter_factory,
         )
         self.api_key = api_key
-        domain = 'geocode-maps.yandex.ru'
         self.api = '%s://%s%s' % (self.scheme, domain, self.api_path)
 
     def geocode(
@@ -196,9 +200,9 @@ class Yandex(Geocoder):
             except KeyError:
                 raise GeocoderParseError('Failed to parse server response')
 
-            longitude, latitude = [
+            longitude, latitude = (
                 float(_) for _ in place['Point']['pos'].split(' ')
-            ]
+            )
 
             name_elements = ['name', 'description']
             location = ', '.join([place[k] for k in name_elements if place.get(k)])

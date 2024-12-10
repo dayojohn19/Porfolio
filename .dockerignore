@@ -1,0 +1,12 @@
+env
+.git
+# Ignore unnecessary files inside allowed directories
+# This should go after the allowed directories
+**/*~
+**/*.log
+**/.DS_Store
+**/Thumbs.db
+# Allow files and directories
+***.png
+***.jpeg
+***.mp3

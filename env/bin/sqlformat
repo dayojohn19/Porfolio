@@ -1,6 +1,4 @@
-#!/bin/sh
-'''exec' "/Volumes/John HDD/Visual Studio Code /WebPages/django_webpage/webpage/env/bin/python3" "$0" "$@"
-' '''
+#!/Users/nhoj/Desktop/webpage/env/bin/python3.13
 # -*- coding: utf-8 -*-
 import re
 import sys

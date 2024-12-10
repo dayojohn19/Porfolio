@@ -14,15 +14,43 @@
 #             - .:/usr/src/app
 #         ports:
 #             - "8000:8000"
-version: '3'
+# version: '3'
+
+# services:
+#     db:
+#         image: postgres
+#         # environment:
+#     #         POSTGRES_PASSWORD: mydb        
+#         environment:
+#             POSTGRES_USER: djangouser
+#             POSTGRES_PASSWORD: djangopassword
+        
+#     # web:
+#     #     build: .
+#     #     volumes:
+#     #         - .:/usr/src/webpage
+#     #     ports:
+#     #         - "8000:8000"
+
+#     # environment:
 
 services:
-    db:
-        image: postgres
+  django:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+      shm_size: 16g
+    ports:
+      - mode: ingress
+        target: 8000
+        # published: 8000 # uncomment for local dev
+    environment:
+      - DEBUG=False # set to "True" for local dev
+    #deploy:
+    #  resources:
+    #    reservations:
+    #      memory: 256M`
 
-    web:
-        build: .
-        volumes:
-            - .:/usr/src/app
-        ports:
-            - "8000:8000"
+
+            
